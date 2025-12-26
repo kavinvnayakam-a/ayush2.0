@@ -133,7 +133,8 @@ export function Header() {
                   <div className="p-6 border-b">
                     <Image 
                       src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" 
-                      alt="Logo" width={50} height={40} 
+                      alt="Logo" width={50} height={40}
+                      loading="lazy"
                     />
                   </div>
                   <div className="flex-1 overflow-y-auto p-6 space-y-6">

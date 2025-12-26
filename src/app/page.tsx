@@ -40,7 +40,7 @@ function PersonCard({ name, title, imageUrl }: { name: string; title: string; im
   return (
     <div className="group relative flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-2">
       <div className="relative w-full aspect-[3/4] overflow-hidden rounded-[2rem] mb-6 border-4 border-white shadow-xl transition-all duration-500 group-hover:border-[hsl(93,45%,44%)]">
-        <Image src={imageUrl} alt={name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+        <Image src={imageUrl} alt={name} fill loading="lazy" className="object-cover transition-transform duration-700 group-hover:scale-110" />
         <div className="absolute inset-0 bg-gradient-to-t from-[hsl(93,20%,15%)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
       <h3 className="text-lg font-black text-[hsl(93,20%,15%)] leading-tight mb-2">{name}</h3>
@@ -89,6 +89,9 @@ function VisitorForm({ closeModal }: { closeModal: () => void }) {
     }
 
     try {
+        if (!firestore) {
+          throw new Error('Firestore is not initialized');
+        }
         const visitorsRef = collection(firestore, 'visitor_passes');
         await addDoc(visitorsRef, {
             ...validatedFields.data,
@@ -320,7 +323,7 @@ export default function HomePage() {
             ].map((logo, i) => (
               <div key={i} className="group flex flex-col items-center justify-center space-y-4 p-8 rounded-[2.5rem] bg-white border border-slate-50 hover:border-[hsl(93,45%,44%)]/20 transition-all">
                 <div className="relative w-full h-24 transition-transform group-hover:scale-110">
-                  <Image src={`https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F${logo.img}.webp?alt=media&token=${logo.token}`} alt={logo.label} fill className="object-contain" />
+                  <Image src={`https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F${logo.img}.webp?alt=media&token=${logo.token}`} alt={logo.label} fill loading="lazy" className="object-contain" />
                 </div>
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">{logo.label}</p>
               </div>

@@ -94,6 +94,7 @@ export default function SpeakersPage() {
                   src={speaker.image} 
                   alt={speaker.name} 
                   fill 
+                  loading="lazy"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[hsl(93,20%,15%)]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">

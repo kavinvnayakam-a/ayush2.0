@@ -21,7 +21,8 @@ export default function AyushConclavePage() {
             src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" 
             alt="Ayush Conclave Logo" 
             width={240} 
-            height={80} 
+            height={80}
+            loading="lazy"
             className="mx-auto mb-12 object-contain"
           />
           <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-md px-6 py-2 rounded-full border border-slate-200 text-[hsl(93,45%,44%)] font-black text-xs tracking-[0.3em] uppercase mb-8 shadow-sm">

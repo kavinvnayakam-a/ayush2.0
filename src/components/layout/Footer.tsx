@@ -61,7 +61,8 @@ export function Footer() {
               src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" 
               alt="AyushConclave Logo" 
               width={180} 
-              height={60} 
+              height={60}
+              loading="lazy"
               className="object-contain" 
             />
             <p className="text-[hsl(93,20%,15%)]/60 font-medium leading-relaxed max-w-sm italic mx-auto lg:mx-0">

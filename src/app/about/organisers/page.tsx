@@ -30,7 +30,7 @@ function OrganiserDescription({
           </h2>
         </div>
         <div className="relative w-32 h-20 md:w-48 md:h-24 bg-white rounded-2xl p-2 shadow-inner border border-slate-50 transition-transform group-hover:scale-105 duration-500 mx-auto md:mx-0">
-          <Image src={logoUrl} alt={`${title} Logo`} fill className="object-contain p-2" />
+          <Image src={logoUrl} alt={`${title} Logo`} fill loading="lazy" className="object-contain p-2" />
         </div>
       </div>
       
@@ -100,7 +100,8 @@ export default function OrganisersPage() {
             <div className="relative w-64 md:w-72 h-[380px] md:h-[420px] rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden border-8 border-white shadow-2xl mb-6 md:mb-8 transition-transform group-hover:-translate-y-4 duration-500">
               <Image 
                 src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FOrganisers%2FModi.webp?alt=media&token=86eb1f00-0bc0-4b76-ba74-2e2c62fa4ebd" 
-                alt="Shri Narendra Modi" fill className="object-cover" 
+                alt="Shri Narendra Modi" fill className="object-cover"
+                loading="lazy"
               />
             </div>
             <h3 className="text-xl md:text-2xl font-black text-[hsl(93,20%,15%)] uppercase">Shri Narendra Modi</h3>
@@ -112,7 +113,8 @@ export default function OrganisersPage() {
             <div className="relative w-64 md:w-72 h-[380px] md:h-[420px] rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden border-8 border-white shadow-2xl mb-6 md:mb-8 transition-transform group-hover:-translate-y-4 duration-500">
               <Image 
                 src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FOrganisers%2FShri%20Prataprao%20Jadhav.webp?alt=media&token=14f151ae-7c25-4c47-8875-0176df5f8b38" 
-                alt="Shri Prataprao Jadhav" fill className="object-cover" 
+                alt="Shri Prataprao Jadhav" fill className="object-cover"
+                loading="lazy"
               />
             </div>
             <h3 className="text-xl md:text-2xl font-black text-[hsl(93,20%,15%)] uppercase">Shri Prataprao Jadhav</h3>
@@ -126,7 +128,8 @@ export default function OrganisersPage() {
             <div className="relative w-64 md:w-72 h-[380px] md:h-[420px] rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden border-8 border-white shadow-2xl mb-6 md:mb-8 transition-transform group-hover:-translate-y-4 duration-500">
               <Image 
                 src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FOrganisers%2FPadmashree%20Vaidya%20%20_Rajesh%20Kotecha.webp?alt=media&token=b16b78e9-9b1f-4fc1-88cc-3ed4ac2c97f8" 
-                alt="Rajesh Kotecha" fill className="object-cover" 
+                alt="Rajesh Kotecha" fill className="object-cover"
+                loading="lazy"
               />
             </div>
             <h3 className="text-xl md:text-2xl font-black text-[hsl(93,20%,15%)] uppercase px-4">Padmashree Vaidya Rajesh Kotecha</h3>
@@ -180,7 +183,8 @@ export default function OrganisersPage() {
             <div className="relative w-32 h-20 md:w-48 md:h-24 bg-white rounded-2xl p-2 shadow-inner border border-slate-50 transition-transform group-hover:scale-105 duration-500 mx-auto md:mx-0">
               <Image 
                 src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FOrganisers%2FHeartfulness.webp?alt=media&token=f08090fa-6239-464a-8ce5-eae869f38071" 
-                alt="Heartfulness Logo" fill className="object-contain p-2" 
+                alt="Heartfulness Logo" fill className="object-contain p-2"
+                loading="lazy"
               />
             </div>
           </div>

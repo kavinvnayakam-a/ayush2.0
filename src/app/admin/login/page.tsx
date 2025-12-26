@@ -46,6 +46,9 @@ export default function AdminLoginPage() {
   const onSubmit = async (data: LoginFormValues) => {
     setError(null);
     try {
+      if (!auth) {
+        throw new Error('Auth service is not available.');
+      }
       await signInWithEmailAndPassword(auth, data.email, data.password);
       toast({
         title: 'Login Successful',
@@ -82,6 +85,7 @@ export default function AdminLoginPage() {
                 alt="Logo"
                 width={120}
                 height={40}
+                loading="lazy"
                 className="mx-auto"
             />
             <h1 className="text-4xl font-black text-foreground uppercase tracking-tight">Admin Portal</h1>
