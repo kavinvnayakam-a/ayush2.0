@@ -2,16 +2,17 @@
 
 import React, { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth, useUser, useCollection, useMemoFirebase } from '@/firebase';
+import { useAuth, useUser, useMemoFirebase } from '@/firebase';
 import { Button } from '@/components/ui/button';
 import { signOut } from 'firebase/auth';
-import { collection, query, orderBy, getFirestore } from 'firebase/firestore';
+import { collection, query, orderBy, getFirestore, doc } from 'firebase/firestore';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { LogOut, ShieldCheck, Users, Ticket } from 'lucide-react';
 import { format } from 'date-fns';
 import { useDoc } from '@/firebase/firestore/use-doc';
-import { doc } from 'firebase/firestore';
+import { useCollection } from '@/firebase/firestore/use-collection';
+
 
 interface VisitorPass {
   id: string;
@@ -38,10 +39,15 @@ function AdminDashboard() {
 
   const { data: adminRole, isLoading: isAdminLoading } = useDoc(adminRoleRef);
   
+  const isHardcodedAdmin = user?.email === 'kavinvnayakam@gmail.com';
+  const hasAdminRole = !!adminRole;
+  const isAdmin = isHardcodedAdmin || hasAdminRole;
+
   const visitorPassesQuery = useMemoFirebase(() => {
-      if (!firestore) return null;
+      // Only run the query if the user is a confirmed admin
+      if (!firestore || !isAdmin) return null;
       return query(collection(firestore, 'visitor_passes'), orderBy('registrationDate', 'desc'));
-  }, [firestore]);
+  }, [firestore, isAdmin]);
 
 
   const { data: visitorPasses, isLoading: isLoadingPasses, error } = useCollection<VisitorPass>(visitorPassesQuery);
@@ -65,9 +71,6 @@ function AdminDashboard() {
 
   const isLoading = isUserLoading || isAdminLoading;
 
-  const isHardcodedAdmin = user?.email === 'kavinvnayakam@gmail.com';
-  const hasAdminRole = !!adminRole;
-  const isAdmin = isHardcodedAdmin || hasAdminRole;
 
   if (isLoading) {
     return (
@@ -91,7 +94,7 @@ function AdminDashboard() {
             <h1 className="text-2xl font-bold">Access Denied</h1>
             <p className="text-center">You do not have permission to view this page.</p>
             <Button onClick={handleGoToLogin} variant="destructive" className="mt-8">
-                <LogOut className="mr-2 h-4 w-4" /> Go to Login
+                Go to Login
             </Button>
         </div>
     );
