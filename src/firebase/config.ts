@@ -5,12 +5,12 @@
 import { initializeApp, getApps } from 'firebase/app';
 
 const firebaseConfig = {
-  apiKey: "TODO: Your API key",
-  authDomain: "TODO: Your auth domain",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   projectId: "ayushconclave--arogya-expo",
-  storageBucket: "TODO: Your storage bucket",
-  messagingSenderId: "TODO: Your messaging sender ID",
-  appId: "TODO: Your app ID"
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
 // Initialize Firebase
