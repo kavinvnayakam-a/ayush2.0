@@ -1,3 +1,40 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero",
+      "description": "A beautiful arrangement of ayurvedic herbs and spices on a rustic wooden surface.",
+      "imageUrl": "https://images.unsplash.com/photo-1761926783705-61fb59d80c98?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxheXVydmVkYSUyMGhlcmJzfGVufDB8fHx8MTc2NjcyNDYzMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "ayurveda herbs"
+    },
+    {
+      "id": "about",
+      "description": "A person meditating peacefully in a serene yoga pose outdoors.",
+      "imageUrl": "https://images.unsplash.com/photo-1635617240041-c95219c05542?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHx5b2dhJTIwbWVkaXRhdGlvbnxlbnwwfHx8fDE3NjY3MTM3ODd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "yoga meditation"
+    },
+    {
+      "id": "exhibitor1",
+      "description": "Artisanal display of herbal products and natural soaps.",
+      "imageUrl": "https://images.unsplash.com/photo-1758534272283-bbbeacf06b2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxoZXJiYWwlMjBwcm9kdWN0c3xlbnwwfHx8fDE3NjY3MjQ2MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "herbal products"
+    },
+    {
+      "id": "exhibitor2",
+      "description": "A collection of essential oil bottles with fresh herbs.",
+      "imageUrl": "https://images.unsplash.com/photo-1638609927127-aeb9e74c3cfd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxlc3NlbnRpYWwlMjBvaWxzfGVufDB8fHx8MTc2NjcyNDYzMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "essential oils"
+    },
+    {
+      "id": "exhibitor3",
+      "description": "The tranquil interior of a modern wellness center.",
+      "imageUrl": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx3ZWxsbmVzcyUyMGNlbnRlcnxlbnwwfHx8fDE3NjY3MjQ2MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "wellness center"
+    },
+    {
+      "id": "map",
+      "description": "A stylized map of an expo hall layout.",
+      "imageUrl": "https://images.unsplash.com/photo-1599417053841-d32a7d1cd179?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxleHBvJTIwbWFwfGVufDB8fHx8MTc2NjcyNDYzMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "expo map"
+    }
+  ]
 }
