@@ -46,11 +46,11 @@ export function Header() {
             : "bg-transparent py-4 px-4 border-transparent"
         )}
       >
-        <div className="flex h-16 items-center justify-between md:justify-start">
+        <div className="flex h-16 items-center justify-between">
           
           {/* LOGO */}
-          <div className="flex-1 md:flex-none">
-            <Link href="/" className="relative z-[110] flex items-center gap-3 group transition-transform hover:scale-105 w-fit mx-auto md:mx-0">
+          <div className="flex-none">
+            <Link href="/" className="relative z-[110] flex items-center gap-3 group transition-transform hover:scale-105 w-fit">
               <div className="relative w-[60px] h-[50px] md:w-[74px] md:h-[60px]">
                 <Image 
                   src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" 
@@ -61,6 +61,11 @@ export function Header() {
                 />
               </div>
             </Link>
+          </div>
+          
+          {/* Centered container for mobile logo */}
+          <div className="flex-1 flex justify-center md:hidden">
+             {/* This space is intentionally left to allow the logo to center itself relative to the parent flex container */}
           </div>
 
           {/* DESKTOP NAVIGATION */}
@@ -176,7 +181,7 @@ export function Header() {
                 {/* Mobile Bottom Button */}
                 <div className="p-6 border-t bg-slate-50">
                   <Button asChild className="w-full h-16 rounded-2xl bg-[hsl(93,45%,44%)] text-white font-black text-xl shadow-lg shadow-[hsl(93,45%,44%)]/20">
-                    <Link href="/registration" onClick={closeSheet}>REGISTER NOW</Link>
+                    <Link href="/register" onClick={closeSheet}>REGISTER NOW</Link>
                   </Button>
                 </div>
               </div>
