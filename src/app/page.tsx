@@ -143,8 +143,8 @@ export default function Home() {
                   <h3 className="text-xl md:text-2xl font-headline text-primary/80 mt-2">International AyushConclave - 2026: Transforming Ayurveda through Research, Innovation & Integration</h3>
                   <p className="mt-4 text-muted-foreground">International AyushConclave - 2026 is the first international conference dedicated to advancing Ayurveda through contemporary science. Themed "Transforming Ayurveda: Through Research, Innovation & Integration", this landmark event will bring together global experts, researchers, and practitioners to explore cutting-edge developments in Ayurvedic sciences. With eight focused scientific sessions spanning from AI and microbiome research to clinical validation and education, AyushConclave aims to bridge traditional wisdom with modern innovation.</p>
               </div>
-              <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                  <Image src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F1000157891.webp?alt=media&token=4be2587a-1605-40c6-8bff-dc1472ecfe22" alt="Image placeholder" width={500} height={500} className="object-cover" />
+              <div className="flex items-center justify-center">
+                  <Image src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F1000157891.webp?alt=media&token=4be2587a-1605-40c6-8bff-dc1472ecfe22" alt="Image placeholder" width={300} height={300} className="object-contain" />
               </div>
           </div>
       </section>
@@ -309,5 +309,3 @@ export default function Home() {
     </div>
   );
 }
-
-    
