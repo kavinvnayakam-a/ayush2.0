@@ -8,12 +8,14 @@ import { signOut } from 'firebase/auth';
 import { collection, query, orderBy, getFirestore } from 'firebase/firestore';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { LogOut, ShieldCheck, Users } from 'lucide-react';
+import { LogOut, ShieldCheck, Users, Ticket } from 'lucide-react';
 import { format } from 'date-fns';
 import { useDoc } from '@/firebase/firestore/use-doc';
 import { doc } from 'firebase/firestore';
+import Image from 'next/image';
 
 interface VisitorPass {
+  id: string;
   name: string;
   number: string;
   mailId: string;
@@ -65,7 +67,14 @@ function AdminDashboard() {
   const isAdmin = isHardcodedAdmin || hasAdminRole;
 
   if (isLoading) {
-    return <div className="flex h-screen items-center justify-center"><p>Loading dashboard...</p></div>;
+    return (
+        <div className="flex h-screen items-center justify-center bg-slate-50">
+            <div className="flex flex-col items-center gap-4">
+                <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-primary"></div>
+                <p className="text-muted-foreground font-bold">Loading Dashboard...</p>
+            </div>
+        </div>
+    );
   }
   
   if (!user) {
@@ -89,51 +98,81 @@ function AdminDashboard() {
     <div className="min-h-screen bg-slate-50 p-4 sm:p-8">
       <div className="max-w-7xl mx-auto">
         <header className="flex flex-col sm:flex-row items-center justify-between mb-8">
-          <div className='text-center sm:text-left'>
-            <h1 className="text-3xl font-bold text-foreground">Admin Dashboard</h1>
-            <p className="text-muted-foreground">Welcome, {user.email}</p>
+          <div className='flex items-center gap-4 text-center sm:text-left'>
+             <Image 
+                src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" 
+                alt="Logo"
+                width={50}
+                height={40}
+                className="object-contain"
+            />
+            <div>
+                <h1 className="text-3xl font-black text-foreground uppercase tracking-tight">Admin Dashboard</h1>
+                <p className="text-muted-foreground font-bold italic">Welcome, {user.email}</p>
+            </div>
           </div>
-          <Button onClick={handleLogout} variant="outline" className="mt-4 sm:mt-0">
+          <Button onClick={handleLogout} variant="outline" className="mt-4 sm:mt-0 bg-white shadow-sm font-bold">
             <LogOut className="mr-2 h-4 w-4" />
             Logout
           </Button>
         </header>
 
-        <Card>
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <Card className="rounded-[1.5rem] bg-white shadow-sm border-slate-100">
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                    <CardTitle className="text-sm font-bold uppercase text-muted-foreground tracking-wider">Total Enrollments</CardTitle>
+                    <Ticket className="h-5 w-5 text-accent" />
+                </CardHeader>
+                <CardContent>
+                    <div className="text-4xl font-black text-foreground">
+                        {isLoadingPasses ? '...' : (visitorPasses?.length ?? 0)}
+                    </div>
+                    <p className="text-xs text-muted-foreground pt-1">Free visitor passes registered</p>
+                </CardContent>
+            </Card>
+        </div>
+
+
+        <Card className="rounded-[2rem] bg-white shadow-xl shadow-slate-200/60">
           <CardHeader>
             <div className="flex items-center gap-3">
               <Users className="w-6 h-6 text-primary"/>
-              <CardTitle>Visitor Pass Registrations</CardTitle>
+              <CardTitle className="text-2xl font-black tracking-tight text-foreground">Visitor Pass Registrations</CardTitle>
             </div>
-            <CardDescription>
-              A list of all visitors who have registered for a free pass.
+            <CardDescription className="!mt-2 italic font-semibold">
+              A list of all visitors who have registered for a free pass for the Arogya Expo.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            {isLoadingPasses && <p>Loading visitors...</p>}
-            {error && <p className="text-destructive">Error loading visitors: {error.message}</p>}
+            {isLoadingPasses && (
+                <div className="text-center py-20 text-muted-foreground font-bold">
+                    <p>Loading visitor data...</p>
+                </div>
+            )}
+            {error && <p className="text-destructive p-4 bg-destructive/10 rounded-lg">Error loading visitors: {error.message}</p>}
             {!isLoadingPasses && visitorPasses && (
-              <div className="border rounded-lg">
+              <div className="border rounded-lg overflow-hidden">
                 <Table>
-                  <TableHeader>
+                  <TableHeader className="bg-slate-50">
                     <TableRow>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Email</TableHead>
-                      <TableHead>Mobile</TableHead>
-                      <TableHead>Location</TableHead>
-                      <TableHead>Registered On</TableHead>
+                      <TableHead className="font-black uppercase text-xs tracking-wider">Name</TableHead>
+                      <TableHead className="font-black uppercase text-xs tracking-wider">Email</TableHead>
+                      <TableHead className="font-black uppercase text-xs tracking-wider">Mobile</TableHead>
+                      <TableHead className="font-black uppercase text-xs tracking-wider">Location</TableHead>
+                      <TableHead className="font-black uppercase text-xs tracking-wider">Registered On</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {visitorPasses.map((pass) => (
-                      <TableRow key={pass.id}>
-                        <TableCell className="font-medium">{pass.name}</TableCell>
-                        <TableCell>{pass.mailId}</TableCell>
-                        <TableCell>{pass.number}</TableCell>
-                        <TableCell>{pass.location}</TableCell>
-                        <TableCell>
+                      <TableRow key={pass.id} className="font-semibold">
+                        <TableCell className="font-bold text-foreground">{pass.name}</TableCell>
+                        <TableCell className="text-muted-foreground">{pass.mailId}</TableCell>
+                        <TableCell className="text-muted-foreground">{pass.number}</TableCell>
+                        <TableCell className="text-muted-foreground">{pass.location}</TableCell>
+                        <TableCell className="text-muted-foreground text-xs">
                           {pass.registrationDate
-                            ? format(new Date(pass.registrationDate.seconds * 1000), 'PPp')
+                            ? format(new Date(pass.registrationDate.seconds * 1000), 'MMM d, yyyy h:mm a')
                             : 'N/A'}
                         </TableCell>
                       </TableRow>
@@ -143,8 +182,9 @@ function AdminDashboard() {
               </div>
             )}
              {!isLoadingPasses && (!visitorPasses || visitorPasses.length === 0) && (
-                <div className="text-center py-12 text-muted-foreground">
-                    <p>No visitor passes have been registered yet.</p>
+                <div className="text-center py-20 text-muted-foreground">
+                    <p className="font-bold mb-2">No Visitors Yet</p>
+                    <p className="text-sm">No visitor passes have been registered.</p>
                 </div>
              )}
           </CardContent>
