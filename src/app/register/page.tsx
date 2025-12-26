@@ -163,7 +163,7 @@ export default function RegistrationPage() {
                 </div>
                 <Button 
                   asChild
-                  className={`w-full h-14 rounded-2xl font-black uppercase tracking-widest transition-transform hover:scale-105 ${item.highlight ? 'bg-[hsl(93,45%,44%)] hover:bg-[#ffa62f]' : 'bg-slate-100 text-slate-400 hover:bg-[hsl(93,45%,44%)] hover:text-white'}`}
+                  className={`w-full h-14 rounded-2xl font-black uppercase tracking-widest transition-transform hover:scale-105 ${item.highlight ? 'bg-[hsl(93,45%,44%)] hover:bg-[#ffa62f]' : 'bg-[hsl(93,45%,44%)] text-white hover:bg-[#ffa62f]'}`}
                 >
                   <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">Register</a>
                 </Button>
