@@ -47,18 +47,6 @@ export async function addVisitor(
 ): Promise<string> {
   const visitorsRef = db.collection('visitor_passes');
 
-  // Check for existing number
-  const numberQuery = await visitorsRef.where('number', '==', visitorData.number).limit(1).get();
-  if (!numberQuery.empty) {
-    throw new Error('This phone number is already registered.');
-  }
-
-  // Check for existing email
-  const mailIdQuery = await visitorsRef.where('mailId', '==', visitorData.mailId).limit(1).get();
-  if (!mailIdQuery.empty) {
-    throw new Error('This email address is already registered.');
-  }
-
   try {
     const docRef = await visitorsRef.add({
       ...visitorData,
