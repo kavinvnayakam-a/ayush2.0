@@ -77,13 +77,7 @@ export default function Home() {
                     </Button>
                   </div>
                   <div className="flex items-center justify-center">
-                    <div className="bg-white/70 p-8 rounded-full">
-                      <div className="flex flex-col items-center justify-center text-primary">
-                          <LogoIcon className="h-24 w-24 text-blue-500" />
-                          <span className="text-2xl font-bold font-headline mt-2 text-blue-500">AyushConclave</span>
-                          <p className="text-sm text-center mt-2 text-green-800">Holistic Health & One Vision</p>
-                      </div>
-                    </div>
+                    <Image src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F1000157891.webp?alt=media&token=4be2587a-1605-40c6-8bff-dc1472ecfe22" alt="AyushConclave Logo" width={300} height={300} className="object-contain" />
                   </div>
                 </div>
             </CarouselItem>
