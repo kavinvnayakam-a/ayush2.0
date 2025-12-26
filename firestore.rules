@@ -22,9 +22,9 @@ service cloud.firestore {
     }
 
     match /admin_roles/{uid} {
-      // Allow a user to read their own admin role document.
-      allow get: if request.auth.uid == uid;
-      allow read: if request.auth.uid == uid && isAdmin();
+      // Allow a user to read their own admin role document if they are an admin.
+      // This is used by the dashboard to verify admin status.
+      allow get: if request.auth.uid == uid && isAdmin();
     }
   }
 }

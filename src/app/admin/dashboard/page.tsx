@@ -52,11 +52,17 @@ function AdminDashboard() {
   }, [user, isUserLoading, router]);
 
   const handleLogout = async () => {
-    await signOut(auth);
+    if (auth) {
+      await signOut(auth);
+    }
     router.push('/admin/login');
   };
 
   const isLoading = isUserLoading || isAdminLoading;
+
+  const isHardcodedAdmin = user?.email === 'kavinvnayakam@gmail.com';
+  const hasAdminRole = !!adminRole;
+  const isAdmin = isHardcodedAdmin || hasAdminRole;
 
   if (isLoading) {
     return <div className="flex h-screen items-center justify-center"><p>Loading dashboard...</p></div>;
@@ -66,7 +72,7 @@ function AdminDashboard() {
      return null;
   }
 
-  if (!adminRole) {
+  if (!isAdmin) {
     return (
         <div className="flex h-screen flex-col items-center justify-center bg-red-50 text-red-700 p-4">
             <ShieldCheck className="w-16 h-16 mb-4"/>
