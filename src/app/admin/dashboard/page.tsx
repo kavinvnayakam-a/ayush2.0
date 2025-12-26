@@ -39,7 +39,7 @@ function AdminDashboard() {
 
   const { data: adminRole, isLoading: isAdminLoading } = useDoc(adminRoleRef);
   
-  const isHardcodedAdmin = user?.email === 'kavinvnayakam@gmail.com';
+  const isHardcodedAdmin = user?.email === 'kavinvnayakam@gmail.com' || user?.email === 'mainadmin@shreevarma.org';
   const hasAdminRole = !!adminRole;
   const isAdmin = isHardcodedAdmin || hasAdminRole;
 
