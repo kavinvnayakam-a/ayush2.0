@@ -46,23 +46,25 @@ export function Header() {
             : "bg-transparent py-4 px-4 border-transparent"
         )}
       >
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-16 items-center justify-between md:justify-start">
           
           {/* LOGO */}
-          <Link href="/" className="relative z-[110] flex items-center gap-3 group transition-transform hover:scale-105">
-            <div className="relative w-[60px] h-[50px] md:w-[74px] md:h-[60px]">
-              <Image 
-                src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" 
-                alt="AyushConclave Logo" 
-                fill
-                priority
-                className="object-contain"
-              />
-            </div>
-          </Link>
+          <div className="flex-1 md:flex-none">
+            <Link href="/" className="relative z-[110] flex items-center gap-3 group transition-transform hover:scale-105 w-fit mx-auto md:mx-0">
+              <div className="relative w-[60px] h-[50px] md:w-[74px] md:h-[60px]">
+                <Image 
+                  src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" 
+                  alt="AyushConclave Logo" 
+                  fill
+                  priority
+                  className="object-contain"
+                />
+              </div>
+            </Link>
+          </div>
 
           {/* DESKTOP NAVIGATION */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-1 ml-auto">
             {navLinks.map((link) => (
               <div key={link.name}>
                 {link.subLinks ? (
