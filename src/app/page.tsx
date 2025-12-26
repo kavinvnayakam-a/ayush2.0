@@ -127,13 +127,11 @@ export default function Home() {
         </Carousel>
       </section>
 
-      <section className="py-16 md:py-24">
+      <section className="py-12 md:py-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4">
             <div className="text-center max-w-4xl mx-auto">
-                <h2 className="text-2xl md:text-3xl font-headline text-primary mb-6">Join us to explore integrative medicine and collectively shape the future of AYUSH for global wellness.</h2>
-                <p className="text-muted-foreground">NASYA is a vibrant national network of Ayurveda students and youth, connecting 100+ institutions and over 6000 members across India. Established to empower the next generation, NASYA promotes leadership, research, innovation, and collaborative learning, nurturing skilled Ayurvedic professionals committed to advancing holistic health and strengthening the AYUSH ecosystem.</p>
-            </div>
-            <div className="mt-12">
+                <h2 className="text-2xl md:text-3xl font-headline text-primary-foreground mb-6">Join us to explore integrative medicine and collectively shape the future of AYUSH for global wellness.</h2>
+                <p className="text-primary-foreground/80">NASYA is a vibrant national network of Ayurveda students and youth, connecting 100+ institutions and over 6000 members across India. Established to empower the next generation, NASYA promotes leadership, research, innovation, and collaborative learning, nurturing skilled Ayurvedic professionals committed to advancing holistic health and strengthening the AYUSH ecosystem.</p>
             </div>
         </div>
       </section>
@@ -179,7 +177,6 @@ export default function Home() {
           <div className="container mx-auto px-4">
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                    <p className="text-muted-foreground">Image placeholder</p>
                 </div>
                 <div>
                     <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary">National Arogya Expo 2026</h2>
