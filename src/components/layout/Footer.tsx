@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Leaf } from 'lucide-react';
+import Image from 'next/image';
 
 const socialLinks = [
   { name: 'Facebook', href: '#' },
@@ -13,8 +13,7 @@ export function Footer() {
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="flex items-center space-x-2 mb-4 md:mb-0">
-             <Leaf className="h-6 w-6 text-primary" />
-            <span className="font-bold font-headline">AyushConclave</span>
+             <Image src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" alt="AyushConclave Logo" width={120} height={40} className="object-contain" />
           </div>
           <div className="text-sm text-muted-foreground mb-4 md:mb-0">
             &copy; {new Date().getFullYear()} AyushConclave. All rights reserved.

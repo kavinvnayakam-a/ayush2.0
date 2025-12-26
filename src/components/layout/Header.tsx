@@ -9,12 +9,12 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { ChevronDown, Menu, Leaf } from 'lucide-react';
+import { ChevronDown, Menu } from 'lucide-react';
 import { navLinks, infoPages } from '@/lib/data';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
-import { LogoIcon } from '../icons';
+import Image from 'next/image';
 
 export function Header() {
   const pathname = usePathname();
@@ -26,8 +26,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center">
         <Link href="/" className="mr-6 flex items-center space-x-2">
-          <Leaf className="h-6 w-6 text-primary" />
-          <span className="font-bold font-headline inline-block">AyushConclave</span>
+          <Image src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" alt="AyushConclave Logo" width={120} height={40} className="object-contain" />
         </Link>
 
         <div className="flex flex-1 items-center justify-end">
@@ -78,8 +77,7 @@ export function Header() {
               <div className="flex flex-col h-full">
                 <div className="flex items-center border-b pb-4 mb-4">
                   <Link href="/" className="flex items-center space-x-2" onClick={closeSheet}>
-                     <Leaf className="h-6 w-6 text-primary" />
-                    <span className="font-bold font-headline">AyushConclave</span>
+                     <Image src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" alt="AyushConclave Logo" width={120} height={40} className="object-contain" />
                   </Link>
                 </div>
                 <div className="flex flex-col space-y-4 text-lg">
