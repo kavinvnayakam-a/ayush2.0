@@ -20,8 +20,10 @@ export function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSheetOpen, setSheetOpen] = useState(false);
+  const [mounted, setMounted] = useState(false); // Fix for Hydration Error
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -30,6 +32,9 @@ export function Header() {
   }, []);
 
   const closeSheet = () => setSheetOpen(false);
+
+  // Avoid rendering parts that depend on window/scroll until mounted
+  if (!mounted) return null;
 
   return (
     <header 
@@ -46,25 +51,30 @@ export function Header() {
             : "bg-transparent py-4 px-4 border-transparent"
         )}
       >
-        <div className="flex h-16 items-center justify-between">
+        {/* MOBILE GRID LAYOUT: 3 columns to force center logo */}
+        <div className="grid grid-cols-3 md:flex h-16 items-center justify-between">
           
-          {/* LOGO - Takes up space but on mobile, it is centered by the parent's justify-center. On desktop, it's at the start. */}
-          <div className="flex-none">
-            <Link href="/" className="relative z-[110] flex items-center gap-3 group transition-transform hover:scale-105 w-fit">
-              <div className="relative w-[60px] h-[50px] md:w-[74px] md:h-[60px]">
-                <Image 
-                  src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" 
-                  alt="AyushConclave Logo" 
-                  fill
-                  priority
-                  className="object-contain"
-                />
-              </div>
-            </Link>
-          </div>
+          {/* Left Spacer for Mobile (keeps logo centered) */}
+          <div className="md:hidden" />
+
+          {/* LOGO (Centered on mobile, Left on desktop) */}
+          <Link 
+            href="/" 
+            className="flex items-center justify-center md:justify-start gap-3 group transition-transform hover:scale-105"
+          >
+            <div className="relative w-[60px] h-[50px] md:w-[74px] md:h-[60px]">
+              <Image 
+                src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" 
+                alt="Logo" 
+                fill
+                priority
+                className="object-contain"
+              />
+            </div>
+          </Link>
 
           {/* DESKTOP NAVIGATION */}
-          <nav className="hidden md:flex items-center gap-1 ml-auto">
+          <nav className="hidden md:flex items-center gap-1 justify-end flex-1">
             {navLinks.map((link) => (
               <div key={link.name}>
                 {link.subLinks ? (
@@ -107,64 +117,55 @@ export function Header() {
             ))}
             
             <Button asChild className="ml-4 rounded-full px-8 font-black bg-[hsl(93,45%,44%)] text-white hover:bg-[#ffa62f] transition-all">
-              <Link href="/register">REGISTER</Link>
+              <Link href="/registration">REGISTER</Link>
             </Button>
           </nav>
 
-          {/* MOBILE TOGGLE & SHEET */}
-          <div className="md:hidden">
+          {/* MOBILE TOGGLE (Right aligned on mobile) */}
+          <div className="flex justify-end md:hidden">
             <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="relative z-[110] rounded-full">
                   <Menu size={28} className="text-[hsl(93,20%,15%)]" />
                 </Button>
               </SheetTrigger>
-              <SheetContent 
-                side="right" 
-                className="w-[80%] bg-white p-0 border-none z-[150]"
-              >
+              <SheetContent side="right" className="w-[80%] bg-white p-0 border-none z-[150]">
                 <div className="sr-only">
                   <SheetTitle>Menu</SheetTitle>
-                  <SheetDescription>Navigation for National Ayush Conclave</SheetDescription>
+                  <SheetDescription>Navigation</SheetDescription>
                 </div>
-
                 <div className="flex flex-col h-full">
-                  {/* Mobile Top Bar - Clean Logo Only, Shadcn provides the 'X' button */}
-                  <div className="p-6 flex items-center justify-start border-b">
+                  <div className="p-6 border-b">
                     <Image 
                       src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" 
                       alt="Logo" width={50} height={40} 
                     />
                   </div>
-
-                  {/* Mobile Scrollable Links */}
                   <div className="flex-1 overflow-y-auto p-6 space-y-6">
                     {navLinks.map((link) => (
                       <div key={link.name} className="space-y-3">
                         {link.subLinks ? (
-                           <>
-                              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 px-4">{link.name}</p>
-                              {link.subLinks.map((sub) => (
-                                <Link 
-                                  key={sub.name} 
-                                  href={sub.href} 
-                                  onClick={closeSheet}
-                                  className="flex items-center justify-between px-4 py-3 rounded-xl text-lg font-bold text-slate-700 hover:bg-slate-50"
-                                >
-                                  {sub.name}
-                                  <ArrowRight size={16} className="text-slate-300" />
-                                </Link>
-                              ))}
-                           </>
+                          <>
+                            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 px-4">{link.name}</p>
+                            {link.subLinks.map((sub) => (
+                              <Link 
+                                key={sub.name} 
+                                href={sub.href} 
+                                onClick={closeSheet}
+                                className="flex items-center justify-between px-4 py-3 rounded-xl text-lg font-bold text-slate-700 hover:bg-slate-50"
+                              >
+                                {sub.name}
+                                <ArrowRight size={16} className="text-slate-300" />
+                              </Link>
+                            ))}
+                          </>
                         ) : (
                           <Link 
                             href={link.href || '#'} 
                             onClick={closeSheet} 
                             className={cn(
                               "flex items-center justify-between px-4 py-4 rounded-xl text-xl font-black uppercase tracking-tighter transition-all",
-                              pathname === link.href 
-                                ? "bg-[hsl(93,45%,44%)] text-white" 
-                                : "text-slate-800 hover:bg-slate-50"
+                              pathname === link.href ? "bg-[hsl(93,45%,44%)] text-white" : "text-slate-800 hover:bg-slate-50"
                             )}
                           >
                             {link.name}
@@ -172,13 +173,6 @@ export function Header() {
                         )}
                       </div>
                     ))}
-                  </div>
-
-                  {/* Mobile Bottom Button */}
-                  <div className="p-6 border-t bg-slate-50">
-                    <Button asChild className="w-full h-16 rounded-2xl bg-[hsl(93,45%,44%)] text-white font-black text-xl shadow-lg shadow-[hsl(93,45%,44%)]/20">
-                      <Link href="/register" onClick={closeSheet}>REGISTER NOW</Link>
-                    </Button>
                   </div>
                 </div>
               </SheetContent>

@@ -171,8 +171,10 @@ export default function CallForPapersPage() {
               </p>
             </div>
 
-            <Button size="lg" className="h-20 px-16 rounded-full bg-[hsl(93,45%,44%)] text-white font-black hover:scale-105 transition-all text-xl shadow-2xl shadow-[hsl(93,45%,44%)]/30 group">
-              Submit Your Abstract <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
+            <Button asChild size="lg" className="h-20 px-16 rounded-full bg-[hsl(93,45%,44%)] text-white font-black hover:scale-105 transition-all text-xl shadow-2xl shadow-[hsl(93,45%,44%)]/30 group">
+              <a href="https://www.arogyaayurconclave.org/#/callforpapers?lang=en" target="_blank" rel="noopener noreferrer">
+                Submit Your Abstract <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
+              </a>
             </Button>
             
             <p className="mt-10 text-[10px] font-black uppercase tracking-[0.3em] text-slate-300">
