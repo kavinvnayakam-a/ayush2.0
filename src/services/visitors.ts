@@ -1,39 +1,34 @@
 'use server';
 
-import { initializeApp, getApps, cert } from 'firebase-admin/app';
+import { initializeApp, getApps, cert, App } from 'firebase-admin/app';
 import { getFirestore, Timestamp } from 'firebase-admin/firestore';
 
-// IMPORTANT: Do not expose this service account key to the client-side.
-// This is a server-only file.
+let adminApp: App;
 
-try {
-  if (getApps().length === 0) {
+// Unified initialization logic
+if (!getApps().length) {
+  try {
     const serviceAccountString = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
+    
     if (serviceAccountString) {
       const serviceAccount = JSON.parse(serviceAccountString);
-      initializeApp({
-        credential: cert(serviceAccount),
-      });
-    } else if (process.env.GOOGLE_APPLICATION_CREDENTIALS) {
-       // This will work in environments where the GOOGLE_APPLICATION_CREDENTIALS path is set
-       initializeApp();
+      adminApp = initializeApp({ credential: cert(serviceAccount) });
+    } else if (process.env.GCLOUD_PROJECT) {
+      // For Google Cloud environments like App Hosting, Cloud Run, etc.
+      adminApp = initializeApp();
     } else {
-      // Check for App Hosting environment variables
-      if (process.env.GCLOUD_PROJECT) {
-          initializeApp();
-      } else {
-          throw new Error('Firebase Admin initialization failed. FIREBASE_SERVICE_ACCOUNT_KEY environment variable is not set and not in a recognized Google Cloud environment.');
-      }
+      throw new Error('Firebase Admin initialization failed. Set FIREBASE_SERVICE_ACCOUNT_KEY for local dev or deploy to a Google Cloud environment.');
     }
+  } catch (error: any) {
+    console.error("Firebase Admin SDK Initialization Error:", error.message);
+    // This error will now be more informative for debugging.
+    throw new Error("A server configuration error occurred. Please check server logs for details on Firebase Admin initialization.");
   }
-} catch (error: any) {
-  console.error("Firebase Admin SDK Initialization Error:", error.message);
-  // We throw a new error to avoid leaking implementation details to the client.
-  throw new Error("A server configuration error occurred. Please check the server logs.");
+} else {
+  adminApp = getApps()[0];
 }
 
-
-const db = getFirestore();
+const db = getFirestore(adminApp);
 
 export interface Visitor {
   name: string;
@@ -55,8 +50,8 @@ export async function addVisitor(
     console.log('Document written with ID: ', docRef.id);
     return docRef.id;
   } catch (e: any) {
-    console.error('Error adding document: ', e);
-    // Re-throw a generic error if something else goes wrong during the write.
-    throw new Error('Could not save visitor information. Please try again.');
+    console.error('Error adding document to Firestore: ', e);
+    // This will now throw the specific Firestore error for better debugging if the issue is not initialization.
+    throw new Error(e.message || 'Could not save visitor information. Please try again.');
   }
 }
