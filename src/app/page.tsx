@@ -18,14 +18,21 @@ import {
 import { Button } from '@/components/ui/button';
 import { CountdownTimer } from '@/components/CountdownTimer';
 import { EventMap } from '@/components/EventMap';
-import { useActionState } from 'react';
-import { useFormStatus } from 'react-dom';
-import { registerVisitorAction, FormState } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Input } from '@/components/ui/input';
+import { useFirestore } from '@/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { z } from 'zod';
+
 
 /** --- CONSTANTS --- **/
 const REGISTRATION_LINK = "https://www.arogyaayurconclave.org/#/buyTickets/selectTickets?day=1&lang=en";
+const VisitorSchema = z.object({
+    name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+    number: z.string().regex(/^\+?[1-9]\d{1,14}$/, { message: "Please enter a valid mobile number." }),
+    mailId: z.string().email({ message: "Please enter a valid email address." }),
+    location: z.string().min(2, { message: "Location is required." }),
+});
 
 /** --- SUB-COMPONENTS --- **/
 
@@ -55,37 +62,65 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 function VisitorForm({ closeModal }: { closeModal: () => void }) {
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
+  const firestore = useFirestore();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const initialState: FormState = { status: 'idle', message: '' };
-  const [state, formAction] = useActionState(registerVisitorAction, initialState);
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    const formData = new FormData(event.currentTarget);
 
-  const { pending } = useFormStatus();
+    const validatedFields = VisitorSchema.safeParse({
+        name: formData.get('name'),
+        number: formData.get('mobile'),
+        mailId: formData.get('mailId'),
+        location: formData.get('location'),
+    });
 
-  useEffect(() => {
-    if (state.status === 'success') {
-      toast({
-        title: 'Success!',
-        description: state.message,
-      });
-      formRef.current?.reset();
-      closeModal();
-    } else if (state.status === 'error') {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description: state.message,
-      });
+    if (!validatedFields.success) {
+        const fieldErrors = validatedFields.error.flatten().fieldErrors;
+        toast({
+            variant: 'destructive',
+            title: 'Validation Error',
+            description: fieldErrors.name?.[0] || fieldErrors.number?.[0] || fieldErrors.mailId?.[0] || fieldErrors.location?.[0] || 'Please check your inputs.',
+        });
+        setIsSubmitting(false);
+        return;
     }
-  }, [state, toast, closeModal]);
+
+    try {
+        const visitorsRef = collection(firestore, 'visitor_passes');
+        await addDoc(visitorsRef, {
+            ...validatedFields.data,
+            registrationDate: serverTimestamp(),
+        });
+        toast({
+            title: 'Success!',
+            description: 'Registration successful! See you at the Expo.',
+        });
+        formRef.current?.reset();
+        closeModal();
+    } catch (error: any) {
+        console.error("Firestore Error:", error);
+        toast({
+            variant: 'destructive',
+            title: 'Error',
+            description: 'Could not save your registration. Please try again later.',
+        });
+    } finally {
+        setIsSubmitting(false);
+    }
+  };
+
 
   return (
-     <form ref={formRef} action={formAction} className="space-y-4">
+     <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
         <Input name="name" type="text" placeholder="Full Name" required />
         <Input name="mobile" type="tel" placeholder="Mobile Number" required />
         <Input name="mailId" type="email" placeholder="Email Address" required />
         <Input name="location" type="text" placeholder="City / Location" required />
-        <Button type="submit" disabled={pending} className="w-full h-12 bg-[hsl(93,45%,44%)] text-white rounded-xl font-black uppercase hover:bg-[#ffa62f] shadow-xl">
-          {pending ? 'Booking...' : 'Confirm Booking'}
+        <Button type="submit" disabled={isSubmitting} className="w-full h-12 bg-[hsl(93,45%,44%)] text-white rounded-xl font-black uppercase hover:bg-[#ffa62f] shadow-xl">
+          {isSubmitting ? 'Booking...' : 'Confirm Booking'}
         </Button>
       </form>
   )
