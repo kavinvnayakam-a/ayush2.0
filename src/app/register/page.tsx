@@ -16,7 +16,7 @@ import { Button } from '@/components/ui/button';
 import { useFormState, useFormStatus } from 'react-dom';
 import { registerVisitorAction, type FormState } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
-
+import { Input } from '@/components/ui/input';
 
 const REGISTRATION_LINK = "https://www.arogyaayurconclave.org/#/buyTickets/selectTickets?day=1&lang=en";
 
@@ -63,15 +63,19 @@ function VisitorForm({ closeModal }: { closeModal: () => void }) {
       <form ref={formRef} action={formAction} className="space-y-4">
         <div>
             <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Full Name</label>
-            <input name="name" type="text" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold focus:outline-none focus:border-[hsl(93,45%,44%)] transition-colors" placeholder="Enter your name" required />
+            <Input name="name" type="text" placeholder="Enter your name" required />
         </div>
         <div>
             <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Mobile Number</label>
-            <input name="mobile" type="tel" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold focus:outline-none focus:border-[hsl(93,45%,44%)] transition-colors" placeholder="+91 XXXXX XXXXX" required />
+            <Input name="mobile" type="tel" placeholder="+91 XXXXX XXXXX" required />
+        </div>
+        <div>
+            <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Email Address</label>
+            <Input name="mailId" type="email" placeholder="your@email.com" required />
         </div>
         <div>
             <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Location</label>
-            <input name="location" type="text" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold focus:outline-none focus:border-[hsl(93,45%,44%)] transition-colors" placeholder="City / State" required />
+            <Input name="location" type="text" placeholder="City / State" required />
         </div>
         <Button type="submit" disabled={pending} className="w-full h-16 bg-[hsl(93,45%,44%)] text-white rounded-2xl font-black uppercase tracking-widest hover:bg-[#ffa62f] transition-all mt-6 shadow-xl shadow-[hsl(93,45%,44%)]/20">
              {pending ? 'Booking...' : 'Confirm Booking'}

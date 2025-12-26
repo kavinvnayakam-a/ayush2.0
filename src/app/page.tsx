@@ -19,8 +19,9 @@ import { Button } from '@/components/ui/button';
 import { CountdownTimer } from '@/components/CountdownTimer';
 import { EventMap } from '@/components/EventMap';
 import { useFormState, useFormStatus } from 'react-dom';
-import { registerVisitorAction } from '@/app/actions';
+import { registerVisitorAction, FormState } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
+import { Input } from '@/components/ui/input';
 
 /** --- CONSTANTS --- **/
 const REGISTRATION_LINK = "https://www.arogyaayurconclave.org/#/buyTickets/selectTickets?day=1&lang=en";
@@ -78,10 +79,11 @@ function VisitorForm({ closeModal }: { closeModal: () => void }) {
 
   return (
      <form ref={formRef} action={formAction} className="space-y-4">
-        <input name="name" type="text" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold" placeholder="Full Name" required />
-        <input name="mobile" type="tel" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold" placeholder="Mobile Number" required />
-        <input name="location" type="text" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold" placeholder="City / Location" required />
-        <Button type="submit" disabled={pending} className="w-full h-16 bg-[hsl(93,45%,44%)] text-white rounded-2xl font-black uppercase hover:bg-[#ffa62f] shadow-xl">
+        <Input name="name" type="text" placeholder="Full Name" required />
+        <Input name="mobile" type="tel" placeholder="Mobile Number" required />
+        <Input name="mailId" type="email" placeholder="Email Address" required />
+        <Input name="location" type="text" placeholder="City / Location" required />
+        <Button type="submit" disabled={pending} className="w-full h-12 bg-[hsl(93,45%,44%)] text-white rounded-xl font-black uppercase hover:bg-[#ffa62f] shadow-xl">
           {pending ? 'Booking...' : 'Confirm Booking'}
         </Button>
       </form>
