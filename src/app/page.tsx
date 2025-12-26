@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Sparkles, Globe, ArrowRight, Target, ShieldCheck, Microscope, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CountdownTimer } from '@/components/CountdownTimer';
+import { EventMap } from '@/components/EventMap';
 
 /** --- SUB-COMPONENTS --- **/
 
@@ -58,9 +59,9 @@ export default function HomePage() {
               </p>
             </div>
             
-            <div className="relative w-48 h-48">
+            <div className="relative w-60 h-60">
               <Image 
-                src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5"
+                src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F1000157891%20(1).webp?alt=media&token=f13fc097-13b6-4af3-bb0e-2788a1fb4b73"
                 alt="National Arogya Expo 2026"
                 fill
                 className="object-contain"
@@ -192,11 +193,13 @@ export default function HomePage() {
               </div>
             </div>
             <div className="lg:w-1/2 w-full h-[400px] bg-[hsl(91,30%,90%)] rounded-[3rem] border-8 border-white shadow-2xl relative overflow-hidden group">
-               {/* Map Placeholder */}
-               <div className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" style={{backgroundImage: "url('https://images.unsplash.com/photo-1524230572899-a752b3835840?auto=format&fit=crop&q=80')"}}></div>
-               <div className="absolute inset-0 bg-[hsl(93,45%,44%)]/10 mix-blend-multiply"></div>
+               <EventMap />
                <div className="absolute bottom-8 right-8">
-                 <Button className="rounded-full bg-white text-[hsl(93,20%,15%)] font-black shadow-xl">Get Directions</Button>
+                 <Button asChild className="rounded-full bg-white text-[hsl(93,20%,15%)] font-black shadow-xl">
+                   <a href="https://www.google.com/maps/dir/?api=1&destination=12.9934,80.1706" target="_blank" rel="noopener noreferrer">
+                    Get Directions
+                   </a>
+                 </Button>
                </div>
             </div>
           </div>
