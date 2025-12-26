@@ -167,8 +167,8 @@ export default function Home() {
                   <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary">Our vision</h2>
                   <p className="mt-4 text-muted-foreground">Our vision is to harmonize ancient Ayurvedic wisdom with modern scientific care, creating a healthcare ecosystem that is safe, evidence-based, accessible, and compassionate. By placing the patient at the center of every decision, we aim to advance holistic well-being and promote a future where tradition and innovation thrive together.</p>
               </div>
-              <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                  <p className="text-muted-foreground">Image placeholder</p>
+              <div className="flex items-center justify-center">
+                  <Image src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FOur%20vision.webp?alt=media&token=c568e396-21f1-4771-a361-3efaff9cb909" alt="Our Vision" width={300} height={300} className="object-contain" />
               </div>
           </div>
       </section>
