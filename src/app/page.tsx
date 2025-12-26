@@ -176,8 +176,8 @@ export default function Home() {
       <section className="py-16 md:py-24">
           <div className="container mx-auto px-4">
               <div className="grid md:grid-cols-2 gap-12 items-center">
-                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                    <p className="text-muted-foreground">Image placeholder</p>
+                <div className="flex items-center justify-center">
+                    <Image src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" alt="Arogya 2026" width={300} height={300} className="object-contain" />
                 </div>
                 <div>
                     <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary">National Arogya Expo 2026</h2>
@@ -204,33 +204,33 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary mb-12">Leadership</h2>
             <div className="mb-12">
                 <h3 className="text-2xl font-headline text-primary/90 mb-8">Chief Patron</h3>
-                <PersonCard name="Hon'ble Shri Prataprao Jadhav" title="Union Minister, Ministry of AYUSH, Government of India" />
+                <PersonCard name="Hon'ble Shri Prataprao Jadhav" title="Union Minister, Ministry of AYUSH, Government of India" imageUrl="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FBoard%20Members%20Images%2FHon'ble%20Shri%20Prataprao%20Jadhav.webp?alt=media&token=f5cb4292-512c-4906-8528-a466b1706edb" />
             </div>
 
             <div className="mb-12">
                 <h3 className="text-2xl font-headline text-primary/90 mb-8">Patron</h3>
                 <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-16">
-                    <PersonCard name="Vaidya Rajesh Kotecha" title="Secretary, Ministry of AYUSH, GOI" />
-                    <PersonCard name="Dr Shekhar C. Mande" title="National President, VIBHA" />
+                    <PersonCard name="Vaidya Rajesh Kotecha" title="Secretary, Ministry of AYUSH, GOI" imageUrl="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FBoard%20Members%20Images%2FVaidya%20Rajesh%20Kotecha.webp?alt=media&token=47c73bff-410c-4934-95f7-f1ba2081e869" />
+                    <PersonCard name="Dr Shekhar C. Mande" title="National President, VIBHA" imageUrl="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FBoard%20Members%20Images%2FDr%20Shekhar%20C.%20Mande.webp?alt=media&token=601c27ea-cb6b-4af7-85f8-099a344f3125" />
                 </div>
             </div>
 
             <div>
                 <h3 className="text-2xl font-headline text-primary/90 mb-8">National Advisory Board</h3>
                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 md:gap-12">
-                    <PersonCard name="Prof (Dr) Rabinarayan Acharya" title="DG, CCRAS, New Delhi" />
-                    <PersonCard name="Prof (Dr) N. J. Muthukumar" title="DG, CCRS, Chennai" />
-                    <PersonCard name="Prof (Vd) P. K. Prajapati" title="Director, AIIA, New Delhi" />
-                    <PersonCard name="Prof Sanjeev Sharma" title="Vice Chancellor, NIA, Jaipur" />
-                    <PersonCard name="Prof (Dr) B. L. Mehra" title="Former Chairman, NCISM, New Delhi" />
-                    <PersonCard name="Prof (Dr) Tanuja Nesari" title="Director, ITRA, Jamnagar" />
-                    <PersonCard name="Prof (Dr) Sujata Kadam" title="Director I/C, AIIA, Goa" />
-                    <PersonCard name="Dr Shivkumar Sharma" title="National Organizing Secretary, VIBHA" />
-                    <PersonCard name="Shri Praveen Ramadas" title="National Jt. Organizing Secretary, VIBHA" />
-                    <PersonCard name="Shri Vivekananda Pai" title="Secretary General, VIBHA" />
-                    <PersonCard name="Shri Abga R. Babu" title="South India Organizing Secretary, VIBHA" />
-                    <PersonCard name="Dr Manasi Malgaonkar" title="Governing Council Member, Vijnana Bharati" />
-                    <PersonCard name="Aacharya Dr Shreevarma" title="Founder & Chairman - PCR Herbals CMD - Wellness by Heartfulness" />
+                    <PersonCard name="Prof (Dr) Rabinarayan Acharya" title="DG, CCRAS, New Delhi" imageUrl="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FBoard%20Members%20Images%2FProf%20(Dr)%20Rabinarayan%20Acharya.webp?alt=media&token=7034e1c3-af74-4d01-8b32-0e3ef0482004" />
+                    <PersonCard name="Prof (Dr) N. J. Muthukumar" title="DG, CCRS, Chennai" imageUrl="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FBoard%20Members%20Images%2FProf%20(Dr)%20N.%20J.%20Muthukumar.webp?alt=media&token=031f9166-3c63-4a4f-a17c-3cba85443f7c" />
+                    <PersonCard name="Prof (Vd) P. K. Prajapati" title="Director, AIIA, New Delhi" imageUrl="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FBoard%20Members%20Images%2FProf%20(Vd)%20P.%20K.%20Prajapati.webp?alt=media&token=88b9c3ea-38b7-4396-a499-669fc2ca44d5" />
+                    <PersonCard name="Prof Sanjeev Sharma" title="Vice Chancellor, NIA, Jaipur" imageUrl="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FBoard%20Members%20Images%2FProf%20Sanjeev%20Sharma.webp?alt=media&token=dedff5d1-b8e7-4255-8fa7-16daf7a3b422" />
+                    <PersonCard name="Prof (Dr) B. L. Mehra" title="Former Chairman, NCISM, New Delhi" imageUrl="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FBoard%20Members%20Images%2FProf%20(Dr)%20B.%20L.%20Mehra.webp?alt=media&token=e56e63b0-a201-4bb2-9d98-ad5994e2a5bd" />
+                    <PersonCard name="Prof (Dr) Tanuja Nesari" title="Director, ITRA, Jamnagar" imageUrl="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FBoard%20Members%20Images%2FProf%20(Dr)%20Tanuja%20Nesari.webp?alt=media&token=4b1badf5-a60d-433c-b122-306181dd2574" />
+                    <PersonCard name="Prof (Dr) Sujata Kadam" title="Director I/C, AIIA, Goa" imageUrl="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FBoard%20Members%20Images%2FProf%20(Dr)%20Sujata%20Kadam.webp?alt=media&token=b15ee02b-d383-41bc-8c22-ddfa82abf838" />
+                    <PersonCard name="Dr Shivkumar Sharma" title="National Organizing Secretary, VIBHA" imageUrl="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FBoard%20Members%20Images%2FDr%20Shivkumar%20Sharma.webp?alt=media&token=2ca44caf-7b10-4c1b-876a-abb228554b22" />
+                    <PersonCard name="Shri Praveen Ramadas" title="National Jt. Organizing Secretary, VIBHA" imageUrl="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FBoard%20Members%20Images%2FShri%20Praveen%20Ramadas.webp?alt=media&token=32d9aeba-0a06-43b8-b619-02a464c13d69" />
+                    <PersonCard name="Shri Vivekananda Pai" title="Secretary General, VIBHA" imageUrl="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FBoard%20Members%20Images%2FShri%20Vivekananda%20Pai.webp?alt=media&token=e1d841aa-56e6-47c0-b0c6-04167e848e44" />
+                    <PersonCard name="Shri Abga R. Babu" title="South India Organizing Secretary, VIBHA" imageUrl="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FBoard%20Members%20Images%2FShri%20Abga%20R.%20Babu.webp?alt=media&token=9646ff38-bc5e-4cb3-8be3-a25e7fe43a76" />
+                    <PersonCard name="Dr Manasi Malgaonkar" title="Governing Council Member, Vijnana Bharati" imageUrl="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FBoard%20Members%20Images%2FDr%20Manasi%20Malgaonkar.webp?alt=media&token=a3d64718-018e-46dd-ba14-3876074cec8d" />
+                    <PersonCard name="Aacharya Dr Shreevarma" title="Founder & Chairman - PCR Herbals CMD - Wellness by Heartfulness" imageUrl="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FBoard%20Members%20Images%2FAacharya%20Dr%20Shreevarma.webp?alt=media&token=bad10147-6181-467d-a51b-5eb038393f47" />
                 </div>
             </div>
         </div>
