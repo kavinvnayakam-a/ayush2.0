@@ -109,29 +109,6 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Newsletter Section: Fully Centered on Mobile */}
-        <div className="bg-white/60 backdrop-blur-xl border border-white p-8 rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between gap-8 mb-16 shadow-xl shadow-[hsl(93,45%,44%)]/5 text-center md:text-left">
-          <div className="flex flex-col md:flex-row items-center gap-6">
-            <div className="w-14 h-14 bg-[hsl(93,45%,44%)]/10 rounded-2xl flex items-center justify-center text-[hsl(93,45%,44%)] shrink-0">
-              <Mail size={28} />
-            </div>
-            <div>
-              <h4 className="text-lg font-black text-[hsl(93,20%,15%)] leading-tight">Stay Updated</h4>
-              <p className="text-sm font-bold text-[hsl(93,20%,15%)]/50">News about AYUSH Conclave 2026</p>
-            </div>
-          </div>
-          <div className="flex flex-col sm:flex-row w-full md:w-auto gap-3">
-            <input 
-              type="email" 
-              placeholder="Enter your email" 
-              className="bg-white border border-[hsl(93,45%,44%)]/10 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[hsl(93,45%,44%)]/20 w-full md:w-64 font-medium text-center md:text-left"
-            />
-            <button className="bg-[hsl(93,45%,44%)] text-white font-black text-xs uppercase tracking-widest px-8 py-4 rounded-full hover:scale-105 transition-transform shadow-lg shadow-[hsl(93,45%,44%)]/20">
-              Join
-            </button>
-          </div>
-        </div>
-
         {/* Bottom Bar: Centered on Mobile */}
         <div className="pt-8 border-t border-[hsl(93,45%,44%)]/10 flex flex-col md:flex-row items-center justify-between gap-6 text-center">
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[hsl(93,20%,15%)]/40">
