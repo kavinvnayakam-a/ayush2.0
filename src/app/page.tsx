@@ -134,9 +134,6 @@ export default function Home() {
                 <p className="text-muted-foreground">NASYA is a vibrant national network of Ayurveda students and youth, connecting 100+ institutions and over 6000 members across India. Established to empower the next generation, NASYA promotes leadership, research, innovation, and collaborative learning, nurturing skilled Ayurvedic professionals committed to advancing holistic health and strengthening the AYUSH ecosystem.</p>
             </div>
             <div className="mt-12">
-                <div className="aspect-video bg-muted rounded-lg w-full max-w-4xl mx-auto flex items-center justify-center">
-                    <p className="text-muted-foreground">Image placeholder</p>
-                </div>
             </div>
         </div>
       </section>
