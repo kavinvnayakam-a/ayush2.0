@@ -151,8 +151,8 @@ export default function Home() {
 
        <section className="py-16 md:py-24">
           <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-               <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                  <p className="text-muted-foreground">Image placeholder</p>
+               <div className="flex items-center justify-center">
+                  <Image src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FAYUSH%20for%20One%20Health.webp?alt=media&token=79f49573-f5a2-4206-9b42-9bedecd093ff" alt="AYUSH for One Health" width={300} height={300} className="object-contain" />
               </div>
               <div>
                   <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary">AYUSH for One Health</h2>
