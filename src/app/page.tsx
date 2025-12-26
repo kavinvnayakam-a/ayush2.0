@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Calendar, MapPin, Users, Award, Mic, BarChart, BookUser, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Calendar, MapPin, Users, Award, Mic, BarChart } from 'lucide-react';
 import { CountdownTimer } from '@/components/CountdownTimer';
 import { LogoIcon } from '@/components/icons';
 import {
@@ -32,7 +32,7 @@ const StatCard = ({ icon, value, label }: { icon: React.ElementType, value: stri
 const PersonCard = ({ name, title, imageUrl }: { name: string, title: string, imageUrl?: string }) => (
     <div className="text-center">
         <div className="relative w-32 h-32 mx-auto bg-muted rounded-full mb-4 flex items-center justify-center">
-             {/* Placeholder for image */}
+             {imageUrl ? <Image src={imageUrl} alt={name} width={128} height={128} className="rounded-full object-cover" /> : <div className="w-full h-full bg-muted rounded-full" />}
         </div>
         <h3 className="font-semibold text-lg">{name}</h3>
         <p className="text-muted-foreground text-sm">{title}</p>
@@ -144,7 +144,7 @@ export default function Home() {
                   <p className="mt-4 text-muted-foreground">International AyushConclave - 2026 is the first international conference dedicated to advancing Ayurveda through contemporary science. Themed "Transforming Ayurveda: Through Research, Innovation & Integration", this landmark event will bring together global experts, researchers, and practitioners to explore cutting-edge developments in Ayurvedic sciences. With eight focused scientific sessions spanning from AI and microbiome research to clinical validation and education, AyushConclave aims to bridge traditional wisdom with modern innovation.</p>
               </div>
               <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                  <p className="text-muted-foreground">Image placeholder</p>
+                  <Image src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F1000157891.webp?alt=media&token=4be2587a-1605-40c6-8bff-dc1472ecfe22" alt="Image placeholder" width={500} height={500} className="object-cover" />
               </div>
           </div>
       </section>
@@ -177,6 +177,7 @@ export default function Home() {
           <div className="container mx-auto px-4">
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                    <p className="text-muted-foreground">Image placeholder</p>
                 </div>
                 <div>
                     <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary">National Arogya Expo 2026</h2>
@@ -308,3 +309,5 @@ export default function Home() {
     </div>
   );
 }
+
+    
