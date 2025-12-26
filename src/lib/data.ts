@@ -12,7 +12,7 @@ export const navLinks = [
       { name: 'Call for Papers', href: '/abstract/call-for-papers' },
     ]
   },
-  { name: 'Scientific Session', href: '/scientific-session' },
+  { name: 'Session', href: '/scientific-session' },
   { name: 'Speakers', href: '/speakers' },
   { name: 'Registration', href: '/register' },
   { name: 'Venue', href: '/venue' },
