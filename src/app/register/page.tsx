@@ -13,7 +13,8 @@ import {
   X
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { registerVisitorAction, type FormState } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Input } from '@/components/ui/input';
@@ -38,7 +39,7 @@ function VisitorForm({ closeModal }: { closeModal: () => void }) {
   const formRef = useRef<HTMLFormElement>(null);
 
   const initialState: FormState = { status: 'idle', message: '' };
-  const [state, formAction] = useFormState(registerVisitorAction, initialState);
+  const [state, formAction] = useActionState(registerVisitorAction, initialState);
 
   const { pending } = useFormStatus();
 
