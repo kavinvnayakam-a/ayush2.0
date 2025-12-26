@@ -39,6 +39,12 @@ const PersonCard = ({ name, title, imageUrl }: { name: string, title: string, im
     </div>
 );
 
+const supportedByLogos = [
+  "https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FSupported%20by%20logos%2Fpreview.webp?alt=media&token=3dc567d4-b3da-4f76-b4cd-dfc8e935049a",
+  "https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FSupported%20by%20logos%2FNasya.webp?alt=media&token=e71b53e2-130a-41f1-87e4-e8e6d51938bc",
+  "https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FSupported%20by%20logos%2FHeartfulness.webp?alt=media&token=dae70f60-e8cc-48cd-8317-8379e6ef818c",
+  "https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FSupported%20by%20logos%2FVibha.webp?alt=media&token=19ef4dd0-2d8c-4fea-a2da-1aa0c8fefd0c"
+]
 
 export default function Home() {
   const eventDate = new Date('2026-01-09T00:00:00');
@@ -226,10 +232,10 @@ export default function Home() {
       <section className="py-16 md:py-24">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary">Supported by</h2>
-            <div className="mt-8 grid grid-cols-2 md:grid-cols-5 gap-8 items-center">
-                {[...Array(5)].map((_, i) => (
-                    <div key={i} className="h-24 bg-muted rounded-lg flex items-center justify-center">
-                        <p className="text-muted-foreground">Logo</p>
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-center">
+                {supportedByLogos.map((logo, i) => (
+                    <div key={i} className="w-32 h-32 mx-auto bg-muted rounded-full flex items-center justify-center p-2">
+                        <Image src={logo} alt={`Supported by logo ${i+1}`} width={128} height={128} className="object-contain" />
                     </div>
                 ))}
             </div>
@@ -296,3 +302,5 @@ export default function Home() {
     </div>
   );
 }
+
+    
