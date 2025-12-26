@@ -11,8 +11,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useAuth, useUser } from '@/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
-import { LogIn } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import Image from 'next/image';
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'Invalid email address.' }),
@@ -73,52 +74,65 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-100 p-4">
-      <Card className="w-full max-w-md shadow-2xl">
-        <CardHeader className="text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-            <LogIn size={32} />
-          </div>
-          <CardTitle className="text-3xl font-black uppercase tracking-tight text-foreground">Admin Login</CardTitle>
-          <CardDescription>Access the AyushConclave Dashboard</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-bold uppercase tracking-wider text-xs">Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="admin@example.com" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-bold uppercase tracking-wider text-xs">Password</FormLabel>
-                    <FormControl>
-                      <Input type="password" placeholder="••••••••" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {error && <p className="text-sm font-medium text-destructive">{error}</p>}
-              <Button type="submit" className="w-full h-12 font-black uppercase" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? 'Signing In...' : 'Sign In'}
-              </Button>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
+    <div className="flex min-h-screen items-center justify-center bg-slate-50 p-4">
+      <div className="w-full max-w-md space-y-8">
+        <div className="text-center space-y-4">
+            <Image 
+                src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" 
+                alt="Logo"
+                width={120}
+                height={40}
+                className="mx-auto"
+            />
+            <h1 className="text-4xl font-black text-foreground uppercase tracking-tight">Admin Portal</h1>
+            <p className="text-muted-foreground font-bold italic">Access the AyushConclave Dashboard</p>
+        </div>
+        
+        <Card className="rounded-[2rem] shadow-xl shadow-slate-200/80">
+          <CardHeader>
+             <div className="flex items-center gap-3 text-sm font-bold text-primary">
+                <ShieldCheck size={18} />
+                <span>Secure Sign-In</span>
+             </div>
+          </CardHeader>
+          <CardContent>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-bold uppercase tracking-wider text-xs text-muted-foreground">Email</FormLabel>
+                      <FormControl>
+                        <Input className="h-12" placeholder="admin@example.com" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-bold uppercase tracking-wider text-xs text-muted-foreground">Password</FormLabel>
+                      <FormControl>
+                        <Input className="h-12" type="password" placeholder="••••••••" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                {error && <p className="text-sm font-medium text-destructive">{error}</p>}
+                <Button type="submit" className="w-full h-14 font-black uppercase text-base rounded-2xl tracking-widest bg-primary hover:bg-accent text-primary-foreground hover:text-accent-foreground transition-all shadow-lg shadow-primary/20" disabled={form.formState.isSubmitting}>
+                  {form.formState.isSubmitting ? 'Signing In...' : 'Sign In'}
+                </Button>
+              </form>
+            </Form>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
