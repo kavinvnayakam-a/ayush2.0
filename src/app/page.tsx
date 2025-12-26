@@ -4,10 +4,16 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Calendar, MapPin, Users, Award, Mic, BarChart, BookUser } from 'lucide-react';
+import { ArrowRight, Calendar, MapPin, Users, Award, Mic, BarChart, BookUser, ChevronLeft, ChevronRight } from 'lucide-react';
 import { CountdownTimer } from '@/components/CountdownTimer';
 import { LogoIcon } from '@/components/icons';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 
 const StatCard = ({ icon, value, label }: { icon: React.ElementType, value: string, label: string }) => {
@@ -36,46 +42,89 @@ const PersonCard = ({ name, title, imageUrl }: { name: string, title: string, im
 
 export default function Home() {
   const eventDate = new Date('2026-01-09T00:00:00');
+  const eventDateWithTime = new Date('2026-01-09T08:00:00');
 
   return (
     <div className="flex flex-col">
       <section className="relative w-full flex items-center justify-center text-center text-white bg-[#E6F0E4]">
-        <div className="container mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-8 items-center">
-          <div className="text-left text-primary space-y-4">
-            <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight text-green-900">
-              National Arogya Expo 2026
-            </h1>
-            <p className="text-lg md:text-xl text-green-800">
-              AYUSH for One Health: Bridging Tradition, Innovation and Well-being
-            </p>
-            <p className="font-semibold text-green-800">
-              Ancient Wisdom | Modern Care | Patient First
-            </p>
-            <div className="space-y-2 text-green-800">
-              <div className="flex items-center gap-2">
-                <Calendar className="w-5 h-5" />
-                <span>Jan 09 - 12, 2026</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-5 h-5" />
-                <span>Heartfulness, Babuji Memorial Ashram, Manapakkam, Chennai</span>
-              </div>
-            </div>
-            <CountdownTimer targetDate={eventDate} />
-            <Button size="lg" className="bg-orange-500 text-white hover:bg-orange-600">
-              Register Now
-            </Button>
-          </div>
-          <div className="flex items-center justify-center">
-            <div className="bg-white/70 p-8 rounded-full">
-              <div className="flex flex-col items-center justify-center text-primary">
-                  <LogoIcon className="h-24 w-24 text-blue-500" />
-                  <span className="text-2xl font-bold font-headline mt-2 text-blue-500">AyushConclave</span>
-                  <p className="text-sm text-center mt-2 text-green-800">Holistic Health & One Vision</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Carousel className="w-full" opts={{ loop: true }}>
+          <CarouselContent>
+            <CarouselItem>
+                <div className="container mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-8 items-center">
+                  <div className="text-left text-primary space-y-4">
+                    <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight text-green-900">
+                      National Arogya Expo 2026
+                    </h1>
+                    <p className="text-lg md:text-xl text-green-800">
+                      AYUSH for One Health: Bridging Tradition, Innovation and Well-being
+                    </p>
+                    <p className="font-semibold text-green-800">
+                      Ancient Wisdom | Modern Care | Patient First
+                    </p>
+                    <div className="space-y-2 text-green-800">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-5 h-5" />
+                        <span>Jan 09 - 12, 2026</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-5 h-5" />
+                        <span>Heartfulness, Babuji Memorial Ashram, Manapakkam, Chennai</span>
+                      </div>
+                    </div>
+                    <CountdownTimer targetDate={eventDate} />
+                    <Button size="lg" className="bg-orange-500 text-white hover:bg-orange-600">
+                      Register Now
+                    </Button>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <div className="bg-white/70 p-8 rounded-full">
+                      <div className="flex flex-col items-center justify-center text-primary">
+                          <LogoIcon className="h-24 w-24 text-blue-500" />
+                          <span className="text-2xl font-bold font-headline mt-2 text-blue-500">AyushConclave</span>
+                          <p className="text-sm text-center mt-2 text-green-800">Holistic Health & One Vision</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </CarouselItem>
+            <CarouselItem>
+                <div className="container mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-8 items-center">
+                  <div className="text-left text-primary space-y-4">
+                    <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight text-green-900">
+                      Arogya Expo 2026
+                    </h1>
+                     <div className="space-y-2 text-green-800">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-5 h-5" />
+                        <span>Jan 09 - 12, 2026</span>
+                        <span className="ml-2">08:00 AM</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-5 h-5" />
+                        <span>Heartfulness, Babuji Memorial Ashram, Manapakkam, Chennai</span>
+                      </div>
+                    </div>
+                    <CountdownTimer targetDate={eventDateWithTime} />
+                    <Button size="lg" className="bg-orange-500 text-white hover:bg-orange-600">
+                      Register Now
+                    </Button>
+                  </div>
+                  <div className="hidden md:flex items-center justify-center">
+                     <div className="bg-white/70 p-8 rounded-full">
+                      <div className="flex flex-col items-center justify-center text-primary">
+                          <h2 className="text-3xl font-bold font-headline text-green-900">National</h2>
+                          <h1 className="text-5xl font-bold font-headline text-green-800">Arogya</h1>
+                          <h2 className="text-3xl font-bold font-headline text-green-900">Expo</h2>
+                          <p className="text-lg text-center mt-2 text-green-800">& Ayush Conclave 2026</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </CarouselItem>
+          </CarouselContent>
+          <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black/20 hover:bg-black/50 border-none" />
+          <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black/20 hover:bg-black/50 border-none" />
+        </Carousel>
       </section>
 
       <section className="py-16 md:py-24">
@@ -265,5 +314,3 @@ export default function Home() {
     </div>
   );
 }
-
-    
