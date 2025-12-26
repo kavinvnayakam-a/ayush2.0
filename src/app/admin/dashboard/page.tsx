@@ -99,13 +99,6 @@ function AdminDashboard() {
       <div className="max-w-7xl mx-auto">
         <header className="flex flex-col sm:flex-row items-center justify-between mb-8">
           <div className='flex items-center gap-4 text-center sm:text-left'>
-             <Image 
-                src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" 
-                alt="Logo"
-                width={50}
-                height={40}
-                className="object-contain"
-            />
             <div>
                 <h1 className="text-3xl font-black text-foreground uppercase tracking-tight">Admin Dashboard</h1>
                 <p className="text-muted-foreground font-bold italic">Welcome, {user.email}</p>
@@ -195,5 +188,3 @@ function AdminDashboard() {
 }
 
 export default AdminDashboard;
-
-    
