@@ -18,7 +18,7 @@ export const navLinks = [
   { name: 'Venue', href: '/venue' },
   { name: 'Contact Us', href: '/contact' },
   { name: 'Tourist Attractions', href: '/tourist-attractions' },
-  { name: 'Map', href: '/map' },
+  
 ];
 
 export const infoPages = [

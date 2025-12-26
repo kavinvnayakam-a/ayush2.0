@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { ChevronDown, Menu, X, Sparkles } from 'lucide-react';
+import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,7 +13,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+// Import SheetTitle and SheetDescription to fix the error
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { navLinks } from '@/lib/data';
 
 export function Header() {
@@ -23,7 +24,6 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Trigger the transition slightly later for a smoother feel
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
@@ -49,7 +49,7 @@ export function Header() {
       >
         <div className="flex h-16 items-center justify-between">
           
-          {/* LOGO - Scaled for 554x450 ratio */}
+          {/* LOGO */}
           <Link href="/" className="flex items-center gap-3 group transition-transform hover:scale-105">
             <div className="relative w-[74px] h-[60px]">
               <Image 
@@ -63,16 +63,9 @@ export function Header() {
                 )}
               />
             </div>
-            <div className="flex flex-col leading-none">
-              <span className={cn(
-                "text-xl font-black tracking-tighter transition-colors duration-500",
-                isScrolled ? "text-[hsl(93,20%,15%)]" : "text-[hsl(93,20%,15%)]"
-              )}>
-              </span>
-            </div>
           </Link>
 
-          {/* DESKTOP NAVIGATION */}
+          {/* DESKTOP NAVIGATION (Unchanged) */}
           <nav className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <div key={link.name}>
@@ -109,7 +102,7 @@ export function Header() {
                       className={cn(
                         "relative h-10 px-4 flex items-center text-sm font-bold transition-all rounded-full",
                         pathname === link.href 
-                          ? (isScrolled ? "text-[hsl(93,45%,44%)]" : "text-[hsl(93,45%,44%)] font-black")
+                          ? "text-[hsl(93,45%,44%)] font-black"
                           : (isScrolled ? "text-[hsl(93,20%,15%)]/70 hover:text-[hsl(93,45%,44%)]" : "text-[hsl(93,20%,15%)] hover:bg-white/10")
                       )}
                     >
@@ -135,33 +128,75 @@ export function Header() {
             </div>
           </nav>
 
-          {/* MOBILE TOGGLE */}
+          {/* MOBILE TOGGLE & SHEET */}
           <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden rounded-full hover:bg-white/10">
                 <Menu size={28} className={isScrolled ? "text-[hsl(93,45%,44%)]" : "text-[hsl(93,20%,15%)]"} />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[85%] bg-[hsl(91,30%,95%)] p-0 border-none">
-              <div className="flex flex-col h-full">
-                <div className="p-8 flex items-center justify-between bg-white border-b">
+            <SheetContent side="right" className="w-[85%] bg-white p-0 border-none">
+              
+              {/* HIDDEN TITLES FOR ACCESSIBILITY (Fixes the Error) */}
+              <div className="sr-only">
+                <SheetTitle>Navigation Menu</SheetTitle>
+                <SheetDescription>Explore Arogya Ayur Conclave pages and registration.</SheetDescription>
+              </div>
+
+              <div className="flex flex-col h-full bg-slate-50">
+                {/* Mobile Header */}
+                <div className="p-8 flex items-center justify-between bg-white border-b border-slate-100">
                   <Image 
                     src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" 
                     alt="Logo" width={62} height={50} 
                   />
-                  <Button variant="ghost" size="icon" onClick={closeSheet} className="rounded-full"><X /></Button>
+                  <Button variant="ghost" size="icon" onClick={closeSheet} className="rounded-full bg-slate-100 text-slate-500 hover:bg-[hsl(93,45%,44%)] hover:text-white transition-all">
+                    <X size={20}/>
+                  </Button>
                 </div>
-                <div className="flex-1 p-8 space-y-4">
+
+                {/* Navigation Links */}
+                <div className="flex-1 overflow-y-auto py-8 px-6 space-y-2">
                   {navLinks.map((link) => (
-                    <Link key={link.name} href={link.href || '#'} onClick={closeSheet} className="block text-2xl font-black text-[hsl(93,20%,15%)]">
-                      {link.name}
-                    </Link>
+                    <div key={link.name} className="space-y-1">
+                      {link.subLinks ? (
+                         <div className="py-2">
+                            <p className="px-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">{link.name}</p>
+                            {link.subLinks.map((sub) => (
+                              <Link 
+                                key={sub.name} 
+                                href={sub.href} 
+                                onClick={closeSheet}
+                                className="flex items-center justify-between px-4 py-4 rounded-2xl text-lg font-bold text-[hsl(93,20%,15%)] hover:bg-[hsl(93,45%,44%)]/5 hover:text-[hsl(93,45%,44%)] transition-all"
+                              >
+                                {sub.name}
+                                <ArrowRight size={16} className="opacity-20" />
+                              </Link>
+                            ))}
+                         </div>
+                      ) : (
+                        <Link 
+                          href={link.href || '#'} 
+                          onClick={closeSheet} 
+                          className={cn(
+                            "flex items-center justify-between px-4 py-4 rounded-2xl text-xl font-black uppercase tracking-tighter transition-all",
+                            pathname === link.href ? "bg-[hsl(93,45%,44%)] text-white" : "text-[hsl(93,20%,15%)] hover:bg-[hsl(93,45%,44%)]/5 hover:text-[hsl(93,45%,44%)]"
+                          )}
+                        >
+                          {link.name}
+                          {pathname !== link.href && <ArrowRight size={18} className="opacity-20" />}
+                        </Link>
+                      )}
+                    </div>
                   ))}
                 </div>
-                <div className="p-8 mt-auto">
-                  <Button asChild className="w-full h-16 rounded-2xl bg-[hsl(93,45%,44%)] text-white font-black text-xl">
+
+                {/* Footer Action */}
+                <div className="p-8 bg-white border-t border-slate-100">
+                  <Button asChild className="w-full h-16 rounded-[1.5rem] bg-[hsl(93,45%,44%)] text-white font-black text-xl shadow-xl shadow-[hsl(93,45%,44%)]/20 hover:bg-[#ffa62f] transition-all">
                     <Link href="/register" onClick={closeSheet}>REGISTER NOW</Link>
                   </Button>
+                  <p className="text-center text-[10px] font-bold text-slate-400 mt-4 uppercase tracking-[0.1em]">Arogya Ayur Conclave 2026</p>
                 </div>
               </div>
             </SheetContent>

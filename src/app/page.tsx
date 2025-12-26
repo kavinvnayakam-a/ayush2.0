@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Sparkles, Globe, ArrowRight, Target, ShieldCheck, Microscope, Users } from 'lucide-react';
+import { Sparkles, Globe, ArrowRight, Target, ShieldCheck, Microscope, Users, MapPin, Navigation } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CountdownTimer } from '@/components/CountdownTimer';
 import { EventMap } from '@/components/EventMap';
@@ -36,22 +36,47 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 export default function HomePage() {
   const eventDate = new Date('2026-01-09T00:00:00');
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Set Video Speed to 40% (60% reduction) for smooth ambient feel
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.4;
+    }
+  }, []);
 
   return (
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
       
-      {/* 1. HERO SECTION */}
+      {/* 1. HERO SECTION WITH VIDEO BG */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-36 pb-20">
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute -top-[10%] -left-[10%] w-[80%] h-[80%] bg-[hsl(93,45%,44%)]/20 blur-[120px] rounded-full animate-float" />
-          <div className="absolute top-[20%] -right-[10%] w-[60%] h-[60%] bg-[hsl(93,45%,70%)]/25 blur-[100px] rounded-full animate-float [animation-direction:reverse] [animation-duration:20s]" />
-          <div className="absolute -bottom-[10%] left-[20%] w-[50%] h-[50%] bg-[#ffa62f]/10 blur-[110px] rounded-full animate-float [animation-duration:18s]" />
+        
+        {/* Video Background Layer */}
+        <div className="absolute inset-0 z-0">
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute top-1/2 left-1/2 min-w-full min-h-full object-cover -translate-x-1/2 -translate-y-1/2 opacity-30 
+                       md:rotate-0 rotate-90 scale-[2.5] md:scale-100 transition-all duration-[2000ms] ease-in-out"
+            style={{ filter: 'contrast(1.05) brightness(1.05)' }}
+          >
+            <source 
+              src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2F5943-187188345.mp4?alt=media&token=78470ded-5e02-4b9f-aa94-528be152ee00" 
+              type="video/mp4" 
+            />
+          </video>
+          {/* Subtle Overlay to ensure text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white/80 z-[1]" />
         </div>
 
+        {/* Hero Content */}
         <div className="container mx-auto px-6 relative z-10 text-center">
           <div className="flex flex-col items-center space-y-10">
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-md px-6 py-2.5 rounded-full border border-white/20 text-[hsl(93,45%,44%)] font-black text-xs tracking-[0.3em] uppercase shadow-sm">
+              <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md px-6 py-2.5 rounded-full border border-white/40 text-[hsl(93,45%,44%)] font-black text-xs tracking-[0.3em] uppercase shadow-sm">
                 <Sparkles size={16} /> National Ayush Conclave 2026
               </div>
               <p className="text-[hsl(93,20%,15%)]/60 font-black uppercase tracking-[0.2em] text-[10px] md:text-xs">
@@ -59,7 +84,7 @@ export default function HomePage() {
               </p>
             </div>
             
-            <div className="relative w-60 h-60">
+            <div className="relative w-60 h-60 drop-shadow-2xl">
               <Image 
                 src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F1000157891%20(1).webp?alt=media&token=f13fc097-13b6-4af3-bb0e-2788a1fb4b73"
                 alt="National Arogya Expo 2026"
@@ -68,16 +93,16 @@ export default function HomePage() {
               />
             </div>
             
-            <p className="text-xl md:text-3xl font-bold text-[hsl(93,20%,15%)]/80 max-w-3xl italic">
+            <p className="text-xl md:text-3xl font-bold text-[hsl(93,20%,15%)]/90 max-w-3xl italic drop-shadow-sm">
               "AYUSH for One Health: Bridging Tradition, Innovation and Well-being"
             </p>
 
             <div className="flex flex-col md:flex-row items-center gap-4">
-              <div className="flex items-center gap-3 bg-white/60 backdrop-blur-md px-6 py-3 rounded-2xl border border-white shadow-sm">
+              <div className="flex items-center gap-3 bg-white/80 backdrop-blur-md px-6 py-3 rounded-2xl border border-white shadow-sm">
                 <div className="bg-[#ffa62f] p-2 rounded-lg text-white font-bold text-xs uppercase">Jan</div>
                 <span className="font-black text-sm">09 - 12, 2026</span>
               </div>
-              <div className="flex items-center gap-3 bg-white/60 backdrop-blur-md px-6 py-3 rounded-2xl border border-white shadow-sm">
+              <div className="flex items-center gap-3 bg-white/80 backdrop-blur-md px-6 py-3 rounded-2xl border border-white shadow-sm">
                 <Globe className="text-[hsl(93,45%,44%)]" size={20} />
                 <span className="font-bold text-sm text-left leading-tight">Heartfulness, Manapakkam, Chennai</span>
               </div>
@@ -94,7 +119,7 @@ export default function HomePage() {
       </section>
 
       {/* 2. OBJECTIVES / FOCUS AREAS */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-white relative z-10">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
@@ -114,7 +139,7 @@ export default function HomePage() {
       </section>
 
       {/* 3. LEADERSHIP SECTION */}
-      <section className="py-32 bg-[hsl(91,30%,96%)]">
+      <section className="py-32 bg-[hsl(91,30%,96%)] relative z-10">
         <div className="container mx-auto px-6">
           <div className="text-center mb-24">
             <h2 className="text-6xl md:text-8xl font-[1000] tracking-tighter italic text-[hsl(93,20%,15%)] uppercase">Leadership</h2>
@@ -175,31 +200,114 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. VENUE SECTION */}
-      <section className="py-24 bg-white overflow-hidden">
+
+{/* 5. SUPPORTED BY SECTION */}
+<section className="py-24 bg-white relative z-10">
         <div className="container mx-auto px-6">
+          <SectionLabel>Supported By</SectionLabel>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 items-center justify-center">
+            {/* Ministry of AYUSH */}
+            <div className="group flex flex-col items-center justify-center space-y-4 p-8 rounded-[2.5rem] bg-white border border-[hsl(93,45%,44%)]/5 hover:border-[hsl(93,45%,44%)]/20 hover:shadow-xl hover:shadow-[hsl(93,45%,44%)]/5 transition-all duration-500">
+              <div className="relative w-full h-24 transition-transform duration-500 group-hover:scale-110">
+                <Image 
+                  src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FMINISTRY%20OF%20AYUSH.webp?alt=media&token=38e912a4-940b-4571-9f97-b24a22ea96a0" 
+                  alt="Ministry of AYUSH" 
+                  fill 
+                  className="object-contain" 
+                />
+              </div>
+              <p className="text-[10px] font-black text-[hsl(93,20%,15%)]/60 uppercase tracking-widest text-center">Ministry of AYUSH</p>
+            </div>
+
+            {/* NASYA */}
+            <div className="group flex flex-col items-center justify-center space-y-4 p-8 rounded-[2.5rem] bg-white border border-[hsl(93,45%,44%)]/5 hover:border-[hsl(93,45%,44%)]/20 hover:shadow-xl hover:shadow-[hsl(93,45%,44%)]/5 transition-all duration-500">
+              <div className="relative w-full h-24 transition-transform duration-500 group-hover:scale-110">
+                <Image 
+                  src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FNASYA%20(1).webp?alt=media&token=1537925f-0428-498a-8015-34e119872093" 
+                  alt="NASYA" 
+                  fill 
+                  className="object-contain" 
+                />
+              </div>
+              <p className="text-[10px] font-black text-[hsl(93,20%,15%)]/60 uppercase tracking-widest text-center">NASYA</p>
+            </div>
+
+            {/* VIBHA */}
+            <div className="group flex flex-col items-center justify-center space-y-4 p-8 rounded-[2.5rem] bg-white border border-[hsl(93,45%,44%)]/5 hover:border-[hsl(93,45%,44%)]/20 hover:shadow-xl hover:shadow-[hsl(93,45%,44%)]/5 transition-all duration-500">
+              <div className="relative w-full h-24 transition-transform duration-500 group-hover:scale-110">
+                <Image 
+                  src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FSupported%20by%20logos%2FVibha.webp?alt=media&token=19ef4dd0-2d8c-4fea-a2da-1aa0c8fefd0c" 
+                  alt="Vijnana Bharati (VIBHA)" 
+                  fill 
+                  className="object-contain" 
+                />
+              </div>
+              <p className="text-[10px] font-black text-[hsl(93,20%,15%)]/60 uppercase tracking-widest text-center">VIBHA</p>
+            </div>
+
+            {/* Wellness */}
+            <div className="group flex flex-col items-center justify-center space-y-4 p-8 rounded-[2.5rem] bg-white border border-[hsl(93,45%,44%)]/5 hover:border-[hsl(93,45%,44%)]/20 hover:shadow-xl hover:shadow-[hsl(93,45%,44%)]/5 transition-all duration-500">
+              <div className="relative w-full h-24 transition-transform duration-500 group-hover:scale-110">
+                <Image 
+                  src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FHEARTFULNESS.webp?alt=media&token=59bf8c0a-5083-436a-b0d2-6bd746e2583f" 
+                  alt="Wellness" 
+                  fill 
+                  className="object-contain" 
+                />
+              </div>
+              <p className="text-[10px] font-black text-[hsl(93,20%,15%)]/60 uppercase tracking-widest text-center">Wellness by Heartfulness</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. VENUE SECTION - COLORFUL VERSION */}
+      <section className="py-24 relative overflow-hidden z-10">
+        <div className="absolute inset-0 bg-[hsl(93,20%,15%)]" /> 
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[hsl(93,45%,44%)] opacity-20 blur-[120px] rounded-full -mr-48 -mt-48" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#ffa62f] opacity-10 blur-[100px] rounded-full -ml-24 -mb-24" />
+
+        <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <div className="lg:w-1/2 space-y-8">
-              <h2 className="text-5xl font-black text-[hsl(93,20%,15%)] leading-tight uppercase">The <span className="text-[hsl(93,45%,44%)] italic">Venue</span></h2>
-              <p className="text-lg text-[hsl(93,20%,15%)]/70 font-medium leading-relaxed italic">"A spiritual sanctuary for holistic growth and community well-being."</p>
+              <div className="inline-flex items-center gap-2 bg-[hsl(93,45%,44%)]/20 px-4 py-2 rounded-full border border-[hsl(93,45%,44%)]/30 text-[hsl(93,45%,44%)] font-black text-[10px] tracking-[0.3em] uppercase">
+                <MapPin size={14} className="animate-bounce" /> Destination
+              </div>
+              <h2 className="text-5xl md:text-7xl font-black text-white leading-tight uppercase tracking-tighter">
+                The <span className="text-[hsl(93,45%,44%)] italic">Venue</span>
+              </h2>
+              <p className="text-xl text-white/60 font-medium leading-relaxed italic border-l-4 border-[#ffa62f] pl-6">
+                "A spiritual sanctuary for holistic growth and community well-being."
+              </p>
               <div className="space-y-6">
-                <div className="flex gap-4 p-6 rounded-3xl bg-[hsl(91,30%,96%)] border-l-8 border-[#ffa62f]">
-                  <Globe className="text-[#ffa62f] shrink-0" size={24} />
+                <div className="group flex gap-5 p-8 rounded-[2.5rem] bg-white/5 backdrop-blur-xl border border-white/10 transition-all hover:bg-white/10 hover:border-[hsl(93,45%,44%)]/50">
+                  <div className="w-14 h-14 rounded-2xl bg-[hsl(93,45%,44%)] flex items-center justify-center text-white shrink-0 shadow-lg shadow-[hsl(93,45%,44%)]/20 transition-transform group-hover:rotate-12">
+                    <Globe size={28} />
+                  </div>
                   <div>
-                    <h4 className="font-black text-[hsl(93,20%,15%)] uppercase text-sm mb-1">Heartfulness</h4>
-                    <p className="text-sm font-bold text-[hsl(93,20%,15%)]/60 uppercase tracking-tighter">Babuji Memorial Ashram, Manapakkam, Chennai</p>
+                    <h4 className="font-black text-white uppercase text-lg mb-1 tracking-tight">Heartfulness Center</h4>
+                    <p className="text-sm font-bold text-[hsl(93,45%,44%)] uppercase tracking-widest mb-2">Heartfulness, Babuji Memorial Ashram, Manapakkam, Chennai</p>
+                    <p className="text-sm text-white/50 leading-relaxed">
+                      Babuji Memorial Ashram, Manapakkam, Chennai, Tamil Nadu 600125
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="lg:w-1/2 w-full h-[400px] bg-[hsl(91,30%,90%)] rounded-[3rem] border-8 border-white shadow-2xl relative overflow-hidden group">
-               <EventMap />
-               <div className="absolute bottom-8 right-8">
-                 <Button asChild className="rounded-full bg-white text-[hsl(93,20%,15%)] font-black shadow-xl">
-                   <a href="https://www.google.com/maps/dir/?api=1&destination=Babuji+Memorial+Ashram,+Manapakkam,+Chennai" target="_blank" rel="noopener noreferrer">
-                    Get Directions
-                   </a>
-                 </Button>
+
+            <div className="lg:w-1/2 w-full h-[500px] relative group">
+               <div className="absolute inset-0 bg-gradient-to-tr from-[hsl(93,45%,44%)] to-[#ffa62f] rounded-[3.5rem] -rotate-2 scale-[1.02] opacity-50 blur-sm group-hover:rotate-0 transition-all duration-500" />
+               <div className="relative h-full w-full bg-[hsl(93,20%,15%)] rounded-[3rem] border-4 border-white/10 shadow-2xl overflow-hidden">
+                  <EventMap />
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <Button asChild className="w-full md:w-auto rounded-2xl bg-white text-[hsl(93,20%,15%)] font-black py-7 px-8 shadow-2xl hover:bg-[#ffa62f] hover:text-white transition-all group/btn">
+                      <a href="https://www.google.com/maps/search/?api=1&query=Babuji%20Memorial%20Ashram%2C%20Manapakkam%2C%20Chennai&query_place_id=ChIJuVsroc9gUjoRAXBf489zoMU" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3">
+                        <Navigation size={20} className="group-hover/btn:animate-pulse" />
+                        OPEN IN GOOGLE MAPS
+                      </a>
+                    </Button>
+                  </div>
                </div>
             </div>
           </div>
