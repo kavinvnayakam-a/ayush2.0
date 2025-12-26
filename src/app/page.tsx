@@ -1,20 +1,40 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Calendar, MapPin } from 'lucide-react';
-import { eventHighlights, featuredExhibitors } from '@/lib/data';
-import { Badge } from '@/components/ui/badge';
+import { ArrowRight, Calendar, MapPin, Users, Award, Mic, BarChart, BookUser } from 'lucide-react';
 import { CountdownTimer } from '@/components/CountdownTimer';
 import { LogoIcon } from '@/components/icons';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
+
+const StatCard = ({ icon, value, label }: { icon: React.ElementType, value: string, label: string }) => {
+    const Icon = icon;
+    return (
+        <Card className="text-center">
+            <CardContent className="pt-6">
+                <Icon className="h-12 w-12 mx-auto text-primary mb-4" />
+                <div className="text-4xl font-bold text-primary">{value}</div>
+                <p className="text-muted-foreground mt-2">{label}</p>
+            </CardContent>
+        </Card>
+    )
+};
+
+const PersonCard = ({ name, title, imageUrl }: { name: string, title: string, imageUrl?: string }) => (
+    <div className="text-center">
+        <div className="relative w-32 h-32 mx-auto bg-muted rounded-full mb-4 flex items-center justify-center">
+             {/* Placeholder for image */}
+        </div>
+        <h3 className="font-semibold text-lg">{name}</h3>
+        <p className="text-muted-foreground text-sm">{title}</p>
+    </div>
+);
 
 
 export default function Home() {
-  const heroImage = PlaceHolderImages.find((img) => img.id === 'hero');
-  const aboutImage = PlaceHolderImages.find((img) => img.id === 'about');
   const eventDate = new Date('2026-01-09T00:00:00');
 
   return (
@@ -58,100 +78,192 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="about" className="py-16 md:py-24 bg-card">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-4">
-              <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary">About the Expo</h2>
-              <p className="text-lg text-muted-foreground">
-                The Arogya Expo is a premier event dedicated to showcasing the vast potential of AYUSH systems of medicine - Ayurveda, Yoga & Naturopathy, Unani, Siddha, and Homoeopathy.
-              </p>
-              <p className="text-muted-foreground">
-                Our mission is to foster a holistic approach to health and wellness, bringing together practitioners, researchers, manufacturers, and the public to explore, learn, and collaborate.
-              </p>
-              <Button asChild variant="link" className="p-0 h-auto text-primary text-lg">
-                <Link href="/info/about-ayush">Learn more about AYUSH <ArrowRight className="ml-2 h-4 w-4" /></Link>
-              </Button>
+            <div className="text-center max-w-4xl mx-auto">
+                <h2 className="text-2xl md:text-3xl font-headline text-primary mb-6">Join us to explore integrative medicine and collectively shape the future of AYUSH for global wellness.</h2>
+                <p className="text-muted-foreground">NASYA is a vibrant national network of Ayurveda students and youth, connecting 100+ institutions and over 6000 members across India. Established to empower the next generation, NASYA promotes leadership, research, innovation, and collaborative learning, nurturing skilled Ayurvedic professionals committed to advancing holistic health and strengthening the AYUSH ecosystem.</p>
             </div>
-            <div className="relative h-80 w-full rounded-lg overflow-hidden shadow-xl">
-              {aboutImage && (
-                <Image
-                  src={aboutImage.imageUrl}
-                  alt={aboutImage.description}
-                  fill
-                  className="object-cover"
-                  data-ai-hint={aboutImage.imageHint}
-                />
-              )}
+            <div className="mt-12">
+                <div className="aspect-video bg-muted rounded-lg w-full max-w-4xl mx-auto flex items-center justify-center">
+                    <p className="text-muted-foreground">Image placeholder</p>
+                </div>
             </div>
-          </div>
         </div>
       </section>
 
-      <section id="highlights" className="py-16 md:py-24">
+      <section className="py-16 md:py-24 bg-card">
+          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                  <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary">About national AyushConclave</h2>
+                  <h3 className="text-xl md:text-2xl font-headline text-primary/80 mt-2">International AyushConclave - 2026: Transforming Ayurveda through Research, Innovation & Integration</h3>
+                  <p className="mt-4 text-muted-foreground">International AyushConclave - 2026 is the first international conference dedicated to advancing Ayurveda through contemporary science. Themed "Transforming Ayurveda: Through Research, Innovation & Integration", this landmark event will bring together global experts, researchers, and practitioners to explore cutting-edge developments in Ayurvedic sciences. With eight focused scientific sessions spanning from AI and microbiome research to clinical validation and education, AyushConclave aims to bridge traditional wisdom with modern innovation.</p>
+              </div>
+              <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                  <p className="text-muted-foreground">Image placeholder</p>
+              </div>
+          </div>
+      </section>
+
+       <section className="py-16 md:py-24">
+          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+               <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                  <p className="text-muted-foreground">Image placeholder</p>
+              </div>
+              <div>
+                  <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary">AYUSH for One Health</h2>
+                  <p className="mt-4 text-muted-foreground">Bridging Tradition, Innovation and Well-being” highlights the harmony between ancient healing wisdom and modern scientific advances. The theme emphasizes holistic health for humans, animals, and the environment, promoting integrative solutions that ensure sustainable wellness, evidence-based practices, and a unified approach to global well-being.</p>
+              </div>
+          </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-card">
+          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                  <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary">Our vision</h2>
+                  <p className="mt-4 text-muted-foreground">Our vision is to harmonize ancient Ayurvedic wisdom with modern scientific care, creating a healthcare ecosystem that is safe, evidence-based, accessible, and compassionate. By placing the patient at the center of every decision, we aim to advance holistic well-being and promote a future where tradition and innovation thrive together.</p>
+              </div>
+              <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                  <p className="text-muted-foreground">Image placeholder</p>
+              </div>
+          </div>
+      </section>
+
+      <section className="py-16 md:py-24">
+          <div className="container mx-auto px-4">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                    <p className="text-muted-foreground">Image placeholder</p>
+                </div>
+                <div>
+                    <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary">National Arogya Expo 2026</h2>
+                    <p className="mt-4 text-muted-foreground">The National Arogya Expo 2026 will showcase India’s rich AYUSH heritage through medicinal products, wellness therapies, healthcare technologies, and interactive demonstrations. Bringing together practitioners, industries, startups, researchers, and the public, the expo promotes evidence-based traditional medicine, holistic well-being, innovative solutions, and opportunities for collaboration in the growing AYUSH sector.</p>
+                </div>
+              </div>
+
+              <div className="mt-16 text-center">
+                <h3 className="text-2xl font-headline font-semibold text-primary">EXPECTED FOOTFALL</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8 mt-8">
+                    <StatCard icon={Users} value="15,000+" label="Expected visitors per day" />
+                    <StatCard icon={Users} value="1,500" label="Delegates from across India" />
+                    <StatCard icon={Award} value="150+" label="Research Scholars & Experts" />
+                    <StatCard icon={Award} value="40+" label="National and International Eminent personalities" />
+                    <StatCard icon={Mic} value="50+" label="Scientific Sessions on AYUSH System" />
+                    <StatCard icon={BarChart} value="30+" label="Curtain raisers across India and Associate events" />
+                </div>
+              </div>
+          </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-headline font-semibold">Event Highlights</h2>
-          <p className="mt-2 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Experience a rich program of activities designed to enlighten and inspire.
-          </p>
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
-            {eventHighlights.map((highlight) => (
-              <Card key={highlight.title} className="flex flex-col">
-                <CardHeader>
-                  <div className="flex items-center gap-4">
-                    <div className="bg-primary/10 text-primary p-3 rounded-full">
-                       <highlight.icon className="w-6 h-6" />
+            <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary mb-12">Leadership</h2>
+            <div className="mb-12">
+                <h3 className="text-2xl font-headline text-primary/90 mb-8">Chief Patron</h3>
+                <PersonCard name="Hon'ble Shri Prataprao Jadhav" title="Union Minister, Ministry of AYUSH, Government of India" />
+            </div>
+
+            <div className="mb-12">
+                <h3 className="text-2xl font-headline text-primary/90 mb-8">Patron</h3>
+                <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-16">
+                    <PersonCard name="Vaidya Rajesh Kotecha" title="Secretary, Ministry of AYUSH, GOI" />
+                    <PersonCard name="Dr Shekhar C. Mande" title="National President, VIBHA" />
+                </div>
+            </div>
+
+            <div>
+                <h3 className="text-2xl font-headline text-primary/90 mb-8">National Advisory Board</h3>
+                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 md:gap-12">
+                    <PersonCard name="Prof (Dr) Rabinarayan Acharya" title="DG, CCRAS, New Delhi" />
+                    <PersonCard name="Prof (Dr) N. J. Muthukumar" title="DG, CCRS, Chennai" />
+                    <PersonCard name="Prof (Vd) P. K. Prajapati" title="Director, AIIA, New Delhi" />
+                    <PersonCard name="Prof Sanjeev Sharma" title="Vice Chancellor, NIA, Jaipur" />
+                    <PersonCard name="Prof (Dr) B. L. Mehra" title="Former Chairman, NCISM, New Delhi" />
+                    <PersonCard name="Prof (Dr) Tanuja Nesari" title="Director, ITRA, Jamnagar" />
+                    <PersonCard name="Prof (Dr) Sujata Kadam" title="Director I/C, AIIA, Goa" />
+                    <PersonCard name="Dr Shivkumar Sharma" title="National Organizing Secretary, VIBHA" />
+                    <PersonCard name="Shri Praveen Ramadas" title="National Jt. Organizing Secretary, VIBHA" />
+                    <PersonCard name="Shri Vivekananda Pai" title="Secretary General, VIBHA" />
+                    <PersonCard name="Shri Abga R. Babu" title="South India Organizing Secretary, VIBHA" />
+                    <PersonCard name="Dr Manasi Malgaonkar" title="Governing Council Member, Vijnana Bharati" />
+                    <PersonCard name="Aacharya Dr Shreevarma" title="Founder & Chairman - PCR Herbals CMD - Wellness by Heartfulness" />
+                </div>
+            </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary">Supported by</h2>
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-5 gap-8 items-center">
+                {[...Array(5)].map((_, i) => (
+                    <div key={i} className="h-24 bg-muted rounded-lg flex items-center justify-center">
+                        <p className="text-muted-foreground">Logo</p>
                     </div>
-                    <CardTitle className="text-xl font-headline">{highlight.title}</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  <p className="text-muted-foreground">{highlight.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+                ))}
+            </div>
           </div>
+      </section>
+      
+      <section className="py-16 md:py-24 bg-card">
+        <div className="container mx-auto px-4 text-center">
+          <Card className="max-w-2xl mx-auto">
+            <CardHeader>
+              <CardTitle className="text-primary font-headline text-3xl">Submit your Abstracts!</CardTitle>
+              <CardDescription>Only registered participants can present their papers</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">Please note that you must sign in using your registered email address to access the Abstract form. Once signed in, navigate to Abstract → Abstract Submissions to submit your abstracts.</p>
+              <Button size="lg" className="mt-6">Submit now</Button>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
-      <section id="exhibitors" className="py-16 md:py-24 bg-card">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary">Featured Exhibitors</h2>
-          <p className="mt-2 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Connect with leading brands and practitioners in the wellness industry.
-          </p>
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredExhibitors.map((exhibitor) => {
-              const exhibitorImage = PlaceHolderImages.find(img => img.id === exhibitor.imageId);
-              return (
-                <Card key={exhibitor.name} className="overflow-hidden">
-                  <div className="relative h-48 w-full">
-                    {exhibitorImage && (
-                       <Image
-                          src={exhibitorImage.imageUrl}
-                          alt={exhibitor.name}
-                          fill
-                          className="object-cover"
-                          data-ai-hint={exhibitorImage.imageHint}
-                        />
-                    )}
-                  </div>
-                  <CardContent className="p-6 text-left">
-                    <h3 className="text-xl font-headline font-semibold">{exhibitor.name}</h3>
-                    <p className="text-muted-foreground mt-2">{exhibitor.description}</p>
-                    <Badge variant="secondary" className="mt-4">{exhibitor.category}</Badge>
-                  </CardContent>
-                </Card>
-              );
-            })}
+      <section className="py-16 md:py-24">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary">Our Speakers</h2>
+            <p className="mt-2 text-lg text-muted-foreground">Exciting speakers to follow at the event</p>
+             <div className="mt-12 max-w-md mx-auto text-center p-8 border-2 border-dashed rounded-lg">
+                <p className="text-muted-foreground">Our exciting speaker lineup will be announced soon</p>
+             </div>
+            <Button variant="outline" size="lg" className="mt-8">
+                View Speakers
+            </Button>
           </div>
-          <Button asChild variant="outline" size="lg" className="mt-12">
-            <Link href="/map">
-              View All Exhibitors <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
+      </section>
+
+      <section className="py-16 md:py-24 bg-card">
+          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary">Venue</h2>
+                <p className="mt-2 text-lg text-muted-foreground">Our location and how you can get here</p>
+
+                <div className="mt-6 space-y-4">
+                    <div>
+                        <h3 className="font-semibold">Address</h3>
+                        <p className="text-muted-foreground">Heartfulness, Babuji Memorial Ashram, Manapakkam, Chennai</p>
+                        <p className="text-muted-foreground text-sm">Babuji Memorial Ashram, SRCM World Headquarters, Lalithamba Nagar, Manapakkam, Chennai, Tamil Nadu 600089, India, Chennai, Tamil Nadu - 600089 India</p>
+                    </div>
+                    <Button variant="link" className="p-0 h-auto">Get Directions <ArrowRight className="ml-2 h-4 w-4" /></Button>
+                </div>
+            </div>
+             <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                <p className="text-muted-foreground">Map placeholder</p>
+            </div>
+          </div>
+      </section>
+
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-headline font-semibold text-primary">Get in touch</h2>
+            <p className="mt-2 text-lg text-muted-foreground">Got questions? Write to us.</p>
+             <Button size="lg" className="mt-8">Contact Us</Button>
         </div>
       </section>
+
     </div>
   );
 }
+
+    
