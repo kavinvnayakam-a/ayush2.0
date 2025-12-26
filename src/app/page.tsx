@@ -104,14 +104,7 @@ export default function Home() {
                     </Button>
                   </div>
                   <div className="hidden md:flex items-center justify-center">
-                     <div className="bg-white/70 p-8 rounded-full">
-                      <div className="flex flex-col items-center justify-center text-primary">
-                          <h2 className="text-3xl font-bold font-headline text-green-900">National</h2>
-                          <h1 className="text-5xl font-bold font-headline text-green-800">Arogya</h1>
-                          <h2 className="text-3xl font-bold font-headline text-green-900">Expo</h2>
-                          <p className="text-lg text-center mt-2 text-green-800">& Ayush Conclave 2026</p>
-                      </div>
-                    </div>
+                    <Image src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" alt="Arogya 2026 Logo" width={300} height={300} className="object-contain" />
                   </div>
                 </div>
             </CarouselItem>
