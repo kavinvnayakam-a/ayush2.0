@@ -3,9 +3,10 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     function isAdmin() {
-      // Grant admin access if the user's email is kavinvnayakam@gmail.com
+      // Grant admin access if the user's email is one of the designated admin emails
       // OR if they have a document in the admin_roles collection.
-      return request.auth.token.email == 'kavinvnayakam@gmail.com' || 
+      let adminEmails = ['kavinvnayakam@gmail.com', 'mainadmin@shreevarma.org'];
+      return request.auth.token.email in adminEmails || 
              exists(/databases/$(database)/documents/admin_roles/$(request.auth.uid));
     }
 
@@ -22,9 +23,9 @@ service cloud.firestore {
     }
 
     match /admin_roles/{uid} {
-      // Allow a user to read their own admin role document if they are an admin.
-      // This is used by the dashboard to verify admin status.
-      allow get: if request.auth.uid == uid && isAdmin();
+      // Allow an authenticated user to read their own admin role document.
+      // This is safe and necessary for the dashboard to verify admin status.
+      allow get: if request.auth.uid == uid;
     }
   }
 }

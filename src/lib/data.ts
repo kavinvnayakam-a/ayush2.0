@@ -14,7 +14,6 @@ export const navLinks = [
   },
   { name: 'Session', href: '/scientific-session' },
   { name: 'Speakers', href: '/speakers' },
-  { name: 'Delegate Registration', href: '/register' },
   { name: 'Visitor Pass', href: '/visitor-pass' },
   { name: 'Venue', href: '/venue' },
   { name: 'Contact Us', href: '/contact' },
