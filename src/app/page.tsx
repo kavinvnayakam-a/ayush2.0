@@ -1,42 +1,60 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Calendar, MapPin } from 'lucide-react';
 import { eventHighlights, featuredExhibitors } from '@/lib/data';
 import { Badge } from '@/components/ui/badge';
+import { CountdownTimer } from '@/components/CountdownTimer';
+import { LogoIcon } from '@/components/icons';
+
 
 export default function Home() {
   const heroImage = PlaceHolderImages.find((img) => img.id === 'hero');
   const aboutImage = PlaceHolderImages.find((img) => img.id === 'about');
+  const eventDate = new Date('2026-01-09T00:00:00');
 
   return (
     <div className="flex flex-col">
-      <section className="relative h-[60vh] md:h-[70vh] w-full flex items-center justify-center text-center text-white">
-        {heroImage && (
-          <Image
-            src={heroImage.imageUrl}
-            alt={heroImage.description}
-            fill
-            className="object-cover"
-            priority
-            data-ai-hint={heroImage.imageHint}
-          />
-        )}
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 max-w-4xl p-4">
-          <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tighter text-shadow-lg">
-            Welcome to AyushConclave - Arogya Expo
-          </h1>
-          <p className="mt-4 text-lg md:text-xl max-w-2xl mx-auto text-shadow">
-            Discover the synergy of traditional wisdom and modern wellness.
-          </p>
-          <Button asChild size="lg" className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90">
-            <Link href="/register">
-              Register Now <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
+      <section className="relative w-full flex items-center justify-center text-center text-white bg-[#E6F0E4]">
+        <div className="container mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-8 items-center">
+          <div className="text-left text-primary space-y-4">
+            <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight text-green-900">
+              National Arogya Expo 2026
+            </h1>
+            <p className="text-lg md:text-xl text-green-800">
+              AYUSH for One Health: Bridging Tradition, Innovation and Well-being
+            </p>
+            <p className="font-semibold text-green-800">
+              Ancient Wisdom | Modern Care | Patient First
+            </p>
+            <div className="space-y-2 text-green-800">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-5 h-5" />
+                <span>Jan 09 - 12, 2026</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <MapPin className="w-5 h-5" />
+                <span>Heartfulness, Babuji Memorial Ashram, Manapakkam, Chennai</span>
+              </div>
+            </div>
+            <CountdownTimer targetDate={eventDate} />
+            <Button size="lg" className="bg-orange-500 text-white hover:bg-orange-600">
+              Register Now
+            </Button>
+          </div>
+          <div className="flex items-center justify-center">
+            <div className="bg-white/70 p-8 rounded-full">
+              <div className="flex flex-col items-center justify-center text-primary">
+                  <LogoIcon className="h-24 w-24 text-blue-500" />
+                  <span className="text-2xl font-bold font-headline mt-2 text-blue-500">AyushConclave</span>
+                  <p className="text-sm text-center mt-2 text-green-800">Holistic Health & One Vision</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
