@@ -158,24 +158,30 @@ export default function HomePage() {
             </div>
 
             {/* PERFECTLY CENTERED TIMER & BUTTONS */}
-            <div className="w-full flex flex-col items-center justify-center pt-6 space-y-10">
+            <div className="w-full flex flex-col items-center justify-center pt-6 space-y-6">
               <div className="flex justify-center w-full">
                  <CountdownTimer targetDate={eventDate} />
               </div>
               
-              <div className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full">
-                <Button asChild size="lg" className="h-20 w-full sm:w-auto px-16 rounded-full bg-[hsl(93,45%,44%)] text-white font-black hover:scale-105 transition-all text-xl shadow-2xl shadow-[hsl(93,45%,44%)]/30 group">
-                  <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">
-                    Register Now <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
-                  </a>
-                </Button>
+              <div className="flex flex-col gap-4 items-center justify-center w-full">
                 <Button 
                   onClick={() => setIsVisitorModalOpen(true)}
+                  size="lg" 
+                  className="h-20 w-full sm:w-auto px-16 rounded-full bg-[hsl(93,45%,44%)] text-white font-black hover:scale-105 transition-all text-xl shadow-2xl shadow-[hsl(93,45%,44%)]/30 group"
+                >
+                  Free Visitor Pass
+                </Button>
+                <p className="text-xs font-bold text-slate-500">Note: Free pass Only for Public.</p>
+
+                <Button 
+                  asChild
                   variant="outline" 
                   size="lg" 
                   className="h-20 w-full sm:w-auto px-12 rounded-full border-2 border-[hsl(93,45%,44%)] text-[hsl(93,45%,44%)] font-black hover:bg-[hsl(93,45%,44%)] hover:text-white transition-all text-xl"
                 >
-                  Free Visitor Pass
+                   <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">
+                    Register as Delegate <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
+                  </a>
                 </Button>
               </div>
             </div>
