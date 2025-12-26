@@ -49,7 +49,7 @@ export function Header() {
         <div className="flex h-16 items-center justify-between">
           
           {/* LOGO */}
-          <div className="flex-none">
+          <div className="flex-1 md:flex-none">
             <Link href="/" className="relative z-[110] flex items-center gap-3 group transition-transform hover:scale-105 w-fit">
               <div className="relative w-[60px] h-[50px] md:w-[74px] md:h-[60px]">
                 <Image 
@@ -61,11 +61,6 @@ export function Header() {
                 />
               </div>
             </Link>
-          </div>
-          
-          {/* Centered container for mobile logo */}
-          <div className="flex-1 flex justify-center md:hidden">
-             {/* This space is intentionally left to allow the logo to center itself relative to the parent flex container */}
           </div>
 
           {/* DESKTOP NAVIGATION */}
