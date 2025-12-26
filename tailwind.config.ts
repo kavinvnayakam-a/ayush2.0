@@ -77,7 +77,7 @@ export default {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
-        // Animated Mesh Orbs Logic
+        // Modern Floating logic for Hero Mesh Orbs
         float: {
           '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
           '33%': { transform: 'translate(2%, 4%) scale(1.05)' },
@@ -87,7 +87,7 @@ export default {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        // Applied to Hero Section Orbs
+        // Smooth drifting effect for background blobs
         float: 'float 15s infinite ease-in-out',
       },
     },

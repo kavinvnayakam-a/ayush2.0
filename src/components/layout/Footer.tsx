@@ -1,75 +1,145 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { Facebook, Twitter, Instagram, ArrowUpRight, Mail } from 'lucide-react';
 
 const footerLinks = [
-    { name: 'About', subLinks: [
-        { name: 'Organisers', href: '/about/organisers' },
-        { name: 'About Arogya Expo', href: '/about/arogya-expo' },
-        { name: 'About Ayush Conclave', href: '/about/ayush-conclave' },
-      ] 
-    },
-    { name: 'Abstract', subLinks: [
-        { name: 'Call for Papers', href: '/abstract/call-for-papers' },
-      ]
-    },
-    { name: 'Scientific Session', href: '/scientific-session' },
-    { name: 'Speakers', href: '/speakers' },
-    { name: 'Registration', href: '/register' },
-    { name: 'Venue', href: '/venue' },
-    { name: 'Contact Us', href: '/contact' },
-    { name: 'Tourist Attractions', href: '/tourist-attractions' },
-    { name: 'Map', href: '/map' },
+  { 
+    name: 'About', 
+    subLinks: [
+      { name: 'Organisers', href: '/about/organisers' },
+      { name: 'About Arogya Expo', href: '/about/arogya-expo' },
+      { name: 'About Ayush Conclave', href: '/about/ayush-conclave' },
+    ] 
+  },
+  { 
+    name: 'Scientific', 
+    subLinks: [
+      { name: 'Call for Papers', href: '/abstract/call-for-papers' },
+      { name: 'Scientific Session', href: '/scientific-session' },
+      { name: 'Speakers', href: '/speakers' },
+    ]
+  },
+  { 
+    name: 'Information', 
+    subLinks: [
+      { name: 'Registration', href: '/register' },
+      { name: 'Venue', href: '/venue' },
+      { name: 'Tourist Attractions', href: '/tourist-attractions' },
+    ]
+  },
+  { 
+    name: 'Quick Links', 
+    subLinks: [
+      { name: 'Contact Us', href: '/contact' },
+      { name: 'Map', href: '/map' },
+      { name: 'Sitemap', href: '/sitemap' },
+    ]
+  },
 ];
 
 const socialLinks = [
-  { name: 'Facebook', href: '#' },
-  { name: 'Twitter', href: '#' },
-  { name: 'Instagram', href: '#' },
+  { name: 'Facebook', href: '#', icon: <Facebook size={18} /> },
+  { name: 'Twitter', href: '#', icon: <Twitter size={18} /> },
+  { name: 'Instagram', href: '#', icon: <Instagram size={18} /> },
 ];
 
 export function Footer() {
   return (
-    <footer className="border-t bg-card">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-8">
-            {footerLinks.map((section) => (
-                <div key={section.name}>
-                    <h3 className="font-semibold mb-4">{section.name}</h3>
-                    <ul className="space-y-2">
-                        {section.subLinks ? section.subLinks.map(link => (
-                            <li key={link.name}>
-                                <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                                    {link.name}
-                                </Link>
-                            </li>
-                        )) : (
-                            section.href && <li>
-                                <Link href={section.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                                    {section.name}
-                                </Link>
-                            </li>
-                        )}
-                    </ul>
+    <footer className="relative bg-[hsl(91,30%,96%)] border-t border-[hsl(93,45%,44%)]/10 pt-20 pb-10 overflow-hidden">
+      {/* Background Decor Orbs */}
+      <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[hsl(93,45%,44%)]/5 blur-[100px] rounded-full" />
+      <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-[#ffa62f]/5 blur-[80px] rounded-full" />
+
+      <div className="container mx-auto px-6 relative z-10">
+        
+        {/* Main Grid: Centered on Mobile, Left-aligned on Desktop */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20 text-center lg:text-left">
+          
+          {/* Brand Column */}
+          <div className="lg:col-span-4 flex flex-col items-center lg:items-start space-y-8">
+            <Image 
+              src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" 
+              alt="AyushConclave Logo" 
+              width={180} 
+              height={60} 
+              className="object-contain" 
+            />
+            <p className="text-[hsl(93,20%,15%)]/60 font-medium leading-relaxed max-w-sm italic mx-auto lg:mx-0">
+              "AYUSH for One Health: Bridging Tradition, Innovation and Well-being for a sustainable future."
+            </p>
+            <div className="flex gap-4">
+              {socialLinks.map((social) => (
+                <Link 
+                  key={social.name} 
+                  href={social.href} 
+                  className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[hsl(93,45%,44%)] shadow-sm hover:bg-[hsl(93,45%,44%)] hover:text-white transition-all duration-300"
+                >
+                  {social.icon}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Links Columns: 2 columns on mobile, 4 on tablet/desktop */}
+          <div className="lg:col-span-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {footerLinks.map((section) => (
+                <div key={section.name} className="flex flex-col items-center lg:items-start">
+                  <h3 className="text-[hsl(93,20%,15%)] font-black uppercase text-xs tracking-[0.2em] mb-6">
+                    {section.name}
+                  </h3>
+                  <ul className="space-y-4">
+                    {section.subLinks.map((link) => (
+                      <li key={link.name}>
+                        <Link 
+                          href={link.href} 
+                          className="group text-sm font-bold text-[hsl(93,20%,15%)]/50 hover:text-[hsl(93,45%,44%)] transition-colors flex items-center justify-center lg:justify-start gap-1"
+                        >
+                          {link.name}
+                          <ArrowUpRight size={12} className="opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-            ))}
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="border-t pt-8 flex flex-col md:flex-row items-center justify-between">
-          <div className="flex items-center space-x-2 mb-4 md:mb-0">
-             <Image src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" alt="AyushConclave Logo" width={120} height={40} className="object-contain" />
+
+        {/* Newsletter Section: Fully Centered on Mobile */}
+        <div className="bg-white/60 backdrop-blur-xl border border-white p-8 rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between gap-8 mb-16 shadow-xl shadow-[hsl(93,45%,44%)]/5 text-center md:text-left">
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            <div className="w-14 h-14 bg-[hsl(93,45%,44%)]/10 rounded-2xl flex items-center justify-center text-[hsl(93,45%,44%)] shrink-0">
+              <Mail size={28} />
+            </div>
+            <div>
+              <h4 className="text-lg font-black text-[hsl(93,20%,15%)] leading-tight">Stay Updated</h4>
+              <p className="text-sm font-bold text-[hsl(93,20%,15%)]/50">News about AYUSH Conclave 2026</p>
+            </div>
           </div>
-          <div className="text-sm text-muted-foreground mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} AyushConclave. All rights reserved.
+          <div className="flex flex-col sm:flex-row w-full md:w-auto gap-3">
+            <input 
+              type="email" 
+              placeholder="Enter your email" 
+              className="bg-white border border-[hsl(93,45%,44%)]/10 rounded-full px-6 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[hsl(93,45%,44%)]/20 w-full md:w-64 font-medium text-center md:text-left"
+            />
+            <button className="bg-[hsl(93,45%,44%)] text-white font-black text-xs uppercase tracking-widest px-8 py-4 rounded-full hover:scale-105 transition-transform shadow-lg shadow-[hsl(93,45%,44%)]/20">
+              Join
+            </button>
           </div>
-          <div className="flex items-center space-x-4">
-            {socialLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-sm text-muted-foreground hover:text-primary transition-colors"
-              >
-                {link.name}
-              </Link>
-            ))}
+        </div>
+
+        {/* Bottom Bar: Centered on Mobile */}
+        <div className="pt-8 border-t border-[hsl(93,45%,44%)]/10 flex flex-col md:flex-row items-center justify-between gap-6 text-center">
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[hsl(93,20%,15%)]/40">
+            &copy; {new Date().getFullYear()} National Ayush Conclave. All rights reserved.
+          </p>
+          <div className="flex gap-8">
+            <Link href="/privacy" className="text-[10px] font-black uppercase tracking-[0.2em] text-[hsl(93,20%,15%)]/40 hover:text-[hsl(93,45%,44%)] transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="text-[10px] font-black uppercase tracking-[0.2em] text-[hsl(93,20%,15%)]/40 hover:text-[hsl(93,45%,44%)] transition-colors">Terms of Use</Link>
           </div>
         </div>
       </div>
