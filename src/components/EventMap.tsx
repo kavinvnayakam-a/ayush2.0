@@ -9,8 +9,8 @@ const mapContainerStyle = {
 };
 
 const center = {
-  lat: 12.9934,
-  lng: 80.1706,
+  lat: 13.0132,
+  lng: 80.1919,
 };
 
 const mapOptions: google.maps.MapOptions = {
