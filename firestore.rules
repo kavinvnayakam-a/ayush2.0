@@ -7,15 +7,15 @@ service cloud.firestore {
     }
 
     match /visitor_passes/{visitorPassId} {
-      allow create: if true; // Anyone can create a visitor pass
-      allow read: if isAdmin();
-      // list is implicitly denied for non-admins now
-      // update and delete are implicitly denied
+      // Allow anyone to create a visitor pass.
+      allow create: if true;
+      
+      // Only admins can read, list, update, or delete passes.
+      allow read, update, delete: if isAdmin();
     }
 
     match /admin_roles/{uid} {
       allow read: if request.auth.uid == uid && isAdmin();
-      // create, update, delete, and list are implicitly denied.
     }
   }
 }
