@@ -12,7 +12,6 @@ import { LogOut, ShieldCheck, Users, Ticket } from 'lucide-react';
 import { format } from 'date-fns';
 import { useDoc } from '@/firebase/firestore/use-doc';
 import { doc } from 'firebase/firestore';
-import Image from 'next/image';
 
 interface VisitorPass {
   id: string;
@@ -56,7 +55,11 @@ function AdminDashboard() {
   const handleLogout = async () => {
     if (auth) {
       await signOut(auth);
+      router.push('/admin/login');
     }
+  };
+  
+  const handleGoToLogin = () => {
     router.push('/admin/login');
   };
 
@@ -87,7 +90,7 @@ function AdminDashboard() {
             <ShieldCheck className="w-16 h-16 mb-4"/>
             <h1 className="text-2xl font-bold">Access Denied</h1>
             <p className="text-center">You do not have permission to view this page.</p>
-            <Button onClick={handleLogout} variant="destructive" className="mt-8">
+            <Button onClick={handleGoToLogin} variant="destructive" className="mt-8">
                 <LogOut className="mr-2 h-4 w-4" /> Go to Login
             </Button>
         </div>
