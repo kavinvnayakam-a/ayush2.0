@@ -2,7 +2,22 @@ import { BookOpen, CalendarDays, Globe, Microscope, Sparkles, UserPlus, type Luc
 
 export const navLinks = [
   { name: 'Home', href: '/' },
-  { name: 'Info', href: '/info' },
+  { name: 'About', subLinks: [
+      { name: 'Organisers', href: '/about/organisers' },
+      { name: 'About Arogya Expo', href: '/about/arogya-expo' },
+      { name: 'About Ayush Conclave', href: '/about/ayush-conclave' },
+    ] 
+  },
+  { name: 'Abstract', subLinks: [
+      { name: 'Call for Papers', href: '/abstract/call-for-papers' },
+    ]
+  },
+  { name: 'Scientific Session', href: '/scientific-session' },
+  { name: 'Speakers', href: '/speakers' },
+  { name: 'Registration', href: '/register' },
+  { name: 'Venue', href: '/venue' },
+  { name: 'Contact Us', href: '/contact' },
+  { name: 'Tourist Attractions', href: '/tourist-attractions' },
   { name: 'Map', href: '/map' },
 ];
 

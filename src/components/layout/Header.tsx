@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ChevronDown, Menu } from 'lucide-react';
-import { navLinks, infoPages } from '@/lib/data';
+import { navLinks } from '@/lib/data';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
@@ -32,7 +32,7 @@ export function Header() {
         <div className="flex flex-1 items-center justify-end">
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
             {navLinks.map((link) =>
-              link.href === '/info' ? (
+              link.subLinks ? (
                 <DropdownMenu key={link.name}>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="flex items-center gap-1">
@@ -41,15 +41,15 @@ export function Header() {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
-                    {infoPages.map((page) => (
-                      <DropdownMenuItem key={page.slug} asChild>
-                        <Link href={`/info/${page.slug}`}>{page.title}</Link>
+                    {link.subLinks.map((subLink) => (
+                      <DropdownMenuItem key={subLink.name} asChild>
+                        <Link href={subLink.href}>{subLink.name}</Link>
                       </DropdownMenuItem>
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
               ) : (
-                <Link
+                link.href && <Link
                   key={link.name}
                   href={link.href}
                   className={cn(
@@ -83,17 +83,17 @@ export function Header() {
                 <div className="flex flex-col space-y-4 text-lg">
                   {navLinks.map((link) => (
                     <div key={link.name}>
-                       {link.href === '/info' ? (
+                       {link.subLinks ? (
                          <>
                           <h3 className="font-semibold text-foreground/60 px-4 mb-2">{link.name}</h3>
                           <div className="flex flex-col space-y-2 pl-4">
-                            {infoPages.map((page) => (
-                              <Link key={page.slug} href={`/info/${page.slug}`} onClick={closeSheet} className="text-foreground/80 hover:text-foreground">{page.title}</Link>
+                            {link.subLinks.map((subLink) => (
+                              <Link key={subLink.name} href={subLink.href} onClick={closeSheet} className="text-foreground/80 hover:text-foreground">{subLink.name}</Link>
                             ))}
                           </div>
                          </>
                        ) : (
-                        <Link href={link.href} onClick={closeSheet} className={cn("px-4 py-2 rounded-md hover:bg-muted", pathname === link.href && "bg-muted")}>{link.name}</Link>
+                        link.href && <Link href={link.href} onClick={closeSheet} className={cn("px-4 py-2 rounded-md hover:bg-muted", pathname === link.href && "bg-muted")}>{link.name}</Link>
                        )}
                     </div>
                   ))}
