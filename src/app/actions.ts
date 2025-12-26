@@ -45,11 +45,11 @@ export async function registerVisitorAction(
             status: 'success', 
             message: 'Registration successful! See you at the Expo.' 
         };
-    } catch (error) {
+    } catch (error: any) {
         console.error(error);
         return { 
             status: 'error', 
-            message: 'Something went wrong. Please try again.' 
+            message: error.message || 'Something went wrong. Please try again.' 
         };
     }
 }

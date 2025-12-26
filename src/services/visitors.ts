@@ -24,7 +24,7 @@ const db = getFirestore();
 
 export interface Visitor {
   name: string;
-  number: string; // Changed from 'mobile' to match form
+  number: string;
   mailId: string;
   location: string;
   registrationDate: any;
@@ -33,18 +33,33 @@ export interface Visitor {
 export async function addVisitor(
   visitorData: Omit<Visitor, 'registrationDate'>
 ): Promise<string> {
+  const visitorsRef = db.collection('visitor_passes');
+
+  // Check for existing number
+  const numberQuery = await visitorsRef.where('number', '==', visitorData.number).limit(1).get();
+  if (!numberQuery.empty) {
+    throw new Error('This phone number is already registered.');
+  }
+
+  // Check for existing email
+  const mailIdQuery = await visitorsRef.where('mailId', '==', visitorData.mailId).limit(1).get();
+  if (!mailIdQuery.empty) {
+    throw new Error('This email address is already registered.');
+  }
+
   try {
-    const docRef = await addDoc(collection(db, 'visitor_passes'), {
+    const docRef = await visitorsRef.add({
       name: visitorData.name,
-      number: visitorData.number, // Ensure field name matches
+      number: visitorData.number,
       mailId: visitorData.mailId,
       location: visitorData.location,
       registrationDate: Timestamp.now(),
     });
     console.log('Document written with ID: ', docRef.id);
     return docRef.id;
-  } catch (e) {
+  } catch (e: any) {
     console.error('Error adding document: ', e);
-    throw new Error('Could not save visitor information.');
+    // Re-throw a generic error if something else goes wrong during the write.
+    throw new Error('Could not save visitor information. Please try again.');
   }
 }
