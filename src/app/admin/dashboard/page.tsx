@@ -95,7 +95,7 @@ function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 p-4 sm:p-8">
+    <div className="min-h-screen bg-slate-50 p-4 sm:p-8 pt-24 sm:pt-32">
       <div className="max-w-7xl mx-auto">
         <header className="flex flex-col sm:flex-row items-center justify-between mb-8">
           <div className='flex items-center gap-4 text-center sm:text-left'>
@@ -195,3 +195,5 @@ function AdminDashboard() {
 }
 
 export default AdminDashboard;
+
+    
