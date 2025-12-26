@@ -1,11 +1,27 @@
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
-import { Sparkles, Globe, ArrowRight, Target, ShieldCheck, Microscope, Users, MapPin, Navigation } from 'lucide-react';
+import { 
+  Sparkles, 
+  Globe, 
+  ArrowRight, 
+  Target, 
+  ShieldCheck, 
+  Microscope, 
+  Users, 
+  MapPin, 
+  Navigation, 
+  UserCheck, 
+  X, 
+  Ticket 
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CountdownTimer } from '@/components/CountdownTimer';
 import { EventMap } from '@/components/EventMap';
+
+/** --- CONSTANTS --- **/
+const REGISTRATION_LINK = "https://www.arogyaayurconclave.org/#/buyTickets/selectTickets?day=1&lang=en";
 
 /** --- SUB-COMPONENTS --- **/
 
@@ -37,8 +53,9 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 export default function HomePage() {
   const eventDate = new Date('2026-01-09T00:00:00');
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVisitorModalOpen, setIsVisitorModalOpen] = useState(false);
 
-  // Set Video Speed to 40% (60% reduction) for smooth ambient feel
+  // Set Video Speed
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.4;
@@ -51,7 +68,6 @@ export default function HomePage() {
       {/* 1. HERO SECTION WITH VIDEO BG */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-36 pb-20">
         
-        {/* Video Background Layer */}
         <div className="absolute inset-0 z-0">
           <video
             ref={videoRef}
@@ -68,11 +84,9 @@ export default function HomePage() {
               type="video/mp4" 
             />
           </video>
-          {/* Subtle Overlay to ensure text readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white/80 z-[1]" />
         </div>
 
-        {/* Hero Content */}
         <div className="container mx-auto px-6 relative z-10 text-center">
           <div className="flex flex-col items-center space-y-10">
             <div className="space-y-4">
@@ -110,9 +124,21 @@ export default function HomePage() {
 
             <div className="pt-6">
               <CountdownTimer targetDate={eventDate} />
-              <Button size="lg" className="mt-10 h-20 px-16 rounded-full bg-[hsl(93,45%,44%)] text-white font-black hover:scale-105 transition-all text-xl shadow-2xl shadow-[hsl(93,45%,44%)]/30 group">
-                Register Now <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4 mt-10 items-center justify-center">
+                <Button asChild size="lg" className="h-20 px-16 rounded-full bg-[hsl(93,45%,44%)] text-white font-black hover:scale-105 transition-all text-xl shadow-2xl shadow-[hsl(93,45%,44%)]/30 group">
+                  <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">
+                    Delegate Registration <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
+                  </a>
+                </Button>
+                <Button 
+                  onClick={() => setIsVisitorModalOpen(true)}
+                  variant="outline" 
+                  size="lg" 
+                  className="h-20 px-12 rounded-full border-2 border-[hsl(93,45%,44%)] text-[hsl(93,45%,44%)] font-black hover:bg-[hsl(93,45%,44%)] hover:text-white transition-all text-xl"
+                >
+                  Free Visitor Pass
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -201,8 +227,8 @@ export default function HomePage() {
       </section>
 
 
-{/* 5. SUPPORTED BY SECTION */}
-<section className="py-24 bg-white relative z-10">
+      {/* 5. SUPPORTED BY SECTION */}
+      <section className="py-24 bg-white relative z-10">
         <div className="container mx-auto px-6">
           <SectionLabel>Supported By</SectionLabel>
           
@@ -262,7 +288,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. VENUE SECTION - COLORFUL VERSION */}
+      {/* 4. VENUE SECTION */}
       <section className="py-24 relative overflow-hidden z-10">
         <div className="absolute inset-0 bg-[hsl(93,20%,15%)]" /> 
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[hsl(93,45%,44%)] opacity-20 blur-[120px] rounded-full -mr-48 -mt-48" />
@@ -313,6 +339,42 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* VISITOR MODAL */}
+      {isVisitorModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-[hsl(93,20%,15%)]/80 backdrop-blur-sm" onClick={() => setIsVisitorModalOpen(false)} />
+          <div className="relative bg-white w-full max-w-lg rounded-[3rem] p-10 shadow-2xl overflow-hidden">
+            <button onClick={() => setIsVisitorModalOpen(false)} className="absolute top-6 right-6 p-2 hover:bg-slate-100 rounded-full transition-colors">
+              <X size={24} />
+            </button>
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 bg-[hsl(93,45%,44%)]/10 rounded-2xl flex items-center justify-center text-[hsl(93,45%,44%)] mx-auto mb-4">
+                <Ticket size={32} />
+              </div>
+              <h2 className="text-3xl font-black text-[hsl(93,20%,15%)] uppercase">Visitor Pass</h2>
+              <p className="text-slate-500 font-bold italic">Secure your free entry to the Arogya Expo</p>
+            </div>
+            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <div>
+                <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Full Name</label>
+                <input type="text" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold focus:outline-none focus:border-[hsl(93,45%,44%)] transition-colors" placeholder="Enter your name" />
+              </div>
+              <div>
+                <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Mobile Number</label>
+                <input type="tel" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold focus:outline-none focus:border-[hsl(93,45%,44%)] transition-colors" placeholder="+91 XXXXX XXXXX" />
+              </div>
+              <div>
+                <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Location</label>
+                <input type="text" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold focus:outline-none focus:border-[hsl(93,45%,44%)] transition-colors" placeholder="City / State" />
+              </div>
+              <Button className="w-full h-16 bg-[hsl(93,45%,44%)] text-white rounded-2xl font-black uppercase tracking-widest hover:bg-[#ffa62f] transition-all mt-6 shadow-xl shadow-[hsl(93,45%,44%)]/20">
+                Confirm Booking
+              </Button>
+            </form>
+          </div>
+        </div>
+      )}
 
     </main>
   );
