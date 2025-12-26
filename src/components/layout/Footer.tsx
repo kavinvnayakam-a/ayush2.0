@@ -33,8 +33,6 @@ const footerLinks = [
     name: 'Quick Links', 
     subLinks: [
       { name: 'Contact Us', href: '/contact' },
-      { name: 'Map', href: '/map' },
-      { name: 'Sitemap', href: '/sitemap' },
     ]
   },
 ];
