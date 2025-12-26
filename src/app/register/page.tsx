@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Ticket, 
   CheckCircle2, 
@@ -13,6 +13,10 @@ import {
   X
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useFormState, useFormStatus } from 'react-dom';
+import { registerVisitorAction, type FormState } from '@/app/actions';
+import { useToast } from '@/hooks/use-toast';
+
 
 const REGISTRATION_LINK = "https://www.arogyaayurconclave.org/#/buyTickets/selectTickets?day=1&lang=en";
 
@@ -28,6 +32,54 @@ const nasyaPrices = [
   { category: "PG Students", price: "2,000" },
   { category: "PHD / Faculty", price: "2,000" },
 ];
+
+function VisitorForm({ closeModal }: { closeModal: () => void }) {
+  const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const initialState: FormState = { status: 'idle', message: '' };
+  const [state, formAction] = useFormState(registerVisitorAction, initialState);
+
+  const { pending } = useFormStatus();
+
+  useEffect(() => {
+    if (state.status === 'success') {
+      toast({
+        title: 'Success!',
+        description: state.message,
+      });
+      formRef.current?.reset();
+      closeModal();
+    } else if (state.status === 'error') {
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: state.message,
+      });
+    }
+  }, [state, toast, closeModal]);
+
+  return (
+      <form ref={formRef} action={formAction} className="space-y-4">
+        <div>
+            <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Full Name</label>
+            <input name="name" type="text" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold focus:outline-none focus:border-[hsl(93,45%,44%)] transition-colors" placeholder="Enter your name" required />
+        </div>
+        <div>
+            <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Mobile Number</label>
+            <input name="mobile" type="tel" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold focus:outline-none focus:border-[hsl(93,45%,44%)] transition-colors" placeholder="+91 XXXXX XXXXX" required />
+        </div>
+        <div>
+            <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Location</label>
+            <input name="location" type="text" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold focus:outline-none focus:border-[hsl(93,45%,44%)] transition-colors" placeholder="City / State" required />
+        </div>
+        <Button type="submit" disabled={pending} className="w-full h-16 bg-[hsl(93,45%,44%)] text-white rounded-2xl font-black uppercase tracking-widest hover:bg-[#ffa62f] transition-all mt-6 shadow-xl shadow-[hsl(93,45%,44%)]/20">
+             {pending ? 'Booking...' : 'Confirm Booking'}
+        </Button>
+    </form>
+  )
+}
+
 
 export default function RegistrationPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -50,7 +102,7 @@ export default function RegistrationPage() {
                 <Users2 size={20} /> Bulk Concessions Available
              </div>
              <a href="tel:+919585567891" className="flex items-center gap-2 hover:text-[hsl(93,45%,44%)] transition-colors">
-                <PhoneCall size={20} className="text-[#ffa62f]" /> +91 9585567891
+                <PhoneCall size={20} className="text-[#ffa62f]" /> +91 9994211666
              </a>
           </div>
         </div>
@@ -208,23 +260,7 @@ export default function RegistrationPage() {
               <h2 className="text-3xl font-black text-[hsl(93,20%,15%)] uppercase">Visitor Pass</h2>
               <p className="text-slate-500 font-bold italic">Secure your free entry to the Arogya Expo</p>
             </div>
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-              <div>
-                <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Full Name</label>
-                <input type="text" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold focus:outline-none focus:border-[hsl(93,45%,44%)] transition-colors" placeholder="Enter your name" />
-              </div>
-              <div>
-                <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Mobile Number</label>
-                <input type="tel" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold focus:outline-none focus:border-[hsl(93,45%,44%)] transition-colors" placeholder="+91 XXXXX XXXXX" />
-              </div>
-              <div>
-                <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Location</label>
-                <input type="text" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold focus:outline-none focus:border-[hsl(93,45%,44%)] transition-colors" placeholder="City / State" />
-              </div>
-              <Button className="w-full h-16 bg-[hsl(93,45%,44%)] text-white rounded-2xl font-black uppercase tracking-widest hover:bg-[#ffa62f] transition-all mt-6 shadow-xl shadow-[hsl(93,45%,44%)]/20">
-                Confirm Booking
-              </Button>
-            </form>
+            <VisitorForm closeModal={() => setIsModalOpen(false)} />
           </div>
         </div>
       )}

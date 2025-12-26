@@ -105,7 +105,7 @@ export function Header() {
             ))}
             
             <Button asChild className="ml-4 rounded-full px-8 font-black bg-[hsl(93,45%,44%)] text-white hover:bg-[#ffa62f] transition-all">
-              <Link href="/registration">REGISTER</Link>
+              <Link href="/register">REGISTER</Link>
             </Button>
           </nav>
 

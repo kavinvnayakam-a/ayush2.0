@@ -12,13 +12,15 @@ import {
   Users, 
   MapPin, 
   Navigation, 
-  UserCheck, 
   X, 
   Ticket 
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CountdownTimer } from '@/components/CountdownTimer';
 import { EventMap } from '@/components/EventMap';
+import { useFormState, useFormStatus } from 'react-dom';
+import { registerVisitorAction } from '@/app/actions';
+import { useToast } from '@/hooks/use-toast';
 
 /** --- CONSTANTS --- **/
 const REGISTRATION_LINK = "https://www.arogyaayurconclave.org/#/buyTickets/selectTickets?day=1&lang=en";
@@ -48,6 +50,44 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
+function VisitorForm({ closeModal }: { closeModal: () => void }) {
+  const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const initialState: FormState = { status: 'idle', message: '' };
+  const [state, formAction] = useFormState(registerVisitorAction, initialState);
+
+  const { pending } = useFormStatus();
+
+  useEffect(() => {
+    if (state.status === 'success') {
+      toast({
+        title: 'Success!',
+        description: state.message,
+      });
+      formRef.current?.reset();
+      closeModal();
+    } else if (state.status === 'error') {
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: state.message,
+      });
+    }
+  }, [state, toast, closeModal]);
+
+  return (
+     <form ref={formRef} action={formAction} className="space-y-4">
+        <input name="name" type="text" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold" placeholder="Full Name" required />
+        <input name="mobile" type="tel" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold" placeholder="Mobile Number" required />
+        <input name="location" type="text" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold" placeholder="City / Location" required />
+        <Button type="submit" disabled={pending} className="w-full h-16 bg-[hsl(93,45%,44%)] text-white rounded-2xl font-black uppercase hover:bg-[#ffa62f] shadow-xl">
+          {pending ? 'Booking...' : 'Confirm Booking'}
+        </Button>
+      </form>
+  )
+}
+
 /** --- MAIN PAGE --- **/
 
 export default function HomePage() {
@@ -55,7 +95,6 @@ export default function HomePage() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVisitorModalOpen, setIsVisitorModalOpen] = useState(false);
 
-  // Set Video Speed
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.4;
@@ -65,49 +104,43 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
       
-      {/* 1. HERO SECTION WITH VIDEO BG */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-36 pb-20">
+      {/* 1. HERO SECTION - FULL BLEED VIDEO */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 bg-white">
           <video
             ref={videoRef}
             autoPlay
             muted
             loop
             playsInline
-            className="absolute top-1/2 left-1/2 min-w-full min-h-full object-cover -translate-x-1/2 -translate-y-1/2 opacity-30 
-                       md:rotate-0 rotate-90 scale-[2.5] md:scale-100 transition-all duration-[2000ms] ease-in-out"
-            style={{ filter: 'contrast(1.05) brightness(1.05)' }}
+            className="absolute top-0 left-0 w-full h-full object-cover opacity-40 scale-110 md:scale-100 transition-all duration-[2000ms]"
           >
             <source 
               src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2F5943-187188345.mp4?alt=media&token=78470ded-5e02-4b9f-aa94-528be152ee00" 
               type="video/mp4" 
             />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white/80 z-[1]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white z-[1]" />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10 text-center">
+        <div className="container mx-auto px-6 relative z-10 text-center pt-36 pb-20">
           <div className="flex flex-col items-center space-y-10">
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md px-6 py-2.5 rounded-full border border-white/40 text-[hsl(93,45%,44%)] font-black text-xs tracking-[0.3em] uppercase shadow-sm">
-                <Sparkles size={16} /> National Ayush Conclave 2026
-              </div>
-              <p className="text-[hsl(93,20%,15%)]/60 font-black uppercase tracking-[0.2em] text-[10px] md:text-xs">
-                Ancient Wisdom <span className="mx-2 opacity-30">|</span> Modern Care <span className="mx-2 opacity-30">|</span> Patient First
-              </p>
+            <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md px-6 py-2.5 rounded-full border border-white/40 text-[hsl(93,45%,44%)] font-black text-xs tracking-[0.3em] uppercase shadow-sm">
+              <Sparkles size={16} /> National Ayush Conclave 2026
             </div>
             
-            <div className="relative w-60 h-60 drop-shadow-2xl">
+            <div className="relative w-56 h-56 md:w-64 md:h-64 drop-shadow-2xl">
               <Image 
                 src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F1000157891%20(1).webp?alt=media&token=f13fc097-13b6-4af3-bb0e-2788a1fb4b73"
-                alt="National Arogya Expo 2026"
+                alt="Logo"
                 fill
+                priority
                 className="object-contain"
               />
             </div>
             
-            <p className="text-xl md:text-3xl font-bold text-[hsl(93,20%,15%)]/90 max-w-3xl italic drop-shadow-sm">
+            <p className="text-xl md:text-3xl font-bold text-[hsl(93,20%,15%)]/90 max-w-3xl italic">
               "AYUSH for One Health: Bridging Tradition, Innovation and Well-being"
             </p>
 
@@ -118,23 +151,27 @@ export default function HomePage() {
               </div>
               <div className="flex items-center gap-3 bg-white/80 backdrop-blur-md px-6 py-3 rounded-2xl border border-white shadow-sm">
                 <Globe className="text-[hsl(93,45%,44%)]" size={20} />
-                <span className="font-bold text-sm text-left leading-tight">Heartfulness, Manapakkam, Chennai</span>
+                <span className="font-bold text-sm text-left leading-tight">Heartfulness, Chennai</span>
               </div>
             </div>
 
-            <div className="pt-6">
-              <CountdownTimer targetDate={eventDate} />
-              <div className="flex flex-col sm:flex-row gap-4 mt-10 items-center justify-center">
-                <Button asChild size="lg" className="h-20 px-16 rounded-full bg-[hsl(93,45%,44%)] text-white font-black hover:scale-105 transition-all text-xl shadow-2xl shadow-[hsl(93,45%,44%)]/30 group">
+            {/* PERFECTLY CENTERED TIMER & BUTTONS */}
+            <div className="w-full flex flex-col items-center justify-center pt-6 space-y-10">
+              <div className="flex justify-center w-full">
+                 <CountdownTimer targetDate={eventDate} />
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full">
+                <Button asChild size="lg" className="h-20 w-full sm:w-auto px-16 rounded-full bg-[hsl(93,45%,44%)] text-white font-black hover:scale-105 transition-all text-xl shadow-2xl shadow-[hsl(93,45%,44%)]/30 group">
                   <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">
-                    Delegate Registration <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
+                    Register Now <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
                   </a>
                 </Button>
                 <Button 
                   onClick={() => setIsVisitorModalOpen(true)}
                   variant="outline" 
                   size="lg" 
-                  className="h-20 px-12 rounded-full border-2 border-[hsl(93,45%,44%)] text-[hsl(93,45%,44%)] font-black hover:bg-[hsl(93,45%,44%)] hover:text-white transition-all text-xl"
+                  className="h-20 w-full sm:w-auto px-12 rounded-full border-2 border-[hsl(93,45%,44%)] text-[hsl(93,45%,44%)] font-black hover:bg-[hsl(93,45%,44%)] hover:text-white transition-all text-xl"
                 >
                   Free Visitor Pass
                 </Button>
@@ -144,7 +181,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. OBJECTIVES / FOCUS AREAS */}
+      {/* 2. OBJECTIVES */}
       <section className="py-24 bg-white relative z-10">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -154,10 +191,10 @@ export default function HomePage() {
               { icon: <Users size={32} />, title: "Global Access", desc: "Making traditional healthcare affordable and accessible to all." },
               { icon: <Target size={32} />, title: "One Health", desc: "Uniting humans, animals, and the environment in a single health vision." }
             ].map((item, i) => (
-              <div key={i} className="p-8 rounded-[2rem] bg-[hsl(91,30%,96%)] border border-[hsl(93,45%,44%)]/10 hover:border-[hsl(93,45%,44%)]/40 transition-all">
+              <div key={i} className="p-8 rounded-[2rem] bg-slate-50 border border-slate-100 hover:border-[hsl(93,45%,44%)]/40 transition-all">
                 <div className="text-[hsl(93,45%,44%)] mb-6">{item.icon}</div>
-                <h3 className="text-xl font-black text-[hsl(93,20%,15%)] mb-3">{item.title}</h3>
-                <p className="text-sm text-[hsl(93,20%,15%)]/60 font-medium leading-relaxed">{item.desc}</p>
+                <h3 className="text-xl font-black text-slate-900 mb-3">{item.title}</h3>
+                <p className="text-sm text-slate-500 font-medium leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -165,10 +202,10 @@ export default function HomePage() {
       </section>
 
       {/* 3. LEADERSHIP SECTION */}
-      <section className="py-32 bg-[hsl(91,30%,96%)] relative z-10">
+      <section className="py-32 bg-slate-50 relative z-10">
         <div className="container mx-auto px-6">
           <div className="text-center mb-24">
-            <h2 className="text-6xl md:text-8xl font-[1000] tracking-tighter italic text-[hsl(93,20%,15%)] uppercase">Leadership</h2>
+            <h2 className="text-6xl md:text-8xl font-[1000] tracking-tighter italic text-slate-900 uppercase">Leadership</h2>
             <div className="w-24 h-2 bg-[hsl(28,90%,45%)] mx-auto mt-4 rounded-full" />
           </div>
 
@@ -226,115 +263,45 @@ export default function HomePage() {
         </div>
       </section>
 
-
-      {/* 5. SUPPORTED BY SECTION */}
+      {/* 4. SUPPORTED BY - RESTORED SECTION */}
       <section className="py-24 bg-white relative z-10">
         <div className="container mx-auto px-6">
           <SectionLabel>Supported By</SectionLabel>
-          
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 items-center justify-center">
-            {/* Ministry of AYUSH */}
-            <div className="group flex flex-col items-center justify-center space-y-4 p-8 rounded-[2.5rem] bg-white border border-[hsl(93,45%,44%)]/5 hover:border-[hsl(93,45%,44%)]/20 hover:shadow-xl hover:shadow-[hsl(93,45%,44%)]/5 transition-all duration-500">
-              <div className="relative w-full h-24 transition-transform duration-500 group-hover:scale-110">
-                <Image 
-                  src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FMINISTRY%20OF%20AYUSH.webp?alt=media&token=38e912a4-940b-4571-9f97-b24a22ea96a0" 
-                  alt="Ministry of AYUSH" 
-                  fill 
-                  className="object-contain" 
-                />
+            {[
+              { img: "MINISTRY%20OF%20AYUSH", token: "38e912a4-940b-4571-9f97-b24a22ea96a0", label: "Ministry of AYUSH" },
+              { img: "NASYA%20(1)", token: "1537925f-0428-498a-8015-34e119872093", label: "NASYA" },
+              { img: "Supported%20by%20logos%2FVibha", token: "19ef4dd0-2d8c-4fea-a2da-1aa0c8fefd0c", label: "VIBHA" },
+              { img: "HEARTFULNESS", token: "59bf8c0a-5083-436a-b0d2-6bd746e2583f", label: "Wellness by Heartfulness" }
+            ].map((logo, i) => (
+              <div key={i} className="group flex flex-col items-center justify-center space-y-4 p-8 rounded-[2.5rem] bg-white border border-slate-50 hover:border-[hsl(93,45%,44%)]/20 transition-all">
+                <div className="relative w-full h-24 transition-transform group-hover:scale-110">
+                  <Image src={`https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F${logo.img}.webp?alt=media&token=${logo.token}`} alt={logo.label} fill className="object-contain" />
+                </div>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">{logo.label}</p>
               </div>
-              <p className="text-[10px] font-black text-[hsl(93,20%,15%)]/60 uppercase tracking-widest text-center">Ministry of AYUSH</p>
-            </div>
-
-            {/* NASYA */}
-            <div className="group flex flex-col items-center justify-center space-y-4 p-8 rounded-[2.5rem] bg-white border border-[hsl(93,45%,44%)]/5 hover:border-[hsl(93,45%,44%)]/20 hover:shadow-xl hover:shadow-[hsl(93,45%,44%)]/5 transition-all duration-500">
-              <div className="relative w-full h-24 transition-transform duration-500 group-hover:scale-110">
-                <Image 
-                  src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FNASYA%20(1).webp?alt=media&token=1537925f-0428-498a-8015-34e119872093" 
-                  alt="NASYA" 
-                  fill 
-                  className="object-contain" 
-                />
-              </div>
-              <p className="text-[10px] font-black text-[hsl(93,20%,15%)]/60 uppercase tracking-widest text-center">NASYA</p>
-            </div>
-
-            {/* VIBHA */}
-            <div className="group flex flex-col items-center justify-center space-y-4 p-8 rounded-[2.5rem] bg-white border border-[hsl(93,45%,44%)]/5 hover:border-[hsl(93,45%,44%)]/20 hover:shadow-xl hover:shadow-[hsl(93,45%,44%)]/5 transition-all duration-500">
-              <div className="relative w-full h-24 transition-transform duration-500 group-hover:scale-110">
-                <Image 
-                  src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FSupported%20by%20logos%2FVibha.webp?alt=media&token=19ef4dd0-2d8c-4fea-a2da-1aa0c8fefd0c" 
-                  alt="Vijnana Bharati (VIBHA)" 
-                  fill 
-                  className="object-contain" 
-                />
-              </div>
-              <p className="text-[10px] font-black text-[hsl(93,20%,15%)]/60 uppercase tracking-widest text-center">VIBHA</p>
-            </div>
-
-            {/* Wellness */}
-            <div className="group flex flex-col items-center justify-center space-y-4 p-8 rounded-[2.5rem] bg-white border border-[hsl(93,45%,44%)]/5 hover:border-[hsl(93,45%,44%)]/20 hover:shadow-xl hover:shadow-[hsl(93,45%,44%)]/5 transition-all duration-500">
-              <div className="relative w-full h-24 transition-transform duration-500 group-hover:scale-110">
-                <Image 
-                  src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FHEARTFULNESS.webp?alt=media&token=59bf8c0a-5083-436a-b0d2-6bd746e2583f" 
-                  alt="Wellness" 
-                  fill 
-                  className="object-contain" 
-                />
-              </div>
-              <p className="text-[10px] font-black text-[hsl(93,20%,15%)]/60 uppercase tracking-widest text-center">Wellness by Heartfulness</p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 4. VENUE SECTION */}
-      <section className="py-24 relative overflow-hidden z-10">
-        <div className="absolute inset-0 bg-[hsl(93,20%,15%)]" /> 
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[hsl(93,45%,44%)] opacity-20 blur-[120px] rounded-full -mr-48 -mt-48" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#ffa62f] opacity-10 blur-[100px] rounded-full -ml-24 -mb-24" />
-
+      {/* 5. VENUE */}
+      <section className="py-24 relative overflow-hidden z-10 bg-slate-900">
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <div className="lg:w-1/2 space-y-8">
-              <div className="inline-flex items-center gap-2 bg-[hsl(93,45%,44%)]/20 px-4 py-2 rounded-full border border-[hsl(93,45%,44%)]/30 text-[hsl(93,45%,44%)] font-black text-[10px] tracking-[0.3em] uppercase">
-                <MapPin size={14} className="animate-bounce" /> Destination
-              </div>
-              <h2 className="text-5xl md:text-7xl font-black text-white leading-tight uppercase tracking-tighter">
+              <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter">
                 The <span className="text-[hsl(93,45%,44%)] italic">Venue</span>
               </h2>
-              <p className="text-xl text-white/60 font-medium leading-relaxed italic border-l-4 border-[#ffa62f] pl-6">
-                "A spiritual sanctuary for holistic growth and community well-being."
-              </p>
-              <div className="space-y-6">
-                <div className="group flex gap-5 p-8 rounded-[2.5rem] bg-white/5 backdrop-blur-xl border border-white/10 transition-all hover:bg-white/10 hover:border-[hsl(93,45%,44%)]/50">
-                  <div className="w-14 h-14 rounded-2xl bg-[hsl(93,45%,44%)] flex items-center justify-center text-white shrink-0 shadow-lg shadow-[hsl(93,45%,44%)]/20 transition-transform group-hover:rotate-12">
-                    <Globe size={28} />
-                  </div>
-                  <div>
-                    <h4 className="font-black text-white uppercase text-lg mb-1 tracking-tight">Heartfulness Center</h4>
-                    <p className="text-sm font-bold text-[hsl(93,45%,44%)] uppercase tracking-widest mb-2">Heartfulness, Babuji Memorial Ashram, Manapakkam, Chennai</p>
-                    <p className="text-sm text-white/50 leading-relaxed">
-                      Babuji Memorial Ashram, Manapakkam, Chennai, Tamil Nadu 600125
-                    </p>
-                  </div>
-                </div>
+              <div className="p-8 rounded-[2.5rem] bg-white/5 backdrop-blur-xl border border-white/10">
+                <h4 className="font-black text-white uppercase text-lg mb-1 tracking-tight">Heartfulness Center</h4>
+                <p className="text-sm text-white/50 leading-relaxed">
+                  Babuji Memorial Ashram, Manapakkam, Chennai, Tamil Nadu 600125
+                </p>
               </div>
             </div>
-
-            <div className="lg:w-1/2 w-full h-[500px] relative group">
-               <div className="absolute inset-0 bg-gradient-to-tr from-[hsl(93,45%,44%)] to-[#ffa62f] rounded-[3.5rem] -rotate-2 scale-[1.02] opacity-50 blur-sm group-hover:rotate-0 transition-all duration-500" />
-               <div className="relative h-full w-full bg-[hsl(93,20%,15%)] rounded-[3rem] border-4 border-white/10 shadow-2xl overflow-hidden">
-                  <EventMap />
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <Button asChild className="w-full md:w-auto rounded-2xl bg-white text-[hsl(93,20%,15%)] font-black py-7 px-8 shadow-2xl hover:bg-[#ffa62f] hover:text-white transition-all group/btn">
-                      <a href="https://www.google.com/maps/search/?api=1&query=Babuji%20Memorial%20Ashram%2C%20Manapakkam%2C%20Chennai&query_place_id=ChIJuVsroc9gUjoRAXBf489zoMU" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3">
-                        <Navigation size={20} className="group-hover/btn:animate-pulse" />
-                        OPEN IN GOOGLE MAPS
-                      </a>
-                    </Button>
-                  </div>
-               </div>
+            <div className="lg:w-1/2 w-full h-[500px] relative rounded-[3rem] border-4 border-white/10 shadow-2xl overflow-hidden">
+               <EventMap />
             </div>
           </div>
         </div>
@@ -343,35 +310,18 @@ export default function HomePage() {
       {/* VISITOR MODAL */}
       {isVisitorModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-[hsl(93,20%,15%)]/80 backdrop-blur-sm" onClick={() => setIsVisitorModalOpen(false)} />
-          <div className="relative bg-white w-full max-w-lg rounded-[3rem] p-10 shadow-2xl overflow-hidden">
-            <button onClick={() => setIsVisitorModalOpen(false)} className="absolute top-6 right-6 p-2 hover:bg-slate-100 rounded-full transition-colors">
+          <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm" onClick={() => setIsVisitorModalOpen(false)} />
+          <div className="relative bg-white w-full max-w-lg rounded-[3rem] p-10 shadow-2xl">
+            <button onClick={() => setIsVisitorModalOpen(false)} className="absolute top-6 right-6 p-2 hover:bg-slate-100 rounded-full">
               <X size={24} />
             </button>
             <div className="text-center mb-8">
               <div className="w-16 h-16 bg-[hsl(93,45%,44%)]/10 rounded-2xl flex items-center justify-center text-[hsl(93,45%,44%)] mx-auto mb-4">
                 <Ticket size={32} />
               </div>
-              <h2 className="text-3xl font-black text-[hsl(93,20%,15%)] uppercase">Visitor Pass</h2>
-              <p className="text-slate-500 font-bold italic">Secure your free entry to the Arogya Expo</p>
+              <h2 className="text-3xl font-black text-slate-900 uppercase">Visitor Pass</h2>
             </div>
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-              <div>
-                <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Full Name</label>
-                <input type="text" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold focus:outline-none focus:border-[hsl(93,45%,44%)] transition-colors" placeholder="Enter your name" />
-              </div>
-              <div>
-                <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Mobile Number</label>
-                <input type="tel" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold focus:outline-none focus:border-[hsl(93,45%,44%)] transition-colors" placeholder="+91 XXXXX XXXXX" />
-              </div>
-              <div>
-                <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Location</label>
-                <input type="text" className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-6 font-bold focus:outline-none focus:border-[hsl(93,45%,44%)] transition-colors" placeholder="City / State" />
-              </div>
-              <Button className="w-full h-16 bg-[hsl(93,45%,44%)] text-white rounded-2xl font-black uppercase tracking-widest hover:bg-[#ffa62f] transition-all mt-6 shadow-xl shadow-[hsl(93,45%,44%)]/20">
-                Confirm Booking
-              </Button>
-            </form>
+            <VisitorForm closeModal={() => setIsVisitorModalOpen(false)} />
           </div>
         </div>
       )}
