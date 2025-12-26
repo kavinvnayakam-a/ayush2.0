@@ -196,7 +196,7 @@ export default function HomePage() {
                <EventMap />
                <div className="absolute bottom-8 right-8">
                  <Button asChild className="rounded-full bg-white text-[hsl(93,20%,15%)] font-black shadow-xl">
-                   <a href="https://www.google.com/maps/dir/?api=1&destination=12.9934,80.1706" target="_blank" rel="noopener noreferrer">
+                   <a href="https://www.google.com/maps/dir/?api=1&destination=Babuji+Memorial+Ashram,+Manapakkam,+Chennai" target="_blank" rel="noopener noreferrer">
                     Get Directions
                    </a>
                  </Button>

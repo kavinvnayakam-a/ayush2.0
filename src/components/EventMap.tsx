@@ -88,7 +88,7 @@ export function EventMap() {
       center={center}
       options={mapOptions}
     >
-      <MarkerF position={center} title="Heartfulness, Manapakkam" />
+      <MarkerF position={center} title="Babuji Memorial Ashram, Manapakkam, Chennai" />
     </GoogleMap>
   );
 }
