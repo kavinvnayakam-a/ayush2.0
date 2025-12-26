@@ -1,0 +1,89 @@
+{
+  "entities": {
+    "VisitorPass": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "VisitorPass",
+      "type": "object",
+      "description": "Represents a visitor pass for the AyushConclave- Arogya Expo.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Visitor Pass."
+        },
+        "name": {
+          "type": "string",
+          "description": "The full name of the visitor."
+        },
+        "number": {
+          "type": "string",
+          "description": "The phone number of the visitor."
+        },
+        "mailId": {
+          "type": "string",
+          "description": "The email address of the visitor.",
+          "format": "email"
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the visitor."
+        },
+        "registrationDate": {
+          "type": "string",
+          "description": "The date and time the visitor pass was registered.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "number",
+        "mailId",
+        "location",
+        "registrationDate"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/visitor_passes/{visitorPassId}",
+        "definition": {
+          "entityName": "VisitorPass",
+          "schema": {
+            "$ref": "#/backend/entities/VisitorPass"
+          },
+          "description": "Stores visitor pass information. Accessible only to admins.  Includes fields for name, number, mailId, location, and registrationDate.",
+          "params": [
+            {
+              "name": "visitorPassId",
+              "description": "Unique identifier for the visitor pass."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/admin_roles/{uid}",
+        "definition": {
+          "entityName": "admin_role",
+          "schema": {
+            "$ref": "#/backend/entities/admin_role"
+          },
+          "description": "Documents in this collection indicate admin status.  The existence of a document with the user's UID grants admin privileges.",
+          "params": [
+            {
+              "name": "uid",
+              "description": "The Firebase Auth UID of the potential admin."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "This design prioritizes security and scalability for the AyushConclave-Arogya Expo visitor pass management. It leverages Structural Segregation and Access Modeling to ensure clear authorization and efficient queries. A dedicated collection, `/visitor_passes`, stores all visitor pass data. Admins are managed via an `/admin_roles/{uid}` collection, using Existence over Content. This design eliminates the need for complex rules or `get()` calls in security rules, enhancing performance and security.  The structure enables secure `list` operations (QAPs) by limiting read access to authorized admins through path-based rules on the `/visitor_passes` collection and the `/admin_roles/{uid}` collection."
+  }
+}

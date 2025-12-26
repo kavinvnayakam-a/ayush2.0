@@ -1,23 +1,8 @@
-// To find your Firebase config object, go to
-// https://console.firebase.google.com/project/ayushconclave--arogya-expo/settings/general/
-// and scroll down to the "Your apps" section.
-
-import { initializeApp, getApps } from 'firebase/app';
-
-const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: "studio-2309061503-7e9f2",
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
+export const firebaseConfig = {
+  "projectId": "studio-2309061503-7e9f2",
+  "appId": "1:543454250900:web:e401c4d445fec484c0f181",
+  "apiKey": "AIzaSyAeyC45ryCKCdx0su-mGqHaxXAxlCjN5BI",
+  "authDomain": "studio-2309061503-7e9f2.firebaseapp.com",
+  "measurementId": "",
+  "messagingSenderId": "543454250900"
 };
-
-// Initialize Firebase
-function initializeFirebase() {
-  if (!getApps().length) {
-    return initializeApp(firebaseConfig);
-  }
-}
-
-export const app = initializeFirebase();

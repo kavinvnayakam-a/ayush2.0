@@ -1,12 +1,82 @@
+/**
+ * This ruleset enforces a role-based access control (RBAC) model for the AyushConclave-Arogya Expo application.
+ *
+ * Core Philosophy:
+ * The security model is centered around two distinct roles: Admins and the Public.
+ * - Public users (including anonymous visitors) have the ability to create visitor passes.
+ * - Admins have exclusive read access to all visitor pass data for management and verification purposes.
+ * This ensures that personal visitor information is protected from public access while maintaining an open registration process.
+ *
+ * Data Structure:
+ * The data is organized into two separate top-level collections to segregate responsibilities and enhance security:
+ * - `/visitor_passes/{visitorPassId}`: Stores all submitted visitor pass information.
+ * - `/admin_roles/{uid}`: A lookup collection where the existence of a document grants a user admin privileges. The document ID is the user's Firebase Auth UID.
+ *
+ * Key Security Decisions:
+ * - Admin roles are managed out-of-band (e.g., via the Firebase Console or a trusted server environment) for maximum security. Client-side modifications to the `/admin_roles` collection are strictly forbidden.
+ * - Public creation of visitor passes is permitted to facilitate easy registration for the expo.
+ * - All read access (`get`, `list`) to the sensitive visitor pass list is restricted to authenticated admins.
+ * - Modification (`update`) and deletion (`delete`) of visitor passes are disabled from the client side by default to prevent data tampering. These actions should be handled by trusted server-side logic if required.
+ *
+ * Denormalization for Authorization:
+ * This ruleset uses a dedicated `/admin_roles/{uid}` collection to manage permissions. This is a highly performant authorization pattern that relies on a document's existence (`exists()`) rather than its content. This avoids costly `get()` calls within rules and allows for scalable, secure checks to determine if a user is an admin.
+ *
+ * Structural Segregation:
+ * Public data submission is segregated into the `/visitor_passes` collection, while authorization logic is handled by the separate `/admin_roles` collection. This clean separation prevents anonymous users from ever being able to access or even query for administrative data.
+ */
 rules_version = '2';
-
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Allow guest users (unauthenticated) to create documents in the 'visitors' collection for the free pass.
-    // For security, this rule only allows creation. Reading, updating, and deleting are denied.
-    match /visitors/{visitorId} {
+
+    // Helper functions for reusable logic.
+
+    /**
+     * Checks if the user is a designated administrator.
+     * Admin status is granted by the existence of a document in the /admin_roles collection
+     * where the document ID matches the user's UID.
+     */
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/admin_roles/$(request.auth.uid));
+    }
+
+    /**
+     * Checks if a user is authenticated.
+     */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * @description Rules for the collection of visitor passes.
+     * @path /visitor_passes/{visitorPassId}
+     * @allow (create) any user, authenticated or not, can create a new visitor pass.
+     * @allow (get, list) an authenticated admin can read the full list of visitor passes.
+     * @deny (get, list) a non-admin or anonymous user cannot read any visitor pass data.
+     * @deny (update, delete) no user can modify or delete a visitor pass from the client.
+     * @principle Enforces public write for registration and admin-only read for data protection.
+     */
+    match /visitor_passes/{visitorPassId} {
+      allow get: if isAdmin();
+      allow list: if isAdmin();
       allow create: if true;
-      allow read, update, delete: if false;
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    /**
+     * @description Rules for the admin role lookup collection.
+     * @path /admin_roles/{uid}
+     * @allow (get, list) an authenticated admin can check for the existence of other admin roles.
+     * @deny (get, list) a non-admin user cannot read or list documents in this collection.
+     * @deny (create, update, delete) no user can change admin roles from the client.
+     * @principle Secures administrative roles by making them read-only for other admins and completely inaccessible to non-admins. Role management must occur out-of-band.
+     */
+    match /admin_roles/{uid} {
+      allow get: if isAdmin();
+      allow list: if isAdmin();
+      allow create: if false;
+      allow update: if false;
+      allow delete: if false;
     }
   }
 }
