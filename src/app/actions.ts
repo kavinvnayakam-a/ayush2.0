@@ -40,6 +40,7 @@ export async function registerVisitorAction(
         await addVisitor(validatedFields.data);
         revalidatePath('/');
         revalidatePath('/register');
+        revalidatePath('/visitor-pass');
         revalidatePath('/admin/dashboard');
         return { 
             status: 'success', 

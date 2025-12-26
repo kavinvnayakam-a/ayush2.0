@@ -27,11 +27,10 @@ export interface Visitor {
   number: string;
   mailId: string;
   location: string;
-  registrationDate: any;
 }
 
 export async function addVisitor(
-  visitorData: Omit<Visitor, 'registrationDate'>
+  visitorData: Visitor
 ): Promise<string> {
   const visitorsRef = db.collection('visitor_passes');
 
@@ -49,10 +48,7 @@ export async function addVisitor(
 
   try {
     const docRef = await visitorsRef.add({
-      name: visitorData.name,
-      number: visitorData.number,
-      mailId: visitorData.mailId,
-      location: visitorData.location,
+      ...visitorData,
       registrationDate: Timestamp.now(),
     });
     console.log('Document written with ID: ', docRef.id);
