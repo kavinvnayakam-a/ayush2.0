@@ -51,27 +51,22 @@ export function Header() {
             : "bg-transparent py-4 px-4 border-transparent"
         )}
       >
-        {/* MOBILE GRID LAYOUT: 3 columns to force center logo */}
-        <div className="grid grid-cols-3 md:flex h-16 items-center justify-between">
+        <div className="flex h-16 items-center justify-between">
           
-          {/* Left Spacer for Mobile (keeps logo centered) */}
-          <div className="md:hidden" />
-
-          {/* LOGO (Centered on mobile, Left on desktop) */}
-          <Link 
-            href="/" 
-            className="flex items-center justify-center md:justify-start gap-3 group transition-transform hover:scale-105"
-          >
-            <div className="relative w-[60px] h-[50px] md:w-[74px] md:h-[60px]">
-              <Image 
-                src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" 
-                alt="Logo" 
-                fill
-                priority
-                className="object-contain"
-              />
-            </div>
-          </Link>
+          {/* LOGO */}
+          <div className="flex-none">
+            <Link href="/" className="relative z-[110] flex items-center gap-3 group transition-transform hover:scale-105">
+              <div className="relative w-[60px] h-[50px] md:w-[74px] md:h-[60px]">
+                <Image 
+                  src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" 
+                  alt="Logo" 
+                  fill
+                  priority
+                  className="object-contain"
+                />
+              </div>
+            </Link>
+          </div>
 
           {/* DESKTOP NAVIGATION */}
           <nav className="hidden md:flex items-center gap-1 justify-end flex-1">
@@ -117,7 +112,7 @@ export function Header() {
             ))}
             
             <Button asChild className="ml-4 rounded-full px-8 font-black bg-[hsl(93,45%,44%)] text-white hover:bg-[#ffa62f] transition-all">
-              <Link href="/registration">REGISTER</Link>
+              <Link href="/register">REGISTER</Link>
             </Button>
           </nav>
 
@@ -160,19 +155,26 @@ export function Header() {
                             ))}
                           </>
                         ) : (
-                          <Link 
-                            href={link.href || '#'} 
-                            onClick={closeSheet} 
-                            className={cn(
-                              "flex items-center justify-between px-4 py-4 rounded-xl text-xl font-black uppercase tracking-tighter transition-all",
-                              pathname === link.href ? "bg-[hsl(93,45%,44%)] text-white" : "text-slate-800 hover:bg-slate-50"
-                            )}
-                          >
-                            {link.name}
-                          </Link>
+                          link.href && (
+                            <Link 
+                              href={link.href} 
+                              onClick={closeSheet} 
+                              className={cn(
+                                "flex items-center justify-between px-4 py-4 rounded-xl text-xl font-black uppercase tracking-tighter transition-all",
+                                pathname === link.href ? "bg-[hsl(93,45%,44%)] text-white" : "text-slate-800 hover:bg-slate-50"
+                              )}
+                            >
+                              {link.name}
+                            </Link>
+                          )
                         )}
                       </div>
                     ))}
+                  </div>
+                  <div className="p-6 border-t">
+                     <Button asChild className="w-full h-16 rounded-2xl bg-[hsl(93,45%,44%)] text-white font-black text-xl shadow-lg shadow-[hsl(93,45%,44%)]/20">
+                        <Link href="/register">REGISTER NOW</Link>
+                     </Button>
                   </div>
                 </div>
               </SheetContent>
