@@ -58,65 +58,104 @@ export function VisitorForm({ closeModal, buttonText = "Confirm Booking" }: Visi
           subject: 'Your Free Visitor Pass for Arogya Expo 2026!',
           html: `
           <!DOCTYPE html>
-          <html lang="en">
-          <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <style>
-              @import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap');
-              body {
-                margin: 0;
-                padding: 0;
-                background-color: #f0f4f0;
-              }
-              .container {
-                font-family: 'Cabin', sans-serif;
-                background-color: #f0f4f0;
-                color: #333;
-                padding: 20px;
-                text-align: center;
-              }
-              .content {
-                max-width: 600px;
-                margin: auto;
-                background-color: white;
-                border-radius: 2rem;
-                padding: 40px;
-                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-              }
-              @media (max-width: 600px) {
-                .container { padding: 10px; }
-                .content {
-                  padding: 20px;
-                  border-radius: 1rem;
-                }
-                .title {
-                  font-size: 1.8rem !important;
-                }
-              }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <div class="content">
-                <img src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" alt="Arogya Expo 2026 Logo" style="width: 180px; height: auto; max-width: 100%; margin: 0 auto 20px auto; display: block;">
-                <h1 class="title" style="color: #6CA33F; font-size: 2.5rem; text-transform: uppercase; letter-spacing: -1px; margin: 0;">Registration Confirmed!</h1>
-                <p style="font-size: 1.2rem; font-style: italic; color: #555; margin-top: 10px;">Hello ${data.name},</p>
-                <p style="font-size: 1.1rem; line-height: 1.6;">Thank you for registering for the <strong>Arogya Expo 2026</strong>. We are thrilled to have you join us for this celebration of health, nature, and tradition.</p>
-                
-                <div style="background-color: #f7f9f5; border-radius: 1.5rem; padding: 20px; margin: 30px 0; text-align: left;">
-                  <h3 style="color: #6CA33F; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; border-bottom: 2px solid #e2ead9; padding-bottom: 10px; margin-bottom: 20px;">Event Details</h3>
-                  <p style="margin: 10px 0; font-size: 1rem;"><strong>Date:</strong> January 09-12, 2026</p>
-                  <p style="margin: 10px 0; font-size: 1rem;"><strong>Location:</strong> Heartfulness (Babuji Memorial Ashram), Manapakkam, Chennai</p>
-                  <a href="https://maps.app.goo.gl/JhskuW5WSBJGonAv7" target="_blank" style="display: inline-block; margin-top: 15px; padding: 12px 24px; background-color: #6CA33F; color: white; text-decoration: none; border-radius: 12px; font-weight: bold;">Get Directions</a>
-                </div>
-                
-                <p style="font-size: 1rem; color: #777;">Please show this email at the registration desk to receive your visitor pass. We look forward to seeing you there!</p>
-                <p style="font-size: 0.9rem; color: #aaa; margin-top: 30px;">© ${new Date().getFullYear()} National Ayush Conclave. All rights reserved.</p>
-              </div>
-            </div>
-          </body>
-          </html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Confirmed</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+
+        @media screen and (max-width: 600px) {
+            .content-table {
+                width: 100% !important;
+                border-radius: 16px !important;
+            }
+            .mobile-padding {
+                padding: 20px !important;
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f0f4f0; font-family: 'Cabin', Arial, Helvetica, sans-serif;">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f0f4f0; padding: 20px;">
+        <tr>
+            <td align="center">
+                <table class="content-table" border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; border-radius: 32px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
+                    
+                    <tr>
+                        <td align="center" style="padding: 40px 20px 20px 20px;">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FMail%20Tempalte.png?alt=media&token=d597f9e9-acfe-4250-bc7e-ab7274918080" 
+                                 alt="Arogya Expo 2026" 
+                                 width="200" 
+                                 style="display: block; width: 200px; max-width: 80%; height: auto; border: 0;">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" class="mobile-padding" style="padding: 0 50px;">
+                            <h1 style="color: #6CA33F; font-size: 30px; text-transform: uppercase; margin: 0; letter-spacing: -0.5px; font-weight: 700; line-height: 1.2;">Registration Confirmed!</h1>
+                            <p style="font-size: 18px; font-style: italic; color: #555; margin: 20px 0 0 0;">Hello ${data.name},</p>
+                            <p style="font-size: 16px; line-height: 1.6; color: #444; margin-top: 15px;">Thank you for registering for the <strong>Arogya Expo 2026</strong>. We are thrilled to have you join us for this celebration of health, nature, and tradition.</p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" class="mobile-padding" style="padding: 30px 50px;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f7f9f5; border-radius: 24px; text-align: left;">
+                                <tr>
+                                    <td style="padding: 30px;">
+                                        <h3 style="color: #6CA33F; text-transform: uppercase; font-size: 12px; letter-spacing: 2px; border-bottom: 2px solid #e2ead9; padding-bottom: 10px; margin: 0 0 20px 0; font-weight: 700;">Event Details</h3>
+                                        
+                                        <p style="margin: 12px 0; font-size: 16px; color: #333;">
+                                            <strong style="color: #6CA33F;">Date:</strong> January 09-12, 2026
+                                        </p>
+                                        <p style="margin: 12px 0; font-size: 16px; color: #333;">
+                                            <strong style="color: #6CA33F;">Location:</strong> Heartfulness (Babuji Memorial Ashram), Manapakkam, Chennai
+                                        </p>
+                                        
+                                        <div style="margin-top: 25px;">
+                                            <a href="https://maps.app.goo.gl/ekNUDN2mFC8utAGf8" 
+                                               target="_blank" 
+                                               style="display: inline-block; padding: 14px 28px; background-color: #6CA33F; color: #ffffff; text-decoration: none; border-radius: 12px; font-weight: bold; font-size: 15px;">
+                                               Get Directions
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" class="mobile-padding" style="padding: 0 50px 40px 50px;">
+                            <p style="font-size: 14px; color: #888; margin: 0; line-height: 1.5;">Please show this email at the registration desk to receive your visitor pass.</p>
+                            <div style="border-top: 1px solid #eee; margin: 30px 0;"></div>
+                            <p style="font-size: 12px; color: #bbb; margin: 0;">© ${new Date().getFullYear()} National Ayush Conclave. All rights reserved.</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
           `,
         }
       });

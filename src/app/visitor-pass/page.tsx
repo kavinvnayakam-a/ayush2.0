@@ -6,8 +6,55 @@ import { VisitorForm } from '@/components/forms/VisitorForm';
 
 
 export default function VisitorPassPage() {
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    'name': 'Arogya Expo 2026 (Part of National Ayush Conclave)',
+    'startDate': '2026-01-09T09:00:00+05:30',
+    'endDate': '2026-01-12T18:00:00+05:30',
+    'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
+    'eventStatus': 'https://schema.org/EventScheduled',
+    'location': {
+      '@type': 'Place',
+      'name': 'Heartfulness (Babuji Memorial Ashram)',
+      'address': {
+        '@type': 'PostalAddress',
+        'streetAddress': 'Manapakkam',
+        'addressLocality': 'Chennai',
+        'addressRegion': 'TN',
+        'postalCode': '600125',
+        'addressCountry': 'IN',
+      },
+    },
+    'image': [
+      'https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F1000157891%20(1).webp?alt=media&token=f13fc097-13b6-4af3-bb0e-2788a1fb4b73'
+    ],
+    'description': 'Get your free visitor pass for the Arogya Expo 2026. Explore over 100 stalls, live demonstrations, and open sessions on holistic health and wellness.',
+    'offers': {
+      '@type': 'Offer',
+      'name': 'Free Visitor Pass',
+      'price': '0',
+      'priceCurrency': 'INR',
+      'availability': 'https://schema.org/InStock',
+      'url': 'https://ayushconclave.com/visitor-pass',
+      'validFrom': '2024-01-01',
+    },
+    'organizer': {
+      '@type': 'Organization',
+      'name': 'Vijnana Bharati (VIBHA)',
+      'url': 'https://ayushconclave.com'
+    }
+  };
+
+
   return (
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
+      {/* Add JSON-LD to the head of the document */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       
       {/* 1. HERO SECTION */}
       <section className="relative pt-40 pb-20 overflow-hidden bg-[hsl(91,30%,96%)]">
