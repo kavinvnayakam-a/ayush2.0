@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { 
   Ticket, 
   CheckCircle2, 
@@ -13,20 +13,9 @@ import {
   X
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useToast } from '@/hooks/use-toast';
-import { Input } from '@/components/ui/input';
-import { useFirestore } from '@/firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { z } from 'zod';
+import { VisitorForm } from '@/components/forms/VisitorForm';
 
 const REGISTRATION_LINK = "https://www.arogyaayurconclave.org/#/buyTickets/selectTickets?day=1&lang=en";
-
-const VisitorSchema = z.object({
-    name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-    number: z.string().regex(/^\+?[1-9]\d{1,14}$/, { message: "Please enter a valid mobile number." }),
-    mailId: z.string().email({ message: "Please enter a valid email address." }),
-    location: z.string().min(2, { message: "Location is required." }),
-});
 
 const standardPrices = [
   { category: "UG Students", price: "2,000", subtitle: "Budding Professionals" },
@@ -40,117 +29,6 @@ const nasyaPrices = [
   { category: "PG Students", price: "2,000" },
   { category: "PHD / Faculty", price: "2,000" },
 ];
-
-function VisitorForm({ closeModal }: { closeModal: () => void }) {
-  const { toast } = useToast();
-  const formRef = useRef<HTMLFormElement>(null);
-  const firestore = useFirestore();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsSubmitting(true);
-    const formData = new FormData(event.currentTarget);
-
-    const validatedFields = VisitorSchema.safeParse({
-        name: formData.get('name'),
-        number: formData.get('mobile'),
-        mailId: formData.get('mailId'),
-        location: formData.get('location'),
-    });
-
-    if (!validatedFields.success) {
-        const fieldErrors = validatedFields.error.flatten().fieldErrors;
-        toast({
-            variant: 'destructive',
-            title: 'Validation Error',
-            description: fieldErrors.name?.[0] || fieldErrors.number?.[0] || fieldErrors.mailId?.[0] || fieldErrors.location?.[0] || 'Please check your inputs.',
-        });
-        setIsSubmitting(false);
-        return;
-    }
-
-    try {
-        if (!firestore) {
-          throw new Error('Firestore is not initialized');
-        }
-        const visitorsRef = collection(firestore, 'visitor_passes');
-        const mailRef = collection(firestore, 'mail');
-
-        await addDoc(visitorsRef, {
-            ...validatedFields.data,
-            registrationDate: serverTimestamp(),
-        });
-
-        await addDoc(mailRef, {
-          to: validatedFields.data.mailId,
-          message: {
-            subject: 'Your Free Visitor Pass for Arogya Expo 2026!',
-            html: `
-            <div style="font-family: 'Cabin', sans-serif; background-color: #E2EAD9; color: #333; padding: 40px; text-align: center;">
-              <div style="max-width: 600px; margin: auto; background-color: white; border-radius: 2rem; padding: 40px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
-                <img src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" alt="Arogya Expo Logo" style="width: 150px; margin-bottom: 20px;">
-                <h1 style="color: #6CA33F; font-size: 2.5rem; text-transform: uppercase; letter-spacing: -1px; margin: 0;">Registration Confirmed!</h1>
-                <p style="font-size: 1.2rem; font-style: italic; color: #555; margin-top: 10px;">Hello ${validatedFields.data.name},</p>
-                <p style="font-size: 1.1rem; line-height: 1.6;">Thank you for registering for the <strong>Arogya Expo 2026</strong>. We are thrilled to have you join us for this celebration of health, nature, and tradition.</p>
-                
-                <div style="background-color: #f7f9f5; border-radius: 1.5rem; padding: 20px; margin: 30px 0; text-align: left;">
-                  <h3 style="color: #6CA33F; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; border-bottom: 2px solid #e2ead9; padding-bottom: 10px; margin-bottom: 20px;">Event Details</h3>
-                  <p style="margin: 10px 0; font-size: 1rem;"><strong>Date:</strong> January 09-12, 2026</p>
-                  <p style="margin: 10px 0; font-size: 1rem;"><strong>Location:</strong> Heartfulness (Babuji Memorial Ashram), Manapakkam, Chennai</p>
-                </div>
-                
-                <p style="font-size: 1rem; color: #777;">Please show this email at the registration desk to receive your visitor pass. We look forward to seeing you there!</p>
-                <p style="font-size: 0.9rem; color: #aaa; margin-top: 30px;">© ${new Date().getFullYear()} National Ayush Conclave. All rights reserved.</p>
-              </div>
-            </div>
-            `,
-          }
-        });
-        
-        toast({
-            title: 'Success!',
-            description: 'Registration successful! A confirmation email has been sent.',
-        });
-        formRef.current?.reset();
-        closeModal();
-    } catch (error: any) {
-        console.error("Firestore Error:", error);
-        toast({
-            variant: 'destructive',
-            title: 'Error',
-            description: 'Could not save your registration. Please try again later.',
-        });
-    } finally {
-        setIsSubmitting(false);
-    }
-  };
-
-
-  return (
-      <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
-        <div>
-            <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Full Name</label>
-            <Input name="name" type="text" placeholder="Enter your name" required />
-        </div>
-        <div>
-            <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Mobile Number</label>
-            <Input name="mobile" type="tel" placeholder="+91 XXXXX XXXXX" required />
-        </div>
-        <div>
-            <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Email Address</label>
-            <Input name="mailId" type="email" placeholder="your@email.com" required />
-        </div>
-        <div>
-            <label className="text-[10px] font-black uppercase tracking-widest ml-2 mb-1 block text-slate-400">Location</label>
-            <Input name="location" type="text" placeholder="City / State" required />
-        </div>
-        <Button type="submit" disabled={isSubmitting} className="w-full h-16 bg-[hsl(93,45%,44%)] text-white rounded-2xl font-black uppercase tracking-widest hover:bg-[#ffa62f] transition-all mt-6 shadow-xl shadow-[hsl(93,45%,44%)]/20">
-             {isSubmitting ? 'Booking...' : 'Confirm Booking'}
-        </Button>
-    </form>
-  )
-}
 
 
 export default function RegistrationPage() {
