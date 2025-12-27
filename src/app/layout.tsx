@@ -82,6 +82,19 @@ export default function RootLayout({
         />
         {/* End Google Tag Manager */}
 
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-TR5TZW4DTF"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-TR5TZW4DTF');
+            `,
+          }}
+        />
+
         {/* Structured Data Script */}
         <script
           type="application/ld+json"
