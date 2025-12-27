@@ -3,39 +3,34 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     function isAdmin() {
-      // Grant admin access if the user's email is one of the designated admin emails
-      // OR if they have a document in the admin_roles collection.
       let adminEmails = ['kavinvnayakam@gmail.com', 'mainadmin@shreevarma.org'];
-      return request.auth.token.email in adminEmails || 
-             exists(/databases/$(database)/documents/admin_roles/$(request.auth.uid));
+      return request.auth != null && (request.auth.token.email in adminEmails || 
+             exists(/databases/$(database)/documents/admin_roles/$(request.auth.uid)));
     }
 
     match /visitor_passes/{visitorPassId} {
-      // Allow anyone to create a visitor pass.
+      // Allow anyone to create a visitor pass for the expo.
       allow create: if true;
       
       // Only admins can read, list, update, or delete passes.
-      allow read, update, delete: if isAdmin();
-    }
-    
-    match /visitor_passes/{document=**} {
-        allow list: if isAdmin();
+      allow read, update, delete, list: if isAdmin();
     }
 
     match /admin_roles/{uid} {
-      // Allow an authenticated user to read their own admin role document.
-      // This is safe and necessary for the dashboard to verify admin status.
-      allow get: if request.auth.uid == uid;
+      // Allow any authenticated user to read their own admin role document.
+      allow get: if request.auth != null && request.auth.uid == uid;
+      
+      // Prevent unauthorized creation/modification of admin roles.
+      allow create, update, delete, list: if isAdmin();
     }
 
-    // Rule for the 'mail' collection used by the Trigger Email extension
+    // Rule for the 'mail' collection used by the Trigger Email extension.
     match /mail/{docId} {
-      // Allow anyone to create a document in the mail collection.
-      // This is how the app triggers an email.
+      // Allow anyone to create a document to trigger an email.
       allow create: if true;
       
-      // Disallow reading, updating, or deleting for security.
-      allow read, update, delete: if false;
+      // Disallow all other operations for security.
+      allow read, update, delete, list: if false;
     }
   }
 }
