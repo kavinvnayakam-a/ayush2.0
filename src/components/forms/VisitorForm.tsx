@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -108,7 +108,7 @@ export function VisitorForm({ closeModal, buttonText = "Confirm Booking" }: Visi
                   <h3 style="color: #6CA33F; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; border-bottom: 2px solid #e2ead9; padding-bottom: 10px; margin-bottom: 20px;">Event Details</h3>
                   <p style="margin: 10px 0; font-size: 1rem;"><strong>Date:</strong> January 09-12, 2026</p>
                   <p style="margin: 10px 0; font-size: 1rem;"><strong>Location:</strong> Heartfulness (Babuji Memorial Ashram), Manapakkam, Chennai</p>
-                  <a href="https://www.google.com/maps/search/?api=1&query=Heartfulness+(Babuji+Memorial+Ashram),+Manapakkam,+Chennai" target="_blank" style="display: inline-block; margin-top: 15px; padding: 12px 24px; background-color: #6CA33F; color: white; text-decoration: none; border-radius: 12px; font-weight: bold;">View on Google Maps</a>
+                  <a href="https://maps.app.goo.gl/JhskuW5WSBJGonAv7" target="_blank" style="display: inline-block; margin-top: 15px; padding: 12px 24px; background-color: #6CA33F; color: white; text-decoration: none; border-radius: 12px; font-weight: bold;">Get Directions</a>
                 </div>
                 
                 <p style="font-size: 1rem; color: #777;">Please show this email at the registration desk to receive your visitor pass. We look forward to seeing you there!</p>
