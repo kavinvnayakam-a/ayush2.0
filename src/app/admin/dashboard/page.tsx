@@ -2,10 +2,10 @@
 
 import React, { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth, useUser, useMemoFirebase } from '@/firebase';
+import { useAuth, useUser, useMemoFirebase, useFirestore } from '@/firebase';
 import { Button } from '@/components/ui/button';
 import { signOut } from 'firebase/auth';
-import { collection, query, orderBy, getFirestore, doc } from 'firebase/firestore';
+import { collection, query, orderBy, doc } from 'firebase/firestore';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { LogOut, ShieldCheck, Users, Ticket } from 'lucide-react';
@@ -30,7 +30,7 @@ function AdminDashboard() {
   const { user, isUserLoading } = useUser();
   const router = useRouter();
   const auth = useAuth();
-  const firestore = getFirestore();
+  const firestore = useFirestore();
 
   const adminRoleRef = useMemoFirebase(() => {
     if (!firestore || !user) return null;
