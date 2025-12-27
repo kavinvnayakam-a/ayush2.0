@@ -27,5 +27,15 @@ service cloud.firestore {
       // This is safe and necessary for the dashboard to verify admin status.
       allow get: if request.auth.uid == uid;
     }
+
+    // Rule for the 'mail' collection used by the Trigger Email extension
+    match /mail/{docId} {
+      // Allow anyone to create a document in the mail collection.
+      // This is how the app triggers an email.
+      allow create: if true;
+      
+      // Disallow reading, updating, or deleting for security.
+      allow read, update, delete: if false;
+    }
   }
 }

@@ -47,14 +47,46 @@ function VisitorForm() {
     }
 
     try {
+        if (!firestore) {
+          throw new Error('Firestore is not initialized');
+        }
         const visitorsRef = collection(firestore, 'visitor_passes');
+        const mailRef = collection(firestore, 'mail');
+        
         await addDoc(visitorsRef, {
             ...validatedFields.data,
             registrationDate: serverTimestamp(),
         });
+
+        await addDoc(mailRef, {
+          to: validatedFields.data.mailId,
+          message: {
+            subject: 'Your Free Visitor Pass for Arogya Expo 2026!',
+            html: `
+            <div style="font-family: 'Cabin', sans-serif; background-color: #E2EAD9; color: #333; padding: 40px; text-align: center;">
+              <div style="max-width: 600px; margin: auto; background-color: white; border-radius: 2rem; padding: 40px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+                <img src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" alt="Arogya Expo Logo" style="width: 150px; margin-bottom: 20px;">
+                <h1 style="color: #6CA33F; font-size: 2.5rem; text-transform: uppercase; letter-spacing: -1px; margin: 0;">Registration Confirmed!</h1>
+                <p style="font-size: 1.2rem; font-style: italic; color: #555; margin-top: 10px;">Hello ${validatedFields.data.name},</p>
+                <p style="font-size: 1.1rem; line-height: 1.6;">Thank you for registering for the <strong>Arogya Expo 2026</strong>. We are thrilled to have you join us for this celebration of health, nature, and tradition.</p>
+                
+                <div style="background-color: #f7f9f5; border-radius: 1.5rem; padding: 20px; margin: 30px 0; text-align: left;">
+                  <h3 style="color: #6CA33F; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; border-bottom: 2px solid #e2ead9; padding-bottom: 10px; margin-bottom: 20px;">Event Details</h3>
+                  <p style="margin: 10px 0; font-size: 1rem;"><strong>Date:</strong> January 09-12, 2026</p>
+                  <p style="margin: 10px 0; font-size: 1rem;"><strong>Location:</strong> Heartfulness (Babuji Memorial Ashram), Manapakkam, Chennai</p>
+                </div>
+                
+                <p style="font-size: 1rem; color: #777;">Please show this email at the registration desk to receive your visitor pass. We look forward to seeing you there!</p>
+                <p style="font-size: 0.9rem; color: #aaa; margin-top: 30px;">© ${new Date().getFullYear()} National Ayush Conclave. All rights reserved.</p>
+              </div>
+            </div>
+            `,
+          }
+        });
+
         toast({
             title: 'Success!',
-            description: 'Registration successful! See you at the Expo.',
+            description: 'Registration successful! A confirmation email has been sent.',
         });
         formRef.current?.reset();
     } catch (error: any) {
