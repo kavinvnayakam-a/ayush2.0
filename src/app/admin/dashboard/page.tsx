@@ -44,7 +44,8 @@ function AdminDashboard() {
   const isAdmin = isHardcodedAdmin || hasAdminRole;
 
   const visitorPassesQuery = useMemoFirebase(() => {
-      // Only run the query if the user is a confirmed admin
+      // Only run the query if the user is a confirmed admin.
+      // This now depends on the final calculated isAdmin status.
       if (!firestore || !isAdmin) return null;
       return query(collection(firestore, 'visitor_passes'), orderBy('registrationDate', 'desc'));
   }, [firestore, isAdmin]);
