@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useState, useEffect } from 'react';
-import { Play, Pause } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
@@ -13,6 +13,7 @@ interface VideoReelItemProps {
 export function VideoReelItem({ videoSrc, link }: VideoReelItemProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [isIntersecting, setIsIntersecting] = useState(false);
 
   useEffect(() => {
@@ -58,6 +59,15 @@ export function VideoReelItem({ videoSrc, link }: VideoReelItemProps) {
     }
   };
 
+  const toggleMute = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (videoRef.current) {
+        videoRef.current.muted = !isMuted;
+        setIsMuted(!isMuted);
+    }
+  };
+
   return (
     <div className="h-full w-full snap-start relative flex items-center justify-center bg-black">
       <Link href={link} className="w-full h-full">
@@ -65,7 +75,7 @@ export function VideoReelItem({ videoSrc, link }: VideoReelItemProps) {
           ref={videoRef}
           src={videoSrc}
           loop
-          muted
+          muted={isMuted}
           playsInline
           className="w-full h-full object-cover"
           onClick={(e) => {
@@ -83,6 +93,13 @@ export function VideoReelItem({ videoSrc, link }: VideoReelItemProps) {
         )}
       >
         {isPlaying ? <Pause size={24} /> : <Play size={24} fill="currentColor" />}
+      </button>
+
+      <button
+        onClick={toggleMute}
+        className="absolute bottom-4 right-4 z-10 p-2 bg-black/50 rounded-full text-white"
+      >
+        {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
       </button>
     </div>
   );
