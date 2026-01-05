@@ -105,7 +105,7 @@ export default function HomePage() {
                         <Button 
                             onClick={() => setIsVisitorModalOpen(true)}
                             size="lg"
-                            className="h-14 rounded-lg bg-[#ffa62f] text-white font-bold hover:bg-[hsl(93,45%,44%)] transition-colors px-8 animate-pulse"
+                            className="h-16 rounded-lg bg-[#ffa62f] text-white font-black text-base hover:bg-[hsl(93,45%,44%)] transition-colors px-8 animate-pulse"
                         >
                             Free Visitor Pass
                         </Button>
@@ -118,7 +118,7 @@ export default function HomePage() {
                              <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">Register as Delegate</a>
                         </Button>
                     </div>
-                     <p className="text-xs text-center md:text-left text-[hsl(93,20%,35%)] font-semibold pt-2">Note: Free pass Only for Public.</p>
+                     <p className="text-sm text-center md:text-left text-[hsl(93,20%,35%)] font-black pt-2">Note: Free pass Only for Public.</p>
                 </div>
 
                 {/* Right Column: Logo */}
