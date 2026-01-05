@@ -101,14 +101,30 @@ export default function VisitorPassPage() {
             </h2>
           </div>
           <div className="grid grid-cols-2 gap-4 md:gap-8 max-w-4xl mx-auto">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="relative aspect-[9/16] rounded-[2rem] md:rounded-[3rem] overflow-hidden border-4 md:border-8 border-white shadow-2xl">
-                <VideoReelItem
-                  videoSrc="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHon'ble%20Chief%20Minister%20of%20Goa%2C%20Dr.%20Pramod%20Sawant.mp4?alt=media&token=c11c15f4-3d71-46f9-a359-57b98a39a7b7"
-                  link="#"
-                />
-              </div>
-            ))}
+             <div className="relative aspect-[9/16] rounded-[2rem] md:rounded-[3rem] overflow-hidden border-4 md:border-8 border-white shadow-2xl">
+              <VideoReelItem
+                videoSrc="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHon'ble%20Chief%20Minister%20of%20Goa%2C%20Dr.%20Pramod%20Sawant.mp4?alt=media&token=c11c15f4-3d71-46f9-a359-57b98a39a7b7"
+                link="https://www.youtube.com/shorts/uFvyjjN-XzU"
+              />
+            </div>
+            <div className="relative aspect-[9/16] rounded-[2rem] md:rounded-[3rem] overflow-hidden border-4 md:border-8 border-white shadow-2xl">
+              <VideoReelItem
+                videoSrc="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHon'ble%20Chief%20Minister%20of%20Goa%2C%20Dr.%20Pramod%20Sawant.mp4?alt=media&token=c11c15f4-3d71-46f9-a359-57b98a39a7b7"
+                link="https://www.instagram.com/reel/DScscvgEnDt/?igsh=YjJwZ284NHBjeXow"
+              />
+            </div>
+             <div className="relative aspect-[9/16] rounded-[2rem] md:rounded-[3rem] overflow-hidden border-4 md:border-8 border-white shadow-2xl">
+              <VideoReelItem
+                videoSrc="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHon'ble%20Chief%20Minister%20of%20Goa%2C%20Dr.%20Pramod%20Sawant.mp4?alt=media&token=c11c15f4-3d71-46f9-a359-57b98a39a7b7"
+                link="https://www.youtube.com/shorts/ppuXBN-Pi1E"
+              />
+            </div>
+             <div className="relative aspect-[9/16] rounded-[2rem] md:rounded-[3rem] overflow-hidden border-4 md:border-8 border-white shadow-2xl">
+              <VideoReelItem
+                videoSrc="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHon'ble%20Chief%20Minister%20of%20Goa%2C%20Dr.%20Pramod%20Sawant.mp4?alt=media&token=c11c15f4-3d71-46f9-a359-57b98a39a7b7"
+                link="https://www.youtube.com/shorts/g09k5qrFbn0"
+              />
+            </div>
           </div>
         </div>
       </section>
