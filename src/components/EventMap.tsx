@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api';
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 
 const mapContainerStyle = {
   width: '100%',
@@ -88,7 +88,7 @@ export function EventMap() {
       center={center}
       options={mapOptions}
     >
-      <MarkerF position={center} title="Babuji Memorial Ashram, Manapakkam, Chennai" />
+      <Marker position={center} title="Babuji Memorial Ashram, Manapakkam, Chennai" />
     </GoogleMap>
   );
 }
