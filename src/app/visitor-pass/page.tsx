@@ -1,8 +1,9 @@
 'use client';
 
 import React from 'react';
-import { Ticket, UserCheck, ShieldCheck } from 'lucide-react';
+import { Ticket, UserCheck, ShieldCheck, Play, Video } from 'lucide-react';
 import { VisitorForm } from '@/components/forms/VisitorForm';
+import { VideoReelItem } from '@/components/VideoReelItem';
 
 
 export default function VisitorPassPage() {
@@ -86,9 +87,38 @@ export default function VisitorPassPage() {
           </div>
         </div>
       </section>
+
+      {/* 3. VIDEO REEL SECTION */}
+      <section className="py-24 bg-slate-50">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 text-primary font-black text-sm uppercase tracking-widest">
+              <Video size={18} />
+              <span>Event Highlights</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-foreground uppercase tracking-tight mt-2">
+              Catch a Glimpse of the Expo
+            </h2>
+          </div>
+          <div className="relative max-w-sm mx-auto">
+            <div className="absolute inset-0 bg-slate-200 rounded-[3.5rem] transform -rotate-2"></div>
+            <div className="relative h-[600px] overflow-y-auto snap-y snap-mandatory rounded-[3rem] border-8 border-white shadow-2xl scrollbar-hide">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <VideoReelItem
+                  key={i}
+                  // You can replace these with actual video sources later
+                  videoSrc="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHon'ble%20Chief%20Minister%20of%20Goa%2C%20Dr.%20Pramod%20Sawant.mp4?alt=media&token=c11c15f4-3d71-46f9-a359-57b98a39a7b7"
+                  link="#" // Replace with your navigation link
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       
-      {/* 3. INFO SECTION */}
-      <section className="pb-24 container mx-auto px-6">
+      {/* 4. INFO SECTION */}
+      <section className="py-24 container mx-auto px-6">
         <div className="max-w-xl mx-auto space-y-10">
           <div>
               <h2 className="text-3xl font-black text-[hsl(93,20%,15%)] uppercase tracking-tight mb-4">What's Included?</h2>
