@@ -100,22 +100,18 @@ export default function VisitorPassPage() {
               Catch a Glimpse of the Expo
             </h2>
           </div>
-          <div className="relative max-w-sm mx-auto">
-            <div className="absolute inset-0 bg-slate-200 rounded-[3.5rem] transform -rotate-2"></div>
-            <div className="relative h-[600px] overflow-y-auto snap-y snap-mandatory rounded-[3rem] border-8 border-white shadow-2xl scrollbar-hide">
-              {Array.from({ length: 4 }).map((_, i) => (
+          <div className="grid grid-cols-2 gap-4 md:gap-8 max-w-4xl mx-auto">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="relative aspect-[9/16] rounded-[2rem] md:rounded-[3rem] overflow-hidden border-4 md:border-8 border-white shadow-2xl">
                 <VideoReelItem
-                  key={i}
-                  // You can replace these with actual video sources later
                   videoSrc="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHon'ble%20Chief%20Minister%20of%20Goa%2C%20Dr.%20Pramod%20Sawant.mp4?alt=media&token=c11c15f4-3d71-46f9-a359-57b98a39a7b7"
-                  link="#" // Replace with your navigation link
+                  link="#"
                 />
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
-
       
       {/* 4. INFO SECTION */}
       <section className="py-24 container mx-auto px-6">
