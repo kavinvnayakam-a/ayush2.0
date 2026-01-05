@@ -59,7 +59,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
       
       {/* 1. HERO SECTION - IMAGE BACKGROUND */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-[80vh] max-h-[720px] flex items-center justify-center overflow-hidden">
         
         <div className="absolute inset-0 z-0 bg-white">
           {/* Mobile Background Image */}
