@@ -60,7 +60,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
       
       {/* 1. HERO SECTION - IMAGE BACKGROUND */}
-      <section className="relative h-[85vh] max-h-[720px] flex items-center justify-center overflow-hidden pt-24 pb-12">
+      <section className="relative h-auto md:h-[85vh] md:max-h-[720px] flex items-center justify-center overflow-hidden pt-32 pb-12 md:pt-24">
         
         <div className="absolute inset-0 z-0 bg-white">
           {/* Mobile Background Image */}
@@ -76,7 +76,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white to-white z-[1]" />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10 flex items-center pt-16">
+        <div className="container mx-auto px-6 relative z-10 flex items-center md:pt-16">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center w-full">
                 {/* Left Column: Text Content */}
                 <div className="text-center md:text-left space-y-4">
@@ -99,7 +99,7 @@ export default function HomePage() {
                             <span>Heartfulness, Babuji Memorial Ashram, Manapakkam, Chennai</span>
                         </div>
                     </div>
-                    <div className="pt-6">
+                    <div className="pt-6 flex justify-center md:justify-start">
                         <CountdownTimer targetDate={eventDate} />
                     </div>
                     <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-4">
