@@ -59,7 +59,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
       
       {/* 1. HERO SECTION - IMAGE BACKGROUND */}
-      <section className="relative h-[80vh] max-h-[720px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[80vh] max-h-[720px] flex items-center justify-center overflow-hidden pt-24 pb-12">
         
         <div className="absolute inset-0 z-0 bg-white">
           {/* Mobile Background Image */}
@@ -75,13 +75,13 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white z-[1]" />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10 text-center pt-36 pb-20">
-          <div className="flex flex-col items-center space-y-10">
+        <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center space-y-6">
             <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md px-6 py-2.5 rounded-full border border-white/40 text-[hsl(93,45%,44%)] font-black text-xs tracking-[0.3em] uppercase shadow-sm">
               <Sparkles size={16} /> National Ayush Conclave 2026
             </div>
             
-            <div className="relative w-56 h-56 md:w-64 md:h-64 drop-shadow-2xl">
+            <div className="relative w-48 h-48 md:w-56 md:h-56 drop-shadow-2xl">
               <Image 
                 src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F1000157891%20(1).webp?alt=media&token=f13fc097-13b6-4af3-bb0e-2788a1fb4b73"
                 alt="Logo"
@@ -91,7 +91,7 @@ export default function HomePage() {
               />
             </div>
             
-            <p className="text-xl md:text-3xl font-bold text-[hsl(93,20%,15%)]/90 max-w-3xl italic">
+            <p className="text-xl md:text-2xl font-bold text-[hsl(93,20%,15%)]/90 max-w-2xl italic">
               "AYUSH for One Health: Bridging Tradition, Innovation and Well-being"
             </p>
 
@@ -105,34 +105,34 @@ export default function HomePage() {
                 <span className="font-bold text-sm text-left leading-tight">Heartfulness, Chennai</span>
               </div>
             </div>
+          </div>
 
-            {/* PERFECTLY CENTERED TIMER & BUTTONS */}
-            <div className="w-full flex flex-col items-center justify-center pt-6 space-y-6">
-              <div className="flex justify-center w-full">
-                 <CountdownTimer targetDate={eventDate} />
-              </div>
-              
-              <div className="flex flex-col gap-4 items-center justify-center w-full">
-                <Button 
-                  onClick={() => setIsVisitorModalOpen(true)}
-                  size="lg" 
-                  className="h-20 w-full sm:w-auto px-16 rounded-full bg-[hsl(93,45%,44%)] text-white font-black hover:scale-105 transition-all text-xl shadow-2xl shadow-[hsl(93,45%,44%)]/30 group"
-                >
-                  Free Visitor Pass
-                </Button>
-                <p className="text-xs font-bold text-slate-500">Note: Free pass Only for Public.</p>
+          {/* PERFECTLY CENTERED TIMER & BUTTONS */}
+          <div className="w-full flex flex-col items-center justify-center pt-6 space-y-6">
+            <div className="flex justify-center w-full">
+               <CountdownTimer targetDate={eventDate} />
+            </div>
+            
+            <div className="flex flex-col gap-4 items-center justify-center w-full">
+              <Button 
+                onClick={() => setIsVisitorModalOpen(true)}
+                size="lg" 
+                className="h-16 sm:h-20 w-full sm:w-auto px-12 sm:px-16 rounded-full bg-[hsl(93,45%,44%)] text-white font-black hover:scale-105 transition-all text-lg sm:text-xl shadow-2xl shadow-[hsl(93,45%,44%)]/30 group"
+              >
+                Free Visitor Pass
+              </Button>
+              <p className="text-xs font-bold text-slate-500">Note: Free pass Only for Public.</p>
 
-                <Button 
-                  asChild
-                  variant="outline" 
-                  size="lg" 
-                  className="h-20 w-full sm:w-auto px-12 rounded-full border-2 border-[hsl(93,45%,44%)] text-[hsl(93,45%,44%)] font-black hover:bg-[hsl(93,45%,44%)] hover:text-white transition-all text-xl"
-                >
-                   <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">
-                    Register as Delegate <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
-                  </a>
-                </Button>
-              </div>
+              <Button 
+                asChild
+                variant="outline" 
+                size="lg" 
+                className="h-16 sm:h-20 w-full sm:w-auto px-10 sm:px-12 rounded-full border-2 border-[hsl(93,45%,44%)] text-[hsl(93,45%,44%)] font-black hover:bg-[hsl(93,45%,44%)] hover:text-white transition-all text-lg sm:text-xl"
+              >
+                 <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">
+                  Register as Delegate <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
+                </a>
+              </Button>
             </div>
           </div>
         </div>
