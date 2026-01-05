@@ -65,12 +65,12 @@ export default function HomePage() {
         <div className="absolute inset-0 z-0 bg-white">
           {/* Mobile Background Image */}
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 md:hidden"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat md:hidden"
             style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHero%20Background.webp?alt=media&token=35b2dc1e-03d6-40e6-baff-34369349f106')` }}
           />
           {/* Desktop Background Image */}
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 hidden md:block"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden md:block"
             style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHero%20image%20Desktop%20with%20anie.webp?alt=media&token=0984a59a-b707-4ad2-8c22-35322cb2e77b')` }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white to-white z-[1]" />
