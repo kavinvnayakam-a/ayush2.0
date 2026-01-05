@@ -60,7 +60,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
       
       {/* 1. HERO SECTION - IMAGE BACKGROUND */}
-      <section className="relative h-auto md:h-[720px] flex items-center justify-center overflow-hidden pt-40 pb-20 md:py-24">
+      <section className="relative h-auto md:h-[800px] flex items-center justify-center overflow-hidden pt-40 pb-20 md:py-24">
         
         <div className="absolute inset-0 z-0">
           {/* Mobile Background Image */}
@@ -105,7 +105,7 @@ export default function HomePage() {
                         <Button 
                             onClick={() => setIsVisitorModalOpen(true)}
                             size="lg"
-                            className="h-16 rounded-lg bg-[#ffa62f] text-white font-black text-lg hover:bg-[hsl(93,45%,44%)] transition-colors px-8 animate-pulse"
+                            className="h-20 w-60 text-lg rounded-lg bg-[#ffa62f] text-white font-black hover:bg-[hsl(93,45%,44%)] transition-colors px-8 animate-pulse"
                         >
                             Free Visitor Pass
                         </Button>
@@ -118,7 +118,7 @@ export default function HomePage() {
                              <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">Register as Delegate</a>
                         </Button>
                     </div>
-                     <p className="text-md text-center md:text-left text-[hsl(93,20%,35%)] font-black pt-2">Note: Free pass Only for Public.</p>
+                     <p className="text-lg text-center md:text-left text-[hsl(93,20%,35%)] font-black pt-2">Note: Free pass Only for Public.</p>
                 </div>
 
                 {/* Right Column: Logo */}
