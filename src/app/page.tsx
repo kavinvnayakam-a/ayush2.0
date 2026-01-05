@@ -53,14 +53,14 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 /** --- MAIN PAGE --- **/
 
 export default function HomePage() {
-  const eventDate = new Date('2026-01-09T00:00:00');
+  const eventDate = new Date('2026-01-09T08:00:00');
   const [isVisitorModalOpen, setIsVisitorModalOpen] = useState(false);
 
   return (
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
       
       {/* 1. HERO SECTION - IMAGE BACKGROUND */}
-      <section className="relative h-auto md:h-[85vh] md:max-h-[720px] flex items-center justify-center overflow-hidden pt-40 pb-20 md:pt-24">
+      <section className="relative h-auto md:h-[720px] flex items-center justify-center overflow-hidden pt-40 pb-20 md:pt-24">
         
         <div className="absolute inset-0 z-0 bg-white">
           {/* Mobile Background Image */}
@@ -75,7 +75,7 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10 flex items-center md:pt-16">
+        <div className="container mx-auto px-6 relative z-10 flex items-center pt-8 md:pt-16">
             <div className="flex flex-col md:grid md:grid-cols-2 gap-8 items-center w-full">
                 {/* Left Column: Text Content */}
                 <div className="text-center md:text-left space-y-4 order-2 md:order-1">
