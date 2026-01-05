@@ -60,7 +60,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
       
       {/* 1. HERO SECTION - IMAGE BACKGROUND */}
-      <section className="relative h-auto md:h-[85vh] md:max-h-[720px] flex items-center justify-center overflow-hidden pt-32 pb-12 md:pt-24">
+      <section className="relative h-auto md:h-[85vh] md:max-h-[720px] flex items-center justify-center overflow-hidden pt-40 pb-20 md:pt-24">
         
         <div className="absolute inset-0 z-0 bg-white">
           {/* Mobile Background Image */}
@@ -77,9 +77,9 @@ export default function HomePage() {
         </div>
 
         <div className="container mx-auto px-6 relative z-10 flex items-center md:pt-16">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center w-full">
+            <div className="flex flex-col md:grid md:grid-cols-2 gap-8 items-center w-full">
                 {/* Left Column: Text Content */}
-                <div className="text-center md:text-left space-y-4">
+                <div className="text-center md:text-left space-y-4 order-2 md:order-1">
                     <h1 className="text-4xl lg:text-6xl font-black text-[hsl(93,20%,20%)] uppercase tracking-tight">
                         National Arogya Expo 2026
                     </h1>
@@ -122,7 +122,7 @@ export default function HomePage() {
                 </div>
 
                 {/* Right Column: Logo */}
-                <div className="relative w-full h-64 md:h-full flex items-center justify-center">
+                <div className="relative w-full h-64 md:h-full flex items-center justify-center order-1 md:order-2">
                     <Image 
                         src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F1000157891%20(1).webp?alt=media&token=f13fc097-13b6-4af3-bb0e-2788a1fb4b73"
                         alt="AyushConclave Logo"
