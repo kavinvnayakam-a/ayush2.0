@@ -38,9 +38,8 @@ const footerLinks = [
 ];
 
 const socialLinks = [
-  { name: 'Facebook', href: '#', icon: <Facebook size={18} /> },
-  { name: 'Twitter', href: '#', icon: <Twitter size={18} /> },
-  { name: 'Instagram', href: '#', icon: <Instagram size={18} /> },
+  { name: 'Facebook', href: 'https://www.facebook.com/shreevarmaindia/', icon: <Facebook size={18} /> },
+  { name: 'Instagram', href: 'https://www.instagram.com/shreevarma_tamil', icon: <Instagram size={18} /> },
 ];
 
 export function Footer() {

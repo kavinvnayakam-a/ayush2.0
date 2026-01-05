@@ -53,35 +53,25 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 export default function HomePage() {
   const eventDate = new Date('2026-01-09T00:00:00');
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [isVisitorModalOpen, setIsVisitorModalOpen] = useState(false);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = 0.4;
-    }
-  }, []);
 
   return (
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
       
-      {/* 1. HERO SECTION - FULL BLEED VIDEO */}
+      {/* 1. HERO SECTION - IMAGE BACKGROUND */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         
         <div className="absolute inset-0 z-0 bg-white">
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute top-0 left-0 w-full h-full object-cover opacity-40 scale-110 md:scale-100 transition-all duration-[2000ms]"
-          >
-            <source 
-              src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2F5943-187188345.mp4?alt=media&token=78470ded-5e02-4b9f-aa94-528be152ee00" 
-              type="video/mp4" 
-            />
-          </video>
+          {/* Mobile Background Image */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 md:hidden"
+            style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHero%20Background.webp?alt=media&token=35b2dc1e-03d6-40e6-baff-34369349f106')` }}
+          />
+          {/* Desktop Background Image */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 hidden md:block"
+            style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHero%20image%20Desktop%20with%20anie.webp?alt=media&token=0984a59a-b707-4ad2-8c22-35322cb2e77b')` }}
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white z-[1]" />
         </div>
 
@@ -261,7 +251,7 @@ export default function HomePage() {
                 The <span className="text-[hsl(93,45%,44%)] italic">Venue</span>
               </h2>
               <div className="p-8 rounded-[2.5rem] bg-white/5 backdrop-blur-xl border border-white/10">
-                <h4 className="font-black text-white uppercase text-lg mb-1 tracking-tight">Heartfulness Center</h4>
+                <h4 className="font-black text-white uppercase text-lg mb-1 tracking-tight">Heartfulness Institute</h4>
                 <p className="text-sm text-white/50 leading-relaxed">
                   Babuji Memorial Ashram, Manapakkam, Chennai, Tamil Nadu 600125
                 </p>
