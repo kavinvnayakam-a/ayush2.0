@@ -60,9 +60,9 @@ export default function HomePage() {
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
       
       {/* 1. HERO SECTION - IMAGE BACKGROUND */}
-      <section className="relative h-auto md:h-[720px] flex items-center justify-center overflow-hidden pt-40 pb-20 md:pt-24">
+      <section className="relative h-auto md:h-[720px] flex items-center justify-center overflow-hidden pt-40 pb-20 md:py-24">
         
-        <div className="absolute inset-0 z-0 bg-white">
+        <div className="absolute inset-0 z-0">
           {/* Mobile Background Image */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat md:hidden"
@@ -75,7 +75,7 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10 flex items-center pt-8 md:pt-16">
+        <div className="container mx-auto px-6 relative z-10 flex items-center h-full">
             <div className="flex flex-col md:grid md:grid-cols-2 gap-8 items-center w-full">
                 {/* Left Column: Text Content */}
                 <div className="text-center md:text-left space-y-4 order-2 md:order-1">
@@ -103,21 +103,22 @@ export default function HomePage() {
                     </div>
                     <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-4">
                         <Button 
-                            asChild
+                            onClick={() => setIsVisitorModalOpen(true)}
                             size="lg"
-                            className="h-14 rounded-lg bg-[#ffa62f] text-white font-bold hover:bg-[hsl(93,45%,44%)] transition-colors px-8"
+                            className="h-14 rounded-lg bg-[#ffa62f] text-white font-bold hover:bg-[hsl(93,45%,44%)] transition-colors px-8 animate-pulse"
                         >
-                             <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">Register as Delegate</a>
+                            Free Visitor Pass
                         </Button>
                         <Button 
-                            onClick={() => setIsVisitorModalOpen(true)}
+                            asChild
                             size="lg"
                             variant="outline"
                             className="h-14 rounded-lg border-2 border-[hsl(93,45%,44%)] text-[hsl(93,45%,44%)] font-bold hover:bg-[hsl(93,45%,44%)] hover:text-white transition-colors px-6"
                         >
-                            Free Visitor Pass
+                             <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">Register as Delegate</a>
                         </Button>
                     </div>
+                     <p className="text-xs text-center md:text-left text-[hsl(93,20%,35%)] font-semibold pt-2">Note: Free pass Only for Public.</p>
                 </div>
 
                 {/* Right Column: Logo */}
