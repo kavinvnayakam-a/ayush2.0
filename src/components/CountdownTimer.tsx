@@ -49,14 +49,14 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
   ];
 
   return (
-    <div className="flex space-x-2 my-4">
+    <div className="flex space-x-1 sm:space-x-2 my-4">
       {timeParts.map((part, index) => (
         <div key={part.label} className="flex items-center">
-          <div className="text-center bg-white/50 p-2 rounded-md border border-green-200">
-            <div className="text-2xl font-bold text-green-900">{String(part.value).padStart(2, '0')}</div>
-            <div className="text-xs text-green-800">{part.label}</div>
+          <div className="text-center bg-white/80 backdrop-blur-sm p-2 rounded-lg border border-slate-200 shadow-sm w-[60px]">
+            <div className="text-2xl font-black text-[hsl(93,20%,25%)]">{String(part.value).padStart(2, '0')}</div>
+            <div className="text-[10px] font-bold text-[hsl(93,20%,40%)] uppercase">{part.label}</div>
           </div>
-          {index < timeParts.length - 1 && <div className="text-2xl font-bold text-green-800 mx-1">:</div>}
+          {index < timeParts.length - 1 && <div className="text-2xl font-bold text-[hsl(93,45%,44%)]/50 mx-1">:</div>}
         </div>
       ))}
     </div>

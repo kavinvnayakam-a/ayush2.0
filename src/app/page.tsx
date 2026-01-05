@@ -13,7 +13,8 @@ import {
   MapPin, 
   Navigation, 
   X, 
-  Ticket 
+  Ticket,
+  CalendarDays
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CountdownTimer } from '@/components/CountdownTimer';
@@ -59,7 +60,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
       
       {/* 1. HERO SECTION - IMAGE BACKGROUND */}
-      <section className="relative h-[80vh] max-h-[720px] flex items-center justify-center overflow-hidden pt-24 pb-12">
+      <section className="relative h-[85vh] max-h-[720px] flex items-center justify-center overflow-hidden pt-24 pb-12">
         
         <div className="absolute inset-0 z-0 bg-white">
           {/* Mobile Background Image */}
@@ -72,69 +73,66 @@ export default function HomePage() {
             className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 hidden md:block"
             style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHero%20image%20Desktop%20with%20anie.webp?alt=media&token=0984a59a-b707-4ad2-8c22-35322cb2e77b')` }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white z-[1]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white to-white z-[1]" />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center justify-center">
-          <div className="flex flex-col items-center space-y-6">
-            <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md px-6 py-2.5 rounded-full border border-white/40 text-[hsl(93,45%,44%)] font-black text-xs tracking-[0.3em] uppercase shadow-sm">
-              <Sparkles size={16} /> National Ayush Conclave 2026
-            </div>
-            
-            <div className="relative w-48 h-48 md:w-56 md:h-56 drop-shadow-2xl">
-              <Image 
-                src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F1000157891%20(1).webp?alt=media&token=f13fc097-13b6-4af3-bb0e-2788a1fb4b73"
-                alt="Logo"
-                fill
-                priority
-                className="object-contain"
-              />
-            </div>
-            
-            <p className="text-xl md:text-2xl font-bold text-[hsl(93,20%,15%)]/90 max-w-2xl italic">
-              "AYUSH for One Health: Bridging Tradition, Innovation and Well-being"
-            </p>
+        <div className="container mx-auto px-6 relative z-10 flex items-center pt-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center w-full">
+                {/* Left Column: Text Content */}
+                <div className="text-center md:text-left space-y-4">
+                    <h1 className="text-4xl lg:text-6xl font-black text-[hsl(93,20%,20%)] uppercase tracking-tight">
+                        National Arogya Expo 2026
+                    </h1>
+                    <p className="text-lg font-bold text-[hsl(93,20%,35%)]">
+                        AYUSH for One Health: Bridging Tradition, Innovation and Well-being
+                    </p>
+                    <p className="font-bold text-[hsl(93,20%,35%)] text-sm uppercase tracking-wider">
+                        Ancient Wisdom | Modern Care | Patient First
+                    </p>
+                    <div className="space-y-3 pt-4">
+                        <div className="flex items-center justify-center md:justify-start gap-3 text-[hsl(93,20%,35%)] font-semibold">
+                            <CalendarDays size={18} className="text-[hsl(93,45%,44%)]"/>
+                            <span>Jan 09 – 12, 2026</span>
+                        </div>
+                        <div className="flex items-center justify-center md:justify-start gap-3 text-[hsl(93,20%,35%)] font-semibold">
+                            <MapPin size={18} className="text-[hsl(93,45%,44%)]"/>
+                            <span>Heartfulness, Babuji Memorial Ashram, Manapakkam, Chennai</span>
+                        </div>
+                    </div>
+                    <div className="pt-6">
+                        <CountdownTimer targetDate={eventDate} />
+                    </div>
+                    <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-4">
+                        <Button 
+                            asChild
+                            size="lg"
+                            className="h-14 rounded-lg bg-[#ffa62f] text-white font-bold hover:bg-[hsl(93,45%,44%)] transition-colors px-8"
+                        >
+                             <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">REGISTER NOW</a>
+                        </Button>
+                        <Button 
+                            onClick={() => setIsVisitorModalOpen(true)}
+                            size="lg"
+                            variant="outline"
+                            className="h-14 rounded-lg border-2 border-[hsl(93,45%,44%)] text-[hsl(93,45%,44%)] font-bold hover:bg-[hsl(93,45%,44%)] hover:text-white transition-colors px-6"
+                        >
+                            Free Visitor Pass
+                        </Button>
+                    </div>
+                </div>
 
-            <div className="flex flex-col md:flex-row items-center gap-4">
-              <div className="flex items-center gap-3 bg-white/80 backdrop-blur-md px-6 py-3 rounded-2xl border border-white shadow-sm">
-                <div className="bg-[#ffa62f] p-2 rounded-lg text-white font-bold text-xs uppercase">Jan</div>
-                <span className="font-black text-sm">09 - 12, 2026</span>
-              </div>
-              <div className="flex items-center gap-3 bg-white/80 backdrop-blur-md px-6 py-3 rounded-2xl border border-white shadow-sm">
-                <Globe className="text-[hsl(93,45%,44%)]" size={20} />
-                <span className="font-bold text-sm text-left leading-tight">Heartfulness, Chennai</span>
-              </div>
+                {/* Right Column: Logo */}
+                <div className="relative w-full h-64 md:h-full flex items-center justify-center">
+                    <Image 
+                        src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F1000157891%20(1).webp?alt=media&token=f13fc097-13b6-4af3-bb0e-2788a1fb4b73"
+                        alt="AyushConclave Logo"
+                        width={400}
+                        height={400}
+                        priority
+                        className="object-contain drop-shadow-2xl"
+                    />
+                </div>
             </div>
-          </div>
-
-          {/* PERFECTLY CENTERED TIMER & BUTTONS */}
-          <div className="w-full flex flex-col items-center justify-center pt-6 space-y-6">
-            <div className="flex justify-center w-full">
-               <CountdownTimer targetDate={eventDate} />
-            </div>
-            
-            <div className="flex flex-col gap-4 items-center justify-center w-full">
-              <Button 
-                onClick={() => setIsVisitorModalOpen(true)}
-                size="lg" 
-                className="h-16 sm:h-20 w-full sm:w-auto px-12 sm:px-16 rounded-full bg-[hsl(93,45%,44%)] text-white font-black hover:scale-105 transition-all text-lg sm:text-xl shadow-2xl shadow-[hsl(93,45%,44%)]/30 group"
-              >
-                Free Visitor Pass
-              </Button>
-              <p className="text-xs font-bold text-slate-500">Note: Free pass Only for Public.</p>
-
-              <Button 
-                asChild
-                variant="outline" 
-                size="lg" 
-                className="h-16 sm:h-20 w-full sm:w-auto px-10 sm:px-12 rounded-full border-2 border-[hsl(93,45%,44%)] text-[hsl(93,45%,44%)] font-black hover:bg-[hsl(93,45%,44%)] hover:text-white transition-all text-lg sm:text-xl"
-              >
-                 <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">
-                  Register as Delegate <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-2" />
-                </a>
-              </Button>
-            </div>
-          </div>
         </div>
       </section>
 
