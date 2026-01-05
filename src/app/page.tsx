@@ -73,14 +73,13 @@ export default function HomePage() {
             className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden md:block"
             style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHero%20image%20Desktop%20with%20anie.webp?alt=media&token=0984a59a-b707-4ad2-8c22-35322cb2e77b')` }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white to-white z-[1]" />
         </div>
 
         <div className="container mx-auto px-6 relative z-10 flex items-center md:pt-16">
             <div className="flex flex-col md:grid md:grid-cols-2 gap-8 items-center w-full">
                 {/* Left Column: Text Content */}
                 <div className="text-center md:text-left space-y-4 order-2 md:order-1">
-                    <h1 className="text-4xl lg:text-6xl font-black text-[hsl(93,20%,20%)] uppercase tracking-tight">
+                    <h1 className="text-4xl lg:text-6xl font-black text-[hsl(93,88.50%,27.30%)] uppercase tracking-tight">
                         National Arogya Expo 2026
                     </h1>
                     <p className="text-lg font-bold text-[hsl(93,20%,35%)]">
@@ -108,7 +107,7 @@ export default function HomePage() {
                             size="lg"
                             className="h-14 rounded-lg bg-[#ffa62f] text-white font-bold hover:bg-[hsl(93,45%,44%)] transition-colors px-8"
                         >
-                             <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">REGISTER NOW</a>
+                             <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">Register as Delegate</a>
                         </Button>
                         <Button 
                             onClick={() => setIsVisitorModalOpen(true)}
