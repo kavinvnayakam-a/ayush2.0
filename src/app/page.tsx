@@ -105,7 +105,7 @@ export default function HomePage() {
                         <Button 
                             onClick={() => setIsVisitorModalOpen(true)}
                             size="lg"
-                            className="h-16 rounded-lg bg-[#ffa62f] text-white font-black text-base hover:bg-[hsl(93,45%,44%)] transition-colors px-8 animate-pulse"
+                            className="h-16 rounded-lg bg-[#ffa62f] text-white font-black text-lg hover:bg-[hsl(93,45%,44%)] transition-colors px-8 animate-pulse"
                         >
                             Free Visitor Pass
                         </Button>
@@ -118,7 +118,7 @@ export default function HomePage() {
                              <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">Register as Delegate</a>
                         </Button>
                     </div>
-                     <p className="text-sm text-center md:text-left text-[hsl(93,20%,35%)] font-black pt-2">Note: Free pass Only for Public.</p>
+                     <p className="text-md text-center md:text-left text-[hsl(93,20%,35%)] font-black pt-2">Note: Free pass Only for Public.</p>
                 </div>
 
                 {/* Right Column: Logo */}
@@ -244,7 +244,7 @@ export default function HomePage() {
       <section className="py-24 relative overflow-hidden z-10 bg-slate-900">
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-16">
-            <div className="lg:w-1/2 space-y-8">
+            <div className="lg:w-1/2 space-y-8 text-center lg:text-left">
               <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter">
                 The <span className="text-[hsl(93,45%,44%)] italic">Venue</span>
               </h2>
@@ -254,6 +254,16 @@ export default function HomePage() {
                   Babuji Memorial Ashram, Manapakkam, Chennai, Tamil Nadu 600125
                 </p>
               </div>
+              <Button asChild className="h-14 px-8 rounded-full bg-[hsl(93,45%,44%)] text-white font-bold hover:bg-[#ffa62f] transition-colors">
+                  <a 
+                    href="https://www.google.com/maps/dir/?api=1&destination=Babuji+Memorial+Ashram,+Manapakkam,+Chennai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                      <Navigation className="mr-2 h-4 w-4" />
+                      Get Directions
+                  </a>
+              </Button>
             </div>
             <div className="lg:w-1/2 w-full h-[500px] relative rounded-[3rem] border-4 border-white/10 shadow-2xl overflow-hidden">
                <EventMap />
