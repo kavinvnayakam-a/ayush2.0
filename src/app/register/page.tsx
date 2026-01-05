@@ -57,31 +57,8 @@ export default function RegistrationPage() {
           </div>
         </div>
       </section>
-
-      {/* 2. FREE VISITOR PASS SECTION (NEW) */}
-      <section className="py-12 bg-white border-y border-slate-100">
-        <div className="container mx-auto px-6">
-          <div className="bg-gradient-to-r from-[hsl(93,20%,15%)] to-[hsl(93,20%,25%)] rounded-[2.5rem] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
-            <div className="flex items-center gap-6">
-              <div className="w-16 h-16 rounded-full bg-[#ffa62f] flex items-center justify-center text-white shrink-0 animate-pulse">
-                <UserCheck size={32} />
-              </div>
-              <div>
-                <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight">Visitor Entry is <span className="text-[#ffa62f]">Free</span></h3>
-                <p className="text-white/60 font-bold italic">Explore the Expo, stalls, and open sessions at no cost.</p>
-              </div>
-            </div>
-            <Button 
-              onClick={() => setIsModalOpen(true)}
-              className="h-16 px-10 rounded-2xl bg-white text-[hsl(93,20%,15%)] font-black uppercase tracking-widest hover:bg-[#ffa62f] hover:text-white transition-all shadow-lg"
-            >
-              Get Free Pass
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. PRICING GRID */}
+      
+      {/* 2. PRICING GRID */}
       <section className="py-24 container mx-auto px-6">
         <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-xl">
@@ -118,8 +95,32 @@ export default function RegistrationPage() {
         </div>
       </section>
 
+      {/* 3. FREE VISITOR PASS SECTION (NEW) */}
+      <section className="py-12 bg-white border-y border-slate-100">
+        <div className="container mx-auto px-6">
+          <div className="bg-gradient-to-r from-[hsl(93,20%,15%)] to-[hsl(93,20%,25%)] rounded-[2.5rem] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
+            <div className="flex items-center gap-6">
+              <div className="w-16 h-16 rounded-full bg-[#ffa62f] flex items-center justify-center text-white shrink-0 animate-pulse">
+                <UserCheck size={32} />
+              </div>
+              <div>
+                <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight">Visitor Entry is <span className="text-[#ffa62f]">Free</span></h3>
+                <p className="text-white/60 font-bold italic">Explore the Expo, stalls, and open sessions at no cost.</p>
+              </div>
+            </div>
+            <Button 
+              onClick={() => setIsModalOpen(true)}
+              className="h-16 px-10 rounded-2xl bg-white text-[hsl(93,20%,15%)] font-black uppercase tracking-widest hover:bg-[#ffa62f] hover:text-white transition-all shadow-lg"
+            >
+              Get Free Pass
+            </Button>
+          </div>
+        </div>
+      </section>
+
+
       {/* 4. NASYA SPECIAL DISCOUNT */}
-      <section className="pb-32 container mx-auto px-6">
+      <section className="py-32 container mx-auto px-6">
         <div className="bg-[hsl(93,45%,44%)] rounded-[4rem] p-10 md:p-20 text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2" />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
