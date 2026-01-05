@@ -71,40 +71,9 @@ export default function VisitorPassPage() {
         </div>
       </section>
 
-      {/* 2. FORM & INFO SECTION */}
+      {/* 2. FORM SECTION */}
       <section className="py-24 container mx-auto px-6">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-
-          {/* Left Side: Info */}
-          <div className="space-y-10">
-            <div>
-                <h2 className="text-3xl font-black text-[hsl(93,20%,15%)] uppercase tracking-tight mb-4">What's Included?</h2>
-                <p className="text-slate-500 font-bold italic leading-relaxed">Your free visitor pass grants you access to key areas of the Arogya Expo. Immerse yourself in the world of AYUSH and discover innovations in wellness.</p>
-            </div>
-
-            <div className="space-y-4">
-                 <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-100">
-                    <UserCheck className="text-[hsl(93,45%,44%)] shrink-0 mt-0.5" size={24} />
-                    <div>
-                        <h4 className="font-black text-slate-800 uppercase">Expo Hall Access</h4>
-                        <p className="text-sm font-bold text-slate-400">Explore over 100 stalls from leading AYUSH brands and startups.</p>
-                    </div>
-                 </div>
-                 <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-100">
-                    <ShieldCheck className="text-[hsl(93,45%,44%)] shrink-0 mt-0.5" size={24} />
-                    <div>
-                        <h4 className="font-black text-slate-800 uppercase">Open Sessions & Demos</h4>
-                        <p className="text-sm font-bold text-slate-400">Attend public talks, product launches, and live demonstrations.</p>
-                    </div>
-                 </div>
-            </div>
-            <div className="bg-[hsl(93,20%,15%)] text-white p-8 rounded-[2.5rem] shadow-xl">
-                <h4 className="font-black text-white uppercase text-lg mb-2">Please Note</h4>
-                <p className="text-white/70 text-sm font-medium leading-relaxed">This pass does not include access to the paid scientific sessions, delegate lunches, or workshops. To attend these, please register as a delegate.</p>
-            </div>
-          </div>
-
-          {/* Right Side: Form */}
+        <div className="max-w-xl mx-auto">
           <div className="bg-white border border-slate-100 shadow-2xl shadow-slate-100 rounded-[3rem] p-10">
              <div className="text-center mb-8">
               <div className="w-16 h-16 bg-[hsl(93,45%,44%)]/10 rounded-2xl flex items-center justify-center text-[hsl(93,45%,44%)] mx-auto mb-4">
@@ -115,7 +84,37 @@ export default function VisitorPassPage() {
             </div>
             <VisitorForm buttonText="Confirm Your Free Pass" />
           </div>
+        </div>
+      </section>
+      
+      {/* 3. INFO SECTION */}
+      <section className="pb-24 container mx-auto px-6">
+        <div className="max-w-xl mx-auto space-y-10">
+          <div>
+              <h2 className="text-3xl font-black text-[hsl(93,20%,15%)] uppercase tracking-tight mb-4">What's Included?</h2>
+              <p className="text-slate-500 font-bold italic leading-relaxed">Your free visitor pass grants you access to key areas of the Arogya Expo. Immerse yourself in the world of AYUSH and discover innovations in wellness.</p>
+          </div>
 
+          <div className="space-y-4">
+               <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-100">
+                  <UserCheck className="text-[hsl(93,45%,44%)] shrink-0 mt-0.5" size={24} />
+                  <div>
+                      <h4 className="font-black text-slate-800 uppercase">Expo Hall Access</h4>
+                      <p className="text-sm font-bold text-slate-400">Explore over 100 stalls from leading AYUSH brands and startups.</p>
+                  </div>
+               </div>
+               <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-100">
+                  <ShieldCheck className="text-[hsl(93,45%,44%)] shrink-0 mt-0.5" size={24} />
+                  <div>
+                      <h4 className="font-black text-slate-800 uppercase">Open Sessions & Demos</h4>
+                      <p className="text-sm font-bold text-slate-400">Attend public talks, product launches, and live demonstrations.</p>
+                  </div>
+               </div>
+          </div>
+          <div className="bg-[hsl(93,20%,15%)] text-white p-8 rounded-[2.5rem] shadow-xl">
+              <h4 className="font-black text-white uppercase text-lg mb-2">Please Note</h4>
+              <p className="text-white/70 text-sm font-medium leading-relaxed">This pass does not include access to the paid scientific sessions, delegate lunches, or workshops. To attend these, please register as a delegate.</p>
+          </div>
         </div>
       </section>
 
