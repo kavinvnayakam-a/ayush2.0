@@ -1,10 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Ticket, UserCheck, ShieldCheck, Play, Video } from 'lucide-react';
+import { Ticket, UserCheck, ShieldCheck } from 'lucide-react';
 import { VisitorForm } from '@/components/forms/VisitorForm';
-import { VideoReelItem } from '@/components/VideoReelItem';
-
 
 export default function VisitorPassPage() {
 
@@ -88,49 +86,9 @@ export default function VisitorPassPage() {
         </div>
       </section>
 
-      {/* 3. VIDEO REEL SECTION */}
-      <section className="py-24 bg-slate-50">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 text-primary font-black text-sm uppercase tracking-widest">
-              <Video size={18} />
-              <span>Event Highlights</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-black text-foreground uppercase tracking-tight mt-2">
-              Catch a Glimpse of the Expo
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 gap-4 md:gap-8 max-w-4xl mx-auto">
-             <div className="relative aspect-[9/16] rounded-[2rem] md:rounded-[3rem] overflow-hidden border-4 md:border-8 border-white shadow-2xl">
-              <VideoReelItem
-                videoSrc="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHon'ble%20Chief%20Minister%20of%20Goa%2C%20Dr.%20Pramod%20Sawant.mp4?alt=media&token=c11c15f4-3d71-46f9-a359-57b98a39a7b7"
-                link="https://www.youtube.com/shorts/uFvyjjN-XzU"
-              />
-            </div>
-            <div className="relative aspect-[9/16] rounded-[2rem] md:rounded-[3rem] overflow-hidden border-4 md:border-8 border-white shadow-2xl">
-              <VideoReelItem
-                videoSrc="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHon'ble%20Chief%20Minister%20of%20Goa%2C%20Dr.%20Pramod%20Sawant.mp4?alt=media&token=c11c15f4-3d71-46f9-a359-57b98a39a7b7"
-                link="https://www.instagram.com/reel/DScscvgEnDt/?igsh=YjJwZ284NHBjeXow"
-              />
-            </div>
-             <div className="relative aspect-[9/16] rounded-[2rem] md:rounded-[3rem] overflow-hidden border-4 md:border-8 border-white shadow-2xl">
-              <VideoReelItem
-                videoSrc="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHon'ble%20Chief%20Minister%20of%20Goa%2C%20Dr.%20Pramod%20Sawant.mp4?alt=media&token=c11c15f4-3d71-46f9-a359-57b98a39a7b7"
-                link="https://www.youtube.com/shorts/ppuXBN-Pi1E"
-              />
-            </div>
-             <div className="relative aspect-[9/16] rounded-[2rem] md:rounded-[3rem] overflow-hidden border-4 md:border-8 border-white shadow-2xl">
-              <VideoReelItem
-                videoSrc="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHon'ble%20Chief%20Minister%20of%20Goa%2C%20Dr.%20Pramod%20Sawant.mp4?alt=media&token=c11c15f4-3d71-46f9-a359-57b98a39a7b7"
-                link="https://www.youtube.com/shorts/g09k5qrFbn0"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
       
-      {/* 4. INFO SECTION */}
-      <section className="py-24 container mx-auto px-6">
+      {/* 3. INFO SECTION */}
+      <section className="pb-24 container mx-auto px-6">
         <div className="max-w-xl mx-auto space-y-10">
           <div>
               <h2 className="text-3xl font-black text-[hsl(93,20%,15%)] uppercase tracking-tight mb-4">What's Included?</h2>
