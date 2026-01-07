@@ -4,13 +4,6 @@ import React from 'react';
 import Image from 'next/image';
 import { Sparkles, Microscope, Dna, BrainCircuit, Lightbulb, Users, ArrowRight, FlaskConical } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-    title: 'International Ayush Conclave 2026 | National Ayush Conclave',
-    description: 'Join the International Ayush Conclave 2026, a premier global forum for advancing Ayurvedic sciences through research, innovation, and integration. Held in Chennai, India.',
-    keywords: ['Ayush Conclave', 'Ayush Conclave 2026', 'International Ayush Conclave', 'Ayurveda Research', 'Ayurveda Conference', 'Ministry of Ayush', 'Shreevarma'],
-};
 
 export default function AyushConclavePage() {
   return (

@@ -14,14 +14,6 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { VisitorForm } from '@/components/forms/VisitorForm';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-    title: 'Registration | National Ayush Conclave & Arogya Expo 2026',
-    description: 'Register as a delegate for the National Ayush Conclave 2026. Special pricing available for students, practitioners, and NASYA members. Secure your spot at India\'s premier Ayush event.',
-    keywords: ['Ayush Conclave Registration', 'Arogya Expo Registration', 'Delegate Pass', 'Expo 2026 Tickets', 'Ayurveda Conference Registration'],
-};
-
 
 const REGISTRATION_LINK = "https://www.arogyaayurconclave.org/#/buyTickets/selectTickets?day=1&lang=en";
 

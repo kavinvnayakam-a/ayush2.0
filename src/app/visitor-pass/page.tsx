@@ -3,14 +3,6 @@
 import React from 'react';
 import { Ticket, UserCheck, ShieldCheck } from 'lucide-react';
 import { VisitorForm } from '@/components/forms/VisitorForm';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-    title: 'Free Visitor Pass | Arogya Expo 2026',
-    description: 'Register for a free visitor pass to the Arogya Expo 2026 in Chennai. Explore 100+ stalls on wellness, Ayurveda, and holistic health. Open to the public.',
-    keywords: ['Free Visitor Pass', 'Arogya Expo Pass', 'Expo 2026 Registration', 'Free Health Expo Chennai', 'Ayush Expo Public Entry'],
-};
-
 
 export default function VisitorPassPage() {
 

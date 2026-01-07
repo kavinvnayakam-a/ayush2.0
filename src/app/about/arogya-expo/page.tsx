@@ -3,14 +3,6 @@
 import React from 'react';
 import { Sparkles, BarChart3, Globe2, Lightbulb, Users2, ShieldCheck, Microscope, Compass, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-    title: 'Arogya Expo 2026 | National Ayush Conclave',
-    description: 'Explore the Arogya Expo 2026, a parallel event to the Ayush Conclave in Chennai. Discover 100+ stalls on Ayurvedic medicines, wellness tech, and holistic health products.',
-    keywords: ['Arogya Expo', 'Arogya Expo 2026', 'Ayurveda Exhibition', 'Wellness Expo Chennai', 'Holistic Health Fair', 'Ministry of Ayush'],
-};
-
 
 export default function ArogyaExpoPage() {
   return (
