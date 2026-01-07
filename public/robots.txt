@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow crawling of admin pages
+Disallow: /admin/
+
+# Sitemap location
+Sitemap: https://ayushconclave.com/sitemap.xml

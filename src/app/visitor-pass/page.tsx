@@ -3,13 +3,21 @@
 import React from 'react';
 import { Ticket, UserCheck, ShieldCheck } from 'lucide-react';
 import { VisitorForm } from '@/components/forms/VisitorForm';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Free Visitor Pass | Arogya Expo 2026',
+    description: 'Register for a free visitor pass to the Arogya Expo 2026 in Chennai. Explore 100+ stalls on wellness, Ayurveda, and holistic health. Open to the public.',
+    keywords: ['Free Visitor Pass', 'Arogya Expo Pass', 'Expo 2026 Registration', 'Free Health Expo Chennai', 'Ayush Expo Public Entry'],
+};
+
 
 export default function VisitorPassPage() {
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Event',
-    'name': 'Arogya Expo 2026 (Part of National Ayush Conclave)',
+    'name': 'Arogya Expo 2026 (Public Access)',
     'startDate': '2026-01-09T09:00:00+05:30',
     'endDate': '2026-01-12T18:00:00+05:30',
     'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
@@ -41,7 +49,7 @@ export default function VisitorPassPage() {
     },
     'organizer': {
       '@type': 'Organization',
-      'name': 'Vijnana Bharati (VIBHA)',
+      'name': 'National Ayush Conclave Organizers',
       'url': 'https://ayushconclave.com'
     }
   };
