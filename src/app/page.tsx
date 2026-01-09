@@ -59,16 +59,24 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
       
-      {/* 1. HERO SECTION - IMAGE BACKGROUND */}
+      {/* 1. HERO SECTION - VIDEO / IMAGE BACKGROUND */}
       <section className="relative h-auto md:h-[800px] flex items-center justify-center overflow-hidden pt-40 pb-20 md:py-24">
         
         <div className="absolute inset-0 z-0">
-          {/* Mobile Background Image */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat md:hidden"
-            style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHero%20Background.webp?alt=media&token=35b2dc1e-03d6-40e6-baff-34369349f106')` }}
-          />
-          {/* Desktop Background Image */}
+          {/* Mobile: YouTube Video Background */}
+          <div className="md:hidden absolute inset-0">
+             <iframe
+                className="w-full h-full"
+                src="https://www.youtube.com/embed/FXoLaJa7EQ4?autoplay=1&mute=1&loop=1&playlist=FXoLaJa7EQ4&controls=0&showinfo=0&autohide=1"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+              <div className="absolute inset-0 bg-black/30"></div>
+          </div>
+          
+          {/* Desktop: Static Image Background */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden md:block"
             style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHero%20image%20Desktop%20with%20anie.webp?alt=media&token=0984a59a-b707-4ad2-8c22-35322cb2e77b')` }}
@@ -79,21 +87,21 @@ export default function HomePage() {
             <div className="flex flex-col md:grid md:grid-cols-2 gap-8 items-center w-full">
                 {/* Left Column: Text Content */}
                 <div className="text-center md:text-left space-y-4 order-2 md:order-1">
-                    <h1 className="text-4xl lg:text-6xl font-black text-[hsl(93,88.50%,27.30%)] uppercase tracking-tight">
+                    <h1 className="text-4xl lg:text-6xl font-black text-white md:text-[hsl(93,88.50%,27.30%)] uppercase tracking-tight">
                         National Arogya Expo 2026
                     </h1>
-                    <p className="text-lg font-bold text-[hsl(93,20%,35%)]">
+                    <p className="text-lg font-bold text-white/80 md:text-[hsl(93,20%,35%)]">
                         AYUSH for One Health: Bridging Tradition, Innovation and Well-being
                     </p>
-                    <p className="font-bold text-[hsl(93,20%,35%)] text-sm uppercase tracking-wider">
+                    <p className="font-bold text-white/80 md:text-[hsl(93,20%,35%)] text-sm uppercase tracking-wider">
                         Ancient Wisdom | Modern Care | Patient First
                     </p>
                     <div className="space-y-3 pt-4">
-                        <div className="flex items-center justify-center md:justify-start gap-3 text-[hsl(93,20%,35%)] font-semibold">
+                        <div className="flex items-center justify-center md:justify-start gap-3 text-white md:text-[hsl(93,20%,35%)] font-semibold">
                             <CalendarDays size={18} className="text-[hsl(93,45%,44%)]"/>
                             <span>Jan 09 – 12, 2026</span>
                         </div>
-                        <div className="flex items-center justify-center md:justify-start gap-3 text-[hsl(93,20%,35%)] font-semibold">
+                        <div className="flex items-center justify-center md:justify-start gap-3 text-white md:text-[hsl(93,20%,35%)] font-semibold">
                             <MapPin size={18} className="text-[hsl(93,45%,44%)]"/>
                             <span>Heartfulness, Babuji Memorial Ashram, Manapakkam, Chennai</span>
                         </div>
@@ -113,12 +121,12 @@ export default function HomePage() {
                             asChild
                             size="lg"
                             variant="outline"
-                            className="h-14 rounded-lg border-2 border-[hsl(93,45%,44%)] text-[hsl(93,45%,44%)] font-bold hover:bg-[hsl(93,45%,44%)] hover:text-white transition-colors px-6"
+                            className="h-14 rounded-lg border-2 border-[hsl(93,45%,44%)] text-[hsl(93,45%,44%)] bg-white/80 md:bg-transparent font-bold hover:bg-[hsl(93,45%,44%)] hover:text-white transition-colors px-6"
                         >
                              <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">Register as Delegate</a>
                         </Button>
                     </div>
-                     <p className="text-lg text-center md:text-left text-[hsl(93,20%,35%)] font-black pt-2">Note: Free pass Only for Public.</p>
+                     <p className="text-lg text-center md:text-left text-white md:text-[hsl(93,20%,35%)] font-black pt-2">Note: Free pass Only for Public.</p>
                 </div>
 
                 {/* Right Column: Logo */}
@@ -133,32 +141,6 @@ export default function HomePage() {
                     />
                 </div>
             </div>
-        </div>
-      </section>
-
-      {/* 1.5 LIVE VIDEO SECTION */}
-      <section className="py-24 bg-slate-50">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-5xl font-black text-slate-800 uppercase tracking-tighter">
-              Watch <span className="text-[hsl(93,45%,44%)]">Live</span>
-            </h2>
-            <p className="text-lg font-bold text-slate-500 mt-2 italic">
-              Join the conclave live stream from anywhere in the world.
-            </p>
-          </div>
-          <div className="max-w-4xl mx-auto">
-            <div className="aspect-video w-full bg-slate-900 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white">
-              <iframe
-                className="w-full h-full"
-                src="https://www.youtube.com/embed/FXoLaJa7EQ4?autoplay=1&mute=1&loop=1&playlist=FXoLaJa7EQ4"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              ></iframe>
-            </div>
-          </div>
         </div>
       </section>
 
