@@ -202,10 +202,10 @@ export default function RootLayout({
             alt="Get your photos card"
             width={80}
             height={128}
-            className="mb-[-10px] z-10 transition-transform group-hover:-translate-y-2"
+            className="mb-[-10px] z-0 transition-transform group-hover:-translate-y-2"
           />
           <div
-            className="relative flex items-center gap-2 bg-accent text-accent-foreground pl-3 pr-4 py-2 rounded-full shadow-lg animate-pulse"
+            className="relative z-10 flex items-center gap-2 bg-accent text-accent-foreground pl-3 pr-4 py-2 rounded-full shadow-lg animate-pulse"
           >
             <Camera size={20} />
             <span className="text-xs font-bold">Get your Photos</span>
