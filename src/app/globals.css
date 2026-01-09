@@ -57,3 +57,40 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  @media print {
+    @page {
+      size: A4 landscape;
+      margin: 1cm;
+    }
+
+    body {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    
+    .no-print,
+    header,
+    footer {
+      display: none !important;
+    }
+
+    .printable-area {
+      display: block !important;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: auto;
+      box-shadow: none !important;
+      border: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    
+    .print-header {
+        display: block !important;
+    }
+  }
+}

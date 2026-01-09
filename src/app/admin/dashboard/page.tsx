@@ -8,11 +8,12 @@ import { signOut } from 'firebase/auth';
 import { collection, query, orderBy, doc } from 'firebase/firestore';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { LogOut, ShieldCheck, Users, Ticket, Download } from 'lucide-react';
+import { LogOut, ShieldCheck, Users, Ticket, Download, Printer } from 'lucide-react';
 import { format } from 'date-fns';
 import { useDoc } from '@/firebase/firestore/use-doc';
 import { useCollection } from '@/firebase/firestore/use-collection';
 import * as XLSX from 'xlsx';
+import Image from 'next/image';
 
 
 interface VisitorPass {
@@ -93,6 +94,10 @@ function AdminDashboard() {
 
     XLSX.writeFile(workbook, fileName, { bookType: formatType });
   };
+  
+  const handlePrint = () => {
+    window.print();
+  };
 
 
   const isLoading = isUserLoading || isAdminLoading;
@@ -129,7 +134,7 @@ function AdminDashboard() {
   return (
     <div className="min-h-screen bg-slate-50 p-4 sm:p-8 pt-24 sm:pt-32">
       <div className="max-w-7xl mx-auto">
-        <header className="flex flex-col sm:flex-row items-center justify-between mb-8">
+        <header className="flex flex-col sm:flex-row items-center justify-between mb-8 no-print">
           <div className='flex items-center gap-4 text-center sm:text-left'>
             <div>
                 <h1 className="text-3xl font-black text-foreground uppercase tracking-tight">Admin Dashboard</h1>
@@ -141,9 +146,20 @@ function AdminDashboard() {
             Logout
           </Button>
         </header>
+        
+        {/* This div is only for printing */}
+        <div className="print-header hidden print:block mb-8">
+            <Image 
+                src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2FArogya%202026%20logo.webp?alt=media&token=0ee2306d-e44e-4c15-b748-69491434e0f5" 
+                alt="AyushConclave Logo" 
+                width={150} 
+                height={50}
+                className="mx-auto"
+            />
+        </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 no-print">
             <Card className="rounded-[1.5rem] bg-white shadow-sm border-slate-100">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                     <CardTitle className="text-sm font-bold uppercase text-muted-foreground tracking-wider">Total Enrollments</CardTitle>
@@ -159,14 +175,14 @@ function AdminDashboard() {
         </div>
 
 
-        <Card className="rounded-[2rem] bg-white shadow-xl shadow-slate-200/60">
+        <Card className="rounded-[2rem] bg-white shadow-xl shadow-slate-200/60 printable-area">
           <CardHeader>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div className="flex items-center gap-3">
                     <Users className="w-6 h-6 text-primary"/>
                     <CardTitle className="text-2xl font-black tracking-tight text-foreground">Visitor Pass Registrations</CardTitle>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 no-print">
                     <Button variant="outline" size="sm" className="font-bold" onClick={() => handleExport('csv')}>
                         <Download className="mr-2 h-4 w-4" />
                         Export CSV
@@ -174,6 +190,10 @@ function AdminDashboard() {
                     <Button variant="outline" size="sm" className="font-bold" onClick={() => handleExport('xlsx')}>
                         <Download className="mr-2 h-4 w-4" />
                         Export XLSX
+                    </Button>
+                    <Button variant="outline" size="sm" className="font-bold" onClick={handlePrint}>
+                        <Printer className="mr-2 h-4 w-4" />
+                        Print
                     </Button>
                 </div>
             </div>
