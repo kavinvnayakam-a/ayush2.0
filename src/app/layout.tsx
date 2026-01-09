@@ -195,7 +195,7 @@ export default function RootLayout({
           href="https://ayushconclave.premagic.com/national-arogya-expo-2026/book/"
           target="_blank"
           rel="noopener noreferrer"
-          className="md:hidden fixed bottom-4 right-4 z-50 flex flex-col items-center group"
+          className="md:hidden fixed bottom-4 right-4 z-50 flex flex-col items-center group animate-pulse"
         >
           <Image
             src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FPremagic%2FNational%20Arogya%20Expo%202026-Pocket-Card.webp?alt=media&token=fc012a2e-aeb2-4649-8c34-dd0f90c07ed0"
@@ -205,7 +205,7 @@ export default function RootLayout({
             className="mb-[-10px] z-0 transition-transform group-hover:-translate-y-2"
           />
           <div
-            className="relative z-10 flex items-center gap-2 bg-accent text-accent-foreground pl-3 pr-4 py-2 rounded-full shadow-lg animate-pulse"
+            className="relative z-10 flex items-center gap-2 bg-accent text-accent-foreground pl-3 pr-4 py-2 rounded-full shadow-lg"
           >
             <Camera size={20} />
             <span className="text-xs font-bold">Get your Photos</span>
