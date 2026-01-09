@@ -205,7 +205,7 @@ export default function RootLayout({
             className="mb-[-10px] z-0 transition-transform group-hover:-translate-y-2 md:w-32 md:h-auto"
           />
           <div
-            className="relative z-10 flex items-center gap-2 bg-accent text-accent-foreground pl-3 pr-4 py-2 md:pl-4 md:pr-6 md:py-3 rounded-full shadow-lg"
+            className="relative z-10 flex items-center gap-2 bg-white text-primary pl-3 pr-4 py-2 md:pl-4 md:pr-6 md:py-3 rounded-full shadow-lg"
           >
             <Camera size={20} className="md:size-6" />
             <span className="text-xs md:text-base font-bold">Get your Photos</span>
