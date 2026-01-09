@@ -71,7 +71,7 @@ function AdminDashboard() {
     router.push('/admin/login');
   };
 
-  const handleExport = (format: 'csv' | 'xlsx') => {
+  const handleExport = (formatType: 'csv' | 'xlsx') => {
     if (!visitorPasses) return;
 
     const dataToExport = visitorPasses.map(pass => ({
@@ -88,10 +88,10 @@ function AdminDashboard() {
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Visitors');
 
-    const fileExtension = format === 'xlsx' ? 'xlsx' : 'csv';
+    const fileExtension = formatType === 'xlsx' ? 'xlsx' : 'csv';
     const fileName = `visitor_passes.${fileExtension}`;
 
-    XLSX.writeFile(workbook, fileName, { bookType: format });
+    XLSX.writeFile(workbook, fileName, { bookType: formatType });
   };
 
 
