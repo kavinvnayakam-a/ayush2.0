@@ -11,6 +11,7 @@ import { FirebaseClientProvider } from '@/firebase';
 import Link from 'next/link';
 import { Camera } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import Image from 'next/image';
 
 const cabin = Cabin({
   subsets: ['latin'],
@@ -189,19 +190,27 @@ export default function RootLayout({
           Visitor Pass
         </Link>
 
-        {/* Floating Photo Icon for Mobile */}
-        <div className="md:hidden fixed bottom-4 right-4 z-50">
-          <Link
-            href="https://ayushconclave.premagic.com/national-arogya-expo-2026/book/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-accent text-accent-foreground pl-3 pr-4 py-2 rounded-full shadow-lg animate-pulse"
+        {/* Floating Photo Icon with Hanger for Mobile */}
+        <Link
+          href="https://ayushconclave.premagic.com/national-arogya-expo-2026/book/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="md:hidden fixed bottom-4 right-4 z-50 flex flex-col items-center group"
+        >
+          <Image
+            src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FPremagic%2FNational%20Arogya%20Expo%202026-Pocket-Card.webp?alt=media&token=fc012a2e-aeb2-4649-8c34-dd0f90c07ed0"
+            alt="Get your photos card"
+            width={80}
+            height={128}
+            className="mb-[-10px] z-10 transition-transform group-hover:-translate-y-2"
+          />
+          <div
+            className="relative flex items-center gap-2 bg-accent text-accent-foreground pl-3 pr-4 py-2 rounded-full shadow-lg animate-pulse"
           >
             <Camera size={20} />
             <span className="text-xs font-bold">Get your Photos</span>
-          </Link>
-        </div>
-
+          </div>
+        </Link>
       </body>
     </html>
   );
