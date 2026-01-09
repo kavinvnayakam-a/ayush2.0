@@ -64,8 +64,11 @@ export default function HomePage() {
         
         {/* Background images/videos */}
         <div className="absolute inset-0 z-0">
-          {/* Mobile: Simple dark background for text contrast */}
-          <div className="md:hidden absolute inset-0 bg-slate-900"></div>
+          {/* Mobile: Static Image Background */}
+           <div 
+            className="md:hidden absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FVideo%20BG%2FHero%20Background.webp?alt=media&token=35b2dc1e-03d6-40e6-baff-34369349f106')` }}
+          />
           
           {/* Desktop: Static Image Background */}
           <div 
