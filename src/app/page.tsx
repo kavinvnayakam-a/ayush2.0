@@ -62,19 +62,10 @@ export default function HomePage() {
       {/* 1. HERO SECTION - VIDEO / IMAGE BACKGROUND */}
       <section className="relative h-auto md:h-[800px] flex items-center justify-center overflow-hidden pt-40 pb-20 md:py-24">
         
+        {/* Background images/videos */}
         <div className="absolute inset-0 z-0">
-          {/* Mobile: YouTube Video Background */}
-          <div className="md:hidden absolute inset-0">
-             <iframe
-                className="w-full h-full"
-                src="https://www.youtube.com/embed/FXoLaJa7EQ4?autoplay=1&mute=1&loop=1&playlist=FXoLaJa7EQ4&controls=0&showinfo=0&autohide=1"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              ></iframe>
-              <div className="absolute inset-0 bg-black/30"></div>
-          </div>
+          {/* Mobile: Simple dark background for text contrast */}
+          <div className="md:hidden absolute inset-0 bg-slate-900"></div>
           
           {/* Desktop: Static Image Background */}
           <div 
@@ -106,39 +97,59 @@ export default function HomePage() {
                             <span>Heartfulness, Babuji Memorial Ashram, Manapakkam, Chennai</span>
                         </div>
                     </div>
-                    <div className="pt-6 flex justify-center md:justify-start">
-                        <CountdownTimer targetDate={eventDate} />
+                    
+                    {/* Desktop-only CTAs and Countdown */}
+                    <div className="hidden md:block">
+                      <div className="pt-6 flex justify-center md:justify-start">
+                          <CountdownTimer targetDate={eventDate} />
+                      </div>
+                      <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-4">
+                          <Button 
+                              onClick={() => setIsVisitorModalOpen(true)}
+                              size="lg"
+                              className="h-20 w-60 text-lg rounded-lg bg-[#ffa62f] text-white font-black hover:bg-[hsl(93,45%,44%)] transition-colors px-8 animate-pulse"
+                          >
+                              Free Visitor Pass
+                          </Button>
+                          <Button 
+                              asChild
+                              size="lg"
+                              variant="outline"
+                              className="h-14 rounded-lg border-2 border-[hsl(93,45%,44%)] text-[hsl(93,45%,44%)] bg-white/80 md:bg-transparent font-bold hover:bg-[hsl(93,45%,44%)] hover:text-white transition-colors px-6"
+                          >
+                              <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">Register as Delegate</a>
+                          </Button>
+                      </div>
+                      <p className="text-lg text-center md:text-left text-white md:text-[hsl(93,20%,35%)] font-black pt-2">Note: Free pass Only for Public.</p>
                     </div>
-                    <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-4">
-                        <Button 
-                            onClick={() => setIsVisitorModalOpen(true)}
-                            size="lg"
-                            className="h-20 w-60 text-lg rounded-lg bg-[#ffa62f] text-white font-black hover:bg-[hsl(93,45%,44%)] transition-colors px-8 animate-pulse"
-                        >
-                            Free Visitor Pass
-                        </Button>
-                        <Button 
-                            asChild
-                            size="lg"
-                            variant="outline"
-                            className="h-14 rounded-lg border-2 border-[hsl(93,45%,44%)] text-[hsl(93,45%,44%)] bg-white/80 md:bg-transparent font-bold hover:bg-[hsl(93,45%,44%)] hover:text-white transition-colors px-6"
-                        >
-                             <a href={REGISTRATION_LINK} target="_blank" rel="noopener noreferrer">Register as Delegate</a>
-                        </Button>
-                    </div>
-                     <p className="text-lg text-center md:text-left text-white md:text-[hsl(93,20%,35%)] font-black pt-2">Note: Free pass Only for Public.</p>
+
                 </div>
 
-                {/* Right Column: Logo */}
+                {/* Right Column: Logo on Desktop, Video on Mobile */}
                 <div className="relative w-full h-64 md:h-full flex items-center justify-center order-1 md:order-2">
-                    <Image 
-                        src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F1000157891%20(1).webp?alt=media&token=f13fc097-13b6-4af3-bb0e-2788a1fb4b73"
-                        alt="AyushConclave Logo"
-                        width={400}
-                        height={400}
-                        priority
-                        className="object-contain drop-shadow-2xl"
-                    />
+                    {/* Desktop Logo */}
+                    <div className="hidden md:block">
+                        <Image 
+                            src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F1000157891%20(1).webp?alt=media&token=f13fc097-13b6-4af3-bb0e-2788a1fb4b73"
+                            alt="AyushConclave Logo"
+                            width={400}
+                            height={400}
+                            priority
+                            className="object-contain drop-shadow-2xl"
+                        />
+                    </div>
+                    
+                    {/* Mobile Video Embed */}
+                    <div className="md:hidden w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
+                        <iframe
+                            className="w-full h-full"
+                            src="https://www.youtube.com/embed/FXoLaJa7EQ4?autoplay=1&mute=1&loop=1&playlist=FXoLaJa7EQ4&controls=0&showinfo=0&autohide=1"
+                            title="YouTube video player"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowFullScreen
+                        ></iframe>
+                    </div>
                 </div>
             </div>
         </div>
