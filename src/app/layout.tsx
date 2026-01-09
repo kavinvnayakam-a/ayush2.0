@@ -191,23 +191,15 @@ export default function RootLayout({
 
         {/* Floating Photo Icon for Mobile */}
         <div className="md:hidden fixed bottom-4 right-4 z-50">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  href="https://ayushconclave.premagic.com/national-arogya-expo-2026/book/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-14 h-14 rounded-full bg-accent text-accent-foreground flex items-center justify-center shadow-lg animate-pulse"
-                >
-                  <Camera size={24} />
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent side="top" align="center" className="bg-foreground text-background">
-                <p>Get your photos from this Event to your phone</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <Link
+            href="https://ayushconclave.premagic.com/national-arogya-expo-2026/book/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-accent text-accent-foreground pl-3 pr-4 py-2 rounded-full shadow-lg animate-pulse"
+          >
+            <Camera size={20} />
+            <span className="text-xs font-bold">Get your Photos</span>
+          </Link>
         </div>
 
       </body>
