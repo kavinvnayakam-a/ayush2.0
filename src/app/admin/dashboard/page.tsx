@@ -8,10 +8,11 @@ import { signOut } from 'firebase/auth';
 import { collection, query, orderBy, doc } from 'firebase/firestore';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { LogOut, ShieldCheck, Users, Ticket } from 'lucide-react';
+import { LogOut, ShieldCheck, Users, Ticket, Download } from 'lucide-react';
 import { format } from 'date-fns';
 import { useDoc } from '@/firebase/firestore/use-doc';
 import { useCollection } from '@/firebase/firestore/use-collection';
+import * as XLSX from 'xlsx';
 
 
 interface VisitorPass {
@@ -69,6 +70,30 @@ function AdminDashboard() {
   const handleGoToLogin = () => {
     router.push('/admin/login');
   };
+
+  const handleExport = (format: 'csv' | 'xlsx') => {
+    if (!visitorPasses) return;
+
+    const dataToExport = visitorPasses.map(pass => ({
+        Name: pass.name,
+        Email: pass.mailId,
+        Mobile: pass.number,
+        Location: pass.location,
+        'Registered On': pass.registrationDate
+            ? format(new Date(pass.registrationDate.seconds * 1000), 'MMM d, yyyy h:mm a')
+            : 'N/A',
+    }));
+    
+    const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Visitors');
+
+    const fileExtension = format === 'xlsx' ? 'xlsx' : 'csv';
+    const fileName = `visitor_passes.${fileExtension}`;
+
+    XLSX.writeFile(workbook, fileName, { bookType: format });
+  };
+
 
   const isLoading = isUserLoading || isAdminLoading;
 
@@ -136,9 +161,21 @@ function AdminDashboard() {
 
         <Card className="rounded-[2rem] bg-white shadow-xl shadow-slate-200/60">
           <CardHeader>
-            <div className="flex items-center gap-3">
-              <Users className="w-6 h-6 text-primary"/>
-              <CardTitle className="text-2xl font-black tracking-tight text-foreground">Visitor Pass Registrations</CardTitle>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div className="flex items-center gap-3">
+                    <Users className="w-6 h-6 text-primary"/>
+                    <CardTitle className="text-2xl font-black tracking-tight text-foreground">Visitor Pass Registrations</CardTitle>
+                </div>
+                <div className="flex items-center gap-2">
+                    <Button variant="outline" size="sm" className="font-bold" onClick={() => handleExport('csv')}>
+                        <Download className="mr-2 h-4 w-4" />
+                        Export CSV
+                    </Button>
+                    <Button variant="outline" size="sm" className="font-bold" onClick={() => handleExport('xlsx')}>
+                        <Download className="mr-2 h-4 w-4" />
+                        Export XLSX
+                    </Button>
+                </div>
             </div>
             <CardDescription className="!mt-2 italic font-semibold">
               A list of all visitors who have registered for a free pass for the Arogya Expo.
