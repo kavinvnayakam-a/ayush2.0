@@ -129,7 +129,7 @@ export default function HomePage() {
                 </div>
 
                 {/* Right Column: Logo on Desktop, Video on Mobile */}
-                <div className="relative w-full h-64 md:h-full flex items-center justify-center order-1 md:order-2">
+                <div className="relative w-full h-auto md:h-full flex flex-col items-center justify-center order-1 md:order-2">
                     {/* Desktop Logo */}
                     <div className="hidden md:block">
                         <Image 
@@ -142,16 +142,25 @@ export default function HomePage() {
                         />
                     </div>
                     
-                    {/* Mobile Video Embed */}
-                    <div className="md:hidden w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
-                        <iframe
-                            className="w-full h-full"
-                            src="https://www.youtube.com/embed/FXoLaJa7EQ4?autoplay=1&mute=1&loop=1&playlist=FXoLaJa7EQ4&controls=1&showinfo=0&autohide=1"
-                            title="YouTube video player"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen
-                        ></iframe>
+                    {/* Mobile: Logo and Video Embed */}
+                    <div className="md:hidden w-full flex flex-col items-center">
+                        <Image
+                            src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F1000157891.webp?alt=media&token=4be2587a-1605-40c6-8bff-dc1472ecfe22"
+                            alt="AyushConclave Logo Mobile"
+                            width={150}
+                            height={150}
+                            className="object-contain mb-4"
+                        />
+                        <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
+                            <iframe
+                                className="w-full h-full"
+                                src="https://www.youtube.com/embed/FXoLaJa7EQ4?autoplay=1&mute=1&loop=1&playlist=FXoLaJa7EQ4&controls=1&showinfo=0&autohide=1"
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                            ></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
