@@ -14,7 +14,8 @@ import {
   Navigation, 
   X, 
   Ticket,
-  CalendarDays
+  CalendarDays,
+  Youtube
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CountdownTimer } from '@/components/CountdownTimer';
@@ -80,7 +81,7 @@ export default function HomePage() {
         <div className="container mx-auto px-6 relative z-10 flex items-center h-full">
             <div className="flex flex-col md:grid md:grid-cols-2 gap-8 items-center w-full">
                 {/* Left Column: Text Content */}
-                <div className="text-center md:text-left space-y-4 order-2 md:order-1">
+                <div className="text-center md:text-left space-y-4 order-2 md:order-1 pt-12 md:pt-0">
                     <h1 className="text-4xl lg:text-6xl font-black text-[hsl(93,88.50%,27.30%)] md:text-[hsl(93,88.50%,27.30%)] uppercase tracking-tight">
                         National Arogya Expo 2026
                     </h1>
@@ -129,7 +130,7 @@ export default function HomePage() {
                 </div>
 
                 {/* Right Column: Logo on Desktop, Video on Mobile */}
-                <div className="relative w-full h-auto md:h-full flex flex-col items-center justify-center order-1 md:order-2 pt-20 md:pt-0">
+                <div className="relative w-full h-auto md:h-full flex flex-col items-center justify-center order-1 md:order-2 pt-12 md:pt-0">
                     {/* Desktop Logo */}
                     <div className="hidden md:block">
                         <Image 
@@ -163,6 +164,30 @@ export default function HomePage() {
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+      </section>
+
+      {/* YOUTUBE LIVE STREAM - DESKTOP ONLY */}
+      <section className="hidden md:block py-24 bg-slate-50">
+        <div className="container mx-auto px-6 text-center">
+            <div className="flex items-center justify-center gap-4 mb-12">
+                <div className="w-16 h-1 bg-[hsl(93,45%,44%)]/20 rounded-full" />
+                <div className='flex items-center gap-3 text-red-600'>
+                    <Youtube size={32} />
+                    <h2 className="text-4xl font-black uppercase tracking-tight text-slate-800">Live Streaming</h2>
+                </div>
+                <div className="w-16 h-1 bg-[hsl(93,45%,44%)]/20 rounded-full" />
+            </div>
+            <div className="w-full max-w-5xl mx-auto aspect-video rounded-2xl overflow-hidden shadow-2xl border-8 border-white/80">
+                <iframe
+                    className="w-full h-full"
+                    src="https://www.youtube.com/embed/c4-k1CuCS8A"
+                    title="YouTube live player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                ></iframe>
             </div>
         </div>
       </section>
