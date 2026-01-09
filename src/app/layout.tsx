@@ -181,7 +181,7 @@ export default function RootLayout({
           <Toaster />
         </FirebaseClientProvider>
         
-        <Link href="/visitor-pass" className="md:hidden fixed top-1/2 -right-14 z-50 -translate-y-1/2 rotate-90 origin-bottom-right bg-primary text-primary-foreground px-4 py-2 rounded-t-lg font-bold text-sm uppercase tracking-widest shadow-lg hover:bg-accent transition-colors">
+        <Link href="/visitor-pass" className="md:hidden fixed top-1/2 -right-12 z-50 -translate-y-1/2 -rotate-90 origin-bottom-right bg-primary text-primary-foreground px-4 py-2 rounded-t-lg font-bold text-sm uppercase tracking-widest shadow-lg hover:bg-accent transition-colors">
           Visitor Pass
         </Link>
       </body>
