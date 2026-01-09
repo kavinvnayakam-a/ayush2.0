@@ -136,6 +136,32 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* 1.5 LIVE VIDEO SECTION */}
+      <section className="py-24 bg-slate-50">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-5xl font-black text-slate-800 uppercase tracking-tighter">
+              Watch <span className="text-[hsl(93,45%,44%)]">Live</span>
+            </h2>
+            <p className="text-lg font-bold text-slate-500 mt-2 italic">
+              Join the conclave live stream from anywhere in the world.
+            </p>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <div className="aspect-video w-full bg-slate-900 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white">
+              <iframe
+                className="w-full h-full"
+                src="https://www.youtube.com/embed/FXoLaJa7EQ4?autoplay=1&mute=1&loop=1&playlist=FXoLaJa7EQ4"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 2. OBJECTIVES */}
       <section className="py-24 bg-white relative z-10">
         <div className="container mx-auto px-6">
