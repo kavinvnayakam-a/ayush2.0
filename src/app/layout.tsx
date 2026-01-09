@@ -1,4 +1,5 @@
 
+
 import type { Metadata } from 'next';
 import { Cabin } from 'next/font/google';
 import './globals.css';
@@ -7,6 +8,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Toaster } from '@/components/ui/toaster';
 import { FirebaseClientProvider } from '@/firebase';
+import Link from 'next/link';
 
 const cabin = Cabin({
   subsets: ['latin'],
@@ -178,6 +180,10 @@ export default function RootLayout({
           </div>
           <Toaster />
         </FirebaseClientProvider>
+        
+        <Link href="/visitor-pass" className="md:hidden fixed top-1/2 -right-14 z-50 -translate-y-1/2 rotate-90 origin-bottom-right bg-primary text-primary-foreground px-4 py-2 rounded-t-lg font-bold text-sm uppercase tracking-widest shadow-lg hover:bg-accent transition-colors">
+          Visitor Pass
+        </Link>
       </body>
     </html>
   );
