@@ -60,7 +60,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
       
       {/* 1. HERO SECTION - VIDEO / IMAGE BACKGROUND */}
-      <section className="relative h-auto md:h-[800px] flex items-center justify-center overflow-hidden pt-28 md:pt-40 pb-20 md:py-24">
+      <section className="relative h-auto md:h-[800px] flex items-center justify-center overflow-hidden pt-20 pb-20 md:py-24">
         
         {/* Background images/videos */}
         <div className="absolute inset-0 z-0">
