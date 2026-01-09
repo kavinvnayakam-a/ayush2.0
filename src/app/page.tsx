@@ -81,21 +81,21 @@ export default function HomePage() {
             <div className="flex flex-col md:grid md:grid-cols-2 gap-8 items-center w-full">
                 {/* Left Column: Text Content */}
                 <div className="text-center md:text-left space-y-4 order-2 md:order-1">
-                    <h1 className="text-4xl lg:text-6xl font-black text-white md:text-[hsl(93,88.50%,27.30%)] uppercase tracking-tight">
+                    <h1 className="text-4xl lg:text-6xl font-black text-[hsl(93,88.50%,27.30%)] md:text-[hsl(93,88.50%,27.30%)] uppercase tracking-tight">
                         National Arogya Expo 2026
                     </h1>
-                    <p className="text-lg font-bold text-white/80 md:text-[hsl(93,20%,35%)]">
+                    <p className="text-lg font-bold text-[hsl(93,20%,35%)] md:text-[hsl(93,20%,35%)]">
                         AYUSH for One Health: Bridging Tradition, Innovation and Well-being
                     </p>
-                    <p className="font-bold text-white/80 md:text-[hsl(93,20%,35%)] text-sm uppercase tracking-wider">
+                    <p className="font-bold text-[hsl(93,20%,35%)] md:text-[hsl(93,20%,35%)] text-sm uppercase tracking-wider">
                         Ancient Wisdom | Modern Care | Patient First
                     </p>
                     <div className="space-y-3 pt-4">
-                        <div className="flex items-center justify-center md:justify-start gap-3 text-white md:text-[hsl(93,20%,35%)] font-semibold">
+                        <div className="flex items-center justify-center md:justify-start gap-3 text-[hsl(93,20%,35%)] md:text-[hsl(93,20%,35%)] font-semibold">
                             <CalendarDays size={18} className="text-[hsl(93,45%,44%)]"/>
                             <span>Jan 09 – 12, 2026</span>
                         </div>
-                        <div className="flex items-center justify-center md:justify-start gap-3 text-white md:text-[hsl(93,20%,35%)] font-semibold">
+                        <div className="flex items-center justify-center md:justify-start gap-3 text-[hsl(93,20%,35%)] md:text-[hsl(93,20%,35%)] font-semibold">
                             <MapPin size={18} className="text-[hsl(93,45%,44%)]"/>
                             <span>Heartfulness, Babuji Memorial Ashram, Manapakkam, Chennai</span>
                         </div>
@@ -146,7 +146,7 @@ export default function HomePage() {
                     <div className="md:hidden w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
                         <iframe
                             className="w-full h-full"
-                            src="https://www.youtube.com/embed/FXoLaJa7EQ4?autoplay=1&mute=1&loop=1&playlist=FXoLaJa7EQ4&controls=0&showinfo=0&autohide=1"
+                            src="https://www.youtube.com/embed/FXoLaJa7EQ4?autoplay=1&mute=1&loop=1&playlist=FXoLaJa7EQ4&controls=1&showinfo=0&autohide=1"
                             title="YouTube video player"
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
