@@ -129,7 +129,7 @@ export default function HomePage() {
                 </div>
 
                 {/* Right Column: Logo on Desktop, Video on Mobile */}
-                <div className="relative w-full h-auto md:h-full flex flex-col items-center justify-center order-1 md:order-2">
+                <div className="relative w-full h-auto md:h-full flex flex-col items-center justify-center order-1 md:order-2 pt-20 md:pt-0">
                     {/* Desktop Logo */}
                     <div className="hidden md:block">
                         <Image 
@@ -154,7 +154,7 @@ export default function HomePage() {
                         <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
                             <iframe
                                 className="w-full h-full"
-                                src="https://www.youtube.com/embed/FXoLaJa7EQ4?autoplay=1&mute=1&loop=1&playlist=FXoLaJa7EQ4&controls=1&showinfo=0&autohide=1"
+                                src="https://www.youtube.com/embed/c4-k1CuCS8A?autoplay=1&mute=1&loop=1&playlist=c4-k1CuCS8A&controls=1&showinfo=0&autohide=1"
                                 title="YouTube video player"
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
