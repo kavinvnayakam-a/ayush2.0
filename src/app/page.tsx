@@ -61,7 +61,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
       
       {/* 1. HERO SECTION - VIDEO / IMAGE BACKGROUND */}
-      <section className="relative h-auto md:h-[800px] flex items-center justify-center overflow-hidden pt-20 pb-20 md:py-24">
+      <section className="relative h-auto md:h-[800px] flex items-center justify-center overflow-hidden pt-12 pb-20 md:py-24">
         
         {/* Background images/videos */}
         <div className="absolute inset-0 z-0">
@@ -155,7 +155,7 @@ export default function HomePage() {
                         <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
                             <iframe
                                 className="w-full h-full"
-                                src="https://www.youtube.com/embed/c4-k1CuCS8A?autoplay=1&mute=1&loop=1&playlist=c4-k1CuCS8A&controls=1&showinfo=0&autohide=1"
+                                src="https://www.youtube.com/embed/AAczDoRHvFA?autoplay=1&mute=1&loop=1&playlist=AAczDoRHvFA&controls=1&showinfo=0&autohide=1"
                                 title="YouTube video player"
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -182,7 +182,7 @@ export default function HomePage() {
             <div className="w-full max-w-5xl mx-auto aspect-video rounded-2xl overflow-hidden shadow-2xl border-8 border-white/80">
                 <iframe
                     className="w-full h-full"
-                    src="https://www.youtube.com/embed/c4-k1CuCS8A"
+                    src="https://www.youtube.com/embed/AAczDoRHvFA"
                     title="YouTube live player"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
