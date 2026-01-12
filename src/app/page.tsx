@@ -155,7 +155,7 @@ export default function HomePage() {
                         <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
                             <iframe
                                 className="w-full h-full"
-                                src="https://www.youtube.com/embed/lauK3EUaltk?autoplay=1&mute=1&loop=1&playlist=lauK3EUaltk&controls=1&showinfo=0&autohide=1"
+                                src="https://www.youtube.com/embed/n0aajW6GW-A?autoplay=1&mute=1&loop=1&playlist=n0aajW6GW-A&controls=1&showinfo=0&autohide=1"
                                 title="YouTube video player"
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -182,7 +182,7 @@ export default function HomePage() {
             <div className="w-full max-w-5xl mx-auto aspect-video rounded-2xl overflow-hidden shadow-2xl border-8 border-white/80">
                 <iframe
                     className="w-full h-full"
-                    src="https://www.youtube.com/embed/lauK3EUaltk"
+                    src="https://www.youtube.com/embed/n0aajW6GW-A"
                     title="YouTube live player"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
