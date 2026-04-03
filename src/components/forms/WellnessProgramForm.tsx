@@ -1,10 +1,10 @@
-
 'use client';
 
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -12,6 +12,8 @@ import { useFirestore } from '@/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
 import { Send } from 'lucide-react';
+import { errorEmitter } from '@/firebase/error-emitter';
+import { FirestorePermissionError } from '@/firebase/errors';
 
 const wellnessSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -26,6 +28,7 @@ type WellnessFormValues = z.infer<typeof wellnessSchema>;
 export function WellnessProgramForm() {
   const { toast } = useToast();
   const firestore = useFirestore();
+  const router = useRouter();
 
   const form = useForm<WellnessFormValues>({
     resolver: zodResolver(wellnessSchema),
@@ -38,32 +41,60 @@ export function WellnessProgramForm() {
     },
   });
 
-  const onSubmit = async (data: WellnessFormValues) => {
-    try {
-      if (!firestore) {
-        throw new Error('Firestore is not initialized');
-      }
-      
-      const registrationsRef = collection(firestore, 'wellness_registrations');
-      
-      await addDoc(registrationsRef, {
-        ...data,
-        registrationDate: serverTimestamp(),
-      });
+  const onSubmit = (data: WellnessFormValues) => {
+    if (!firestore) return;
+    
+    const registrationsRef = collection(firestore, 'wellness_registrations');
+    const mailRef = collection(firestore, 'mail');
+    
+    // 1. Save Registration (Non-blocking)
+    addDoc(registrationsRef, {
+      ...data,
+      registrationDate: serverTimestamp(),
+    }).catch(async (err) => {
+      errorEmitter.emit('permission-error', new FirestorePermissionError({
+        path: registrationsRef.path,
+        operation: 'create',
+        requestResourceData: data,
+      }));
+    });
 
-      toast({
-        title: 'Registration Successful!',
-        description: 'You have been registered for the Corporate Wellness Program.',
-      });
-      form.reset();
-    } catch (error: any) {
-      console.error("Firestore Error:", error);
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description: error.message || 'Could not submit your registration.',
-      });
-    }
+    // 2. Send Confirmation Email (Non-blocking)
+    addDoc(mailRef, {
+      to: data.mailId,
+      message: {
+        subject: 'Corporate Wellness Program - Registration Confirmed',
+        html: `
+          <!DOCTYPE html>
+          <html>
+          <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+            <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+              <h2 style="color: #6CA33F;">Registration Successful!</h2>
+              <p>Hello <strong>${data.name}</strong>,</p>
+              <p>Thank you for registering for the <strong>Corporate Wellness Program</strong> at National Ayush Conclave 2026.</p>
+              <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                <p><strong>Event Details:</strong></p>
+                <p>Date: April 12, 2026</p>
+                <p>Location: Babuji Memorial Ashram, Manapakkam, Chennai</p>
+              </div>
+              <p>We look forward to seeing you there!</p>
+              <p style="font-size: 12px; color: #888;">Note: This is an automated confirmation email. Please do not reply.</p>
+            </div>
+          </body>
+          </html>
+        `,
+      }
+    }).catch(() => {
+      // Silently fail mail errors or handle separately
+    });
+
+    toast({
+      title: 'Registration Submitted!',
+      description: 'Redirecting to confirmation...',
+    });
+
+    // 3. Redirect to Thank You page
+    router.push('/wellness-program/thank-you');
   };
 
   return (
