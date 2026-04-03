@@ -1,3 +1,4 @@
+
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -9,27 +10,22 @@ service cloud.firestore {
     }
 
     match /visitor_passes/{visitorPassId} {
-      // Allow anyone to create a visitor pass for the expo.
       allow create: if true;
-      
-      // Only admins can read, list, update, or delete passes.
       allow read, update, delete, list: if isAdmin();
     }
 
     match /admin_roles/{uid} {
-      // Allow any authenticated user to read their own admin role document.
       allow get: if request.auth != null && request.auth.uid == uid;
-      
-      // Prevent unauthorized creation/modification of admin roles.
       allow create, update, delete, list: if isAdmin();
     }
 
-    // Rule for the 'mail' collection used by the Trigger Email extension.
-    match /mail/{docId} {
-      // Allow anyone to create a document to trigger an email.
+    match /wellness_registrations/{registrationId} {
       allow create: if true;
-      
-      // Disallow all other operations for security.
+      allow read, update, delete, list: if isAdmin();
+    }
+
+    match /mail/{docId} {
+      allow create: if true;
       allow read, update, delete, list: if false;
     }
   }

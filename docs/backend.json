@@ -1,3 +1,4 @@
+
 {
   "entities": {
     "VisitorPass": {
@@ -52,6 +53,47 @@
       "required": [
         "role"
       ]
+    },
+    "CorporateWellnessRegistration": {
+      "title": "Corporate Wellness Registration",
+      "type": "object",
+      "description": "Represents a registration for the Corporate Wellness Program.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The full name of the participant."
+        },
+        "age": {
+          "type": "number",
+          "description": "The age of the participant."
+        },
+        "locality": {
+          "type": "string",
+          "description": "The locality of the participant."
+        },
+        "whatsappNumber": {
+          "type": "string",
+          "description": "The WhatsApp number of the participant."
+        },
+        "mailId": {
+          "type": "string",
+          "description": "The email address of the participant.",
+          "format": "email"
+        },
+        "registrationDate": {
+          "type": "string",
+          "description": "The date and time the registration was submitted.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "name",
+        "age",
+        "locality",
+        "whatsappNumber",
+        "mailId",
+        "registrationDate"
+      ]
     }
   },
   "auth": {
@@ -63,6 +105,19 @@
     "collection_groups": [
       {
         "collectionId": "visitor_passes",
+        "rules": [
+          {
+            "allow": "read, list",
+            "if": "isAdmin()"
+          },
+          {
+            "allow": "create",
+            "if": "true"
+          }
+        ]
+      },
+      {
+        "collectionId": "wellness_registrations",
         "rules": [
           {
             "allow": "read, list",
@@ -104,6 +159,22 @@
             {
               "name": "uid",
               "description": "The Firebase Auth UID of the user."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/wellness_registrations/{registrationId}",
+        "definition": {
+          "entityName": "CorporateWellnessRegistration",
+          "schema": {
+            "$ref": "#/backend/entities/CorporateWellnessRegistration"
+          },
+          "description": "Stores registrations for the Corporate Wellness Program.",
+          "params": [
+            {
+              "name": "registrationId",
+              "description": "Unique identifier for the wellness registration."
             }
           ]
         }

@@ -1,3 +1,4 @@
+
 import { BookOpen, CalendarDays, Globe, Microscope, Sparkles, UserPlus, type LucideIcon } from 'lucide-react';
 
 export const navLinks = [
@@ -14,6 +15,7 @@ export const navLinks = [
   },
   { name: 'Session', href: '/scientific-session' },
   { name: 'Speakers', href: '/speakers' },
+  { name: 'Wellness Program', href: '/wellness-program' },
   { name: 'Visitor Pass', href: '/visitor-pass' },
   { name: 'Venue', href: '/venue' },
   { name: 'Contact Us', href: '/contact' },
