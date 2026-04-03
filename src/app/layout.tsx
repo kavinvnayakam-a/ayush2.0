@@ -1,5 +1,3 @@
-
-
 import type { Metadata } from 'next';
 import { Cabin } from 'next/font/google';
 import './globals.css';
@@ -9,9 +7,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Toaster } from '@/components/ui/toaster';
 import { FirebaseClientProvider } from '@/firebase';
 import Link from 'next/link';
-import { Camera } from 'lucide-react';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import Image from 'next/image';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 const cabin = Cabin({
   subsets: ['latin'],
@@ -188,28 +184,6 @@ export default function RootLayout({
         
         <Link href="/visitor-pass" className="md:hidden fixed top-1/2 -right-12 z-50 -translate-y-1/2 -rotate-90 origin-bottom-right bg-primary text-primary-foreground px-4 py-2 rounded-t-lg font-bold text-sm uppercase tracking-widest shadow-lg hover:bg-accent transition-colors">
           Visitor Pass
-        </Link>
-
-        {/* Floating Photo Icon with Hanger */}
-        <Link
-          href="https://ayushconclave.premagic.com/national-arogya-expo-2026/book/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 flex flex-col items-center group animate-pulse"
-        >
-          <Image
-            src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/AyushConclave%20images%2FPremagic%2FNational%20Arogya%20Expo%202026-Pocket-Card.webp?alt=media&token=fc012a2e-aeb2-4649-8c34-dd0f90c07ed0"
-            alt="Get your photos card"
-            width={80}
-            height={128}
-            className="mb-[-10px] z-0 transition-transform group-hover:-translate-y-2 md:w-32 md:h-auto"
-          />
-          <div
-            className="relative z-10 flex items-center gap-2 bg-white text-primary pl-3 pr-4 py-2 md:pl-4 md:pr-6 md:py-3 rounded-full shadow-lg"
-          >
-            <Camera size={20} className="md:size-6" />
-            <span className="text-xs md:text-base font-bold">Get your Photos</span>
-          </div>
         </Link>
       </body>
     </html>
