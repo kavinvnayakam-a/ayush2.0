@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -19,6 +20,7 @@ import Image from 'next/image';
 interface VisitorPass {
   id: string;
   name: string;
+  gender: string;
   number: string;
   mailId: string;
   location: string;
@@ -32,6 +34,7 @@ interface WellnessRegistration {
   id: string;
   name: string;
   age: number;
+  gender: string;
   locality: string;
   whatsappNumber: string;
   mailId: string;
@@ -99,6 +102,7 @@ function AdminDashboard() {
     if (activeTab === 'visitors' && visitorPasses) {
         dataToExport = visitorPasses.map(pass => ({
             Name: pass.name,
+            Gender: pass.gender || 'N/A',
             Email: pass.mailId,
             Mobile: pass.number,
             Location: pass.location,
@@ -111,6 +115,7 @@ function AdminDashboard() {
         dataToExport = wellnessRegistrations.map(reg => ({
             Name: reg.name,
             Age: reg.age,
+            Gender: reg.gender || 'N/A',
             Locality: reg.locality,
             'WhatsApp Number': reg.whatsappNumber,
             'Mail ID': reg.mailId,
@@ -271,6 +276,7 @@ function AdminDashboard() {
                       <TableHeader className="bg-slate-50">
                         <TableRow>
                           <TableHead className="font-black uppercase text-xs tracking-wider">Name</TableHead>
+                          <TableHead className="font-black uppercase text-xs tracking-wider">Gender</TableHead>
                           <TableHead className="font-black uppercase text-xs tracking-wider">Email</TableHead>
                           <TableHead className="font-black uppercase text-xs tracking-wider">Mobile</TableHead>
                           <TableHead className="font-black uppercase text-xs tracking-wider">Location</TableHead>
@@ -281,6 +287,7 @@ function AdminDashboard() {
                         {visitorPasses.map((pass) => (
                           <TableRow key={pass.id} className="font-semibold">
                             <TableCell className="font-bold text-foreground">{pass.name}</TableCell>
+                            <TableCell className="text-muted-foreground">{pass.gender || 'N/A'}</TableCell>
                             <TableCell className="text-muted-foreground">{pass.mailId}</TableCell>
                             <TableCell className="text-muted-foreground">{pass.number}</TableCell>
                             <TableCell className="text-muted-foreground">{pass.location}</TableCell>
@@ -318,6 +325,7 @@ function AdminDashboard() {
                         <TableRow>
                           <TableHead className="font-black uppercase text-xs tracking-wider">Name</TableHead>
                           <TableHead className="font-black uppercase text-xs tracking-wider">Age</TableHead>
+                          <TableHead className="font-black uppercase text-xs tracking-wider">Gender</TableHead>
                           <TableHead className="font-black uppercase text-xs tracking-wider">Email</TableHead>
                           <TableHead className="font-black uppercase text-xs tracking-wider">WhatsApp</TableHead>
                           <TableHead className="font-black uppercase text-xs tracking-wider">Locality</TableHead>
@@ -329,6 +337,7 @@ function AdminDashboard() {
                           <TableRow key={reg.id} className="font-semibold">
                             <TableCell className="font-bold text-foreground">{reg.name}</TableCell>
                             <TableCell className="text-muted-foreground">{reg.age}</TableCell>
+                            <TableCell className="text-muted-foreground">{reg.gender || 'N/A'}</TableCell>
                             <TableCell className="text-muted-foreground">{reg.mailId}</TableCell>
                             <TableCell className="text-muted-foreground">{reg.whatsappNumber}</TableCell>
                             <TableCell className="text-muted-foreground">{reg.locality}</TableCell>

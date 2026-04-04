@@ -23,6 +23,15 @@
           "type": "string",
           "description": "The location of the visitor."
         },
+        "gender": {
+          "type": "string",
+          "enum": [
+            "Male",
+            "Female",
+            "Other"
+          ],
+          "description": "The gender of the visitor."
+        },
         "registrationDate": {
           "type": "string",
           "description": "The date and time the visitor pass was registered.",
@@ -34,6 +43,7 @@
         "number",
         "mailId",
         "location",
+        "gender",
         "registrationDate"
       ]
     },
@@ -67,6 +77,15 @@
           "type": "number",
           "description": "The age of the participant."
         },
+        "gender": {
+          "type": "string",
+          "enum": [
+            "Male",
+            "Female",
+            "Other"
+          ],
+          "description": "The gender of the participant."
+        },
         "locality": {
           "type": "string",
           "description": "The locality of the participant."
@@ -89,6 +108,7 @@
       "required": [
         "name",
         "age",
+        "gender",
         "locality",
         "whatsappNumber",
         "mailId",

@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -8,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useFirestore } from '@/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
@@ -18,6 +20,7 @@ import { FirestorePermissionError } from '@/firebase/errors';
 const wellnessSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   age: z.coerce.number().min(1, { message: "Please enter a valid age." }).max(120),
+  gender: z.enum(["Male", "Female", "Other"], { required_error: "Please select gender." }),
   locality: z.string().min(2, { message: "Locality is required." }),
   whatsappNumber: z.string().regex(/^\+?[1-9]\d{1,14}$/, { message: "Please enter a valid WhatsApp number." }),
   mailId: z.string().email({ message: "Please enter a valid email address." }),
@@ -35,6 +38,7 @@ export function WellnessProgramForm() {
     defaultValues: {
       name: '',
       age: 0,
+      gender: undefined,
       locality: '',
       whatsappNumber: '',
       mailId: '',
@@ -116,6 +120,31 @@ export function WellnessProgramForm() {
           />
           <FormField
             control={form.control}
+            name="gender"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-[10px] font-black uppercase tracking-widest ml-1 text-slate-400">Gender</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger className="h-14 rounded-2xl border-slate-200">
+                      <SelectValue placeholder="Gender" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="Male">Male</SelectItem>
+                    <SelectItem value="Female">Female</SelectItem>
+                    <SelectItem value="Other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <FormField
+            control={form.control}
             name="age"
             render={({ field }) => (
               <FormItem>
@@ -127,21 +156,20 @@ export function WellnessProgramForm() {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="locality"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-[10px] font-black uppercase tracking-widest ml-1 text-slate-400">Locality</FormLabel>
+                <FormControl>
+                  <Input placeholder="City / Area" className="h-14 rounded-2xl border-slate-200" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
-
-        <FormField
-          control={form.control}
-          name="locality"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-[10px] font-black uppercase tracking-widest ml-1 text-slate-400">Locality</FormLabel>
-              <FormControl>
-                <Input placeholder="City / Area" className="h-14 rounded-2xl border-slate-200" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField
