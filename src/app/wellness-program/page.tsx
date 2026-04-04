@@ -56,8 +56,17 @@ export default function WellnessProgramPage() {
         <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
             
-            {/* Left Column: Details */}
-            <div className="lg:col-span-5 space-y-12">
+            {/* Registration Form - Priority order-1 on mobile, lg:order-2 on desktop */}
+            <div className="order-1 lg:order-2 lg:col-span-7 bg-white rounded-[4rem] p-10 md:p-16 border border-slate-100 shadow-2xl relative">
+              <div className="mb-10">
+                <h2 className="text-3xl font-black text-[hsl(93,20%,15%)] uppercase tracking-tight">Registration Form</h2>
+                <p className="text-slate-500 font-bold italic mt-2">Secure your spot for the Corporate Wellness Program.</p>
+              </div>
+              <WellnessProgramForm />
+            </div>
+
+            {/* Event Details - order-2 on mobile, lg:order-1 on desktop */}
+            <div className="order-2 lg:order-1 lg:col-span-5 space-y-12">
               <div className="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-2xl shadow-slate-100 relative overflow-hidden group">
                 <div className="relative z-10">
                   <h3 className="text-xs font-black text-[#ffa62f] uppercase tracking-[0.3em] mb-10">Program Highlights</h3>
@@ -109,15 +118,6 @@ export default function WellnessProgramPage() {
                   <li>• Holistic lifestyle ergonomics</li>
                 </ul>
               </div>
-            </div>
-
-            {/* Right Column: Form */}
-            <div className="lg:col-span-7 bg-white rounded-[4rem] p-10 md:p-16 border border-slate-100 shadow-2xl relative">
-              <div className="mb-10">
-                <h2 className="text-3xl font-black text-[hsl(93,20%,15%)] uppercase tracking-tight">Registration Form</h2>
-                <p className="text-slate-500 font-bold italic mt-2">Secure your spot for the Corporate Wellness Program.</p>
-              </div>
-              <WellnessProgramForm />
             </div>
 
           </div>
