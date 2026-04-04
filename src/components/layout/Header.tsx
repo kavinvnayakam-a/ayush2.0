@@ -33,9 +33,10 @@ export function Header() {
 
   const closeSheet = () => setSheetOpen(false);
 
-  // Return a consistent empty state during hydration to avoid mismatches
+  // Return null during hydration to ensure server/client HTML match exactly.
+  // The server and initial client render will both see 'null'.
   if (!mounted) {
-    return <div className="h-0 md:h-20" />;
+    return null;
   }
 
   // Hide header on wellness program standalone pages

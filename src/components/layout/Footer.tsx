@@ -52,9 +52,9 @@ export function Footer() {
     setMounted(true);
   }, []);
 
-  // Return consistent structural placeholder during hydration
+  // Return null during hydration to ensure server/client HTML match exactly.
   if (!mounted) {
-    return <div className="h-20 bg-[hsl(91,30%,96%)]" />;
+    return null;
   }
 
   // Hide footer on wellness program standalone pages
