@@ -52,8 +52,10 @@ export function Footer() {
     setMounted(true);
   }, []);
 
-  // Avoid hydration mismatch by not rendering path-dependent content on server
-  if (!mounted) return null;
+  // Return consistent structural placeholder during hydration
+  if (!mounted) {
+    return <div className="h-20 bg-[hsl(91,30%,96%)]" />;
+  }
 
   // Hide footer on wellness program standalone pages
   if (pathname && pathname.startsWith('/wellness-program')) {

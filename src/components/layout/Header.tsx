@@ -20,7 +20,7 @@ export function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSheetOpen, setSheetOpen] = useState(false);
-  const [mounted, setMounted] = useState(false); // Fix for Hydration Error
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -33,8 +33,10 @@ export function Header() {
 
   const closeSheet = () => setSheetOpen(false);
 
-  // Avoid rendering parts that depend on window/scroll until mounted
-  if (!mounted) return null;
+  // Return a consistent empty state during hydration to avoid mismatches
+  if (!mounted) {
+    return <div className="h-0 md:h-20" />;
+  }
 
   // Hide header on wellness program standalone pages
   if (pathname && pathname.startsWith('/wellness-program')) {
