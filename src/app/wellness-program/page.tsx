@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from 'react';
@@ -101,18 +100,6 @@ export default function WellnessProgramPage() {
               <WellnessProgramForm />
             </div>
 
-          </div>
-        </div>
-      </section>
-
-      {/* 3. ADDITIONAL INFO */}
-      <section className="py-24 bg-[hsl(91,30%,96%)]">
-        <div className="container mx-auto px-6 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl font-black text-[hsl(93,20%,15%)] uppercase mb-6">Invest in Your <span className="text-[hsl(93,45%,44%)]">People</span></h2>
-            <p className="text-lg font-bold text-slate-500 italic leading-relaxed">
-              Companies with robust wellness programs see a 25% reduction in absenteeism and health-related costs. Join us at Babuji Memorial Ashram to explore how traditional wisdom can scale your business health.
-            </p>
           </div>
         </div>
       </section>
