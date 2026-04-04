@@ -28,7 +28,7 @@ service cloud.firestore {
       allow read, update, delete, list: if false;
     }
 
-    // Job Portal Rules
+    // Job Portal Rules - Ensure public read access for job listings
     match /jobs/{jobId} {
       allow read: if true;
       allow write: if isAdmin();
