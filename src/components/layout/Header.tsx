@@ -36,6 +36,11 @@ export function Header() {
   // Avoid rendering parts that depend on window/scroll until mounted
   if (!mounted) return null;
 
+  // Hide header on wellness program standalone pages
+  if (pathname.startsWith('/wellness-program')) {
+    return null;
+  }
+
   return (
     <header 
       className={cn(

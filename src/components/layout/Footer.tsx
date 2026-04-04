@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { Facebook, Twitter, Instagram, ArrowUpRight, Mail } from 'lucide-react';
 
 const footerLinks = [
@@ -43,6 +44,13 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const pathname = usePathname();
+
+  // Hide footer on wellness program standalone pages
+  if (pathname.startsWith('/wellness-program')) {
+    return null;
+  }
+
   return (
     <footer className="relative bg-[hsl(91,30%,96%)] border-t border-[hsl(93,45%,44%)]/10 pt-20 pb-10 overflow-hidden">
       {/* Background Decor Orbs */}
