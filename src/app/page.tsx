@@ -142,7 +142,7 @@ export default function HomePage() {
                         />
                     </div>
                     
-                    {/* Mobile: Logo and Video Embed */}
+                    {/* Mobile: Logo */}
                     <div className="md:hidden w-full flex flex-col items-center">
                         <Image
                             src="https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F1000157891.webp?alt=media&token=4be2587a-1605-40c6-8bff-dc1472ecfe22"
@@ -151,16 +151,6 @@ export default function HomePage() {
                             height={150}
                             className="object-contain mb-4"
                         />
-                        <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
-                            <iframe
-                                className="w-full h-full"
-                                src="https://www.youtube.com/embed/TfYXTpADzXw?autoplay=1&mute=1&loop=1&playlist=TfYXTpADzXw&controls=1&showinfo=0&autohide=1"
-                                title="YouTube video player"
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowFullScreen
-                            ></iframe>
-                        </div>
                     </div>
                 </div>
             </div>
