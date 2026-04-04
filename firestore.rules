@@ -1,4 +1,3 @@
-
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -11,17 +10,17 @@ service cloud.firestore {
 
     match /visitor_passes/{visitorPassId} {
       allow create: if true;
-      allow read, update, delete, list: if isAdmin();
+      allow read, write: if isAdmin();
     }
 
     match /admin_roles/{uid} {
       allow get: if request.auth != null && request.auth.uid == uid;
-      allow create, update, delete, list: if isAdmin();
+      allow read, write: if isAdmin();
     }
 
     match /wellness_registrations/{registrationId} {
       allow create: if true;
-      allow read, update, delete, list: if isAdmin();
+      allow read, write: if isAdmin();
     }
 
     match /mail/{docId} {
@@ -31,7 +30,7 @@ service cloud.firestore {
 
     // Job Portal Rules
     match /jobs/{jobId} {
-      allow read, list: if true;
+      allow read: if true;
       allow write: if isAdmin();
     }
 
