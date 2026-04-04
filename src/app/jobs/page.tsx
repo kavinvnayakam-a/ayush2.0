@@ -305,24 +305,26 @@ export default function JobBoardPage() {
               )}
               
               <div className="p-8 md:p-12 overflow-y-auto">
-                <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-8">
-                  <div className="flex items-center gap-6">
-                    <div className="relative w-20 h-20 bg-slate-50 rounded-3xl border p-2 flex items-center justify-center shrink-0">
-                      {viewingJobDetails.logoUrl ? (
-                        <Image src={viewingJobDetails.logoUrl} alt="Logo" fill className="object-contain p-2" />
-                      ) : (
-                        <Building2 className="text-slate-300 h-10 w-10" />
-                      )}
+                <DialogHeader className="mb-8">
+                  <div className="flex flex-col md:flex-row justify-between items-start gap-6">
+                    <div className="flex items-center gap-6">
+                      <div className="relative w-20 h-20 bg-slate-50 rounded-3xl border p-2 flex items-center justify-center shrink-0">
+                        {viewingJobDetails.logoUrl ? (
+                          <Image src={viewingJobDetails.logoUrl} alt="Logo" fill className="object-contain p-2" />
+                        ) : (
+                          <Building2 className="text-slate-300 h-10 w-10" />
+                        )}
+                      </div>
+                      <div className="text-left">
+                        <DialogTitle className="text-3xl font-black uppercase text-foreground leading-tight">{viewingJobDetails.title}</DialogTitle>
+                        <DialogDescription className="text-primary font-bold text-lg opacity-100">{viewingJobDetails.company}</DialogDescription>
+                      </div>
                     </div>
-                    <div>
-                      <h2 className="text-3xl font-black uppercase text-foreground leading-tight">{viewingJobDetails.title}</h2>
-                      <p className="text-primary font-bold text-lg">{viewingJobDetails.company}</p>
-                    </div>
+                    <Badge className="bg-primary text-white font-black px-6 py-2 rounded-full uppercase tracking-widest text-[10px]">
+                      {viewingJobDetails.type}
+                    </Badge>
                   </div>
-                  <Badge className="bg-primary text-white font-black px-6 py-2 rounded-full uppercase tracking-widest text-[10px]">
-                    {viewingJobDetails.type}
-                  </Badge>
-                </div>
+                </DialogHeader>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
                   <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl">
