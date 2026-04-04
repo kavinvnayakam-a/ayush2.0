@@ -13,46 +13,8 @@ export default function WellnessProgramPage() {
   return (
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
       
-      {/* 1. HERO SECTION */}
-      <section className="relative pt-40 pb-20 overflow-hidden bg-[hsl(91,30%,96%)]">
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute top-[-10%] right-[-10%] w-[70%] h-[70%] bg-[hsl(93,45%,44%)]/10 blur-[120px] rounded-full animate-float" />
-          <div className="absolute bottom-[-10%] left-[-10%] w-[60%] h-[60%] bg-[#ffa62f]/10 blur-[100px] rounded-full animate-float [animation-duration:20s]" />
-        </div>
-
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Text Content */}
-            <div className="text-center lg:text-left space-y-6">
-              <div className="inline-flex items-center gap-2 bg-white px-6 py-2.5 rounded-full border border-[hsl(93,45%,44%)]/10 text-[hsl(93,45%,44%)] font-black text-xs tracking-[0.3em] uppercase mb-2 shadow-sm">
-                <Sparkles size={16} /> Transform Your Workplace
-              </div>
-              <h1 className="text-5xl md:text-7xl xl:text-8xl font-[1000] text-[hsl(93,20%,15%)] uppercase tracking-tighter leading-none">
-                Corporate <br/><span className="text-[hsl(93,45%,44%)] italic">Wellness</span> Program
-              </h1>
-              <p className="text-xl md:text-2xl font-bold text-[hsl(93,20%,15%)]/60 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                Enhance productivity, reduce stress, and foster a healthier organizational culture through ancient wisdom and modern wellness.
-              </p>
-            </div>
-
-            {/* Image Content */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-[500px] aspect-square rounded-[3rem] overflow-hidden border-8 border-white shadow-2xl transition-transform hover:scale-[1.02] duration-500">
-                <Image 
-                  src={heroImageUrl} 
-                  alt="Corporate Wellness Program" 
-                  fill 
-                  priority
-                  className="object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. EVENT INFO & FORM SECTION */}
-      <section className="py-24 px-6">
+      {/* 1. EVENT INFO & FORM SECTION - NOW AT THE TOP */}
+      <section className="pt-12 md:pt-20 pb-24 px-6">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
             
@@ -120,6 +82,44 @@ export default function WellnessProgramPage() {
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* 2. INTRO SECTION (MOVED BELOW FORM) */}
+      <section className="relative py-24 overflow-hidden bg-[hsl(91,30%,96%)]">
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute top-[-10%] right-[-10%] w-[70%] h-[70%] bg-[hsl(93,45%,44%)]/10 blur-[120px] rounded-full animate-float" />
+          <div className="absolute bottom-[-10%] left-[-10%] w-[60%] h-[60%] bg-[#ffa62f]/10 blur-[100px] rounded-full animate-float [animation-duration:20s]" />
+        </div>
+
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Text Content */}
+            <div className="text-center lg:text-left space-y-6">
+              <div className="inline-flex items-center gap-2 bg-white px-6 py-2.5 rounded-full border border-[hsl(93,45%,44%)]/10 text-[hsl(93,45%,44%)] font-black text-xs tracking-[0.3em] uppercase mb-2 shadow-sm">
+                <Sparkles size={16} /> Transform Your Workplace
+              </div>
+              <h1 className="text-5xl md:text-7xl xl:text-8xl font-[1000] text-[hsl(93,20%,15%)] uppercase tracking-tighter leading-none">
+                Corporate <br/><span className="text-[hsl(93,45%,44%)] italic">Wellness</span> Program
+              </h1>
+              <p className="text-xl md:text-2xl font-bold text-[hsl(93,20%,15%)]/60 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                Enhance productivity, reduce stress, and foster a healthier organizational culture through ancient wisdom and modern wellness.
+              </p>
+            </div>
+
+            {/* Image Content */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative w-full max-w-[500px] aspect-square rounded-[3rem] overflow-hidden border-8 border-white shadow-2xl transition-transform hover:scale-[1.02] duration-500">
+                <Image 
+                  src={heroImageUrl} 
+                  alt="Corporate Wellness Program" 
+                  fill 
+                  loading="lazy"
+                  className="object-cover"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
