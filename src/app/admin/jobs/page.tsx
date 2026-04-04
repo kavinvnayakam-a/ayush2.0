@@ -11,7 +11,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { collection, query, orderBy, addDoc, updateDoc, serverTimestamp, doc, deleteDoc } from 'firebase/firestore';
-import { Briefcase, Plus, Users, Trash2, ExternalLink, ShieldCheck, Mail, Building2, LayoutDashboard, Edit3, Eye, Phone, MessageSquare, User, GraduationCap, History } from 'lucide-react';
+import { Briefcase, Plus, Users, Trash2, ExternalLink, ShieldCheck, Mail, Building2, LayoutDashboard, Edit3, Eye, Phone, MessageSquare, User, GraduationCap, History, FileText } from 'lucide-react';
 import { useDoc } from '@/firebase/firestore/use-doc';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
@@ -24,6 +24,7 @@ interface Job {
   location: string;
   type: string;
   description: string;
+  requirements?: string;
   salary: string;
   logoUrl?: string;
   bannerUrl?: string;
@@ -101,6 +102,7 @@ export default function AdminJobPortal() {
       type: formData.get('type'),
       salary: formData.get('salary'),
       description: formData.get('description'),
+      requirements: formData.get('requirements'),
       logoUrl: formData.get('logoUrl'),
       bannerUrl: formData.get('bannerUrl'),
     };
@@ -248,8 +250,12 @@ export default function AdminJobPortal() {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Description</label>
-                    <Textarea name="description" rows={6} className="rounded-2xl" placeholder="Provide full job details..." required />
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Job Description</label>
+                    <Textarea name="description" rows={4} className="rounded-2xl" placeholder="Provide full job details..." required />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Candidate Requirements</label>
+                    <Textarea name="requirements" rows={4} className="rounded-2xl" placeholder="List qualification, experience, skills needed..." />
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
@@ -349,8 +355,12 @@ export default function AdminJobPortal() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Description</label>
-                  <Textarea name="description" defaultValue={editingJob.description} rows={6} className="rounded-2xl" required />
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Job Description</label>
+                  <Textarea name="description" defaultValue={editingJob.description} rows={4} className="rounded-2xl" required />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Candidate Requirements</label>
+                  <Textarea name="requirements" defaultValue={editingJob.requirements} rows={4} className="rounded-2xl" />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">

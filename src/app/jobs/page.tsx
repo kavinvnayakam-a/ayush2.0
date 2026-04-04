@@ -7,11 +7,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { Search, MapPin, Building2, Briefcase, ChevronRight, UserCircle, LogIn, AlertCircle } from 'lucide-react';
+import { Search, MapPin, Building2, Briefcase, ChevronRight, UserCircle, LogIn, AlertCircle, FileText, ListChecks } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface Job {
   id: string;
@@ -20,6 +21,7 @@ interface Job {
   location: string;
   type: string;
   description: string;
+  requirements?: string;
   logoUrl?: string;
   bannerUrl?: string;
   salary?: string;
@@ -31,6 +33,7 @@ export default function JobBoardPage() {
   const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+  const [viewingJobDetails, setViewingJobDetails] = useState<Job | null>(null);
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
 
   // Fetch User Profile to check for completeness
@@ -62,7 +65,7 @@ export default function JobBoardPage() {
     profile.skills && 
     profile.experience);
 
-  const handleApply = async (job: Job) => {
+  const handleApply = (job: Job) => {
     if (!user) {
       toast({
         title: 'Authentication Required',
@@ -83,6 +86,7 @@ export default function JobBoardPage() {
 
     setSelectedJob(job);
     setIsApplyModalOpen(true);
+    setViewingJobDetails(null); // Close details modal if open
   };
 
   const confirmApplication = async () => {
@@ -219,7 +223,7 @@ export default function JobBoardPage() {
         ) : filteredJobs && filteredJobs.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredJobs.map((job) => (
-              <Card key={job.id} className="group rounded-[2.5rem] bg-white border-white shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden">
+              <Card key={job.id} className="group rounded-[2.5rem] bg-white border-white shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col h-full">
                 {job.bannerUrl && (
                   <div className="relative h-32 w-full">
                     <Image src={job.bannerUrl} alt="Banner" fill className="object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" />
@@ -246,7 +250,7 @@ export default function JobBoardPage() {
                     <Building2 size={14} className="text-primary" /> {job.company}
                   </p>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-6 flex-1 flex flex-col">
                   <div className="flex flex-wrap gap-4 text-xs font-black text-slate-400 uppercase tracking-widest">
                     <div className="flex items-center gap-1.5">
                       <MapPin size={14} className="text-orange-500" /> {job.location}
@@ -257,15 +261,24 @@ export default function JobBoardPage() {
                       </div>
                     )}
                   </div>
-                  <p className="text-sm text-slate-500 font-medium line-clamp-3 italic">
+                  <p className="text-sm text-slate-500 font-medium line-clamp-3 italic flex-1">
                     {job.description}
                   </p>
-                  <Button 
-                    onClick={() => handleApply(job)}
-                    className="w-full h-14 rounded-2xl bg-slate-900 text-white font-black uppercase tracking-widest hover:bg-primary transition-all group"
-                  >
-                    Apply Now <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                  <div className="grid grid-cols-2 gap-3 mt-auto pt-4">
+                    <Button 
+                      variant="outline"
+                      onClick={() => setViewingJobDetails(job)}
+                      className="h-14 rounded-2xl font-bold uppercase text-xs border-2 hover:bg-slate-50"
+                    >
+                      View Details
+                    </Button>
+                    <Button 
+                      onClick={() => handleApply(job)}
+                      className="h-14 rounded-2xl bg-slate-900 text-white font-black uppercase tracking-widest hover:bg-primary transition-all text-xs"
+                    >
+                      Apply Now <ChevronRight className="ml-1 h-4 w-4" />
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -278,6 +291,98 @@ export default function JobBoardPage() {
           </div>
         )}
       </div>
+
+      {/* Job Details Dialog */}
+      <Dialog open={!!viewingJobDetails} onOpenChange={(open) => !open && setViewingJobDetails(null)}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0 rounded-[3rem] border-none shadow-2xl">
+          {viewingJobDetails && (
+            <div className="flex flex-col h-full">
+              {viewingJobDetails.bannerUrl && (
+                <div className="relative h-48 w-full shrink-0">
+                  <Image src={viewingJobDetails.bannerUrl} alt="Banner" fill className="object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />
+                </div>
+              )}
+              
+              <div className="p-8 md:p-12 overflow-y-auto">
+                <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-8">
+                  <div className="flex items-center gap-6">
+                    <div className="relative w-20 h-20 bg-slate-50 rounded-3xl border p-2 flex items-center justify-center shrink-0">
+                      {viewingJobDetails.logoUrl ? (
+                        <Image src={viewingJobDetails.logoUrl} alt="Logo" fill className="object-contain p-2" />
+                      ) : (
+                        <Building2 className="text-slate-300 h-10 w-10" />
+                      )}
+                    </div>
+                    <div>
+                      <h2 className="text-3xl font-black uppercase text-foreground leading-tight">{viewingJobDetails.title}</h2>
+                      <p className="text-primary font-bold text-lg">{viewingJobDetails.company}</p>
+                    </div>
+                  </div>
+                  <Badge className="bg-primary text-white font-black px-6 py-2 rounded-full uppercase tracking-widest text-[10px]">
+                    {viewingJobDetails.type}
+                  </Badge>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+                  <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl">
+                    <MapPin className="text-orange-500" size={20} />
+                    <div>
+                      <p className="text-[10px] font-black uppercase text-slate-400">Location</p>
+                      <p className="font-bold">{viewingJobDetails.location}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl">
+                    <Briefcase className="text-primary" size={20} />
+                    <div>
+                      <p className="text-[10px] font-black uppercase text-slate-400">Offered Salary</p>
+                      <p className="font-bold">{viewingJobDetails.salary || 'Negotiable'}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-8">
+                  <div>
+                    <h3 className="text-xs font-black uppercase tracking-[0.2em] text-primary mb-4 flex items-center gap-2">
+                      <FileText size={16} /> Job Description
+                    </h3>
+                    <div className="text-slate-600 leading-relaxed whitespace-pre-wrap font-medium bg-slate-50/50 p-6 rounded-3xl border border-slate-100">
+                      {viewingJobDetails.description}
+                    </div>
+                  </div>
+
+                  {viewingJobDetails.requirements && (
+                    <div>
+                      <h3 className="text-xs font-black uppercase tracking-[0.2em] text-orange-500 mb-4 flex items-center gap-2">
+                        <ListChecks size={16} /> Candidate Requirements
+                      </h3>
+                      <div className="text-slate-600 leading-relaxed whitespace-pre-wrap font-medium bg-orange-50/30 p-6 rounded-3xl border border-orange-100">
+                        {viewingJobDetails.requirements}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="p-8 bg-white border-t flex flex-col sm:flex-row gap-4 shrink-0">
+                <Button 
+                  onClick={() => handleApply(viewingJobDetails)}
+                  className="flex-1 h-16 bg-slate-900 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-primary transition-all shadow-xl"
+                >
+                  Apply For This Position
+                </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={() => setViewingJobDetails(null)} 
+                  className="h-16 px-10 rounded-2xl font-bold uppercase border-2"
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       {/* Application Dialog */}
       <Dialog open={isApplyModalOpen} onOpenChange={setIsApplyModalOpen}>
