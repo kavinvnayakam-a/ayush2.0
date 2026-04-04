@@ -33,11 +33,12 @@ export function initializeFirebase() {
 }
 
 export function getSdks(firebaseApp: FirebaseApp) {
-  // Removed custom databaseId to use (default) as requested by the client's runtime environment
+  // Updated to use the custom database name 'ayush' as requested.
+  // This ensures all Firestore operations target the correct instance where your data resides.
   return {
     firebaseApp,
     auth: getAuth(firebaseApp),
-    firestore: getFirestore(firebaseApp)
+    firestore: getFirestore(firebaseApp, 'ayush')
   };
 }
 
