@@ -1,10 +1,16 @@
-
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ShieldCheck } from 'lucide-react';
 
 export default function PrivacyPolicyPage() {
+  const [currentDate, setCurrentDate] = useState<string>('');
+
+  useEffect(() => {
+    // Set date only on the client to avoid hydration mismatch
+    setCurrentDate(new Date().toLocaleDateString());
+  }, []);
+
   return (
     <main className="min-h-screen bg-slate-50 selection:bg-[hsl(93,45%,44%)] selection:text-white">
       <div className="container mx-auto px-6 py-32 md:py-40">
@@ -17,7 +23,7 @@ export default function PrivacyPolicyPage() {
             <h1 className="text-4xl md:text-6xl font-black text-[hsl(93,20%,15%)] uppercase tracking-tighter">
               Privacy Policy
             </h1>
-            <p className="text-lg text-slate-500 font-bold mt-2">Last updated: {new Date().toLocaleDateString()}</p>
+            <p className="text-lg text-slate-500 font-bold mt-2">Last updated: {currentDate || '...'}</p>
           </div>
 
           <div className="prose prose-lg max-w-none bg-white p-8 md:p-12 rounded-3xl border shadow-xl shadow-slate-100">

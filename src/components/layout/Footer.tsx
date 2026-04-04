@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -45,9 +46,17 @@ const socialLinks = [
 
 export function Footer() {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Avoid hydration mismatch by not rendering path-dependent content on server
+  if (!mounted) return null;
 
   // Hide footer on wellness program standalone pages
-  if (pathname.startsWith('/wellness-program')) {
+  if (pathname && pathname.startsWith('/wellness-program')) {
     return null;
   }
 

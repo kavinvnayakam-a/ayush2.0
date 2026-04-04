@@ -37,7 +37,7 @@ export function Header() {
   if (!mounted) return null;
 
   // Hide header on wellness program standalone pages
-  if (pathname.startsWith('/wellness-program')) {
+  if (pathname && pathname.startsWith('/wellness-program')) {
     return null;
   }
 
