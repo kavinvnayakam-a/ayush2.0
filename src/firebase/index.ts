@@ -33,8 +33,7 @@ export function initializeFirebase() {
 }
 
 export function getSdks(firebaseApp: FirebaseApp) {
-  // Updated to use the custom database name 'ayush' as requested.
-  // This ensures all Firestore operations target the correct instance where your data resides.
+  // Explicitly targeting the 'ayush' database instance as requested.
   return {
     firebaseApp,
     auth: getAuth(firebaseApp),
