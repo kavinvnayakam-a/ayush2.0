@@ -114,6 +114,53 @@
         "mailId",
         "registrationDate"
       ]
+    },
+    "Job": {
+      "title": "Job Posting",
+      "type": "object",
+      "description": "Represents a job opening in the portal.",
+      "properties": {
+        "title": { "type": "string" },
+        "company": { "type": "string" },
+        "location": { "type": "string" },
+        "type": { "type": "string", "enum": ["Full-time", "Part-time", "Contract", "Internship"] },
+        "description": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "bannerUrl": { "type": "string" },
+        "requirements": { "type": "string" },
+        "salary": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "company", "description", "createdAt"]
+    },
+    "JobSeekerProfile": {
+      "title": "Job Seeker Profile",
+      "type": "object",
+      "description": "Basic details of a candidate.",
+      "properties": {
+        "fullName": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "resumeUrl": { "type": "string", "description": "Link to hosted resume" },
+        "skills": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["fullName", "email"]
+    },
+    "JobApplication": {
+      "title": "Job Application",
+      "type": "object",
+      "description": "A candidate's application for a specific job.",
+      "properties": {
+        "jobId": { "type": "string" },
+        "userId": { "type": "string" },
+        "applicantName": { "type": "string" },
+        "applicantEmail": { "type": "string" },
+        "resumeUrl": { "type": "string" },
+        "status": { "type": "string", "enum": ["Pending", "Reviewed", "Shortlisted", "Rejected"] },
+        "appliedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["jobId", "userId", "applicantName", "appliedAt"]
     }
   },
   "auth": {
@@ -122,81 +169,54 @@
     ]
   },
   "firestore": {
-    "collection_groups": [
-      {
-        "collectionId": "visitor_passes",
-        "rules": [
-          {
-            "allow": "read, list",
-            "if": "isAdmin()"
-          },
-          {
-            "allow": "create",
-            "if": "true"
-          }
-        ]
-      },
-      {
-        "collectionId": "wellness_registrations",
-        "rules": [
-          {
-            "allow": "read, list",
-            "if": "isAdmin()"
-          },
-          {
-            "allow": "create",
-            "if": "true"
-          }
-        ]
-      }
-    ],
+    "collection_groups": [],
     "structure": [
       {
         "path": "/visitor_passes/{visitorPassId}",
         "definition": {
           "entityName": "VisitorPass",
-          "schema": {
-            "$ref": "#/backend/entities/VisitorPass"
-          },
-          "description": "Stores visitor pass information.",
-          "params": [
-            {
-              "name": "visitorPassId",
-              "description": "Unique identifier for the visitor pass."
-            }
-          ]
+          "schema": { "$ref": "#/backend/entities/VisitorPass" },
+          "description": "Stores visitor pass information."
         }
       },
       {
         "path": "/admin_roles/{uid}",
         "definition": {
           "entityName": "AdminRole",
-          "schema": {
-            "$ref": "#/backend/entities/AdminRole"
-          },
-          "description": "Documents in this collection indicate admin status. The existence of a document with the user's UID grants admin privileges.",
-          "params": [
-            {
-              "name": "uid",
-              "description": "The Firebase Auth UID of the user."
-            }
-          ]
+          "schema": { "$ref": "#/backend/entities/AdminRole" },
+          "description": "Admin status documents."
         }
       },
       {
         "path": "/wellness_registrations/{registrationId}",
         "definition": {
           "entityName": "CorporateWellnessRegistration",
-          "schema": {
-            "$ref": "#/backend/entities/CorporateWellnessRegistration"
-          },
-          "description": "Stores registrations for the Corporate Wellness Program.",
-          "params": [
-            {
-              "name": "registrationId",
-              "description": "Unique identifier for the wellness registration."
-            }
-          ]
+          "schema": { "$ref": "#/backend/entities/CorporateWellnessRegistration" },
+          "description": "Wellness program registrations."
+        }
+      },
+      {
+        "path": "/jobs/{jobId}",
+        "definition": {
+          "entityName": "Job",
+          "schema": { "$ref": "#/backend/entities/Job" },
+          "description": "Public job postings."
+        }
+      },
+      {
+        "path": "/seeker_profiles/{userId}",
+        "definition": {
+          "entityName": "JobSeekerProfile",
+          "schema": { "$ref": "#/backend/entities/JobSeekerProfile" },
+          "description": "User profile data."
+        }
+      },
+      {
+        "path": "/job_applications/{applicationId}",
+        "definition": {
+          "entityName": "JobApplication",
+          "schema": { "$ref": "#/backend/entities/JobApplication" },
+          "description": "Applications submitted for jobs."
         }
       }
     ]
