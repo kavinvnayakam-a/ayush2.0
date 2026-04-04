@@ -2,13 +2,13 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useFirestore, useCollection, useMemoFirebase, useUser } from '@/firebase';
-import { collection, query, orderBy, addDoc, serverTimestamp } from 'firebase/firestore';
+import { useFirestore, useCollection, useMemoFirebase, useUser, useDoc } from '@/firebase';
+import { collection, query, orderBy, addDoc, serverTimestamp, doc } from 'firebase/firestore';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { Search, MapPin, Building2, Clock, Briefcase, ChevronRight, UserCircle, LogIn, Send } from 'lucide-react';
+import { Search, MapPin, Building2, Briefcase, ChevronRight, UserCircle, LogIn, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
@@ -34,6 +34,13 @@ export default function JobBoardPage() {
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
 
+  // Fetch User Profile to check for completeness
+  const profileRef = useMemoFirebase(() => {
+    if (!firestore || !user) return null;
+    return doc(firestore, 'seeker_profiles', user.uid);
+  }, [firestore, user]);
+  const { data: profile } = useDoc(profileRef);
+
   const jobsQuery = useMemoFirebase(() => {
     if (!firestore) return null;
     return query(collection(firestore, 'jobs'), orderBy('createdAt', 'desc'));
@@ -46,6 +53,16 @@ export default function JobBoardPage() {
     job.company.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const isProfileComplete = profile && 
+    profile.fullName && 
+    profile.age && 
+    profile.gender && 
+    profile.phone && 
+    profile.whatsappNumber && 
+    profile.resumeUrl && 
+    profile.skills && 
+    profile.experience;
+
   const handleApply = async (job: Job) => {
     if (!user) {
       toast({
@@ -55,27 +72,93 @@ export default function JobBoardPage() {
       });
       return;
     }
+
+    if (!isProfileComplete) {
+      toast({
+        title: 'Profile Incomplete',
+        description: 'Please complete all mandatory fields in your profile before applying.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     setSelectedJob(job);
     setIsApplyModalOpen(true);
   };
 
   const confirmApplication = async () => {
-    if (!firestore || !user || !selectedJob) return;
+    if (!firestore || !user || !selectedJob || !profile) return;
 
     try {
+      // 1. Record Application
       await addDoc(collection(firestore, 'job_applications'), {
         jobId: selectedJob.id,
         jobTitle: selectedJob.title,
         userId: user.uid,
-        applicantName: user.displayName || user.email?.split('@')[0] || 'Applicant',
+        applicantName: profile.fullName,
         applicantEmail: user.email,
+        phone: profile.phone,
+        whatsappNumber: profile.whatsappNumber,
+        resumeUrl: profile.resumeUrl,
+        age: profile.age,
+        gender: profile.gender,
+        skills: profile.skills,
+        experience: profile.experience,
         status: 'Pending',
         appliedAt: serverTimestamp(),
       });
 
+      // 2. Send Confirmation Email to Applicant
+      await addDoc(collection(firestore, 'mail'), {
+        to: user.email,
+        message: {
+          subject: `Application Received: ${selectedJob.title}`,
+          html: `
+            <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+              <h2 style="color: #6CA33F;">Application Submitted Successfully!</h2>
+              <p>Hello <strong>${profile.fullName}</strong>,</p>
+              <p>Thank you for applying for the position of <strong>${selectedJob.title}</strong> at <strong>${selectedJob.company}</strong> through the AyushConclave Job Portal.</p>
+              <p>Our team will review your profile and get back to you if your qualifications match our requirements.</p>
+              <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                <p><strong>Job Details:</strong></p>
+                <p>Position: ${selectedJob.title}</p>
+                <p>Company: ${selectedJob.company}</p>
+                <p>Location: ${selectedJob.location}</p>
+              </div>
+              <p>Best regards,<br/>AyushConclave HR Team</p>
+            </div>
+          `,
+        }
+      });
+
+      // 3. Send Notification Email to Admin (mainadmin@shreevarma.org)
+      await addDoc(collection(firestore, 'mail'), {
+        to: 'mainadmin@shreevarma.org',
+        message: {
+          subject: `New Job Application: ${selectedJob.title} - ${profile.fullName}`,
+          html: `
+            <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+              <h2 style="color: #ffa62f;">New Candidate Application</h2>
+              <p>A new application has been received for <strong>${selectedJob.title}</strong>.</p>
+              <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                <p><strong>Candidate Details:</strong></p>
+                <p>Name: ${profile.fullName}</p>
+                <p>Email: ${user.email}</p>
+                <p>Phone: ${profile.phone}</p>
+                <p>WhatsApp: ${profile.whatsappNumber}</p>
+                <p>Age: ${profile.age} | Gender: ${profile.gender}</p>
+                <p>Resume: <a href="${profile.resumeUrl}">${profile.resumeUrl}</a></p>
+                <p>Skills: ${profile.skills}</p>
+              </div>
+              <p>Review this application in the <a href="https://ayushconclave.com/admin/jobs">Admin Job Portal</a>.</p>
+            </div>
+          `,
+        }
+      });
+
       toast({
         title: 'Application Sent!',
-        description: `You've successfully applied for ${selectedJob.title}.`,
+        description: `You've successfully applied for ${selectedJob.title}. Confirmation emails have been sent.`,
       });
       setIsApplyModalOpen(false);
     } catch (e: any) {
@@ -95,13 +178,20 @@ export default function JobBoardPage() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
           <div className="text-center md:text-left">
             <h1 className="text-4xl md:text-6xl font-black text-foreground uppercase tracking-tight">Job <span className="text-primary italic">Portal</span></h1>
-            <p className="text-muted-foreground font-bold italic">Find your dream role in AYUSH and Holistic Health</p>
+            <p className="text-muted-foreground font-bold italic">Bridging talent with ancient wisdom and modern health</p>
           </div>
           <div className="flex items-center gap-4">
             {user ? (
-              <Button asChild variant="outline" className="rounded-full font-bold px-6 border-2">
-                <Link href="/jobs/profile"><UserCircle className="mr-2 h-5 w-5" /> Profile</Link>
-              </Button>
+              <div className="flex items-center gap-4">
+                {!isProfileComplete && (
+                  <Badge variant="destructive" className="animate-pulse px-4 py-1.5 rounded-full font-black text-[10px] uppercase">
+                    Profile Incomplete
+                  </Badge>
+                )}
+                <Button asChild variant="outline" className="rounded-full font-bold px-6 border-2">
+                  <Link href="/jobs/profile"><UserCircle className="mr-2 h-5 w-5" /> Profile</Link>
+                </Button>
+              </div>
             ) : (
               <Button asChild className="rounded-full font-black px-8 bg-primary hover:bg-accent transition-all">
                 <Link href="/jobs/auth"><LogIn className="mr-2 h-5 w-5" /> Sign In</Link>
@@ -199,10 +289,13 @@ export default function JobBoardPage() {
               Apply for <span className="text-primary font-black uppercase">{selectedJob?.title}</span> at {selectedJob?.company}.
             </DialogDescription>
           </DialogHeader>
-          <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 my-6">
-            <p className="text-sm font-medium text-slate-600 leading-relaxed">
-              By clicking "Confirm", your profile details (Name, Email, Resume Link) will be sent to the hiring team. Ensure your profile is up-to-date in the Seeker Portal.
-            </p>
+          <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 my-6 space-y-4">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="text-primary h-5 w-5 shrink-0 mt-0.5" />
+              <p className="text-sm font-medium text-slate-600 leading-relaxed">
+                By clicking "Confirm", your complete professional profile (Name, Phone, WhatsApp, Age, Gender, Skills, Experience, and Resume Link) will be shared with <strong>${selectedJob?.company}</strong> and the AyushConclave Admin team.
+              </p>
+            </div>
           </div>
           <DialogFooter className="gap-4">
             <Button variant="ghost" onClick={() => setIsApplyModalOpen(false)} className="font-bold uppercase">Cancel</Button>

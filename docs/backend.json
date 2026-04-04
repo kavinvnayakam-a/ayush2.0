@@ -136,16 +136,20 @@
     "JobSeekerProfile": {
       "title": "Job Seeker Profile",
       "type": "object",
-      "description": "Basic details of a candidate.",
+      "description": "Complete details of a candidate.",
       "properties": {
         "fullName": { "type": "string" },
         "email": { "type": "string", "format": "email" },
+        "age": { "type": "number" },
+        "gender": { "type": "string", "enum": ["Male", "Female", "Other"] },
         "phone": { "type": "string" },
-        "resumeUrl": { "type": "string", "description": "Link to hosted resume" },
+        "whatsappNumber": { "type": "string" },
+        "resumeUrl": { "type": "string" },
         "skills": { "type": "string" },
+        "experience": { "type": "string" },
         "updatedAt": { "type": "string", "format": "date-time" }
       },
-      "required": ["fullName", "email"]
+      "required": ["fullName", "email", "age", "gender", "phone", "whatsappNumber", "resumeUrl", "skills", "experience"]
     },
     "JobApplication": {
       "title": "Job Application",
@@ -153,10 +157,17 @@
       "description": "A candidate's application for a specific job.",
       "properties": {
         "jobId": { "type": "string" },
+        "jobTitle": { "type": "string" },
         "userId": { "type": "string" },
         "applicantName": { "type": "string" },
         "applicantEmail": { "type": "string" },
+        "phone": { "type": "string" },
+        "whatsappNumber": { "type": "string" },
         "resumeUrl": { "type": "string" },
+        "age": { "type": "number" },
+        "gender": { "type": "string" },
+        "skills": { "type": "string" },
+        "experience": { "type": "string" },
         "status": { "type": "string", "enum": ["Pending", "Reviewed", "Shortlisted", "Rejected"] },
         "appliedAt": { "type": "string", "format": "date-time" }
       },
