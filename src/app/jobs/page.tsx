@@ -294,10 +294,10 @@ export default function JobBoardPage() {
 
       {/* Job Details Dialog */}
       <Dialog open={!!viewingJobDetails} onOpenChange={(open) => !open && setViewingJobDetails(null)}>
-        <DialogContent className="max-w-4xl w-[95vw] h-[90vh] md:h-auto max-h-[90vh] overflow-hidden p-0 rounded-[2rem] md:rounded-[3rem] border-none shadow-2xl z-[100]">
+        <DialogContent className="max-w-4xl w-[95vw] h-[90vh] p-0 rounded-[2rem] md:rounded-[3rem] border-none shadow-2xl z-[100] flex flex-col overflow-hidden">
           {viewingJobDetails && (
-            <div className="flex flex-col h-full bg-white">
-              {/* Banner Area */}
+            <div className="flex flex-col h-full bg-white overflow-hidden">
+              {/* Banner Area - Fixed height */}
               <div className="relative h-32 md:h-56 w-full shrink-0">
                 {viewingJobDetails.bannerUrl ? (
                   <Image src={viewingJobDetails.bannerUrl} alt="Banner" fill className="object-cover" />
@@ -313,35 +313,39 @@ export default function JobBoardPage() {
                 </button>
               </div>
               
-              <div className="relative px-6 md:px-12 pb-6 flex-1 overflow-hidden flex flex-col">
-                {/* Header Information Overlay */}
-                <div className="relative -mt-10 md:-mt-16 mb-8 flex flex-col md:flex-row items-center md:items-end justify-between gap-6 z-10">
-                  <div className="flex flex-col md:flex-row items-center md:items-end gap-6 w-full">
-                    <div className="relative w-24 h-24 md:w-32 md:h-32 bg-white rounded-[2rem] md:rounded-[2.5rem] border-4 border-white shadow-2xl p-3 flex items-center justify-center shrink-0">
-                      {viewingJobDetails.logoUrl ? (
-                        <Image src={viewingJobDetails.logoUrl} alt="Logo" fill className="object-contain p-4" />
-                      ) : (
-                        <Building2 className="text-slate-200 h-12 w-12" />
-                      )}
+              {/* Main Content Area - Scrollable */}
+              <div className="flex-1 relative flex flex-col min-h-0">
+                {/* Header Information Overlay - Partially sits on banner */}
+                <div className="relative z-10 px-6 md:px-12 -mt-10 md:-mt-16 shrink-0">
+                  <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-6">
+                    <div className="flex flex-col md:flex-row items-center md:items-end gap-6 w-full">
+                      <div className="relative w-24 h-24 md:w-32 md:h-32 bg-white rounded-[2rem] md:rounded-[2.5rem] border-4 border-white shadow-2xl p-3 flex items-center justify-center shrink-0">
+                        {viewingJobDetails.logoUrl ? (
+                          <Image src={viewingJobDetails.logoUrl} alt="Logo" fill className="object-contain p-4" />
+                        ) : (
+                          <Building2 className="text-slate-200 h-12 w-12" />
+                        )}
+                      </div>
+                      <div className="text-center md:text-left flex-1">
+                        <DialogHeader>
+                          <DialogTitle className="text-2xl md:text-4xl font-black uppercase text-foreground leading-none tracking-tighter mb-2">
+                            {viewingJobDetails.title}
+                          </DialogTitle>
+                          <DialogDescription className="text-primary font-black text-lg md:text-xl uppercase tracking-tight flex items-center justify-center md:justify-start gap-2">
+                            {viewingJobDetails.company}
+                          </DialogDescription>
+                        </DialogHeader>
+                      </div>
                     </div>
-                    <div className="text-center md:text-left flex-1">
-                      <DialogHeader>
-                        <DialogTitle className="text-2xl md:text-4xl font-black uppercase text-foreground leading-none tracking-tighter mb-2">
-                          {viewingJobDetails.title}
-                        </DialogTitle>
-                        <DialogDescription className="text-primary font-black text-lg md:text-xl uppercase tracking-tight flex items-center justify-center md:justify-start gap-2">
-                          {viewingJobDetails.company}
-                        </DialogDescription>
-                      </DialogHeader>
-                    </div>
+                    <Badge className="bg-[hsl(93,45%,44%)] text-white font-black px-6 py-2.5 rounded-full uppercase tracking-widest text-[10px] shadow-lg shadow-primary/20 shrink-0">
+                      {viewingJobDetails.type}
+                    </Badge>
                   </div>
-                  <Badge className="bg-[hsl(93,45%,44%)] text-white font-black px-6 py-2.5 rounded-full uppercase tracking-widest text-[10px] shadow-lg shadow-primary/20">
-                    {viewingJobDetails.type}
-                  </Badge>
                 </div>
 
-                <ScrollArea className="flex-1 -mx-6 md:-mx-12 px-6 md:px-12">
-                  <div className="py-2 space-y-10">
+                {/* Scrollable body content */}
+                <ScrollArea className="flex-1 px-6 md:px-12 mt-8 md:mt-12 overflow-hidden">
+                  <div className="pb-10 space-y-10">
                     {/* Quick Info Grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                       <div className="flex items-center gap-4 p-5 bg-[hsl(91,30%,96%)] rounded-[1.5rem] border border-white">
@@ -401,8 +405,8 @@ export default function JobBoardPage() {
                 </ScrollArea>
               </div>
 
-              {/* Action Footer */}
-              <div className="p-6 md:p-8 bg-slate-50 border-t border-slate-100 flex flex-col sm:flex-row gap-4 shrink-0 shadow-[0_-10px_40px_rgba(0,0,0,0.02)]">
+              {/* Action Footer - Sticky at bottom */}
+              <div className="p-6 md:p-8 bg-slate-50 border-t border-slate-100 flex flex-col sm:flex-row gap-4 shrink-0 shadow-[0_-10px_40px_rgba(0,0,0,0.02)] mt-auto">
                 <Button 
                   onClick={() => handleApply(viewingJobDetails)}
                   className="flex-1 h-16 bg-slate-900 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-primary transition-all shadow-xl shadow-slate-200"
@@ -422,7 +426,7 @@ export default function JobBoardPage() {
         </DialogContent>
       </Dialog>
 
-      {/* Application Dialog */}
+      {/* Application Confirmation Dialog */}
       <Dialog open={isApplyModalOpen} onOpenChange={setIsApplyModalOpen}>
         <DialogContent className="rounded-[2.5rem] p-10 z-[110]">
           <DialogHeader>
