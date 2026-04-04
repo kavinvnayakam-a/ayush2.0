@@ -57,6 +57,7 @@ export default function AdminJobPortal() {
   const [isPosting, setIsPosting] = useState(false);
   const [editingJob, setEditingJob] = useState<Job | null>(null);
   const [viewingApp, setViewApp] = useState<Application | null>(null);
+  const [activeTab, setActiveTab] = useState('list');
 
   // RBAC
   const adminRoleRef = useMemoFirebase(() => {
@@ -90,7 +91,8 @@ export default function AdminJobPortal() {
     e.preventDefault();
     if (!firestore) return;
     setIsPosting(true);
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     
     const jobData = {
       title: formData.get('title'),
@@ -114,8 +116,8 @@ export default function AdminJobPortal() {
           createdAt: serverTimestamp(),
         });
         toast({ title: 'Job Posted!', description: 'The listing is now live.' });
+        form.reset();
       }
-      (e.target as HTMLFormElement).reset();
     } catch (e: any) {
       toast({ variant: 'destructive', title: 'Error', description: e.message });
     } finally {
@@ -148,7 +150,15 @@ export default function AdminJobPortal() {
           </Button>
         </header>
 
-        <Tabs defaultValue="list" className="w-full space-y-8">
+        <Tabs 
+          defaultValue="list" 
+          className="w-full space-y-8" 
+          value={activeTab} 
+          onValueChange={(val) => {
+            setActiveTab(val);
+            if (val !== 'list') setEditingJob(null);
+          }}
+        >
           <TabsList className="bg-white border p-1 rounded-2xl">
             <TabsTrigger value="list" className="rounded-xl px-6 font-bold data-[state=active]:bg-primary data-[state=active]:text-white">Active Jobs</TabsTrigger>
             <TabsTrigger value="post" className="rounded-xl px-6 font-bold data-[state=active]:bg-primary data-[state=active]:text-white">Post New Job</TabsTrigger>
@@ -211,21 +221,21 @@ export default function AdminJobPortal() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Job Title</label>
-                      <Input name="title" defaultValue={editingJob?.title} placeholder="e.g. Ayurvedic Consultant" className="h-12 rounded-xl" required />
+                      <Input name="title" placeholder="e.g. Ayurvedic Consultant" className="h-12 rounded-xl" required />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Company Name</label>
-                      <Input name="company" defaultValue={editingJob?.company} placeholder="e.g. Shreevarma Ayurveda" className="h-12 rounded-xl" required />
+                      <Input name="company" placeholder="e.g. Shreevarma Ayurveda" className="h-12 rounded-xl" required />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Location</label>
-                      <Input name="location" defaultValue={editingJob?.location} placeholder="e.g. Chennai" className="h-12 rounded-xl" />
+                      <Input name="location" placeholder="e.g. Chennai" className="h-12 rounded-xl" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Job Type</label>
-                      <select name="type" defaultValue={editingJob?.type || "Full-time"} className="w-full h-12 rounded-xl border border-input bg-background px-3 text-sm focus:ring-2 focus:ring-primary outline-none">
+                      <select name="type" className="w-full h-12 rounded-xl border border-input bg-background px-3 text-sm focus:ring-2 focus:ring-primary outline-none">
                         <option>Full-time</option>
                         <option>Part-time</option>
                         <option>Contract</option>
@@ -234,31 +244,26 @@ export default function AdminJobPortal() {
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Salary Range</label>
-                      <Input name="salary" defaultValue={editingJob?.salary} placeholder="e.g. 5L - 8L PA" className="h-12 rounded-xl" />
+                      <Input name="salary" placeholder="e.g. 5L - 8L PA" className="h-12 rounded-xl" />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Description</label>
-                    <Textarea name="description" defaultValue={editingJob?.description} rows={6} className="rounded-2xl" placeholder="Provide full job details..." required />
+                    <Textarea name="description" rows={6} className="rounded-2xl" placeholder="Provide full job details..." required />
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Logo URL</label>
-                      <Input name="logoUrl" defaultValue={editingJob?.logoUrl} placeholder="https://..." className="h-12 rounded-xl" />
+                      <Input name="logoUrl" placeholder="https://..." className="h-12 rounded-xl" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Banner URL</label>
-                      <Input name="bannerUrl" defaultValue={editingJob?.bannerUrl} placeholder="https://..." className="h-12 rounded-xl" />
+                      <Input name="bannerUrl" placeholder="https://..." className="h-12 rounded-xl" />
                     </div>
                   </div>
-                  <div className="flex gap-4">
-                    {editingJob && (
-                      <Button type="button" variant="outline" onClick={() => setEditingJob(null)} className="h-16 rounded-2xl px-10 font-bold uppercase">Cancel</Button>
-                    )}
-                    <Button type="submit" disabled={isPosting} className="flex-1 h-16 bg-primary text-white font-black uppercase tracking-widest rounded-2xl hover:bg-slate-900 transition-all shadow-xl shadow-primary/20 text-lg">
-                      {isPosting ? 'Saving...' : (editingJob ? 'Save Changes' : <><Plus className="mr-2" /> Publish Listing</>)}
-                    </Button>
-                  </div>
+                  <Button type="submit" disabled={isPosting} className="w-full h-16 bg-primary text-white font-black uppercase tracking-widest rounded-2xl hover:bg-slate-900 transition-all shadow-xl shadow-primary/20 text-lg">
+                    {isPosting ? 'Publishing...' : <><Plus className="mr-2" /> Publish Listing</>}
+                  </Button>
                 </form>
               </CardContent>
             </Card>
@@ -304,9 +309,74 @@ export default function AdminJobPortal() {
         </Tabs>
       </div>
 
+      {/* Edit Job Dialog */}
+      <Dialog open={!!editingJob} onOpenChange={(open) => !open && setEditingJob(null)}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto rounded-[3rem] p-8 border-none shadow-2xl z-50">
+          {editingJob && (
+            <>
+              <DialogHeader className="mb-6">
+                <DialogTitle className="text-2xl font-black uppercase">Edit Job Listing</DialogTitle>
+                <DialogDescription className="font-bold italic">Modify details for {editingJob.title}</DialogDescription>
+              </DialogHeader>
+              <form onSubmit={handlePostJob} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Job Title</label>
+                    <Input name="title" defaultValue={editingJob.title} className="h-12 rounded-xl" required />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Company Name</label>
+                    <Input name="company" defaultValue={editingJob.company} className="h-12 rounded-xl" required />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Location</label>
+                    <Input name="location" defaultValue={editingJob.location} className="h-12 rounded-xl" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Job Type</label>
+                    <select name="type" defaultValue={editingJob.type} className="w-full h-12 rounded-xl border border-input bg-background px-3 text-sm focus:ring-2 focus:ring-primary outline-none">
+                      <option>Full-time</option>
+                      <option>Part-time</option>
+                      <option>Contract</option>
+                      <option>Internship</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Salary Range</label>
+                    <Input name="salary" defaultValue={editingJob.salary} className="h-12 rounded-xl" />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Description</label>
+                  <Textarea name="description" defaultValue={editingJob.description} rows={6} className="rounded-2xl" required />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Logo URL</label>
+                    <Input name="logoUrl" defaultValue={editingJob.logoUrl} className="h-12 rounded-xl" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Banner URL</label>
+                    <Input name="bannerUrl" defaultValue={editingJob.bannerUrl} className="h-12 rounded-xl" />
+                  </div>
+                </div>
+                <DialogFooter className="gap-4">
+                  <Button type="button" variant="outline" onClick={() => setEditingJob(null)} className="h-14 px-8 rounded-xl font-bold uppercase">Cancel</Button>
+                  <Button type="submit" disabled={isPosting} className="flex-1 h-14 bg-primary text-white font-black uppercase rounded-xl">
+                    {isPosting ? 'Saving...' : 'Save Changes'}
+                  </Button>
+                </DialogFooter>
+              </form>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
       {/* Candidate Details Dialog */}
       <Dialog open={!!viewingApp} onOpenChange={(open) => !open && setViewApp(null)}>
-        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto rounded-[3rem] p-0 border-none shadow-2xl">
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto rounded-[3rem] p-0 border-none shadow-2xl z-50">
           {viewingApp && (
             <div className="p-8 md:p-12">
               <DialogHeader className="mb-8">

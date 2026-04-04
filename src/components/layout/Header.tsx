@@ -34,7 +34,6 @@ export function Header() {
   const closeSheet = () => setSheetOpen(false);
 
   // Return null during hydration to ensure server/client HTML match exactly.
-  // The server and initial client render will both see 'null'.
   if (!mounted) {
     return null;
   }
@@ -47,7 +46,7 @@ export function Header() {
   return (
     <header 
       className={cn(
-        "fixed top-0 left-0 right-0 w-full transition-all duration-500 ease-in-out px-4 md:px-6 z-[100]",
+        "fixed top-0 left-0 right-0 w-full transition-all duration-500 ease-in-out px-4 md:px-6 z-40",
         isScrolled ? "pt-2" : "pt-4"
       )}
     >
