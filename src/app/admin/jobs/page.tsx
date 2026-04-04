@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -10,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
 import { collection, query, orderBy, addDoc, serverTimestamp, doc, deleteDoc } from 'firebase/firestore';
 import { Briefcase, Plus, Users, Trash2, ExternalLink, ShieldCheck, Mail, Building2, LayoutDashboard } from 'lucide-react';
 import { useDoc } from '@/firebase/firestore/use-doc';
@@ -31,6 +31,7 @@ interface Job {
 
 interface Application {
   id: string;
+  jobId: string;
   jobTitle: string;
   applicantName: string;
   applicantEmail: string;
