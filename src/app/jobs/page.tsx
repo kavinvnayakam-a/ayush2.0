@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { Search, MapPin, Building2, Briefcase, ChevronRight, UserCircle, LogIn, AlertCircle, FileText, ListChecks } from 'lucide-react';
+import { Search, MapPin, Building2, Briefcase, ChevronRight, UserCircle, LogIn, AlertCircle, FileText, ListChecks, X, Clock } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
@@ -294,91 +294,127 @@ export default function JobBoardPage() {
 
       {/* Job Details Dialog */}
       <Dialog open={!!viewingJobDetails} onOpenChange={(open) => !open && setViewingJobDetails(null)}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0 rounded-[3rem] border-none shadow-2xl">
+        <DialogContent className="max-w-4xl w-[95vw] h-[90vh] md:h-auto max-h-[90vh] overflow-hidden p-0 rounded-[2rem] md:rounded-[3rem] border-none shadow-2xl z-[100]">
           {viewingJobDetails && (
-            <div className="flex flex-col h-full">
-              {viewingJobDetails.bannerUrl && (
-                <div className="relative h-48 w-full shrink-0">
+            <div className="flex flex-col h-full bg-white">
+              {/* Banner Area */}
+              <div className="relative h-32 md:h-56 w-full shrink-0">
+                {viewingJobDetails.bannerUrl ? (
                   <Image src={viewingJobDetails.bannerUrl} alt="Banner" fill className="object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />
-                </div>
-              )}
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-r from-[hsl(93,45%,44%)] to-[hsl(93,20%,15%)]" />
+                )}
+                <div className="absolute inset-0 bg-black/20" />
+                <button 
+                  onClick={() => setViewingJobDetails(null)}
+                  className="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all z-20"
+                >
+                  <X size={20} />
+                </button>
+              </div>
               
-              <div className="p-8 md:p-12 overflow-y-auto">
-                <DialogHeader className="mb-8">
-                  <div className="flex flex-col md:flex-row justify-between items-start gap-6">
-                    <div className="flex items-center gap-6">
-                      <div className="relative w-20 h-20 bg-slate-50 rounded-3xl border p-2 flex items-center justify-center shrink-0">
-                        {viewingJobDetails.logoUrl ? (
-                          <Image src={viewingJobDetails.logoUrl} alt="Logo" fill className="object-contain p-2" />
-                        ) : (
-                          <Building2 className="text-slate-300 h-10 w-10" />
-                        )}
-                      </div>
-                      <div className="text-left">
-                        <DialogTitle className="text-3xl font-black uppercase text-foreground leading-tight">{viewingJobDetails.title}</DialogTitle>
-                        <DialogDescription className="text-primary font-bold text-lg opacity-100">{viewingJobDetails.company}</DialogDescription>
-                      </div>
+              <div className="relative px-6 md:px-12 pb-6 flex-1 overflow-hidden flex flex-col">
+                {/* Header Information Overlay */}
+                <div className="relative -mt-10 md:-mt-16 mb-8 flex flex-col md:flex-row items-center md:items-end justify-between gap-6 z-10">
+                  <div className="flex flex-col md:flex-row items-center md:items-end gap-6 w-full">
+                    <div className="relative w-24 h-24 md:w-32 md:h-32 bg-white rounded-[2rem] md:rounded-[2.5rem] border-4 border-white shadow-2xl p-3 flex items-center justify-center shrink-0">
+                      {viewingJobDetails.logoUrl ? (
+                        <Image src={viewingJobDetails.logoUrl} alt="Logo" fill className="object-contain p-4" />
+                      ) : (
+                        <Building2 className="text-slate-200 h-12 w-12" />
+                      )}
                     </div>
-                    <Badge className="bg-primary text-white font-black px-6 py-2 rounded-full uppercase tracking-widest text-[10px]">
-                      {viewingJobDetails.type}
-                    </Badge>
-                  </div>
-                </DialogHeader>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-                  <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl">
-                    <MapPin className="text-orange-500" size={20} />
-                    <div>
-                      <p className="text-[10px] font-black uppercase text-slate-400">Location</p>
-                      <p className="font-bold">{viewingJobDetails.location}</p>
+                    <div className="text-center md:text-left flex-1">
+                      <DialogHeader>
+                        <DialogTitle className="text-2xl md:text-4xl font-black uppercase text-foreground leading-none tracking-tighter mb-2">
+                          {viewingJobDetails.title}
+                        </DialogTitle>
+                        <DialogDescription className="text-primary font-black text-lg md:text-xl uppercase tracking-tight flex items-center justify-center md:justify-start gap-2">
+                          {viewingJobDetails.company}
+                        </DialogDescription>
+                      </DialogHeader>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl">
-                    <Briefcase className="text-primary" size={20} />
-                    <div>
-                      <p className="text-[10px] font-black uppercase text-slate-400">Offered Salary</p>
-                      <p className="font-bold">{viewingJobDetails.salary || 'Negotiable'}</p>
-                    </div>
-                  </div>
+                  <Badge className="bg-[hsl(93,45%,44%)] text-white font-black px-6 py-2.5 rounded-full uppercase tracking-widest text-[10px] shadow-lg shadow-primary/20">
+                    {viewingJobDetails.type}
+                  </Badge>
                 </div>
 
-                <div className="space-y-8">
-                  <div>
-                    <h3 className="text-xs font-black uppercase tracking-[0.2em] text-primary mb-4 flex items-center gap-2">
-                      <FileText size={16} /> Job Description
-                    </h3>
-                    <div className="text-slate-600 leading-relaxed whitespace-pre-wrap font-medium bg-slate-50/50 p-6 rounded-3xl border border-slate-100">
-                      {viewingJobDetails.description}
-                    </div>
-                  </div>
-
-                  {viewingJobDetails.requirements && (
-                    <div>
-                      <h3 className="text-xs font-black uppercase tracking-[0.2em] text-orange-500 mb-4 flex items-center gap-2">
-                        <ListChecks size={16} /> Candidate Requirements
-                      </h3>
-                      <div className="text-slate-600 leading-relaxed whitespace-pre-wrap font-medium bg-orange-50/30 p-6 rounded-3xl border border-orange-100">
-                        {viewingJobDetails.requirements}
+                <ScrollArea className="flex-1 -mx-6 md:-mx-12 px-6 md:px-12">
+                  <div className="py-2 space-y-10">
+                    {/* Quick Info Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div className="flex items-center gap-4 p-5 bg-[hsl(91,30%,96%)] rounded-[1.5rem] border border-white">
+                        <div className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600">
+                          <MapPin size={20} />
+                        </div>
+                        <div>
+                          <p className="text-[9px] font-black uppercase text-slate-400 tracking-widest">Location</p>
+                          <p className="font-bold text-sm text-slate-700">{viewingJobDetails.location}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4 p-5 bg-[hsl(91,30%,96%)] rounded-[1.5rem] border border-white">
+                        <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center text-green-600">
+                          <Briefcase size={20} />
+                        </div>
+                        <div>
+                          <p className="text-[9px] font-black uppercase text-slate-400 tracking-widest">Offered Salary</p>
+                          <p className="font-bold text-sm text-slate-700">{viewingJobDetails.salary || 'Negotiable'}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4 p-5 bg-[hsl(91,30%,96%)] rounded-[1.5rem] border border-white">
+                        <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600">
+                          <Clock size={20} />
+                        </div>
+                        <div>
+                          <p className="text-[9px] font-black uppercase text-slate-400 tracking-widest">Role Type</p>
+                          <p className="font-bold text-sm text-slate-700">{viewingJobDetails.type}</p>
+                        </div>
                       </div>
                     </div>
-                  )}
-                </div>
+
+                    {/* Detailed Content */}
+                    <div className="space-y-10">
+                      <section>
+                        <h3 className="text-xs font-black uppercase tracking-[0.3em] text-primary mb-5 flex items-center gap-3">
+                          <div className="w-8 h-1 bg-primary rounded-full" />
+                          Job Description
+                        </h3>
+                        <div className="text-slate-600 leading-relaxed whitespace-pre-wrap font-medium bg-slate-50/50 p-8 rounded-[2rem] border border-slate-100 italic shadow-inner">
+                          {viewingJobDetails.description}
+                        </div>
+                      </section>
+
+                      {viewingJobDetails.requirements && (
+                        <section>
+                          <h3 className="text-xs font-black uppercase tracking-[0.3em] text-orange-500 mb-5 flex items-center gap-3">
+                            <div className="w-8 h-1 bg-orange-500 rounded-full" />
+                            Candidate Requirements
+                          </h3>
+                          <div className="text-slate-600 leading-relaxed whitespace-pre-wrap font-medium bg-orange-50/30 p-8 rounded-[2rem] border border-orange-100 shadow-inner">
+                            {viewingJobDetails.requirements}
+                          </div>
+                        </section>
+                      )}
+                    </div>
+                  </div>
+                </ScrollArea>
               </div>
 
-              <div className="p-8 bg-white border-t flex flex-col sm:flex-row gap-4 shrink-0">
+              {/* Action Footer */}
+              <div className="p-6 md:p-8 bg-slate-50 border-t border-slate-100 flex flex-col sm:flex-row gap-4 shrink-0 shadow-[0_-10px_40px_rgba(0,0,0,0.02)]">
                 <Button 
                   onClick={() => handleApply(viewingJobDetails)}
-                  className="flex-1 h-16 bg-slate-900 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-primary transition-all shadow-xl"
+                  className="flex-1 h-16 bg-slate-900 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-primary transition-all shadow-xl shadow-slate-200"
                 >
-                  Apply For This Position
+                  Apply For This Position <ChevronRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Button 
                   variant="outline" 
                   onClick={() => setViewingJobDetails(null)} 
-                  className="h-16 px-10 rounded-2xl font-bold uppercase border-2"
+                  className="h-16 px-10 rounded-2xl font-bold uppercase border-2 border-slate-200 hover:bg-white text-slate-500"
                 >
-                  Close
+                  Close View
                 </Button>
               </div>
             </div>
@@ -388,7 +424,7 @@ export default function JobBoardPage() {
 
       {/* Application Dialog */}
       <Dialog open={isApplyModalOpen} onOpenChange={setIsApplyModalOpen}>
-        <DialogContent className="rounded-[2.5rem] p-10">
+        <DialogContent className="rounded-[2.5rem] p-10 z-[110]">
           <DialogHeader>
             <DialogTitle className="text-2xl font-black uppercase">Confirm Application</DialogTitle>
             <DialogDescription className="font-bold text-slate-500 italic mt-2">
