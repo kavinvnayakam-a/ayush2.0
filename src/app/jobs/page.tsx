@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState } from 'react';
@@ -53,7 +52,7 @@ export default function JobBoardPage() {
     job.company.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const isProfileComplete = profile && 
+  const isProfileComplete = !!(profile && 
     profile.fullName && 
     profile.age && 
     profile.gender && 
@@ -61,7 +60,7 @@ export default function JobBoardPage() {
     profile.whatsappNumber && 
     profile.resumeUrl && 
     profile.skills && 
-    profile.experience;
+    profile.experience);
 
   const handleApply = async (job: Job) => {
     if (!user) {
@@ -293,7 +292,7 @@ export default function JobBoardPage() {
             <div className="flex items-start gap-3">
               <AlertCircle className="text-primary h-5 w-5 shrink-0 mt-0.5" />
               <p className="text-sm font-medium text-slate-600 leading-relaxed">
-                By clicking "Confirm", your complete professional profile (Name, Phone, WhatsApp, Age, Gender, Skills, Experience, and Resume Link) will be shared with <strong>${selectedJob?.company}</strong> and the AyushConclave Admin team.
+                By clicking "Confirm", your complete professional profile (Name, Phone, WhatsApp, Age, Gender, Skills, Experience, and Resume Link) will be shared with <strong>{selectedJob?.company}</strong> and the AyushConclave Admin team.
               </p>
             </div>
           </div>

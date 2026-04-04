@@ -10,12 +10,12 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { collection, query, orderBy, addDoc, serverTimestamp, doc, deleteDoc } from 'firebase/firestore';
-import { Briefcase, Plus, Users, Trash2, ExternalLink, ShieldCheck, Mail, Building2, LayoutDashboard } from 'lucide-react';
+import { collection, query, orderBy, addDoc, updateDoc, serverTimestamp, doc, deleteDoc } from 'firebase/firestore';
+import { Briefcase, Plus, Users, Trash2, ExternalLink, ShieldCheck, Mail, Building2, LayoutDashboard, Edit3, Eye, Phone, MessageSquare, User, GraduationCap, History } from 'lucide-react';
 import { useDoc } from '@/firebase/firestore/use-doc';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
-import Image from 'next/image';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 
 interface Job {
   id: string;
@@ -24,6 +24,7 @@ interface Job {
   location: string;
   type: string;
   description: string;
+  salary: string;
   logoUrl?: string;
   bannerUrl?: string;
   createdAt: any;
@@ -33,11 +34,18 @@ interface Application {
   id: string;
   jobId: string;
   jobTitle: string;
+  userId: string;
   applicantName: string;
   applicantEmail: string;
+  phone: string;
+  whatsappNumber: string;
+  resumeUrl: string;
+  age: number;
+  gender: string;
+  skills: string;
+  experience: string;
   status: string;
   appliedAt: any;
-  resumeUrl?: string;
 }
 
 export default function AdminJobPortal() {
@@ -45,7 +53,10 @@ export default function AdminJobPortal() {
   const router = useRouter();
   const firestore = useFirestore();
   const { toast } = useToast();
+  
   const [isPosting, setIsPosting] = useState(false);
+  const [editingJob, setEditingJob] = useState<Job | null>(null);
+  const [viewingApp, setViewApp] = useState<Application | null>(null);
 
   // RBAC
   const adminRoleRef = useMemoFirebase(() => {
@@ -81,19 +92,29 @@ export default function AdminJobPortal() {
     setIsPosting(true);
     const formData = new FormData(e.currentTarget);
     
+    const jobData = {
+      title: formData.get('title'),
+      company: formData.get('company'),
+      location: formData.get('location'),
+      type: formData.get('type'),
+      salary: formData.get('salary'),
+      description: formData.get('description'),
+      logoUrl: formData.get('logoUrl'),
+      bannerUrl: formData.get('bannerUrl'),
+    };
+
     try {
-      await addDoc(collection(firestore, 'jobs'), {
-        title: formData.get('title'),
-        company: formData.get('company'),
-        location: formData.get('location'),
-        type: formData.get('type'),
-        salary: formData.get('salary'),
-        description: formData.get('description'),
-        logoUrl: formData.get('logoUrl'),
-        bannerUrl: formData.get('bannerUrl'),
-        createdAt: serverTimestamp(),
-      });
-      toast({ title: 'Job Posted!', description: 'The listing is now live.' });
+      if (editingJob) {
+        await updateDoc(doc(firestore, 'jobs', editingJob.id), jobData);
+        toast({ title: 'Job Updated', description: 'Listing changes saved.' });
+        setEditingJob(null);
+      } else {
+        await addDoc(collection(firestore, 'jobs'), {
+          ...jobData,
+          createdAt: serverTimestamp(),
+        });
+        toast({ title: 'Job Posted!', description: 'The listing is now live.' });
+      }
       (e.target as HTMLFormElement).reset();
     } catch (e: any) {
       toast({ variant: 'destructive', title: 'Error', description: e.message });
@@ -103,7 +124,7 @@ export default function AdminJobPortal() {
   };
 
   const handleDeleteJob = async (id: string) => {
-    if (!firestore || !confirm('Delete this job?')) return;
+    if (!firestore || !confirm('Delete this job listing?')) return;
     try {
       await deleteDoc(doc(firestore, 'jobs', id));
       toast({ title: 'Job Deleted' });
@@ -144,7 +165,7 @@ export default function AdminJobPortal() {
                       <TableRow>
                         <TableHead className="font-black uppercase text-xs">Job Title</TableHead>
                         <TableHead className="font-black uppercase text-xs">Company</TableHead>
-                        <TableHead className="font-black uppercase text-xs">Applications</TableHead>
+                        <TableHead className="font-black uppercase text-xs text-center">Applicants</TableHead>
                         <TableHead className="font-black uppercase text-xs">Date Posted</TableHead>
                         <TableHead className="font-black uppercase text-xs text-right">Actions</TableHead>
                       </TableRow>
@@ -154,7 +175,7 @@ export default function AdminJobPortal() {
                         <TableRow key={job.id} className="font-semibold">
                           <TableCell className="font-bold text-primary">{job.title}</TableCell>
                           <TableCell>{job.company}</TableCell>
-                          <TableCell>
+                          <TableCell className="text-center">
                             <Badge className="bg-slate-100 text-slate-600 border-none font-bold">
                               {applications?.filter(a => a.jobId === job.id).length || 0}
                             </Badge>
@@ -162,7 +183,10 @@ export default function AdminJobPortal() {
                           <TableCell className="text-muted-foreground text-xs">
                             {job.createdAt ? format(new Date(job.createdAt.seconds * 1000), 'MMM d, yyyy') : '...'}
                           </TableCell>
-                          <TableCell className="text-right">
+                          <TableCell className="text-right space-x-2">
+                            <Button variant="ghost" size="icon" onClick={() => setEditingJob(job)} className="text-slate-400 hover:text-primary hover:bg-primary/5 rounded-lg">
+                              <Edit3 size={18} />
+                            </Button>
                             <Button variant="ghost" size="icon" onClick={() => handleDeleteJob(job.id)} className="text-destructive hover:bg-red-50 rounded-lg">
                               <Trash2 size={18} />
                             </Button>
@@ -187,21 +211,21 @@ export default function AdminJobPortal() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Job Title</label>
-                      <Input name="title" placeholder="e.g. Ayurvedic Consultant" className="h-12 rounded-xl" required />
+                      <Input name="title" defaultValue={editingJob?.title} placeholder="e.g. Ayurvedic Consultant" className="h-12 rounded-xl" required />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Company Name</label>
-                      <Input name="company" placeholder="e.g. Shreevarma Ayurveda" className="h-12 rounded-xl" required />
+                      <Input name="company" defaultValue={editingJob?.company} placeholder="e.g. Shreevarma Ayurveda" className="h-12 rounded-xl" required />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Location</label>
-                      <Input name="location" placeholder="e.g. Chennai" className="h-12 rounded-xl" />
+                      <Input name="location" defaultValue={editingJob?.location} placeholder="e.g. Chennai" className="h-12 rounded-xl" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Job Type</label>
-                      <select name="type" className="w-full h-12 rounded-xl border border-input bg-background px-3 text-sm focus:ring-2 focus:ring-primary outline-none">
+                      <select name="type" defaultValue={editingJob?.type || "Full-time"} className="w-full h-12 rounded-xl border border-input bg-background px-3 text-sm focus:ring-2 focus:ring-primary outline-none">
                         <option>Full-time</option>
                         <option>Part-time</option>
                         <option>Contract</option>
@@ -210,26 +234,31 @@ export default function AdminJobPortal() {
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Salary Range</label>
-                      <Input name="salary" placeholder="e.g. 5L - 8L PA" className="h-12 rounded-xl" />
+                      <Input name="salary" defaultValue={editingJob?.salary} placeholder="e.g. 5L - 8L PA" className="h-12 rounded-xl" />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Description</label>
-                    <Textarea name="description" rows={6} className="rounded-2xl" placeholder="Provide full job details..." required />
+                    <Textarea name="description" defaultValue={editingJob?.description} rows={6} className="rounded-2xl" placeholder="Provide full job details..." required />
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Logo URL</label>
-                      <Input name="logoUrl" placeholder="https://..." className="h-12 rounded-xl" />
+                      <Input name="logoUrl" defaultValue={editingJob?.logoUrl} placeholder="https://..." className="h-12 rounded-xl" />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Banner URL</label>
-                      <Input name="bannerUrl" placeholder="https://..." className="h-12 rounded-xl" />
+                      <Input name="bannerUrl" defaultValue={editingJob?.bannerUrl} placeholder="https://..." className="h-12 rounded-xl" />
                     </div>
                   </div>
-                  <Button type="submit" disabled={isPosting} className="w-full h-16 bg-primary text-white font-black uppercase tracking-widest rounded-2xl hover:bg-slate-900 transition-all shadow-xl shadow-primary/20 text-lg">
-                    {isPosting ? 'Publishing...' : <><Plus className="mr-2" /> Publish Listing</>}
-                  </Button>
+                  <div className="flex gap-4">
+                    {editingJob && (
+                      <Button type="button" variant="outline" onClick={() => setEditingJob(null)} className="h-16 rounded-2xl px-10 font-bold uppercase">Cancel</Button>
+                    )}
+                    <Button type="submit" disabled={isPosting} className="flex-1 h-16 bg-primary text-white font-black uppercase tracking-widest rounded-2xl hover:bg-slate-900 transition-all shadow-xl shadow-primary/20 text-lg">
+                      {isPosting ? 'Saving...' : (editingJob ? 'Save Changes' : <><Plus className="mr-2" /> Publish Listing</>)}
+                    </Button>
+                  </div>
                 </form>
               </CardContent>
             </Card>
@@ -247,7 +276,7 @@ export default function AdminJobPortal() {
                         <TableHead className="font-black uppercase text-xs">Target Role</TableHead>
                         <TableHead className="font-black uppercase text-xs">Contact</TableHead>
                         <TableHead className="font-black uppercase text-xs">Applied On</TableHead>
-                        <TableHead className="font-black uppercase text-xs text-right">Resume</TableHead>
+                        <TableHead className="font-black uppercase text-xs text-right">Details</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -260,13 +289,9 @@ export default function AdminJobPortal() {
                             {app.appliedAt ? format(new Date(app.appliedAt.seconds * 1000), 'MMM d, h:mm a') : '...'}
                           </TableCell>
                           <TableCell className="text-right">
-                            {app.resumeUrl ? (
-                              <Button asChild variant="outline" size="sm" className="rounded-lg font-bold">
-                                <a href={app.resumeUrl} target="_blank"><ExternalLink className="mr-2 h-3 w-3" /> View</a>
-                              </Button>
-                            ) : (
-                              <span className="text-[10px] text-muted-foreground uppercase font-bold italic">No Link</span>
-                            )}
+                            <Button variant="outline" size="sm" onClick={() => setViewApp(app)} className="rounded-lg font-bold">
+                              <Eye className="mr-2 h-3 w-3" /> View Profile
+                            </Button>
                           </TableCell>
                         </TableRow>
                       ))}
@@ -278,6 +303,83 @@ export default function AdminJobPortal() {
           </TabsContent>
         </Tabs>
       </div>
+
+      {/* Candidate Details Dialog */}
+      <Dialog open={!!viewingApp} onOpenChange={(open) => !open && setViewApp(null)}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto rounded-[3rem] p-0 border-none shadow-2xl">
+          {viewingApp && (
+            <div className="p-8 md:p-12">
+              <DialogHeader className="mb-8">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                    <User size={32} />
+                  </div>
+                  <div>
+                    <DialogTitle className="text-3xl font-black uppercase text-foreground">{viewingApp.applicantName}</DialogTitle>
+                    <DialogDescription className="text-primary font-bold italic">Applying for: {viewingApp.jobTitle}</DialogDescription>
+                  </div>
+                </div>
+              </DialogHeader>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                <div className="space-y-6">
+                  <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100">
+                    <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">Contact Info</h4>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3 text-sm font-bold text-slate-700">
+                        <Mail size={16} className="text-primary" /> {viewingApp.applicantEmail}
+                      </div>
+                      <div className="flex items-center gap-3 text-sm font-bold text-slate-700">
+                        <Phone size={16} className="text-orange-500" /> {viewingApp.phone}
+                      </div>
+                      <div className="flex items-center gap-3 text-sm font-bold text-slate-700">
+                        <MessageSquare size={16} className="text-green-500" /> {viewingApp.whatsappNumber}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100">
+                    <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">Personal Details</h4>
+                    <div className="flex gap-8">
+                      <div>
+                        <p className="text-[10px] font-black uppercase text-slate-400">Age</p>
+                        <p className="text-lg font-bold">{viewingApp.age}</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-black uppercase text-slate-400">Gender</p>
+                        <p className="text-lg font-bold uppercase">{viewingApp.gender}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100 h-full">
+                    <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">Skills & Tools</h4>
+                    <p className="text-sm font-bold text-slate-600 leading-relaxed italic">{viewingApp.skills}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-6 mb-10">
+                <div className="p-8 rounded-3xl bg-slate-50 border border-slate-100">
+                  <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2"><History size={14} /> Professional Experience</h4>
+                  <p className="text-sm font-medium text-slate-600 whitespace-pre-wrap leading-relaxed">{viewingApp.experience}</p>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button asChild className="flex-1 h-16 rounded-2xl bg-primary text-white font-black uppercase tracking-widest">
+                  <a href={viewingApp.resumeUrl} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="mr-2" /> Download Resume
+                  </a>
+                </Button>
+                <Button variant="outline" onClick={() => setViewApp(null)} className="h-16 px-10 rounded-2xl font-bold uppercase">Close View</Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </main>
   );
 }
