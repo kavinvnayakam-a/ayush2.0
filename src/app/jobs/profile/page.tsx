@@ -11,9 +11,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { Save, UserCircle, FileText, Phone, Mail, Sparkles, LogOut, MessageSquare, User } from 'lucide-react';
+import { Save, UserCircle, FileText, Phone, Mail, Sparkles, LogOut, MessageSquare, User, Briefcase, ArrowRight } from 'lucide-react';
 import { signOut } from 'firebase/auth';
 import { useAuth } from '@/firebase';
+import Link from 'next/link';
 
 export default function SeekerProfilePage() {
   const { user, isUserLoading } = useUser();
@@ -70,6 +71,17 @@ export default function SeekerProfilePage() {
       setIsLoading(false);
     }
   };
+
+  const isProfileComplete = !!(
+    profile?.fullName && 
+    profile?.age && 
+    profile?.gender && 
+    profile?.phone && 
+    profile?.whatsappNumber && 
+    profile?.resumeUrl && 
+    profile?.skills && 
+    profile?.experience
+  );
 
   if (isUserLoading || isProfileLoading) {
     return (
@@ -183,9 +195,17 @@ export default function SeekerProfilePage() {
               <div className="p-8 rounded-[2.5rem] bg-slate-900 text-white shadow-2xl">
                 <h3 className="text-xs font-black uppercase tracking-[0.3em] text-primary mb-6">Action Center</h3>
                 <p className="text-sm font-bold text-white/60 italic mb-10">All fields marked with * must be filled before you can apply for any job openings.</p>
-                <Button type="submit" disabled={isSaving} className="w-full h-16 bg-primary text-white font-black uppercase tracking-widest rounded-2xl hover:bg-accent transition-all">
+                <Button type="submit" disabled={isSaving} className="w-full h-16 bg-primary text-white font-black uppercase tracking-widest rounded-2xl hover:bg-accent transition-all shadow-lg">
                   {isSaving ? 'Saving...' : <><Save className="mr-2" /> Save Profile</>}
                 </Button>
+
+                {isProfileComplete && (
+                  <Button asChild className="w-full h-16 mt-4 bg-white text-slate-900 font-black uppercase tracking-widest rounded-2xl hover:bg-primary hover:text-white transition-all shadow-xl group">
+                    <Link href="/jobs">
+                      <Briefcase className="mr-2 h-5 w-5" /> Find Your Job <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </Button>
+                )}
               </div>
 
               <div className="p-8 rounded-[2.5rem] bg-white border border-white shadow-lg space-y-4">
@@ -197,17 +217,20 @@ export default function SeekerProfilePage() {
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-[10px] font-black uppercase text-slate-400">Completeness</span>
                     <span className="text-xs font-black text-primary">
-                      { (profile?.fullName && profile?.age && profile?.gender && profile?.phone && profile?.whatsappNumber && profile?.resumeUrl && profile?.skills && profile?.experience) ? '100%' : 'Incomplete' }
+                      { isProfileComplete ? '100%' : 'Incomplete' }
                     </span>
                   </div>
                   <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
                     <div 
                       className="h-full bg-primary transition-all duration-1000" 
                       style={{ 
-                        width: (profile?.fullName && profile?.age && profile?.gender && profile?.phone && profile?.whatsappNumber && profile?.resumeUrl && profile?.skills && profile?.experience) ? '100%' : '40%' 
+                        width: isProfileComplete ? '100%' : '40%' 
                       }} 
                     />
                   </div>
+                  {isProfileComplete && (
+                    <p className="text-[10px] font-bold text-green-600 italic mt-3 text-center">Ready to apply! Use the button above to view jobs.</p>
+                  )}
                 </div>
               </div>
             </div>
