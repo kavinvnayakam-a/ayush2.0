@@ -14,8 +14,7 @@ import {
   Navigation, 
   X, 
   Ticket,
-  CalendarDays,
-  Youtube
+  CalendarDays
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CountdownTimer } from '@/components/CountdownTimer';
@@ -168,30 +167,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* YOUTUBE LIVE STREAM - DESKTOP ONLY */}
-      <section className="hidden md:block py-24 bg-slate-50">
-        <div className="container mx-auto px-6 text-center">
-            <div className="flex items-center justify-center gap-4 mb-12">
-                <div className="w-16 h-1 bg-[hsl(93,45%,44%)]/20 rounded-full" />
-                <div className='flex items-center gap-3 text-red-600'>
-                    <Youtube size={32} />
-                    <h2 className="text-4xl font-black uppercase tracking-tight text-slate-800">Live Streaming</h2>
-                </div>
-                <div className="w-16 h-1 bg-[hsl(93,45%,44%)]/20 rounded-full" />
-            </div>
-            <div className="w-full max-w-5xl mx-auto aspect-video rounded-2xl overflow-hidden shadow-2xl border-8 border-white/80">
-                <iframe
-                    className="w-full h-full"
-                    src="https://www.youtube.com/embed/TfYXTpADzXw"
-                    title="YouTube live player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                ></iframe>
-            </div>
-        </div>
-      </section>
-
       {/* 2. OBJECTIVES */}
       <section className="py-24 bg-white relative z-10">
         <div className="container mx-auto px-6">
@@ -285,7 +260,7 @@ export default function HomePage() {
               { img: "Supported%20by%20logos%2FVibha", token: "19ef4dd0-2d8c-4fea-a2da-1aa0c8fefd0c", label: "VIBHA" },
               { img: "HEARTFULNESS", token: "59bf8c0a-5083-436a-b0d2-6bd746e2583f", label: "Wellness by Heartfulness" }
             ].map((logo, i) => (
-              <div key={i} className="group flex flex-col items-center justify-center space-y-4 p-8 rounded-[2.5rem] bg-white border border-slate-50 hover:border-[hsl(93,45%,44%)]/20 transition-all">
+              <div className="group flex flex-col items-center justify-center space-y-4 p-8 rounded-[2.5rem] bg-white border border-slate-50 hover:border-[hsl(93,45%,44%)]/20 transition-all" key={i}>
                 <div className="relative w-full h-24 transition-transform group-hover:scale-110">
                   <Image src={`https://firebasestorage.googleapis.com/v0/b/shreevarma-media/o/Logos%2F${logo.img}.webp?alt=media&token=${logo.token}`} alt={logo.label} fill loading="lazy" className="object-contain" />
                 </div>
