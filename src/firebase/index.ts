@@ -33,11 +33,11 @@ export function initializeFirebase() {
 }
 
 export function getSdks(firebaseApp: FirebaseApp) {
-  const databaseId = "ayush";
+  // Removed custom databaseId to use (default) as requested by the client's runtime environment
   return {
     firebaseApp,
     auth: getAuth(firebaseApp),
-    firestore: getFirestore(firebaseApp, databaseId)
+    firestore: getFirestore(firebaseApp)
   };
 }
 

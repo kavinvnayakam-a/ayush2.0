@@ -1,6 +1,5 @@
 {
   "firestore": {
-    "database": "ayush",
     "rules": "firestore.rules"
   }
 }
