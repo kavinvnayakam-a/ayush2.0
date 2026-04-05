@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState } from 'react';
@@ -16,6 +15,7 @@ import {
   Globe, 
   CheckCircle, 
   PhoneCall, 
+  Phone,
   Users, 
   Zap, 
   Filter, 
