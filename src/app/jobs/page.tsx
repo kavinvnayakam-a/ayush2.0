@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState } from 'react';
@@ -25,7 +26,8 @@ import {
   MessageSquare,
   Sparkles,
   ArrowRight,
-  GraduationCap
+  GraduationCap,
+  Smartphone
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -64,7 +66,7 @@ export default function JobPortalPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-white pt-24">
+    <main className="min-h-screen bg-white pt-24 pb-20">
       {/* 1. TOP TOGGLE NAVIGATION */}
       <nav className="sticky top-24 z-30 bg-white/80 backdrop-blur-md border-b border-slate-100 py-4 mb-8">
         <div className="container mx-auto px-6 flex justify-between items-center">
@@ -93,43 +95,43 @@ export default function JobPortalPage() {
       {view === 'candidate' && (
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
           {/* Hero Section */}
-          <section className="container mx-auto px-6 py-12 lg:py-20 flex flex-col lg:flex-row items-center gap-12">
+          <section className="container mx-auto px-6 py-12 lg:py-20 flex flex-col lg:flex-row items-center gap-16">
             <div className="lg:w-1/2 space-y-8">
-              <div className="inline-flex items-center gap-2 bg-primary/5 px-4 py-2 rounded-full border border-primary/10 text-primary font-black text-[10px] tracking-widest uppercase">
-                <Sparkles size={14} /> Career Opportunities in AYUSH
-              </div>
-              <h2 className="text-5xl lg:text-7xl font-[1000] text-slate-900 leading-none uppercase tracking-tighter">
-                Find Your <span className="text-primary italic">Perfect Role</span> in Wellness
+              <h2 className="text-5xl lg:text-7xl font-[1000] leading-tight text-slate-900 uppercase tracking-tighter">
+                Global Career in <span className="text-primary italic">Ayush & Wellness</span>
               </h2>
-              <p className="text-xl font-bold text-slate-400 italic max-w-xl">
-                Bridging ancient wisdom with modern careers. Discover roles in Healthcare, Education, and Manufacturing.
-              </p>
               
-              <div className="flex flex-wrap gap-6 pt-4">
+              <div className="flex flex-wrap gap-6">
                 <div className="flex items-center gap-3">
                   <div className="bg-primary/10 p-3 rounded-2xl text-primary shadow-sm">
                     <Globe size={24} />
                   </div>
-                  <p className="text-sm font-bold text-slate-600 uppercase tracking-tight leading-tight">National<br/>Outreach</p>
+                  <p className="text-sm font-bold text-slate-600 uppercase leading-tight">Use Portal in<br/>English & Tamil</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="bg-accent/10 p-3 rounded-2xl text-accent shadow-sm">
                     <Search size={24} />
                   </div>
-                  <p className="text-sm font-bold text-slate-600 uppercase tracking-tight leading-tight">Industry Specific<br/>Discovery</p>
+                  <p className="text-sm font-bold text-slate-600 uppercase leading-tight">Discover Multiple<br/>Industries</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 pt-6">
-                <Button asChild size="lg" className="h-16 px-10 rounded-2xl bg-primary text-white font-black uppercase tracking-widest hover:bg-slate-900 transition-all shadow-xl shadow-primary/20">
-                  <Link href="/jobs/auth">Get Started <ArrowRight className="ml-2 h-5 w-5" /></Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="h-16 px-10 rounded-2xl border-2 font-bold uppercase hover:bg-slate-50">
-                  <Link href="/jobs/profile">Manage Profile</Link>
-                </Button>
+              <div className="flex items-center gap-6 p-6 border-2 border-slate-100 rounded-[2.5rem] bg-slate-50/50 w-fit">
+                <div className="w-24 h-24 bg-white border-2 border-dashed border-slate-200 flex items-center justify-center rounded-2xl text-slate-300">
+                  <Smartphone size={32} />
+                </div>
+                <div className="space-y-2">
+                  <p className="text-sm text-slate-600 max-w-[240px] font-bold">
+                    Complete your profile to get instant updates & direct HR contact access
+                  </p>
+                  <Button asChild variant="link" className="p-0 h-auto font-black text-primary uppercase text-xs tracking-widest">
+                    <Link href="/jobs/profile">Update Profile Now <ArrowRight size={14} className="ml-1" /></Link>
+                  </Button>
+                </div>
               </div>
             </div>
 
+            {/* Illustration Area */}
             <div className="lg:w-1/2 relative">
               <div className="relative z-10 rounded-[3rem] overflow-hidden border-8 border-white shadow-2xl">
                 <img 
@@ -139,12 +141,21 @@ export default function JobPortalPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
               </div>
+              
               {/* Floating Badges */}
-              <div className="absolute -left-10 top-1/2 bg-white p-4 rounded-[1.5rem] shadow-2xl border border-slate-100 flex items-center gap-3 animate-float">
+              <div className="absolute -left-10 top-1/2 bg-white p-4 rounded-[1.5rem] shadow-2xl border border-slate-50 flex items-center gap-3 animate-float">
+                <div className="bg-orange-400 p-1.5 rounded-full text-white"><CheckCircle size={16}/></div>
+                <div>
+                  <p className="text-[10px] font-black text-orange-500 uppercase italic">Shortlisted</p>
+                  <p className="text-[8px] font-bold text-slate-400">Profile viewed by Recruiter</p>
+                </div>
+              </div>
+              
+              <div className="absolute -right-6 top-1/4 bg-white p-4 rounded-[1.5rem] shadow-2xl border border-slate-50 flex items-center gap-3">
                 <div className="bg-green-500 p-1.5 rounded-full text-white"><CheckCircle size={16}/></div>
                 <div>
-                  <p className="text-[10px] font-black text-slate-900 uppercase">Shortlisted</p>
-                  <p className="text-[8px] font-bold text-slate-400">By top AYUSH brands</p>
+                  <p className="text-[10px] font-black text-green-600 uppercase italic">Congrats!</p>
+                  <p className="text-[8px] font-bold text-slate-400">Application sent successfully</p>
                 </div>
               </div>
             </div>
@@ -222,15 +233,18 @@ export default function JobPortalPage() {
           </section>
 
           {/* Features Grid */}
-          <section className="py-24 container mx-auto px-6">
+          <section className="bg-white py-24 px-6 container mx-auto">
+            <div className="text-center mb-16">
+              <h3 className="text-3xl md:text-4xl font-black text-slate-900 uppercase tracking-tight">Explore Healthcare, Research and Manufacturing roles</h3>
+            </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 { title: "Verified Recruiters", desc: "Our screening process allows only verified AYUSH providers.", icon: <CheckCircle className="text-primary"/> },
-                { title: "National Network", desc: "Connect with practitioners and centers across India.", icon: <Globe className="text-accent"/> },
-                { title: "Direct Communication", desc: "Call or message recruiters directly for interview updates.", icon: <PhoneCall className="text-green-500"/> },
-                { title: "Location Filters", desc: "Find wellness opportunities in your specific city or locality.", icon: <MapPin className="text-blue-500"/> },
+                { title: "Use in Tamil", desc: "You can use the portal easily in your mother tongue.", icon: <Globe className="text-accent"/> },
+                { title: "Talk to HRs Directly", desc: "Call recruiters directly to know your interview status.", icon: <PhoneCall className="text-green-500"/> },
+                { title: "Location Features", desc: "Find jobs nearby using advanced filters and specific regions.", icon: <MapPin className="text-blue-500"/> },
               ].map((item, idx) => (
-                <div key={idx} className="bg-slate-50 p-8 rounded-[2rem] border border-transparent hover:border-primary/20 transition-all group">
+                <div key={idx} className="bg-slate-50 p-8 rounded-[2rem] hover:shadow-xl transition-all group border border-transparent hover:border-primary/10">
                   <div className="mb-6 w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">{item.icon}</div>
                   <h4 className="font-black text-slate-900 uppercase tracking-tight mb-2">{item.title}</h4>
                   <p className="text-sm font-medium text-slate-500 leading-relaxed italic">{item.desc}</p>
@@ -239,27 +253,23 @@ export default function JobPortalPage() {
             </div>
           </section>
 
-          {/* Category & Types */}
-          <section className="pb-24 px-6 container mx-auto grid md:grid-cols-2 gap-12">
-            <div className="bg-slate-900 text-white p-10 rounded-[3rem] shadow-2xl">
-              <h3 className="text-2xl font-black mb-8 uppercase tracking-tighter flex items-center gap-3">
-                <GraduationCap className="text-primary" /> Qualification based
-              </h3>
+          {/* Category Section */}
+          <section className="py-24 px-6 container mx-auto grid md:grid-cols-2 gap-12 border-t border-slate-100">
+            <div>
+              <h3 className="text-2xl font-black mb-8 italic underline decoration-primary underline-offset-8 uppercase tracking-tight">Qualification based jobs</h3>
               <div className="flex flex-wrap gap-3">
-                {['Doctorate (PhD/MD)', 'Masters', 'Bachelor Degree', 'Diploma', 'Certification'].map(q => (
-                  <span key={q} className="px-5 py-2.5 bg-white/10 rounded-full text-xs font-black uppercase tracking-widest border border-white/10 hover:bg-white hover:text-slate-900 transition-colors cursor-default">
+                {['Doctorate (PhD/MD)', 'Masters', 'Bachelor Degree', 'Diploma', 'ITI', 'Certification'].map(q => (
+                  <span key={q} className="px-5 py-2.5 bg-slate-100 rounded-full text-xs font-black uppercase tracking-widest text-slate-700 hover:bg-primary hover:text-white transition-colors cursor-default">
                     {q}
                   </span>
                 ))}
               </div>
             </div>
-            <div className="bg-primary p-10 rounded-[3rem] shadow-2xl text-white">
-              <h3 className="text-2xl font-black mb-8 uppercase tracking-tighter flex items-center gap-3">
-                <Briefcase className="text-accent" /> Role Types
-              </h3>
+            <div>
+              <h3 className="text-2xl font-black mb-8 italic underline decoration-accent underline-offset-8 uppercase tracking-tight">Job Types</h3>
               <div className="flex flex-wrap gap-3">
-                {['Full time', 'Part time', 'Consultant', 'Research', 'Academic'].map(t => (
-                  <span key={t} className="px-5 py-2.5 bg-white/20 rounded-full text-xs font-black uppercase tracking-widest border border-white/20 hover:bg-accent hover:text-white transition-colors cursor-default">
+                {['Full time', 'Part time', 'Consultant', 'Contract', 'Internship'].map(t => (
+                  <span key={t} className="px-5 py-2.5 bg-accent/10 text-accent rounded-full text-xs font-black uppercase tracking-widest hover:bg-accent hover:text-white transition-colors cursor-default">
                     {t}
                   </span>
                 ))}
@@ -329,18 +339,6 @@ export default function JobPortalPage() {
                  </div>
                  <p className="font-black text-sm uppercase tracking-tight">Ranjith Manohar</p>
                  <p className="text-[10px] text-green-600 uppercase tracking-widest font-black italic">Yoga Master</p>
-              </div>
-            </div>
-          </section>
-
-          {/* Hiring Partners */}
-          <section className="bg-slate-50 py-16 border-y border-slate-100">
-            <div className="container mx-auto px-6 text-center">
-              <p className="text-xs font-black text-slate-400 uppercase tracking-[0.4em] mb-10">Trusted By Industry Leaders</p>
-              <div className="flex flex-wrap justify-center gap-12 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all">
-                {['AYUSH MINISTRY', 'CCRAS', 'CENTRAL COUNCIL', 'NATONAL INSTITUTE', 'VIBHA'].map((brand) => (
-                  <span key={brand} className="text-xl font-black text-slate-900 tracking-tighter">{brand}</span>
-                ))}
               </div>
             </div>
           </section>
