@@ -178,7 +178,7 @@ export default function JobPortalPage() {
                 { title: "Verified Recruiters", desc: "Our screening process allows only verified job providers.", icon: <CheckCircle className="text-primary"/> },
                 { title: "Use in Tamil", desc: "You can use the app easily in your mother tongue.", icon: <Globe className="text-accent"/> },
                 { title: "Talk to HRs Directly", desc: "Call recruiters directly to know your interview status.", icon: <PhoneCall className="text-green-500"/> },
-                { title: "Location Features", desc: "Find jobs nearby using advanced map & distance filters.", icon: <MapPin className="text-blue-500"/> },
+                { title: "Location Features", desc: "Find jobs nearby using advanced map & distance filters.", icon: <MapPin className="text-purple-500"/> },
               ].map((item, idx) => (
                 <div key={idx} className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
                   <div className="mb-4">{item.icon}</div>
@@ -478,32 +478,6 @@ export default function JobPortalPage() {
           </section>
         </div>
       )}
-
-      {/* FOOTER */}
-      <footer className="bg-slate-900 text-white py-16 px-6">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
-          <div className="col-span-1">
-            <h4 className="text-xl font-black mb-4 uppercase tracking-tighter">Ayush <span className="text-primary italic">Jobs</span></h4>
-            <p className="text-slate-400 text-xs font-bold leading-relaxed">
-              Babuji Memorial Ashram,<br/>Raja Annamalai Puram, Chennai,<br/>Tamil Nadu 600028
-            </p>
-          </div>
-          <div>
-            <h4 className="font-bold mb-4 text-primary uppercase text-xs tracking-widest">Legal</h4>
-            <ul className="text-slate-400 text-sm space-y-2">
-              <li><Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-white transition">Terms & Conditions</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-bold mb-4 text-accent uppercase text-xs tracking-widest">Contact Us</h4>
-            <p className="text-slate-400 text-sm">support@arogyaayurconclave.org</p>
-          </div>
-          <div className="text-xs text-slate-500 font-bold uppercase tracking-widest flex items-end">
-            <p>© {new Date().getFullYear()} National Ayush Conclave. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
 
       {/* --- JOB DETAILS DIALOG --- */}
       <Dialog open={!!selectedJob} onOpenChange={(open) => !open && setSelectedJob(null)}>
