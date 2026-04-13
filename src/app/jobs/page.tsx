@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState } from 'react';
@@ -82,12 +81,14 @@ export default function JobPortalPage() {
 
   return (
     <main className="min-h-screen bg-white font-sans">
-      {/* 1. NAVIGATION / TOGGLE BAR */}
-      <nav className="fixed top-24 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-100 py-4 shadow-sm">
+      {/* 1. NAVIGATION / TOGGLE BAR - Moved to top-0 because global header is hidden */}
+      <nav className="fixed top-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-100 py-4 shadow-sm">
         <div className="container mx-auto px-6 flex justify-between items-center max-w-7xl">
           <div className="flex flex-col">
-            <h1 className="text-2xl font-black text-primary tracking-tighter uppercase leading-none">Ayush <span className="italic text-accent">Jobs</span></h1>
-            <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest mt-1">Holistic Career Growth</p>
+            <Link href="/" className="flex flex-col">
+              <h1 className="text-2xl font-black text-primary tracking-tighter uppercase leading-none">Ayush <span className="italic text-accent">Jobs</span></h1>
+              <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest mt-1">Holistic Career Growth</p>
+            </Link>
           </div>
           <div className="flex bg-slate-100 rounded-full p-1 border shadow-inner">
             <button 
@@ -108,7 +109,7 @@ export default function JobPortalPage() {
 
       {/* --- CANDIDATE VIEW --- */}
       {view === 'candidate' && (
-        <div className="pt-40 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="pt-24 animate-in fade-in slide-in-from-bottom-4 duration-700">
           {/* Hero Section */}
           <section className="max-w-7xl mx-auto px-6 py-12 lg:py-20 flex flex-col lg:flex-row items-center">
             <div className="lg:w-1/2 space-y-8">
@@ -276,7 +277,7 @@ export default function JobPortalPage() {
 
       {/* --- RECRUITER VIEW --- */}
       {view === 'recruiter' && (
-        <div className="pt-40 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="pt-24 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <section className="max-w-7xl mx-auto px-6 py-12 md:py-20 grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6 text-slate-900">
@@ -315,7 +316,7 @@ export default function JobPortalPage() {
               </div>
             </div>
 
-            {/* Hero Visuals - REPLACED WITH SINGLE IMAGE */}
+            {/* Hero Visuals */}
             <div className="relative flex justify-center items-center">
                <img 
                 src="https://firebasestorage.googleapis.com/v0/b/studio-2309061503-7e9f2.firebasestorage.app/o/Jobportal%2Fimg-2.webp?alt=media&token=89560f30-8516-4925-9765-7eb711ca4161" 
@@ -362,9 +363,10 @@ export default function JobPortalPage() {
                   We prompt the users to connect with you directly over call allowing for a faster screening & hiring process.
                 </p>
               </div>
-              <div className="flex-1 bg-slate-900 rounded-3xl p-12 text-white flex justify-center gap-12">
-                <Phone size={60} className="text-primary" />
-                <MessageSquare size={60} className="text-accent" />
+              <div className="flex-1 bg-slate-900 rounded-[3rem] p-16 text-white flex justify-center gap-12 shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl rounded-full" />
+                <Phone size={80} className="text-primary" />
+                <MessageSquare size={80} className="text-accent" />
               </div>
             </div>
 

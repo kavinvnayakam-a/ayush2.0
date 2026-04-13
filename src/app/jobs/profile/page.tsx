@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -11,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { Save, UserCircle, FileText, Phone, Mail, Sparkles, LogOut, MessageSquare, User, Briefcase, ArrowRight } from 'lucide-react';
+import { Save, UserCircle, FileText, Phone, Mail, Sparkles, LogOut, MessageSquare, User, Briefcase, ArrowRight, ArrowLeft } from 'lucide-react';
 import { signOut } from 'firebase/auth';
 import { useAuth } from '@/firebase';
 import Link from 'next/link';
@@ -38,8 +37,10 @@ export default function SeekerProfilePage() {
   }, [user, isUserLoading, router]);
 
   const handleLogout = async () => {
-    await signOut(auth);
-    router.push('/jobs');
+    if (auth) {
+      await signOut(auth);
+      router.push('/jobs');
+    }
   };
 
   const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -94,10 +95,13 @@ export default function SeekerProfilePage() {
   if (!user) return null;
 
   return (
-    <main className="min-h-screen bg-slate-50 pt-32 pb-20 px-6">
+    <main className="min-h-screen bg-slate-50 pt-12 pb-20 px-6">
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
           <div className="text-center md:text-left">
+            <Link href="/jobs" className="flex items-center gap-2 text-xs font-black uppercase text-slate-400 hover:text-primary transition-colors mb-4">
+              <ArrowLeft size={14} /> Back to Job Portal
+            </Link>
             <h1 className="text-4xl md:text-6xl font-black text-foreground uppercase tracking-tight">Your <span className="text-primary italic">Profile</span></h1>
             <p className="text-muted-foreground font-bold italic">Mandatory details required for job applications</p>
           </div>

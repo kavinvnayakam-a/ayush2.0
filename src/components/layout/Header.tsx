@@ -38,8 +38,8 @@ export function Header() {
     return null;
   }
 
-  // Hide header on wellness program standalone pages
-  if (pathname && pathname.startsWith('/wellness-program')) {
+  // Hide header on wellness program and job portal standalone pages
+  if (pathname && (pathname.startsWith('/wellness-program') || pathname.startsWith('/jobs'))) {
     return null;
   }
 

@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState } from 'react';
@@ -10,7 +9,8 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
-import { ShieldCheck, UserPlus, LogIn, Mail, Lock, User } from 'lucide-react';
+import { ShieldCheck, UserPlus, LogIn, Mail, Lock, User, ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
 
 export default function SeekerAuthPage() {
   const auth = useAuth();
@@ -26,6 +26,7 @@ export default function SeekerAuthPage() {
     const password = formData.get('password') as string;
 
     try {
+      if (!auth) throw new Error('Auth not initialized');
       await signInWithEmailAndPassword(auth, email, password);
       router.push('/jobs');
       toast({ title: 'Welcome back!', description: 'Redirecting to jobs...' });
@@ -45,6 +46,7 @@ export default function SeekerAuthPage() {
     const password = formData.get('password') as string;
 
     try {
+      if (!auth) throw new Error('Auth not initialized');
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(userCredential.user, { displayName: name });
       router.push('/jobs/profile');
@@ -57,7 +59,11 @@ export default function SeekerAuthPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 flex items-center justify-center p-6 pt-32">
+    <main className="min-h-screen bg-slate-50 flex items-center justify-center p-6 relative">
+      <Link href="/jobs" className="absolute top-8 left-8 flex items-center gap-2 text-sm font-black uppercase text-slate-400 hover:text-primary transition-colors">
+        <ArrowLeft size={16} /> Back to Portal
+      </Link>
+
       <div className="max-w-md w-full">
         <div className="text-center mb-10 space-y-4">
           <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mx-auto">

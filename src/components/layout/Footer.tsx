@@ -57,8 +57,8 @@ export function Footer() {
     return null;
   }
 
-  // Hide footer on wellness program standalone pages
-  if (pathname && pathname.startsWith('/wellness-program')) {
+  // Hide footer on wellness program and job portal standalone pages
+  if (pathname && (pathname.startsWith('/wellness-program') || pathname.startsWith('/jobs'))) {
     return null;
   }
 
