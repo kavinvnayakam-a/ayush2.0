@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from 'react';
@@ -78,7 +77,7 @@ export function WellnessProgramForm() {
               <p>Thank you for registering for the <strong>Corporate Wellness Program</strong> at National Ayush Conclave 2026.</p>
               <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
                 <p><strong>Event Details:</strong></p>
-                <p>Date: April 12, 2026</p>
+                <p>Date: April 19, 2026</p>
                 <p>Location: Babuji Memorial Ashram, Manapakkam, Chennai</p>
               </div>
               <p>We look forward to seeing you there!</p>

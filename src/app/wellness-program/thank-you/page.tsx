@@ -21,7 +21,7 @@ export default function WellnessThankYouPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-8 border-y border-slate-100">
           <div className="flex items-center justify-center gap-3 text-slate-600">
             <Calendar className="text-[hsl(93,45%,44%)]" size={20} />
-            <span className="font-bold">April 12, 2026</span>
+            <span className="font-bold">April 19, 2026</span>
           </div>
           <div className="flex items-center justify-center gap-3 text-slate-600">
             <MapPin className="text-[hsl(93,45%,44%)]" size={20} />

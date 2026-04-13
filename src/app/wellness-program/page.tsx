@@ -40,7 +40,7 @@ export default function WellnessProgramPage() {
                       </div>
                       <div>
                         <h4 className="font-black text-[hsl(93,20%,15%)] uppercase text-sm mb-1">Date</h4>
-                        <p className="text-lg font-bold text-slate-500">April 12, 2026</p>
+                        <p className="text-lg font-bold text-slate-500">April 19, 2026</p>
                       </div>
                     </div>
 
@@ -103,6 +103,7 @@ export default function WellnessProgramPage() {
               <h1 className="text-5xl md:text-7xl xl:text-8xl font-[1000] text-[hsl(93,20%,15%)] uppercase tracking-tighter leading-none">
                 Corporate <br/><span className="text-[hsl(93,45%,44%)] italic">Wellness</span> Program
               </h1>
+              <h3 className="text-2xl font-black text-[hsl(93,45%,44%)] uppercase">April 19, 2026</h3>
               <p className="text-xl md:text-2xl font-bold text-[hsl(93,20%,15%)]/60 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                 Enhance productivity, reduce stress, and foster a healthier organizational culture through ancient wisdom and modern wellness.
               </p>
