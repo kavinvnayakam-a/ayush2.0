@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 
 export default function WellnessProgramPage() {
   const mapUrl = "https://maps.app.goo.gl/FwDdr1mgzz7KbJzR9";
-  const heroImageUrl = "https://firebasestorage.googleapis.com/v0/b/shreevarma-india-location.firebasestorage.app/o/wellnessprogram%2FWELLNESS%20PROGRAM_1.webp?alt=media&token=630bca3d-dbc0-400f-88ee-02476dafc330";
+  const heroImageUrl = "https://firebasestorage.googleapis.com/v0/b/studio-2309061503-7e9f2.firebasestorage.app/o/WELLNESS%20PROGRAM_1%20(1).webp?alt=media&token=6fa19561-8a3b-4ab7-a4e5-b5015677be8f";
 
   return (
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
