@@ -59,8 +59,6 @@ const translations = {
     heroTitle: 'Entry level Sales, Service and Manufacturing jobs',
     heroDesc1: 'Use app in English and Tamil',
     heroDesc2: 'Discover jobs from multiple industries',
-    scanQr: 'Scan the QR code with your mobile to download Ayush Jobs app & get instant updates',
-    qrCode: 'QR CODE',
     exploreTitle: 'Explore Sales, Service and Manufacturing jobs',
     feature1Title: 'Verified Recruiters',
     feature1Desc: 'Our screening process allows only verified job providers.',
@@ -120,8 +118,6 @@ const translations = {
     heroTitle: 'விற்பனை, சேவை மற்றும் உற்பத்தி சார்ந்த ஆரம்ப நிலை வேலைகள்',
     heroDesc1: 'ஆங்கிலம் மற்றும் தமிழில் பயன்பாட்டைப் பயன்படுத்தவும்',
     heroDesc2: 'பல தொழில்துறைகளிலிருந்து வேலைகளைக் கண்டறியவும்',
-    scanQr: 'ஆயுஷ் ஜாப்ஸ் செயலியைப் பதிவிறக்கவும் மற்றும் உடனடி அறிவிப்புகளைப் பெறவும் உங்கள் மொபைல் மூலம் QR குறியீட்டை ஸ்கேன் செய்யவும்',
-    qrCode: 'QR குறியீடு',
     exploreTitle: 'விற்பனை, சேவை மற்றும் உற்பத்தி வேலைகளை ஆராயுங்கள்',
     feature1Title: 'சரிபார்க்கப்பட்ட ஆட்சேர்ப்பு செய்பவர்கள்',
     feature1Desc: 'எங்கள் ஸ்கிரீனிங் செயல்முறை சரிபார்க்கப்பட்ட வேலை வழங்குநர்களை மட்டுமே அனுமதிக்கிறது.',
@@ -181,8 +177,6 @@ const translations = {
     heroTitle: 'एंट्री लेवल सेल्स, सर्विस और मैन्युफैक्चरिंग नौकरियां',
     heroDesc1: 'अंग्रेजी और हिंदी में ऐप का उपयोग करें',
     heroDesc2: 'विभिन्न उद्योगों से नौकरियां खोजें',
-    scanQr: 'आयुष जॉब्स ऐप डाउनलोड करने के लिए क्यूआर कोड स्कैन करें',
-    qrCode: 'क्यूआर कोड',
     exploreTitle: 'सेल्स, सर्विस और मैन्युफैक्चरिंग नौकरियों का पता लगाएं',
     feature1Title: 'सत्यापित नियोक्ता',
     feature1Desc: 'हमारी स्क्रीनिंग प्रक्रिया केवल सत्यापित नौकरी प्रदाताओं को अनुमति देती है।',
@@ -242,8 +236,6 @@ const translations = {
     heroTitle: 'ఎంట్రీ లెవల్ సేల్స్, సర్వీస్ మరియు మాన్యుఫ్యాక్చరింగ్ ఉద్యోగాలు',
     heroDesc1: 'యాప్‌ను ఇంగ్లీష్ మరియు తెలుగులో ఉపయోగించండి',
     heroDesc2: 'బహుళ పరిశ్రమల నుండి ఉద్యోగాలను కనుగొనండి',
-    scanQr: 'యాప్‌ని డౌన్‌లోడ్ చేయడానికి మీ మొబైల్‌తో QR కోడ్‌ని స్కాన్ చేయండి',
-    qrCode: 'QR కోడ్',
     exploreTitle: 'సేల్స్, సర్వీస్ మరియు మాన్యుఫ్యాక్చరింగ్ ఉద్యోగాలను అన్వేషించండి',
     feature1Title: 'ధృవీకరించబడిన రిక్రూటర్లు',
     feature1Desc: 'మా స్క్రీనింగ్ ప్రక్రియ ధృవీకరించబడిన ఉద్యోగ ప్రదాతలను మాత్రమే అనుమతిస్తుంది.',
@@ -303,8 +295,6 @@ const translations = {
     heroTitle: 'എൻട്രി ലെവൽ സെയിൽസ്, സർവീസ്, മാനുഫാക്ചറിംഗ് ജോലികൾ',
     heroDesc1: 'ഇംഗ്ലീഷിലും മലയാളത്തിലും ആപ്പ് ഉപയോഗിക്കുക',
     heroDesc2: 'വിവിധ വ്യവസായങ്ങളിൽ നിന്നുള്ള ജോലികൾ കണ്ടെത്തുക',
-    scanQr: 'ആപ്പ് ഡൗൺലോഡ് ചെയ്യാൻ QR കോഡ് സ്കാൻ ചെയ്യുക',
-    qrCode: 'QR കോഡ്',
     exploreTitle: 'സെയിൽസ്, സർവീസ്, മാനുഫാക്ചറിംഗ് ജോലികൾ പര്യവേക്ഷണം ചെയ്യുക',
     feature1Title: 'പരിശോധിക്കപ്പെട്ട റിക്രൂട്ടർമാർ',
     feature1Desc: 'പരിശോധിക്കപ്പെട്ട തൊഴിൽ ദാതാക്കളെ മാത്രമേ ഞങ്ങളുടെ സ്ക്രീനിംഗ് അനുവദിക്കൂ.',
@@ -477,15 +467,6 @@ export default function JobPortalPage() {
                   </div>
                   <p className="text-sm font-bold text-slate-600">{t.heroDesc2}</p>
                 </div>
-              </div>
-
-              <div className="flex items-center gap-6 p-4 border border-slate-200 rounded-2xl w-fit mx-auto">
-                <div className="w-24 h-24 bg-slate-200 flex items-center justify-center rounded-lg">
-                  <span className="text-[10px] text-center text-slate-500 font-black">{t.qrCode}</span>
-                </div>
-                <p className="text-sm text-slate-600 max-w-[200px] font-bold text-left leading-tight">
-                  {t.scanQr}
-                </p>
               </div>
             </div>
           </section>
