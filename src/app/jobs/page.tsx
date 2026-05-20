@@ -351,7 +351,7 @@ const translations = {
     confirmApply: 'സ്ഥിരീകരിച്ച് ഇപ്പോൾ അപേക്ഷിക്കുക',
     close: 'അടയ്ക്കുക',
     salary: 'ശമ്പളം',
-    jobType: 'ജോലി തരം',
+    jobType: 'ജോലി തരങ്ങൾ',
     location: 'ലൊക്കേഷൻ',
     requirements: 'യോഗ്യതകൾ',
     jobDescription: 'ജോലി വിവരണം'
@@ -458,60 +458,34 @@ export default function JobPortalPage() {
       {view === 'candidate' && (
         <div className="pt-24 animate-in fade-in slide-in-from-bottom-4 duration-700">
           {/* Hero Section */}
-          <section className="max-w-7xl mx-auto px-6 py-12 lg:py-20 flex flex-col lg:flex-row items-center">
-            <div className="lg:w-1/2 space-y-8">
+          <section className="max-w-4xl mx-auto px-6 py-12 md:py-24 text-center">
+            <div className="space-y-8">
               <h2 className="text-4xl lg:text-7xl font-[1000] leading-tight text-slate-900 uppercase tracking-tighter">
                 {t.heroTitle}
               </h2>
               
-              <div className="flex flex-wrap gap-6">
+              <div className="flex flex-wrap justify-center gap-6">
                 <div className="flex items-center gap-3">
                   <div className="bg-primary/10 p-2 rounded-lg text-primary">
                     <Globe size={24} />
                   </div>
-                  <p className="text-sm font-medium text-slate-600">{t.heroDesc1}</p>
+                  <p className="text-sm font-bold text-slate-600">{t.heroDesc1}</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="bg-accent/10 p-2 rounded-lg text-accent">
                     <Search size={24} />
                   </div>
-                  <p className="text-sm font-medium text-slate-600">{t.heroDesc2}</p>
+                  <p className="text-sm font-bold text-slate-600">{t.heroDesc2}</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-6 p-4 border border-slate-200 rounded-2xl w-fit">
+              <div className="flex items-center gap-6 p-4 border border-slate-200 rounded-2xl w-fit mx-auto">
                 <div className="w-24 h-24 bg-slate-200 flex items-center justify-center rounded-lg">
                   <span className="text-[10px] text-center text-slate-500 font-black">{t.qrCode}</span>
                 </div>
-                <p className="text-sm text-slate-600 max-w-[200px] font-bold leading-tight">
+                <p className="text-sm text-slate-600 max-w-[200px] font-bold text-left leading-tight">
                   {t.scanQr}
                 </p>
-              </div>
-            </div>
-
-            {/* Hero Image / Illustration Area */}
-            <div className="lg:w-1/2 mt-12 lg:mt-0 relative">
-              <div className="relative z-10">
-                 <img 
-                  src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=600" 
-                  alt="Candidate" 
-                  className="rounded-[3rem] shadow-2xl"
-                />
-                {/* Floating Badges */}
-                <div className="absolute -left-10 top-1/2 bg-white p-3 rounded-xl shadow-lg border border-orange-100 flex items-center gap-2 animate-bounce">
-                  <div className="bg-orange-400 p-1 rounded-full text-white"><CheckCircle size={14}/></div>
-                  <div>
-                    <p className="text-[10px] font-bold text-orange-500 italic">Shortlisted</p>
-                    <p className="text-[8px] text-slate-500 leading-tight">Your profile is shortlisted<br/>by a recruiter</p>
-                  </div>
-                </div>
-                <div className="absolute -right-6 top-1/4 bg-white p-3 rounded-xl shadow-lg border border-green-100 flex items-center gap-2">
-                  <div className="bg-green-500 p-1 rounded-full text-white"><CheckCircle size={14}/></div>
-                  <div>
-                    <p className="text-[10px] font-bold text-green-600 italic">Congrats!</p>
-                    <p className="text-[8px] text-slate-500 leading-tight">Your application is sent<br/>successfully!</p>
-                  </div>
-                </div>
               </div>
             </div>
           </section>
@@ -625,7 +599,7 @@ export default function JobPortalPage() {
       {/* --- RECRUITER VIEW --- */}
       {view === 'recruiter' && (
         <div className="pt-24 animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <section className="max-w-4xl mx-auto px-6 py-12 md:py-20 text-center">
+          <section className="max-w-4xl mx-auto px-6 py-12 md:py-24 text-center">
             <div className="space-y-8">
               <h1 className="text-4xl md:text-6xl font-[1000] leading-tight text-slate-900 uppercase tracking-tighter">
                 {t.recruiterHeroTitle}
@@ -701,7 +675,7 @@ export default function JobPortalPage() {
                   {t.directContactDesc}
                 </p>
               </div>
-              <div className="flex-1 bg-slate-900 rounded-[4rem] p-16 text-white flex justify-center gap-12 shadow-2xl relative overflow-hidden">
+              <div className="flex-1 bg-slate-900 rounded-[3rem] p-16 text-white flex justify-center gap-12 shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl rounded-full" />
                 <Phone size={80} className="text-primary" />
                 <MessageSquare size={80} className="text-accent" />
