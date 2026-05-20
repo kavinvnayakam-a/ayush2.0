@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState } from 'react';
@@ -58,14 +57,14 @@ const translations = {
     candidate: 'Candidate',
     recruiter: 'Recruiter',
     heroTitle: 'Entry level Sales, Service and Manufacturing jobs',
-    heroDesc1: 'Use app in multiple languages',
+    heroDesc1: 'Use app in English and Tamil',
     heroDesc2: 'Discover jobs from multiple industries',
     scanQr: 'Scan the QR code with your mobile to download Ayush Jobs app & get instant updates',
     qrCode: 'QR CODE',
     exploreTitle: 'Explore Sales, Service and Manufacturing jobs',
     feature1Title: 'Verified Recruiters',
     feature1Desc: 'Our screening process allows only verified job providers.',
-    feature2Title: 'Multi-language',
+    feature2Title: 'Use in Tamil',
     feature2Desc: 'You can use the app easily in your mother tongue.',
     feature3Title: 'Talk to HRs Directly',
     feature3Desc: 'Call recruiters directly to know your interview status.',
@@ -88,7 +87,7 @@ const translations = {
     hireLocDesc: 'Want to hire candidates from a particular locality? Our advanced filters can help you find candidates suiting your requirements in any specific locality.',
     directContactTitle: 'Candidates can contact you directly',
     directContactDesc: 'We prompt the users to connect with you directly over call allowing for a faster screening & hiring process.',
-    vernacularTitle: 'Easy-to-use multi-language app, more local candidates',
+    vernacularTitle: 'Easy-to-use vernacular app, more local candidates',
     vernacularDesc: 'Our easy-to-use vernacular app helps more regional job seekers to register, thereby giving you a larger database of candidates to choose from.',
     benefitHeading: 'We help you find the best candidates who fit your requirements',
     benefit1Title: 'Easier & faster screening',
@@ -102,7 +101,7 @@ const translations = {
     localityTitle: 'Hire from any locality',
     localityDesc: 'Our platform provide you with the opportunity to search for professional talent in any specific locality and hire the best candidates.',
     faqs: 'FAQs',
-    faqAns: 'Answers to these questions are available in our recruiter help documentation. Generally, registration is free and involves email verification.',
+    faqAns: 'Answers to these questions are available in our recruiter help documentation. Generally, registration is free and involves mobile verification.',
     finalCtaTitle: 'Post a job and get applications from the best candidates',
     finalCtaDesc: 'Our platform has an extensive pool of registered talent looking for job opportunities.',
     confirmApply: 'Confirm & Apply Now',
@@ -119,14 +118,14 @@ const translations = {
     candidate: 'விண்ணப்பதாரர்',
     recruiter: 'ஆட்சேர்ப்பு செய்பவர்',
     heroTitle: 'விற்பனை, சேவை மற்றும் உற்பத்தி சார்ந்த ஆரம்ப நிலை வேலைகள்',
-    heroDesc1: 'பல மொழிகளில் பயன்பாட்டைப் பயன்படுத்தவும்',
+    heroDesc1: 'ஆங்கிலம் மற்றும் தமிழில் பயன்பாட்டைப் பயன்படுத்தவும்',
     heroDesc2: 'பல தொழில்துறைகளிலிருந்து வேலைகளைக் கண்டறியவும்',
     scanQr: 'ஆயுஷ் ஜாப்ஸ் செயலியைப் பதிவிறக்கவும் மற்றும் உடனடி அறிவிப்புகளைப் பெறவும் உங்கள் மொபைல் மூலம் QR குறியீட்டை ஸ்கேன் செய்யவும்',
     qrCode: 'QR குறியீடு',
     exploreTitle: 'விற்பனை, சேவை மற்றும் உற்பத்தி வேலைகளை ஆராயுங்கள்',
     feature1Title: 'சரிபார்க்கப்பட்ட ஆட்சேர்ப்பு செய்பவர்கள்',
     feature1Desc: 'எங்கள் ஸ்கிரீனிங் செயல்முறை சரிபார்க்கப்பட்ட வேலை வழங்குநர்களை மட்டுமே அனுமதிக்கிறது.',
-    feature2Title: 'பல மொழிகள்',
+    feature2Title: 'தமிழில் பயன்படுத்தவும்',
     feature2Desc: 'உங்கள் தாய்மொழியில் பயன்பாட்டை எளிதாகப் பயன்படுத்தலாம்.',
     feature3Title: 'HR-களுடன் நேரடியாகப் பேசுங்கள்',
     feature3Desc: 'உங்கள் நேர்காணல் நிலையை அறிய நேரடியாக ஆட்சேர்ப்பு செய்பவர்களை அழைக்கவும்.',
@@ -149,13 +148,13 @@ const translations = {
     hireLocDesc: 'ஒரு குறிப்பிட்ட பகுதியிலிருந்து விண்ணப்பதாரர்களை நியமிக்க வேண்டுமா? எங்கள் மேம்பட்ட வடிப்பான்கள் உங்கள் தேவைகளுக்கு ஏற்ற விண்ணப்பதாரர்களைக் கண்டறிய உதவும்.',
     directContactTitle: 'விண்ணப்பதாரர்கள் உங்களை நேரடியாகத் தொடர்பு கொள்ளலாம்',
     directContactDesc: 'வேகமான ஸ்கிரீனிங் மற்றும் ஆட்சேர்ப்பு செயல்முறைக்கு அழைப்பு மூலம் நேரடியாக உங்களைத் தொடர்பு கொள்ள பயனர்களை நாங்கள் தூண்டுகிறோம்.',
-    vernacularTitle: 'எளிதாகப் பயன்படுத்தக்கூடிய பல மொழி செயலி, அதிக உள்ளூர் விண்ணப்பதாரர்கள்',
-    vernacularDesc: 'எங்கள் எளிதாகப் பயன்படுத்தக்கூடிய உள்ளூர் மொழி செயலி அதிக பிராந்திய வேலை தேடுபவர்களைப் பதிவு செய்ய உதவுகிறது, இதன் மூலம் உங்களுக்கு அதிக விண்ணப்பதாரர்கள் கிடைக்கின்றனர்.',
+    vernacularTitle: 'எளிதாகப் பயன்படுத்தக்கூடிய உள்ளூர் மொழி செயலி, அதிக உள்ளூர் விண்ணப்பதாரர்கள்',
+    vernacularDesc: 'எங்கள் எளிதாகப் பயன்படுத்தக்கூடிய உள்ளூர் மொழி செயலி அதிக பிராந்திய வேலை தேடுபவர்களைப் பதிவு செய்ய உதவுகிறது.',
     benefitHeading: 'உங்கள் தேவைகளுக்குப் பொருந்தக்கூடிய சிறந்த விண்ணப்பதாரர்களைக் கண்டறிய நாங்கள் உதவுகிறோம்',
     benefit1Title: 'எளிதான மற்றும் வேகமான ஸ்கிரீனிங்',
     benefit1Desc: 'விண்ணப்பதாரர் பொருத்தம் மதிப்பெண் உங்கள் தேவைக்கு சிறந்தவர்களை எளிதாகக் கண்டறிய உதவும்.',
     benefit2Title: '2 மடங்கு வேகமான ஆட்சேர்ப்பு',
-    benefit2Desc: 'உங்கள் ஆட்சேர்ப்பை 2 மடங்கு வேகமாக முடிக்க பல்வேறு தொடர்பு சேனல்கள் மூலம் சிறந்த திறமையாளர்களை நேரடியாகத் தொடர்பு கொள்ளுங்கள்.',
+    benefit2Desc: 'சிறந்த திறமையாளர்களை நேரடியாகத் தொடர்பு கொண்டு உங்கள் ஆட்சேர்ப்பை 2 மடங்கு வேகமாக முடித்திடுங்கள்.',
     benefit3Title: 'சிறந்த விண்ணப்பதாரர்களைக் கண்டறிய வடிப்பான்கள்',
     benefit3Desc: 'திறன்கள், கல்வி மற்றும் சம்பள எதிர்பார்ப்பு ஆகியவற்றின் அடிப்படையில் வடிப்பான்கள் விண்ணப்பதாரர்களைக் கண்டறிய உதவும்.',
     rolesTitle: '50+ வெவ்வேறு பணிகளுக்கு ஆட்களை நியமிக்கவும்',
@@ -163,7 +162,7 @@ const translations = {
     localityTitle: 'எந்தப் பகுதியிலிருந்தும் ஆட்களை நியமிக்கவும்',
     localityDesc: 'எந்தவொரு குறிப்பிட்ட பகுதியிலும் தொழில்முறை திறமைகளைத் தேடி சிறந்த விண்ணப்பதாரர்களை நியமிப்பதற்கான வாய்ப்பை எங்கள் தளம் வழங்குகிறது.',
     faqs: 'அடிக்கடி கேட்கப்படும் கேள்விகள் (FAQs)',
-    faqAns: 'இந்தக் கேள்விகளுக்கான பதில்கள் எங்கள் ஆட்சேர்ப்பு உதவி ஆவணங்களில் கிடைக்கின்றன. பொதுவாக, பதிவு இலவசம் மற்றும் மின்னஞ்சல் சரிபார்ப்பை உள்ளடக்கியது.',
+    faqAns: 'இந்தக் கேள்விகளுக்கான பதில்கள் எங்கள் ஆட்சேர்ப்பு உதவி ஆவணங்களில் கிடைக்கின்றன.',
     finalCtaTitle: 'வேலை வாய்ப்பை பதிவிட்டு சிறந்த விண்ணப்பதாரர்களிடமிருந்து விண்ணப்பங்களைப் பெறுங்கள்',
     finalCtaDesc: 'எங்கள் தளத்தில் வேலை வாய்ப்புகளைத் தேடும் பதிவு செய்யப்பட்ட திறமையாளர்களின் பெரிய தரவுத்தளம் உள்ளது.',
     confirmApply: 'உறுதி செய்து விண்ணப்பிக்கவும்',
@@ -180,19 +179,19 @@ const translations = {
     candidate: 'उम्मीदवार',
     recruiter: 'नियोक्ता',
     heroTitle: 'एंट्री लेवल सेल्स, सर्विस और मैन्युफैक्चरिंग नौकरियां',
-    heroDesc1: 'एप्लिकेशन का उपयोग कई भाषाओं में करें',
+    heroDesc1: 'अंग्रेजी और हिंदी में ऐप का उपयोग करें',
     heroDesc2: 'विभिन्न उद्योगों से नौकरियां खोजें',
-    scanQr: 'आयुष जॉब्स ऐप डाउनलोड करने और तुरंत अपडेट पाने के लिए अपने मोबाइल से क्यूआर कोड स्कैन करें',
+    scanQr: 'आयुष जॉब्स ऐप डाउनलोड करने के लिए क्यूआर कोड स्कैन करें',
     qrCode: 'क्यूआर कोड',
     exploreTitle: 'सेल्स, सर्विस और मैन्युफैक्चरिंग नौकरियों का पता लगाएं',
     feature1Title: 'सत्यापित नियोक्ता',
     feature1Desc: 'हमारी स्क्रीनिंग प्रक्रिया केवल सत्यापित नौकरी प्रदाताओं को अनुमति देती है।',
-    feature2Title: 'बहुभाषी',
+    feature2Title: 'बहुभाषी सहायता',
     feature2Desc: 'आप अपनी मातृभाषा में ऐप का आसानी से उपयोग कर सकते हैं।',
     feature3Title: 'सीधे HR से बात करें',
     feature3Desc: 'अपनी इंटरव्यू स्थिति जानने के लिए सीधे नियोक्ताओं को कॉल करें।',
-    feature4Title: 'स्थान विशेषताएं',
-    feature4Desc: 'उन्नत मानचित्र और दूरी फिल्टर का उपयोग करके पास की नौकरियां खोजें।',
+    feature4Title: 'स्थान सुविधाएं',
+    feature4Desc: 'पास की नौकरियां खोजने के लिए मानचित्र और दूरी फिल्टर का उपयोग करें।',
     recentOpenings: 'हाल की रिक्तियां',
     viewDetails: 'विवरण देखें',
     noJobs: 'कोई हालिया नौकरी नहीं मिली। जल्द ही वापस देखें!',
@@ -207,26 +206,26 @@ const translations = {
     liveOnlyTN: 'हम वर्तमान में केवल तमिलनाडु में लाइव हैं',
     hiringPartners: 'हमारे हायरिंग पार्टनर्स',
     hireLocTitle: 'स्थान के आधार पर उम्मीदवारों को नियुक्त करें',
-    hireLocDesc: 'क्या आप किसी विशेष क्षेत्र से उम्मीदवारों को नियुक्त करना चाहते हैं? हमारे फिल्टर आपको सही उम्मीदवार खोजने में मदद करेंगे।',
+    hireLocDesc: 'क्या आप किसी विशेष क्षेत्र से उम्मीदवारों को नियुक्त करना चाहते हैं? हमारे फिल्टर मदद करेंगे।',
     directContactTitle: 'उम्मीदवार आपसे सीधे संपर्क कर सकते हैं',
-    directContactDesc: 'हम तेज स्क्रीनिंग और हायरिंग प्रक्रिया के लिए उपयोगकर्ताओं को कॉल पर आपसे सीधे जुड़ने के लिए प्रेरित करते।',
-    vernacularTitle: 'बहुभाषी ऐप, अधिक स्थानीय उम्मीदवार',
+    directContactDesc: 'हम तेज स्क्रीनिंग के लिए उपयोगकर्ताओं को सीधे आपसे जुड़ने के लिए प्रेरित करते हैं।',
+    vernacularTitle: 'आसान बहुभाषी ऐप, अधिक स्थानीय उम्मीदवार',
     vernacularDesc: 'हमारा बहुभाषी ऐप अधिक क्षेत्रीय नौकरी चाहने वालों को पंजीकरण करने में मदद करता है।',
     benefitHeading: 'हम आपकी आवश्यकताओं के अनुरूप सर्वश्रेष्ठ उम्मीदवार खोजने में मदद करते हैं',
-    benefit1Title: 'आसान और तेज़ स्क्रीनिंग',
-    benefit1Desc: 'कैंडिडेट मैच स्कोर आपको अपनी आवश्यकता के लिए सर्वश्रेष्ठ उम्मीदवारों को आसानी से खोजने में मदद कर सकता है।',
+    benefit1Title: 'आसान स्क्रीनिंग',
+    benefit1Desc: 'कैंडिडेट मैच स्कोर आपको अपनी आवश्यकता के लिए सर्वश्रेष्ठ उम्मीदवारों को खोजने में मदद करता है।',
     benefit2Title: '2 गुणा तेज़ हायरिंग',
     benefit2Desc: 'विभिन्न संचार चैनलों के माध्यम से सीधे सर्वश्रेष्ठ प्रतिभा से संपर्क करें।',
-    benefit3Title: 'सर्वश्रेष्ठ उम्मीदवारों को खोजने के लिए फिल्टर',
-    benefit3Desc: 'कौशल, शिक्षा और वेतन अपेक्षा के आधार पर फिल्टर उम्मीदवारों को खोजने में मदद करते हैं।',
+    benefit3Title: 'खोजने के लिए फिल्टर',
+    benefit3Desc: 'कौशल, शिक्षा और वेतन के आधार पर फिल्टर उम्मीदवारों को खोजने में मदद करते हैं।',
     rolesTitle: '50+ विभिन्न भूमिकाओं के लिए हायर करें',
     registerForFree: 'मुफ्त में पंजीकरण करें',
     localityTitle: 'किसी भी इलाके से हायर करें',
-    localityDesc: 'हमारा प्लेटफॉर्म आपको किसी भी विशेष इलाके में पेशेवर प्रतिभा खोजने का अवसर प्रदान करता है।',
+    localityDesc: 'हमारा प्लेटफॉर्म आपको पेशेवर प्रतिभा खोजने का अवसर प्रदान करता है।',
     faqs: 'सामान्य प्रश्न (FAQs)',
-    faqAns: 'इन सवालों के जवाब हमारे नियोक्ता सहायता दस्तावेजों में उपलब्ध हैं। पंजीकरण आमतौर पर मुफ्त है।',
+    faqAns: 'इन सवालों के जवाब हमारे नियोक्ता सहायता दस्तावेजों में उपलब्ध हैं।',
     finalCtaTitle: 'नौकरी पोस्ट करें और सर्वश्रेष्ठ उम्मीदवारों से आवेदन प्राप्त करें',
-    finalCtaDesc: 'हमारे प्लेटफॉर्म पर नौकरी के अवसरों की तलाश करने वाली पंजीकृत प्रतिभाओं का एक विस्तृत समूह है।',
+    finalCtaDesc: 'हमारे प्लेटफॉर्म पर नौकरी की तलाश करने वाली पंजीकृत प्रतिभाओं का समूह है।',
     confirmApply: 'पुष्टि करें और अभी आवेदन करें',
     close: 'बंद करें',
     salary: 'वेतन',
@@ -241,53 +240,53 @@ const translations = {
     candidate: 'అభ్యర్థి',
     recruiter: 'రిక్రూటర్',
     heroTitle: 'ఎంట్రీ లెవల్ సేల్స్, సర్వీస్ మరియు మాన్యుఫ్యాక్చరింగ్ ఉద్యోగాలు',
-    heroDesc1: 'బహుళ భాషలలో యాప్‌ను ఉపయోగించండి',
+    heroDesc1: 'యాప్‌ను ఇంగ్లీష్ మరియు తెలుగులో ఉపయోగించండి',
     heroDesc2: 'బహుళ పరిశ్రమల నుండి ఉద్యోగాలను కనుగొనండి',
-    scanQr: 'ఆయుష్ జాబ్స్ యాప్‌ని డౌన్‌లోడ్ చేయడానికి మరియు తక్షణ అప్‌డేట్‌లను పొందడానికి మీ మొబైల్‌తో QR కోడ్‌ని స్కాన్ చేయండి',
+    scanQr: 'యాప్‌ని డౌన్‌లోడ్ చేయడానికి మీ మొబైల్‌తో QR కోడ్‌ని స్కాన్ చేయండి',
     qrCode: 'QR కోడ్',
     exploreTitle: 'సేల్స్, సర్వీస్ మరియు మాన్యుఫ్యాక్చరింగ్ ఉద్యోగాలను అన్వేషించండి',
     feature1Title: 'ధృవీకరించబడిన రిక్రూటర్లు',
     feature1Desc: 'మా స్క్రీనింగ్ ప్రక్రియ ధృవీకరించబడిన ఉద్యోగ ప్రదాతలను మాత్రమే అనుమతిస్తుంది.',
-    feature2Title: 'బహుళ భాషలు',
+    feature2Title: 'తెలుగులో ఉపయోగించండి',
     feature2Desc: 'మీరు మీ మాతృభాషలో యాప్‌ని సులభంగా ఉపయోగించవచ్చు.',
     feature3Title: 'HR లతో నేరుగా మాట్లాడండి',
     feature3Desc: 'మీ ఇంటర్వ్యూ స్థితిని తెలుసుకోవడానికి నేరుగా రిక్రూటర్లకు కాల్ చేయండి.',
     feature4Title: 'స్థాన ఫీచర్లు',
-    feature4Desc: 'అడ్వాన్స్‌డ్ మ్యాప్ మరియు దూరం ఫిల్టర్‌లను ఉపయోగించి సమీపంలోని ఉద్యోగాలను కనుగొనండి.',
+    feature4Desc: 'సమీపంలోని ఉద్యోగాలను కనుగొనడానికి మ్యాప్ మరియు దూరం ఫిల్టర్లను ఉపయోగించండి.',
     recentOpenings: 'ఇటీవలి ఓపెనింగ్స్',
     viewDetails: 'వివరాలు చూడండి',
     noJobs: 'ఇటీవలి ఉద్యోగాలు ఏవీ కనుగొనబడలేదు. త్వరలో మళ్ళీ చూడండి!',
     qualifications: 'అర్హత ఆధారిత ఉద్యోగాలు',
     jobTypes: 'ఉద్యోగ రకాలు',
     recruiterHeroTitle: 'మీ వ్యాపారం కోసం ఉత్తమ ప్రతిభను నియమించుకోండి',
-    recruiterHeroDesc1: 'పెద్ద సంఖ్యలో అభ్యర్థుల డేటాబేస్కు యాక్సెస్ పొందండి',
+    recruiterHeroDesc1: 'పెద్ద సంఖ్యలో అభ్యర్థులకు యాక్సెస్ పొందండి',
     recruiterHeroDesc2: 'హైరింగ్ సమయాన్ని తగ్గించండి మరియు ఉత్తమ ప్రతిభను నియమించుకోండి',
     enterMobile: 'మీ మొబైల్ నంబర్‌ను నమోదు చేయండి',
     registerNow: 'ఇప్పుడే నమోదు చేసుకోండి',
     enterpriseLogin: 'ఎంటర్‌ప్రైజ్ లాగిన్ కోసం ఇక్కడ క్లిక్ చేయండి',
     liveOnlyTN: 'మేము ప్రస్తుతం తమిళనాడులో మాత్రమే అందుబాటులో ఉన్నాము',
     hiringPartners: 'మా హైరింగ్ భాగస్వాములు',
-    hireLocTitle: 'వారి స్థానం ఆధారంగా అభ్యర్థులను నియమించుకోండి',
-    hireLocDesc: 'మీరు ఒక నిర్దిష్ట ప్రాంతం నుండి అభ్యర్థులను నియమించుకోవాలనుకుంటున్నారా? మా ఫిల్టర్లు మీకు సహాయపడతాయి.',
-    directContactTitle: 'అభ్యర్థులు మిమ్మల్ని నేరుగా సంప్రదించవచ్చు',
-    directContactDesc: 'వేగవంతమైన స్క్రీనింగ్ మరియు హైరింగ్ ప్రక్రియ కోసం వినియోగదారులు నేరుగా కాల్ ద్వారా మిమ్మల్ని సంప్రదించేలా మేము ప్రోత్సహిస్తాము.',
-    vernacularTitle: 'బహుళ భాషా యాప్, ఎక్కువ స్థానిక అభ్యర్థులు',
+    hireLocTitle: 'స్థానం ఆధారంగా అభ్యర్థులను నియమించుకోండి',
+    hireLocDesc: 'ఒక నిర్దిష్ట ప్రాంతం నుండి అభ్యర్థులను నియమించుకోవాలనుకుంటున్నారా? మా ఫిల్టర్లు మీకు సహాయపడతాయి.',
+    directContactTitle: 'అభ్యర్థులు నేరుగా మిమ్మల్ని సంప్రదించవచ్చు',
+    directContactDesc: 'వేగవంతమైన హైరింగ్ కోసం వినియోగదారులు నేరుగా కాల్ ద్వారా మిమ్మల్ని సంప్రదించేలా మేము ప్రోత్సహిస్తాము.',
+    vernacularTitle: 'సులభమైన బహుళ భాషా యాప్, ఎక్కువ స్థానిక అభ్యర్థులు',
     vernacularDesc: 'మా యాప్ ఎక్కువ మంది ప్రాంతీయ ఉద్యోగార్ధులు నమోదు చేసుకోవడానికి సహాయపడుతుంది.',
     benefitHeading: 'మీ అవసరాలకు సరిపోయే ఉత్తమ అభ్యర్థులను కనుగొనడంలో మేము సహాయం చేస్తాము',
-    benefit1Title: 'సులభమైన మరియు వేగవంతమైన స్క్రీనింగ్',
-    benefit1Desc: 'క్యాండిడేట్ మ్యాచ్ స్కోర్ మీ అవసరానికి తగిన అభ్యర్థులను సులభంగా కనుగొనడంలో సహాయపడుతుంది.',
+    benefit1Title: 'సులభమైన స్క్రీనింగ్',
+    benefit1Desc: 'క్యాండిడేట్ మ్యాచ్ స్కోర్ ఉత్తమ అభ్యర్థులను సులభంగా కనుగొనడంలో సహాయపడుతుంది.',
     benefit2Title: '2 రెట్లు వేగవంతమైన హైరింగ్',
-    benefit2Desc: 'వివిధ కమ్యూనికేషన్ ఛానెల్‌ల ద్వారా నేరుగా ఉత్తమ ప్రతిభను సంప్రదించండి.',
-    benefit3Title: 'ఉత్తమ అభ్యర్థులను కనుగొనడానికి ఫిల్టర్లు',
-    benefit3Desc: 'నైపుణ్యాలు, విద్య మరియు జీతం అంచనాల ఆధారంగా ఫిల్టర్లు అభ్యర్థులను కనుగొనడంలో సహాయపడతాయి.',
+    benefit2Desc: 'నేరుగా ఉత్తమ ప్రతిభను సంప్రదించి మీ హైరింగ్‌ను వేగంగా పూర్తి చేయండి.',
+    benefit3Title: 'ఉత్తమ ఫిల్టర్లు',
+    benefit3Desc: 'నైపుణ్యాలు మరియు విద్య ఆధారంగా ఫిల్టర్లు అభ్యర్థులను కనుగొనడంలో సహాయపడతాయి.',
     rolesTitle: '50+ విభిన్న పాత్రల కోసం హైర్ చేయండి',
     registerForFree: 'ఉచితంగా నమోదు చేసుకోండి',
     localityTitle: 'ఏ ప్రాంతం నుండి అయినా హైర్ చేయండి',
-    localityDesc: 'ఏదైనా నిర్దిష్ట ప్రాంతంలో వృత్తిపరమైన ప్రతిభను వెతకడానికి మరియు ఉత్తమ అభ్యర్థులను నియమించుకోవడానికి మా ప్లాట్‌ఫారమ్ అవకాశం కల్పిస్తుంది.',
+    localityDesc: 'ఏదైనా నిర్దిష్ట ప్రాంతంలో వృత్తిపరమైన ప్రతిభను వెతకడానికి మా ప్లాట్‌ఫారమ్ అవకాశం కల్పిస్తుంది.',
     faqs: 'తరచుగా అడిగే ప్రశ్నలు (FAQs)',
-    faqAns: 'ఈ ప్రశ్నలకు సమాధానాలు మా రిక్రూటర్ సహాయ పత్రాలలో అందుబాటులో ఉన్నాయి. సాధారణంగా నమోదు ఉచితం.',
+    faqAns: 'ఈ ప్రశ్నలకు సమాధానాలు మా రిక్రూటర్ సహాయ పత్రాలలో అందుబాటులో ఉన్నాయి.',
     finalCtaTitle: 'ఉద్యోగాన్ని పోస్ట్ చేయండి మరియు ఉత్తమ అభ్యర్థుల నుండి దరఖాస్తులను పొందండి',
-    finalCtaDesc: 'మా ప్లాట్‌ఫారమ్‌లో ఉద్యోగ అవకాశాల కోసం వెతుకుతున్న నమోదిత ప్రతిభావంతుల పెద్ద సమూహం ఉంది.',
+    finalCtaDesc: 'మా ప్లాట్‌ఫారమ్‌లో ఉద్యోగాల కోసం వెతుకుతున్న నమోదిత ప్రతిభావంతుల పెద్ద సమూహం ఉంది.',
     confirmApply: 'ధృవీకరించండి మరియు ఇప్పుడే దరఖాస్తు చేయండి',
     close: 'ముగించు',
     salary: 'జీతం',
@@ -302,19 +301,19 @@ const translations = {
     candidate: 'ഉദ്യോഗാർത്ഥി',
     recruiter: 'റിക്രൂട്ടർ',
     heroTitle: 'എൻട്രി ലെവൽ സെയിൽസ്, സർവീസ്, മാനുഫാക്ചറിംഗ് ജോലികൾ',
-    heroDesc1: 'ആപ്പ് ഒന്നിലധികം ഭാഷകളിൽ ഉപയോഗിക്കുക',
+    heroDesc1: 'ഇംഗ്ലീഷിലും മലയാളത്തിലും ആപ്പ് ഉപയോഗിക്കുക',
     heroDesc2: 'വിവിധ വ്യവസായങ്ങളിൽ നിന്നുള്ള ജോലികൾ കണ്ടെത്തുക',
-    scanQr: 'ആയുഷ് ജോബ്സ് ആപ്പ് ഡൗൺലോഡ് ചെയ്യുന്നതിനും തൽക്ഷണ അപ്‌ഡേറ്റുകൾ ലഭിക്കുന്നതിനും നിങ്ങളുടെ മൊബൈൽ ഉപയോഗിച്ച് QR കോഡ് സ്കാൻ ചെയ്യുക',
+    scanQr: 'ആപ്പ് ഡൗൺലോഡ് ചെയ്യാൻ QR കോഡ് സ്കാൻ ചെയ്യുക',
     qrCode: 'QR കോഡ്',
     exploreTitle: 'സെയിൽസ്, സർവീസ്, മാനുഫാക്ചറിംഗ് ജോലികൾ പര്യവേക്ഷണം ചെയ്യുക',
     feature1Title: 'പരിശോധിക്കപ്പെട്ട റിക്രൂട്ടർമാർ',
-    feature1Desc: 'ഞങ്ങളുടെ സ്ക്രീനിംഗ് പ്രക്രിയ പരിശോധിക്കപ്പെട്ട തൊഴിൽ ദാതാക്കളെ മാത്രമേ അനുവദിക്കൂ.',
-    feature2Title: 'ബഹുഭാഷാ പിന്തുണ',
+    feature1Desc: 'പരിശോധിക്കപ്പെട്ട തൊഴിൽ ദാതാക്കളെ മാത്രമേ ഞങ്ങളുടെ സ്ക്രീനിംഗ് അനുവദിക്കൂ.',
+    feature2Title: 'മലയാളത്തിൽ ഉപയോഗിക്കാം',
     feature2Desc: 'നിങ്ങളുടെ മാതൃഭാഷയിൽ ആപ്പ് എളുപ്പത്തിൽ ഉപയോഗിക്കാം.',
     feature3Title: 'HR-കളുമായി നേരിട്ട് സംസാരിക്കുക',
-    feature3Desc: 'നിങ്ങളുടെ ഇന്റർവ്യൂ നില അറിയാൻ നേരിട്ട് റിക്രൂട്ടർമാരെ വിളിക്കുക.',
+    feature3Desc: 'നിങ്ങളുടെ ഇന്റർവ്യൂ നില അറിയാൻ റിക്രൂട്ടർമാരെ നേരിട്ട് വിളിക്കുക.',
     feature4Title: 'ലൊക്കേഷൻ സവിശേഷതകൾ',
-    feature4Desc: 'അഡ്വാൻസ്ഡ് മാപ്പും ദൂര ഫിൽട്ടറുകളും ഉപയോഗിച്ച് അടുത്തുള്ള ജോലികൾ കണ്ടെത്തുക.',
+    feature4Desc: 'അടുത്തുള്ള ജോലികൾ കണ്ടെത്താൻ മാപ്പും ദൂര ഫിൽട്ടറുകളും ഉപയോഗിക്കുക.',
     recentOpenings: 'സമീപകാല തൊഴിലവസരങ്ങൾ',
     viewDetails: 'വിവരങ്ങൾ കാണുക',
     noJobs: 'സമീപകാല ജോലികളൊന്നും കണ്ടെത്തിയില്ല. ഉടൻ വീണ്ടും പരിശോധിക്കുക!',
@@ -329,32 +328,32 @@ const translations = {
     liveOnlyTN: 'ഞങ്ങൾ നിലവിൽ തമിഴ്‌നാട്ടിൽ മാത്രമേ ലഭ്യമാകൂ',
     hiringPartners: 'ഞങ്ങളുടെ റിക്രൂട്ട്‌മെന്റ് പങ്കാളികൾ',
     hireLocTitle: 'ലൊക്കേഷൻ അടിസ്ഥാനമാക്കി ഉദ്യോഗാർത്ഥികളെ നിയമിക്കുക',
-    hireLocDesc: 'ഒരു പ്രത്യേക പ്രദേശത്ത് നിന്നുള്ള ഉദ്യോഗാർത്ഥികളെ നിയമിക്കണോ? ഞങ്ങളുടെ ഫിൽട്ടറുകൾ നിങ്ങളെ സഹായിക്കും.',
+    hireLocDesc: 'ഒരു പ്രത്യേക പ്രദേശത്ത് നിന്നുള്ള ഉദ്യോഗാർത്ഥികളെ നിയമിക്കണോ? ഞങ്ങളുടെ ഫിൽട്ടറുകൾ സഹായിക്കും.',
     directContactTitle: 'ഉദ്യോഗാർത്ഥികൾക്ക് നിങ്ങളെ നേരിട്ട് ബന്ധപ്പെടാം',
-    directContactDesc: 'വേഗത്തിലുള്ള സ്ക്രീനിംഗിനും നിയമനത്തിനുമായി ഉദ്യോഗാർത്ഥികൾ നിങ്ങളെ നേരിട്ട് വിളിക്കാൻ ഞങ്ങൾ പ്രോത്സാഹിപ്പിക്കുന്നു.',
-    vernacularTitle: 'ബഹുഭാഷാ ആപ്പ്, കൂടുതൽ പ്രാദേശിക ഉദ്യോഗാർത്ഥികൾ',
-    vernacularDesc: 'ഞങ്ങളുടെ ബഹുഭാഷാ ആപ്പ് കൂടുതൽ പ്രാദേശിക ഉദ്യോഗാർത്ഥികളെ രജിസ്റ്റർ ചെയ്യാൻ സഹായിക്കുന്നു.',
-    benefitHeading: 'നിങ്ങളുടെ ആവശ്യങ്ങൾക്ക് അനുയോജ്യമായ മികച്ച ഉദ്യോഗാർത്ഥികളെ കണ്ടെത്താൻ ഞങ്ങൾ സഹായിക്കുന്നു',
-    benefit1Title: 'എളുപ്പത്തിലുള്ള സ്ക്രീനിംഗ്',
-    benefit1Desc: 'നിങ്ങളുടെ ആവശ്യത്തിന് അനുയോജ്യമായവരെ കണ്ടെത്താൻ കാൻഡിഡേറ്റ് മാച്ച് സ്കോർ സഹായിക്കും.',
+    directContactDesc: 'വേഗത്തിലുള്ള നിയമനത്തിനായി ഉദ്യോഗാർത്ഥികൾ നിങ്ങളെ നേരിട്ട് വിളിക്കാൻ ഞങ്ങൾ പ്രോത്സാഹിപ്പിക്കുന്നു.',
+    vernacularTitle: 'ലളിതമായ ബഹുഭാഷാ ആപ്പ്, കൂടുതൽ പ്രാദേശിക ഉദ്യോഗാർത്ഥികൾ',
+    vernacularDesc: 'പ്രാദേശിക ജോലി അന്വേഷിക്കുന്നവർക്ക് ലളിതമായ ബഹുഭാഷാ ആപ്പ് രജിസ്റ്റർ ചെയ്യാൻ സഹായിക്കുന്നു.',
+    benefitHeading: 'മികച്ച ഉദ്യോഗാർത്ഥികളെ കണ്ടെത്താൻ ഞങ്ങൾ സഹായിക്കുന്നു',
+    benefit1Title: 'ലളിതമായ സ്ക്രീനിംഗ്',
+    benefit1Desc: 'കാൻഡിഡേറ്റ് മാച്ച് സ്കോർ മികച്ചവരെ കണ്ടെത്താൻ സഹായിക്കുന്നു.',
     benefit2Title: '2 മടങ്ങ് വേഗത്തിലുള്ള നിയമനം',
-    benefit2Desc: 'വിവിധ ആശയവിനിമയ ചാനലുകളിലൂടെ നേരിട്ട് മികച്ച പ്രതിഭകളെ ബന്ധപ്പെടുക.',
-    benefit3Title: 'മികച്ച ഉദ്യോഗാർത്ഥികളെ കണ്ടെത്താൻ ഫിൽട്ടറുകൾ',
-    benefit3Desc: 'കഴിവ്, വിദ്യാഭ്യാസം, ശമ്പളം എന്നിവയുടെ അടിസ്ഥാനത്തിലുള്ള ഫിൽട്ടറുകൾ ഉദ്യോഗാർത്ഥികളെ കണ്ടെത്താൻ സഹായിക്കുന്നു.',
+    benefit2Desc: 'മികച്ച പ്രതിഭകളെ നേരിട്ട് ബന്ധപ്പെട്ട് നിയമനം വേഗത്തിലാക്കുക.',
+    benefit3Title: 'മികച്ച ഫിൽട്ടറുകൾ',
+    benefit3Desc: 'വിദ്യാഭ്യാസം, ശമ്പളം എന്നിവയുടെ അടിസ്ഥാനത്തിലുള്ള ഫിൽട്ടറുകൾ സഹായകരമാണ്.',
     rolesTitle: '50+ വ്യത്യസ്ത തസ്തികകളിലേക്ക് നിയമനം നടത്തുക',
     registerForFree: 'സൗജന്യമായി രജിസ്റ്റർ ചെയ്യുക',
     localityTitle: 'ഏത് പ്രദേശത്ത് നിന്നും നിയമനം നടത്തുക',
-    localityDesc: 'ഏതെങ്കിലും പ്രത്യേക പ്രദേശത്തുള്ള പ്രൊഫഷണൽ പ്രതിഭകളെ തിരയാനും നിയമിക്കാനും ഞങ്ങളുടെ പ്ലാറ്റ്ഫോം അവസരം നൽകുന്നു.',
+    localityDesc: 'ഏതെങ്കിലും പ്രത്യേക പ്രദേശത്തുള്ള പ്രൊഫഷണൽ പ്രതിഭകളെ തിരയാൻ അവസരം നൽകുന്നു.',
     faqs: 'സാധാരണ ചോദ്യങ്ങൾ (FAQs)',
     faqAns: 'ഈ ചോദ്യങ്ങൾക്കുള്ള ഉത്തരങ്ങൾ ഞങ്ങളുടെ റിക്രൂട്ടർ ഹെൽപ്പ് ഡോക്യുമെന്റുകളിൽ ലഭ്യമാണ്.',
     finalCtaTitle: 'ജോലി പോസ്റ്റ് ചെയ്യുക, മികച്ച ഉദ്യോഗാർത്ഥികളിൽ നിന്ന് അപേക്ഷകൾ സ്വീകരിക്കുക',
-    finalCtaDesc: 'തൊഴിലവസരങ്ങൾ തേടുന്ന രജിസ്റ്റർ ചെയ്ത നിരവധി പ്രതിഭകൾ ഞങ്ങളുടെ പ്ലാറ്റ്‌ഫോമിലുണ്ട്.',
+    finalCtaDesc: 'ജോലി അന്വേഷിക്കുന്ന രജിസ്റ്റർ ചെയ്ത നിരവധി പ്രതിഭകൾ ഞങ്ങളുടെ പ്ലാറ്റ്‌ഫോമിലുണ്ട്.',
     confirmApply: 'സ്ഥിരീകരിച്ച് ഇപ്പോൾ അപേക്ഷിക്കുക',
     close: 'അടയ്ക്കുക',
     salary: 'ശമ്പളം',
     jobType: 'ജോലി തരം',
     location: 'ലൊക്കേഷൻ',
-    requirements: 'ഉദ്യോഗാർത്ഥി യോഗ്യതകൾ',
+    requirements: 'യോഗ്യതകൾ',
     jobDescription: 'ജോലി വിവരണം'
   }
 };
@@ -490,7 +489,7 @@ export default function JobPortalPage() {
               </div>
             </div>
 
-            {/* Hero Illustration Area */}
+            {/* Hero Image / Illustration Area */}
             <div className="lg:w-1/2 mt-12 lg:mt-0 relative">
               <div className="relative z-10">
                  <img 
@@ -626,12 +625,12 @@ export default function JobPortalPage() {
       {/* --- RECRUITER VIEW --- */}
       {view === 'recruiter' && (
         <div className="pt-24 animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <section className="max-w-7xl mx-auto px-6 py-12 md:py-20 grid md:grid-cols-2 gap-12 items-center">
+          <section className="max-w-4xl mx-auto px-6 py-12 md:py-20 text-center">
             <div className="space-y-8">
               <h1 className="text-4xl md:text-6xl font-[1000] leading-tight text-slate-900 uppercase tracking-tighter">
                 {t.recruiterHeroTitle}
               </h1>
-              <div className="flex flex-col sm:flex-row gap-6 mb-8">
+              <div className="flex flex-col sm:flex-row justify-center gap-6 mb-8">
                 <div className="flex items-center gap-3">
                   <div className="bg-primary p-2 rounded-lg text-white shadow-md">
                     <Users size={20} />
@@ -646,7 +645,7 @@ export default function JobPortalPage() {
                 </div>
               </div>
               
-              <div className="bg-white border rounded-[1.5rem] p-2 shadow-sm flex flex-col sm:flex-row gap-2 max-w-lg mb-4">
+              <div className="bg-white border rounded-[1.5rem] p-2 shadow-sm flex flex-col sm:flex-row gap-2 max-w-lg mx-auto mb-4">
                 <input 
                   type="tel" 
                   placeholder={t.enterMobile} 
@@ -657,20 +656,11 @@ export default function JobPortalPage() {
                 </Button>
               </div>
               <div className="space-y-1">
-                <Link href="/admin/login" className="text-primary font-black uppercase tracking-widest underline flex items-center gap-2 text-[10px]">
+                <Link href="/admin/login" className="text-primary font-black uppercase tracking-widest underline flex items-center justify-center gap-2 text-[10px]">
                   <Briefcase size={14} /> {t.enterpriseLogin}
                 </Link>
                 <p className="text-[10px] text-slate-400 font-bold italic">{t.liveOnlyTN}</p>
               </div>
-            </div>
-
-            {/* Hero Visuals */}
-            <div className="relative flex justify-center items-center">
-               <img 
-                src="https://firebasestorage.googleapis.com/v0/b/studio-2309061503-7e9f2.firebasestorage.app/o/Jobportal%2Fimg-2.webp?alt=media&token=89560f30-8516-4925-9765-7eb711ca4161" 
-                alt="Ayush Jobs Recruiter" 
-                className="w-full h-auto max-w-xl object-contain drop-shadow-2xl"
-              />
             </div>
           </section>
 
@@ -680,7 +670,7 @@ export default function JobPortalPage() {
               <p className="text-xl font-black uppercase tracking-widest mb-8 italic text-slate-400">{t.hiringPartners}</p>
               <div className="flex flex-wrap justify-center gap-10 grayscale opacity-70">
                 {['SHREEVARMA', 'AYUR.AI', 'NASYA', 'VIBHA', 'MINISTRY', 'PCR HERBALS'].map((brand) => (
-                  <span key={brand} className="text-xl font-black text-slate-400 tracking-[0.2em]">{brand}</span>
+                  <span key={brand} className="text-xl font-black text-gray-400 tracking-[0.2em]">{brand}</span>
                 ))}
               </div>
             </div>
@@ -822,7 +812,7 @@ export default function JobPortalPage() {
           <section className="py-32 bg-primary/5 text-center border-t border-slate-100">
             <div className="max-w-4xl mx-auto px-6">
               <p className="text-primary font-black uppercase tracking-[0.3em] mb-6 text-sm">Ayush Jobs Network</p>
-              <h2 className="text-4xl md:text-7xl font-[1000] mb-8 text-slate-900 uppercase tracking-tighter leading-none">{t.finalCtaTitle}</h2>
+              <h2 className="text-4xl md:text-5xl font-[1000] mb-8 text-slate-900 uppercase tracking-tighter leading-none">{t.finalCtaTitle}</h2>
               <p className="text-slate-500 font-bold text-xl mb-12 italic">{t.finalCtaDesc}</p>
               <Button asChild className="bg-primary text-white px-16 py-10 rounded-[2rem] font-black text-2xl hover:bg-slate-900 shadow-2xl shadow-primary/20 transform hover:-translate-y-1 transition duration-500 uppercase tracking-widest">
                 <Link href="/admin/login">{t.registerForFree}</Link>
