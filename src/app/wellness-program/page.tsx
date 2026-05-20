@@ -1,19 +1,17 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { Calendar, MapPin, Sparkles, Navigation, ShieldCheck, Heart } from 'lucide-react';
 import { WellnessProgramForm } from '@/components/forms/WellnessProgramForm';
 import { Button } from '@/components/ui/button';
 
 export default function WellnessProgramPage() {
   const mapUrl = "https://maps.app.goo.gl/FwDdr1mgzz7KbJzR9";
-  const heroImageUrl = "https://firebasestorage.googleapis.com/v0/b/studio-2309061503-7e9f2.firebasestorage.app/o/WELLNESS%20PROGRAM_1%20(1).webp?alt=media&token=6fa19561-8a3b-4ab7-a4e5-b5015677be8f";
 
   return (
     <main className="min-h-screen bg-white selection:bg-[hsl(93,45%,44%)] selection:text-white">
       
-      {/* 1. EVENT INFO & FORM SECTION - NOW AT THE TOP */}
+      {/* 1. EVENT INFO & FORM SECTION */}
       <section className="pt-12 md:pt-20 pb-24 px-6">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
@@ -86,42 +84,24 @@ export default function WellnessProgramPage() {
         </div>
       </section>
 
-      {/* 2. INTRO SECTION (MOVED BELOW FORM) */}
+      {/* 2. INTRO SECTION - CLEAN CENTERED TEXT LAYOUT */}
       <section className="relative py-24 overflow-hidden bg-[hsl(91,30%,96%)]">
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div className="absolute top-[-10%] right-[-10%] w-[70%] h-[70%] bg-[hsl(93,45%,44%)]/10 blur-[120px] rounded-full animate-float" />
           <div className="absolute bottom-[-10%] left-[-10%] w-[60%] h-[60%] bg-[#ffa62f]/10 blur-[100px] rounded-full animate-float [animation-duration:20s]" />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Text Content */}
-            <div className="text-center lg:text-left space-y-6">
-              <div className="inline-flex items-center gap-2 bg-white px-6 py-2.5 rounded-full border border-[hsl(93,45%,44%)]/10 text-[hsl(93,45%,44%)] font-black text-xs tracking-[0.3em] uppercase mb-2 shadow-sm">
-                <Sparkles size={16} /> Transform Your Workplace
-              </div>
-              <h1 className="text-5xl md:text-7xl xl:text-8xl font-[1000] text-[hsl(93,20%,15%)] uppercase tracking-tighter leading-none">
-                Corporate <br/><span className="text-[hsl(93,45%,44%)] italic">Wellness</span> Program
-              </h1>
-              <h3 className="text-2xl font-black text-[hsl(93,45%,44%)] uppercase">April 19, 2026</h3>
-              <p className="text-xl md:text-2xl font-bold text-[hsl(93,20%,15%)]/60 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                Enhance productivity, reduce stress, and foster a healthier organizational culture through ancient wisdom and modern wellness.
-              </p>
-            </div>
-
-            {/* Image Content */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-[500px] aspect-square rounded-[3rem] overflow-hidden border-8 border-white shadow-2xl transition-transform hover:scale-[1.02] duration-500">
-                <Image 
-                  src={heroImageUrl} 
-                  alt="Corporate Wellness Program" 
-                  fill 
-                  loading="lazy"
-                  className="object-cover"
-                />
-              </div>
-            </div>
+        <div className="container mx-auto px-6 relative z-10 text-center">
+          <div className="inline-flex items-center gap-2 bg-white px-6 py-2.5 rounded-full border border-[hsl(93,45%,44%)]/10 text-[hsl(93,45%,44%)] font-black text-xs tracking-[0.3em] uppercase mb-4 shadow-sm">
+            <Sparkles size={16} /> Transform Your Workplace
           </div>
+          <h1 className="text-5xl md:text-7xl xl:text-8xl font-[1000] text-[hsl(93,20%,15%)] uppercase tracking-tighter leading-none mb-6">
+            Corporate <br/><span className="text-[hsl(93,45%,44%)] italic">Wellness</span> Program
+          </h1>
+          <h3 className="text-2xl font-black text-[hsl(93,45%,44%)] uppercase mb-8">April 19, 2026</h3>
+          <p className="text-xl md:text-2xl font-bold text-[hsl(93,20%,15%)]/60 max-w-4xl mx-auto leading-relaxed">
+            Enhance productivity, reduce stress, and foster a healthier organizational culture through ancient wisdom and modern wellness.
+          </p>
         </div>
       </section>
 
