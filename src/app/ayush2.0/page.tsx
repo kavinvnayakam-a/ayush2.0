@@ -123,51 +123,51 @@ export default function Ayush20Page() {
       `}} />
 
       {/* HERO SECTION */}
-      <section className="relative pt-12 md:pt-24 pb-12 overflow-hidden bg-white rounded-b-[4rem] shadow-sm border-b border-slate-200">
-        <div className="container mx-auto px-6 relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 bg-white px-6 py-2.5 rounded-full border border-[#2c5340]/10 text-[#2c5340] font-black text-xs tracking-[0.3em] uppercase mb-8 shadow-sm">
-            <Sparkles size={16} /> World Ayurveda Congress
+      <section className="relative pt-10 md:pt-24 pb-12 overflow-hidden bg-white rounded-b-[3rem] md:rounded-b-[4rem] shadow-sm border-b border-slate-200">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10 text-center">
+          <div className="inline-flex items-center gap-2 bg-white px-5 py-2.5 rounded-full border border-[#2c5340]/10 text-[#2c5340] font-black text-[10px] sm:text-xs tracking-[0.2em] sm:tracking-[0.3em] uppercase mb-6 sm:mb-8 shadow-sm">
+            <Sparkles size={14} className="sm:w-4 sm:h-4" /> World Ayurveda Congress
           </div>
           
-          <h1 className="text-4xl md:text-6xl xl:text-7xl font-[1000] text-[#2c5340] uppercase tracking-tighter leading-none mb-4">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-[1000] text-[#2c5340] uppercase tracking-tighter leading-tight md:leading-none mb-4">
             Satellite <span className="text-[#c4643c] italic">Seminar</span>
           </h1>
-          <p className="text-xl md:text-2xl font-bold text-slate-600 max-w-4xl mx-auto leading-relaxed uppercase tracking-wide">
+          <p className="text-base sm:text-xl md:text-2xl font-bold text-slate-600 max-w-4xl mx-auto leading-relaxed uppercase tracking-wider px-2">
             A Day of Knowledge • Tradition • Wellness
           </p>
         </div>
       </section>
 
       {/* CONTENT SECTION */}
-      <section className="pt-12 md:pt-20 pb-24 px-6">
+      <section className="pt-10 md:pt-16 pb-20 md:pb-24 px-4 sm:px-6">
         <div className="container mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start">
             
-            {/* LEFT COLUMN: Registration Form */}
-            <div className="order-1 lg:order-2 lg:col-span-6 xl:col-span-5 bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden sticky top-8">
-              <div className="bg-[#2c5340] p-8 text-white">
-                <h4 className="text-xs font-bold uppercase tracking-[0.2em] mb-2 text-[#c4643c]">Registration</h4>
-                <h2 className="text-2xl font-serif mb-1">Tell us about yourself</h2>
-                <p className="text-white/80 text-xs">Share your details and areas of interest. It takes less than a minute.</p>
+            {/* LEFT COLUMN: Registration Form - ordered first on mobile */}
+            <div className="order-1 lg:order-2 lg:col-span-6 xl:col-span-5 bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden lg:sticky lg:top-8">
+              <div className="bg-[#2c5340] p-6 sm:p-8 text-white">
+                <h4 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] mb-2 text-[#c4643c]">Registration</h4>
+                <h2 className="text-2xl sm:text-3xl font-serif mb-1">Tell us about yourself</h2>
+                <p className="text-white/80 text-xs sm:text-sm">Share your details and areas of interest. It takes less than a minute.</p>
               </div>
 
-              <form onSubmit={handleSubmit} className="p-8 space-y-5">
+              <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-5">
                 {errorMsg && (
-                  <div className="p-4 bg-red-50 text-red-600 font-semibold text-sm rounded-lg border border-red-100">
+                  <div className="p-4 bg-red-50 text-red-600 font-semibold text-sm rounded-xl border border-red-100">
                     {errorMsg}
                   </div>
                 )}
 
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Name *</label>
-                  <input required type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Enter your full name" className="w-full border border-slate-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#2c5340]/20" />
+                  <input required type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Enter your full name" className="w-full border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#2c5340]/20" />
                 </div>
 
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">System of medicine *</label>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {['Ayurveda', 'Siddha', 'Homeopathy', 'Naturopathy'].map((sys) => (
-                      <label key={sys} className={`flex items-center gap-3 p-2.5 border rounded-lg cursor-pointer transition-all ${selectedMedicine === sys ? 'border-[#2c5340] bg-[#2c5340]/5' : 'border-slate-200 hover:border-[#2c5340]/50'}`}>
+                      <label key={sys} className={`flex items-center gap-3 p-3 border rounded-xl cursor-pointer transition-all ${selectedMedicine === sys ? 'border-[#2c5340] bg-[#2c5340]/5' : 'border-slate-200 hover:border-[#2c5340]/50'}`}>
                         <input type="radio" name="medicine" className="w-4 h-4 text-[#2c5340]" onChange={() => setSelectedMedicine(sys)} checked={selectedMedicine === sys} />
                         <span className="text-sm font-medium text-slate-700">{sys}</span>
                       </label>
@@ -177,20 +177,20 @@ export default function Ayush20Page() {
 
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Currently working *</label>
-                  <input required type="text" name="working" value={formData.working} onChange={handleInputChange} placeholder="Hospital, clinic or institution name" className="w-full border border-slate-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#2c5340]/20" />
+                  <input required type="text" name="working" value={formData.working} onChange={handleInputChange} placeholder="Hospital, clinic or institution name" className="w-full border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#2c5340]/20" />
                 </div>
 
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Mobile number *</label>
                   <div className="flex gap-2">
-                    <div className="border border-slate-200 rounded-lg px-4 py-2.5 bg-slate-50 text-slate-500 font-medium">+91</div>
-                    <input required type="tel" name="mobile" value={formData.mobile} onChange={handleInputChange} placeholder="98765 43210" className="w-full border border-slate-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#2c5340]/20" />
+                    <div className="border border-slate-200 rounded-xl px-4 py-3 bg-slate-50 text-slate-500 font-medium">+91</div>
+                    <input required type="tel" name="mobile" value={formData.mobile} onChange={handleInputChange} placeholder="98765 43210" className="w-full border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#2c5340]/20" />
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Email ID *</label>
-                  <input required type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="name@example.com" className="w-full border border-slate-200 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#2c5340]/20" />
+                  <input required type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="name@example.com" className="w-full border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#2c5340]/20" />
                 </div>
 
                 <div>
@@ -199,17 +199,17 @@ export default function Ayush20Page() {
                     {['General Practice', 'Surgery', 'OG', 'Panchakarma', 'Varmam'].map((interest) => (
                       <button 
                         key={interest} type="button" onClick={() => toggleInterest(interest)}
-                        className={`px-3 py-1.5 border rounded-full text-xs font-medium transition-all ${selectedInterests.includes(interest) ? 'border-[#2c5340] bg-[#2c5340] text-white' : 'border-slate-200 text-slate-600 hover:border-[#2c5340]/50'}`}
+                        className={`px-4 py-2 border rounded-full text-xs font-medium transition-all ${selectedInterests.includes(interest) ? 'border-[#2c5340] bg-[#2c5340] text-white' : 'border-slate-200 text-slate-600 hover:border-[#2c5340]/50'}`}
                       >
                         {interest}
                       </button>
                     ))}
                   </div>
-                  <p className="text-[11px] text-slate-400">Select all that apply.</p>
+                  <p className="text-[11px] text-slate-400 mt-1">Select all that apply.</p>
                 </div>
 
-                <div className="pt-2">
-                  <Button disabled={isLoading} type="submit" className="w-full h-12 bg-[#c4643c] hover:bg-[#a65230] text-white font-bold rounded-lg text-lg transition-all">
+                <div className="pt-4">
+                  <Button disabled={isLoading} type="submit" className="w-full h-14 bg-[#c4643c] hover:bg-[#a65230] text-white font-bold rounded-xl text-lg transition-all shadow-md">
                     {isLoading ? "Submitting..." : "Submit Registration"}
                   </Button>
                   <p className="text-center text-xs text-slate-400 mt-3">Fields marked * are required.</p>
@@ -217,12 +217,12 @@ export default function Ayush20Page() {
               </form>
             </div>
 
-            {/* RIGHT COLUMN: Detailed Event Information */}
-            <div className="order-2 lg:order-1 lg:col-span-6 xl:col-span-7 space-y-8">
+            {/* RIGHT COLUMN: Detailed Event Information - ordered second on mobile */}
+            <div className="order-2 lg:order-1 lg:col-span-6 xl:col-span-7 space-y-6 sm:space-y-8">
               
               {/* Event Logistics */}
-              <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-xl">
-                <h3 className="text-xs font-black text-[#c4643c] uppercase tracking-[0.3em] mb-6">Event Details</h3>
+              <div className="bg-white p-6 sm:p-8 rounded-[2rem] border border-slate-200 shadow-xl">
+                <h3 className="text-[10px] sm:text-xs font-black text-[#c4643c] uppercase tracking-[0.3em] mb-6">Event Details</h3>
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-full bg-[#2c5340]/10 flex items-center justify-center text-[#2c5340] shrink-0">
@@ -230,7 +230,7 @@ export default function Ayush20Page() {
                     </div>
                     <div>
                       <h4 className="font-black text-slate-800 uppercase text-xs mb-1">Date</h4>
-                      <p className="text-base font-bold text-slate-600">21 November 2026 (Saturday)</p>
+                      <p className="text-sm sm:text-base font-bold text-slate-600">21 November 2026 (Saturday)</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
@@ -239,7 +239,7 @@ export default function Ayush20Page() {
                     </div>
                     <div>
                       <h4 className="font-black text-slate-800 uppercase text-xs mb-1">Time</h4>
-                      <p className="text-base font-bold text-slate-600">9:30 AM - 4:00 PM</p>
+                      <p className="text-sm sm:text-base font-bold text-slate-600">9:30 AM - 4:00 PM</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
@@ -248,76 +248,75 @@ export default function Ayush20Page() {
                     </div>
                     <div>
                       <h4 className="font-black text-slate-800 uppercase text-xs mb-1">Venue & Address</h4>
-                      <p className="text-base font-bold text-slate-800">Casa De Gomez</p>
-                      <p className="text-sm font-medium text-slate-500 mt-1">3rd Cross Street, Jagaraj Nagar, Karuvadikuppam,<br/>Puducherry – 605003</p>
+                      <p className="text-sm sm:text-base font-bold text-slate-800">Casa De Gomez</p>
+                      <p className="text-xs sm:text-sm font-medium text-slate-500 mt-1 leading-relaxed">3rd Cross Street, Jagaraj Nagar, Karuvadikuppam,<br/>Puducherry – 605003</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Dignitaries */}
-              <div className="bg-[#2c5340] p-8 rounded-3xl text-white shadow-xl">
-                <h3 className="text-sm font-black uppercase mb-6 flex items-center gap-2 text-[#c4643c] tracking-widest">
+              <div className="bg-[#2c5340] p-6 sm:p-8 rounded-[2rem] text-white shadow-xl">
+                <h3 className="text-xs sm:text-sm font-black uppercase mb-6 flex items-center gap-2 text-[#c4643c] tracking-widest">
                   <Award size={18} /> Dignitaries
                 </h3>
                 <div className="space-y-6">
                   <div>
-                    <h4 className="text-xs text-[#c4643c] font-black uppercase tracking-wider mb-1">Chief Guest</h4>
-                    <p className="font-bold text-lg">Thiru. Ashok Anand</p>
-                    <p className="text-sm text-white/70 mt-0.5">MLA, Tattanchavadi Constituency, Puducherry</p>
+                    <h4 className="text-[10px] sm:text-xs text-[#c4643c] font-black uppercase tracking-wider mb-1">Chief Guest</h4>
+                    <p className="font-bold text-base sm:text-lg">Thiru. Ashok Anand</p>
+                    <p className="text-xs sm:text-sm text-white/70 mt-1">MLA, Tattanchavadi Constituency, Puducherry</p>
                   </div>
                   <div className="w-12 h-px bg-white/20"></div>
                   <div>
-                    <h4 className="text-xs text-[#c4643c] font-black uppercase tracking-wider mb-1">Guest of Honour</h4>
-                    <p className="font-bold text-lg">Dr. Padmavathi Amma</p>
-                    <p className="text-sm text-white/70 mt-0.5">MD (Ayurveda) • Nodal Officer – Ayurveda, Government of Puducherry</p>
+                    <h4 className="text-[10px] sm:text-xs text-[#c4643c] font-black uppercase tracking-wider mb-1">Guest of Honour</h4>
+                    <p className="font-bold text-base sm:text-lg">Dr. Padmavathi Amma</p>
+                    <p className="text-xs sm:text-sm text-white/70 mt-1">MD (Ayurveda) • Nodal Officer – Ayurveda, Government of Puducherry</p>
                   </div>
                   <div className="w-12 h-px bg-white/20"></div>
                   <div>
-                    <h4 className="text-xs text-[#c4643c] font-black uppercase tracking-wider mb-1">Special Guest</h4>
-                    <p className="font-bold text-lg">Dr. Jayaroopa</p>
-                    <p className="text-sm text-white/70 mt-0.5">Medical Director, Dr. Shreevarma Wellness Pvt. Ltd.</p>
+                    <h4 className="text-[10px] sm:text-xs text-[#c4643c] font-black uppercase tracking-wider mb-1">Special Guest</h4>
+                    <p className="font-bold text-base sm:text-lg">Dr. Jayaroopa</p>
+                    <p className="text-xs sm:text-sm text-white/70 mt-1">Medical Director, Dr. Shreevarma Wellness Pvt. Ltd.</p>
                   </div>
                 </div>
               </div>
 
               {/* Scientific Speakers */}
-              <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-xl">
-                <h3 className="text-xs font-black text-[#c4643c] uppercase tracking-[0.3em] mb-6 flex items-center gap-2">
+              <div className="bg-white p-6 sm:p-8 rounded-[2rem] border border-slate-200 shadow-xl">
+                <h3 className="text-[10px] sm:text-xs font-black text-[#c4643c] uppercase tracking-[0.3em] mb-6 flex items-center gap-2">
                   <Mic size={16} /> Scientific Speakers
                 </h3>
                 <div className="space-y-4">
                   <div className="flex gap-4 items-start p-4 bg-slate-50 rounded-2xl border border-slate-100">
                     <div className="w-8 h-8 rounded-full bg-[#2c5340] text-white flex items-center justify-center font-black text-sm shrink-0">1</div>
                     <div>
-                      <p className="font-bold text-slate-800">Dr. J. Roshan Zameer, MS (Ayu)</p>
-                      <p className="text-sm text-slate-500 mt-1">Assistant Medical Officer, ESI Hospital, Hosur</p>
+                      <p className="font-bold text-sm sm:text-base text-slate-800">Dr. J. Roshan Zameer, MS (Ayu)</p>
+                      <p className="text-xs sm:text-sm text-slate-500 mt-1">Assistant Medical Officer, ESI Hospital, Hosur</p>
                     </div>
                   </div>
                   <div className="flex gap-4 items-start p-4 bg-slate-50 rounded-2xl border border-slate-100">
                     <div className="w-8 h-8 rounded-full bg-[#2c5340] text-white flex items-center justify-center font-black text-sm shrink-0">2</div>
                     <div>
-                      <p className="font-bold text-slate-800">Dr. K. Raman</p>
-                      <p className="text-sm text-slate-500 mt-1">Medical Officer, Ayurveda, Puducherry</p>
+                      <p className="font-bold text-sm sm:text-base text-slate-800">Dr. K. Raman</p>
+                      <p className="text-xs sm:text-sm text-slate-500 mt-1">Medical Officer, Ayurveda, Puducherry</p>
                     </div>
                   </div>
                   <div className="flex gap-4 items-start p-4 bg-slate-50 rounded-2xl border border-slate-100">
                     <div className="w-8 h-8 rounded-full bg-[#2c5340] text-white flex items-center justify-center font-black text-sm shrink-0">3</div>
                     <div>
-                      <p className="font-bold text-slate-800">Dr.Karima mubeen B.A.M.S</p>
-                      <p className="text-sm text-slate-500 mt-1">Director 
-                      VK Ayurveda Hospital & VK HERBAL FORMULATIONS</p>
+                      <p className="font-bold text-sm sm:text-base text-slate-800">Dr. Prasana Lakshmi</p>
+                      <p className="text-xs sm:text-sm text-slate-500 mt-1">RMO, AYUSH Hospital, Villianur, Puducherry</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Programme Schedule */}
-              <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-xl">
-                <h3 className="text-xs font-black text-[#c4643c] uppercase tracking-[0.3em] mb-6 flex items-center gap-2">
+              <div className="bg-white p-6 sm:p-8 rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden">
+                <h3 className="text-[10px] sm:text-xs font-black text-[#c4643c] uppercase tracking-[0.3em] mb-6 flex items-center gap-2">
                   <ListChecks size={16} /> Programme Schedule
                 </h3>
-                <div className="relative border-l-2 border-[#2c5340]/20 ml-3 space-y-6">
+                <div className="relative border-l-2 border-[#2c5340]/20 ml-2 sm:ml-3 space-y-6">
                   
                   {[
                     { time: '9:30 – 10:00 am', event: 'Registration' },
@@ -338,10 +337,10 @@ export default function Ayush20Page() {
                     { time: '3:30 – 3:45 pm', event: 'Question & Answer session' },
                     { time: '3:45 – 4:00 pm', event: 'Vote of thanks – Dr. Joy Emmanuel, followed by the National Anthem and High Tea' },
                   ].map((item, i) => (
-                    <div key={i} className="relative pl-6">
+                    <div key={i} className="relative pl-5 sm:pl-6">
                       <div className={`absolute -left-[9px] top-1 w-4 h-4 rounded-full border-2 border-white ${item.highlight ? 'bg-[#c4643c]' : 'bg-[#2c5340]'}`}></div>
-                      <p className="text-xs font-black text-[#c4643c] mb-0.5">{item.time}</p>
-                      <p className="text-sm font-bold text-slate-700">{item.event}</p>
+                      <p className="text-[10px] sm:text-xs font-black text-[#c4643c] mb-0.5">{item.time}</p>
+                      <p className="text-sm font-bold text-slate-700 leading-snug">{item.event}</p>
                     </div>
                   ))}
                   
