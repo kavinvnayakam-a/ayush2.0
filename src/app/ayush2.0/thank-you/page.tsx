@@ -8,6 +8,14 @@ import { Button } from '@/components/ui/button';
 export default function AyushThankYouPage() {
   return (
     <main className="min-h-screen bg-[#f5f2eb] flex items-center justify-center p-6 font-sans">
+      
+      {/* Hide global header/footer to maintain the landing page feel */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        header, footer, nav, [data-testid="global-header"], [data-testid="global-footer"] { 
+          display: none !important; 
+        }
+      `}} />
+
       <div className="max-w-2xl w-full bg-white rounded-[3rem] p-8 md:p-16 shadow-xl border border-slate-100 text-center space-y-8 relative overflow-hidden">
         
         <div className="absolute top-0 right-0 w-64 h-64 bg-[#2c5340]/5 rounded-full blur-[80px] -z-10 pointer-events-none" />
@@ -21,7 +29,7 @@ export default function AyushThankYouPage() {
             Registration <span className="text-[#c4643c]">Successful!</span>
           </h1>
           <p className="text-lg text-slate-600 font-medium">
-            Thank you for registering for <strong className="text-[#2c5340]">AYUSH 2.0</strong>.
+            Thank you for registering for the <strong className="text-[#2c5340]">World Ayurveda Congress Satellite Seminar</strong>.
           </p>
         </div>
 

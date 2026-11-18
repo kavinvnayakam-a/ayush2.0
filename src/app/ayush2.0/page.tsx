@@ -304,8 +304,9 @@ export default function Ayush20Page() {
                   <div className="flex gap-4 items-start p-4 bg-slate-50 rounded-2xl border border-slate-100">
                     <div className="w-8 h-8 rounded-full bg-[#2c5340] text-white flex items-center justify-center font-black text-sm shrink-0">3</div>
                     <div>
-                      <p className="font-bold text-slate-800">Dr. Prasana Lakshmi</p>
-                      <p className="text-sm text-slate-500 mt-1">RMO, AYUSH Hospital, Villianur, Puducherry</p>
+                      <p className="font-bold text-slate-800">Dr.Karima mubeen B.A.M.S</p>
+                      <p className="text-sm text-slate-500 mt-1">Director 
+                      VK Ayurveda Hospital & VK HERBAL FORMULATIONS</p>
                     </div>
                   </div>
                 </div>
