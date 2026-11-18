@@ -207,7 +207,7 @@ const translations = {
     vernacularDesc: 'हमारा बहुभाषी ऐप अधिक क्षेत्रीय नौकरी चाहने वालों को पंजीकरण करने में मदद करता है।',
     benefitHeading: 'हम आपकी आवश्यकताओं के अनुरूप सर्वश्रेष्ठ उम्मीदवार खोजने में मदद करते हैं',
     benefit1Title: 'आसान स्क्रीनिंग',
-    benefit1Desc: 'कैंडिडेट मैच स्कोर आपको अपनी आवश्यकता के लिए सर्वश्रेष्ठ उम्मीदवारों को खोजने में मदद करता है।',
+    benefit1Desc: 'कैंडिडेट मैच स्कोर आपको अपनी आवश्यकता के लिए सर्वश्रेष्ठ उम्मीदवारों को खोजने में मदद करता.।',
     benefit2Title: '2 गुणा तेज़ हायरिंग',
     benefit2Desc: 'विभिन्न संचार चैनलों के माध्यम से सीधे सर्वश्रेष्ठ प्रतिभा से संपर्क करें।',
     benefit3Title: 'खोजने के लिए फिल्टर',
@@ -447,7 +447,7 @@ export default function JobPortalPage() {
       {/* --- CANDIDATE VIEW --- */}
       {view === 'candidate' && (
         <div className="pt-24 animate-in fade-in slide-in-from-bottom-4 duration-700">
-          {/* Hero Section */}
+          {/* Hero Section - Image Removed */}
           <section className="max-w-4xl mx-auto px-6 py-12 md:py-24 text-center">
             <div className="space-y-8">
               <h2 className="text-4xl lg:text-7xl font-[1000] leading-tight text-slate-900 uppercase tracking-tighter">

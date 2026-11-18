@@ -62,7 +62,7 @@ export function WellnessProgramForm() {
       }));
     });
 
-    // 2. Send Confirmation Email (Non-blocking)
+    // 2. Send Confirmation Email (Non-blocking) - Updated Date to April 19
     addDoc(mailRef, {
       to: data.mailId,
       message: {
