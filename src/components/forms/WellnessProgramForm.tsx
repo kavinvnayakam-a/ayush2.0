@@ -50,7 +50,6 @@ export function WellnessProgramForm() {
     const registrationsRef = collection(firestore, 'wellness_registrations');
     const mailRef = collection(firestore, 'mail');
     
-    // 1. Save Registration (Non-blocking)
     addDoc(registrationsRef, {
       ...data,
       registrationDate: serverTimestamp(),
@@ -62,7 +61,6 @@ export function WellnessProgramForm() {
       }));
     });
 
-    // 2. Send Confirmation Email (Non-blocking) - Updated Date to April 19
     addDoc(mailRef, {
       to: data.mailId,
       message: {
@@ -87,16 +85,13 @@ export function WellnessProgramForm() {
           </html>
         `,
       }
-    }).catch(() => {
-      // Silently fail mail errors or handle separately
-    });
+    }).catch(() => {});
 
     toast({
       title: 'Registration Submitted!',
       description: 'Redirecting to confirmation...',
     });
 
-    // 3. Redirect to Thank You page
     router.push('/wellness-program/thank-you');
   };
 
@@ -140,7 +135,6 @@ export function WellnessProgramForm() {
             )}
           />
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField
             control={form.control}
@@ -169,7 +163,6 @@ export function WellnessProgramForm() {
             )}
           />
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField
             control={form.control}
@@ -198,17 +191,8 @@ export function WellnessProgramForm() {
             )}
           />
         </div>
-
-        <Button 
-          type="submit" 
-          disabled={form.formState.isSubmitting} 
-          className="w-full h-16 bg-[hsl(93,45%,44%)] text-white rounded-2xl font-black uppercase tracking-widest hover:bg-[#ffa62f] transition-all shadow-xl shadow-[hsl(93,45%,44%)]/20 text-lg"
-        >
-          {form.formState.isSubmitting ? 'Registering...' : (
-            <span className="flex items-center gap-2">
-              Register Now <Send size={20} />
-            </span>
-          )}
+        <Button type="submit" disabled={form.formState.isSubmitting} className="w-full h-16 bg-[hsl(93,45%,44%)] text-white rounded-2xl font-black uppercase tracking-widest hover:bg-[#ffa62f] transition-all shadow-xl shadow-[hsl(93,45%,44%)]/20 text-lg">
+          {form.formState.isSubmitting ? 'Registering...' : <span className="flex items-center gap-2">Register Now <Send size={20} /></span>}
         </Button>
       </form>
     </Form>

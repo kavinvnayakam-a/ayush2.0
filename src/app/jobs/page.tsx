@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { 
-  Smartphone, 
   CheckCircle, 
   Search, 
   MapPin, 
@@ -18,15 +17,12 @@ import {
   Filter,
   Zap,
   BarChart3,
-  CheckCircle2,
   ChevronDown,
   ChevronUp,
   Briefcase,
   Users,
   ChevronRight,
   Building2,
-  X,
-  ArrowRight,
   Languages
 } from 'lucide-react';
 import Link from 'next/link';
@@ -365,7 +361,6 @@ export default function JobPortalPage() {
 
   const t = translations[lang];
 
-  // Fetch recent jobs for the candidate view
   const jobsQuery = useMemoFirebase(() => {
     if (!firestore) return null;
     return query(collection(firestore, 'jobs'), orderBy('createdAt', 'desc'), limit(6));
@@ -394,7 +389,7 @@ export default function JobPortalPage() {
 
   return (
     <main className="min-h-screen bg-white font-sans">
-      {/* 1. NAVIGATION / TOGGLE BAR */}
+      {/* NAVIGATION */}
       <nav className="fixed top-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-100 py-4 shadow-sm">
         <div className="container mx-auto px-6 flex justify-between items-center max-w-7xl">
           <div className="flex flex-col">
@@ -405,7 +400,6 @@ export default function JobPortalPage() {
           </div>
 
           <div className="flex items-center gap-2 md:gap-4">
-            {/* Language Switcher */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="rounded-full gap-2 font-black text-[10px] uppercase tracking-widest">
@@ -444,34 +438,27 @@ export default function JobPortalPage() {
         </div>
       </nav>
 
-      {/* --- CANDIDATE VIEW --- */}
+      {/* CANDIDATE VIEW */}
       {view === 'candidate' && (
         <div className="pt-24 animate-in fade-in slide-in-from-bottom-4 duration-700">
-          {/* Hero Section - Image Removed */}
           <section className="max-w-4xl mx-auto px-6 py-12 md:py-24 text-center">
             <div className="space-y-8">
               <h2 className="text-4xl lg:text-7xl font-[1000] leading-tight text-slate-900 uppercase tracking-tighter">
                 {t.heroTitle}
               </h2>
-              
               <div className="flex flex-wrap justify-center gap-6">
                 <div className="flex items-center gap-3">
-                  <div className="bg-primary/10 p-2 rounded-lg text-primary">
-                    <Globe size={24} />
-                  </div>
+                  <div className="bg-primary/10 p-2 rounded-lg text-primary"><Globe size={24} /></div>
                   <p className="text-sm font-bold text-slate-600">{t.heroDesc1}</p>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="bg-accent/10 p-2 rounded-lg text-accent">
-                    <Search size={24} />
-                  </div>
+                  <div className="bg-accent/10 p-2 rounded-lg text-accent"><Search size={24} /></div>
                   <p className="text-sm font-bold text-slate-600">{t.heroDesc2}</p>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* Features Grid */}
           <section className="bg-slate-50 py-20 px-6">
             <div className="max-w-7xl mx-auto text-center mb-12">
               <h3 className="text-3xl font-black text-slate-900 uppercase tracking-tighter">{t.exploreTitle}</h3>
@@ -492,7 +479,6 @@ export default function JobPortalPage() {
             </div>
           </section>
 
-          {/* Dynamic Recent Openings Feed */}
           <section className="py-24 container mx-auto px-6 max-w-7xl">
             <div className="text-center mb-16 space-y-4">
               <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase tracking-tighter">{t.recentOpenings}</h2>
@@ -529,18 +515,9 @@ export default function JobPortalPage() {
                     </CardHeader>
                     <CardContent className="space-y-4 flex-1">
                       <div className="flex flex-wrap gap-3 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                        <div className="flex items-center gap-1">
-                          <MapPin size={12} className="text-accent" /> {job.location}
-                        </div>
-                        {job.salary && (
-                          <div className="flex items-center gap-1">
-                            <Briefcase size={12} className="text-primary" /> {job.salary}
-                          </div>
-                        )}
+                        <div className="flex items-center gap-1"><MapPin size={12} className="text-accent" /> {job.location}</div>
+                        {job.salary && <div className="flex items-center gap-1"><Briefcase size={12} className="text-primary" /> {job.salary}</div>}
                       </div>
-                      <p className="text-xs text-slate-500 font-bold line-clamp-2 italic leading-relaxed">
-                        {job.description}
-                      </p>
                       <Button onClick={() => setSelectedJob(job)} className="w-full h-12 rounded-2xl bg-slate-900 text-white font-black uppercase tracking-widest hover:bg-primary transition-all text-xs shadow-lg shadow-slate-200">
                         {t.viewDetails} <ChevronRight className="ml-1 h-4 w-4" />
                       </Button>
@@ -555,7 +532,6 @@ export default function JobPortalPage() {
             )}
           </section>
 
-          {/* Category Section */}
           <section className="py-20 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 border-t border-slate-100">
             <div>
               <h3 className="text-2xl font-[1000] mb-6 italic underline decoration-primary underline-offset-8 uppercase tracking-tighter">{t.qualifications}</h3>
@@ -577,7 +553,7 @@ export default function JobPortalPage() {
         </div>
       )}
 
-      {/* --- RECRUITER VIEW --- */}
+      {/* RECRUITER VIEW */}
       {view === 'recruiter' && (
         <div className="pt-24 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <section className="max-w-4xl mx-auto px-6 py-12 md:py-24 text-center">
@@ -587,25 +563,16 @@ export default function JobPortalPage() {
               </h1>
               <div className="flex flex-col sm:flex-row justify-center gap-6 mb-8">
                 <div className="flex items-center gap-3">
-                  <div className="bg-primary p-2 rounded-lg text-white shadow-md">
-                    <Users size={20} />
-                  </div>
+                  <div className="bg-primary p-2 rounded-lg text-white shadow-md"><Users size={20} /></div>
                   <p className="text-sm font-bold text-slate-700">{t.recruiterHeroDesc1}</p>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="bg-accent p-2 rounded-lg text-white shadow-md">
-                    <Zap size={20} />
-                  </div>
+                  <div className="bg-accent p-2 rounded-lg text-white shadow-md"><Zap size={20} /></div>
                   <p className="text-sm font-bold text-slate-700">{t.recruiterHeroDesc2}</p>
                 </div>
               </div>
-              
               <div className="bg-white border rounded-[1.5rem] p-2 shadow-sm flex flex-col sm:flex-row gap-2 max-w-lg mx-auto mb-4">
-                <input 
-                  type="tel" 
-                  placeholder={t.enterMobile} 
-                  className="flex-1 px-4 py-3 outline-none font-bold"
-                />
+                <input type="tel" placeholder={t.enterMobile} className="flex-1 px-4 py-3 outline-none font-bold" />
                 <Button asChild className="bg-primary text-white px-8 py-6 rounded-xl font-black uppercase tracking-widest hover:bg-slate-900 transition">
                   <Link href="/admin/login">{t.registerNow}</Link>
                 </Button>
@@ -619,7 +586,6 @@ export default function JobPortalPage() {
             </div>
           </section>
 
-          {/* Hiring Partners */}
           <section className="bg-slate-50 py-10 border-y">
             <div className="max-w-7xl mx-auto px-6 text-center">
               <p className="text-xl font-black uppercase tracking-widest mb-8 italic text-slate-400">{t.hiringPartners}</p>
@@ -631,9 +597,7 @@ export default function JobPortalPage() {
             </div>
           </section>
 
-          {/* Feature Highlights */}
           <section className="py-20 space-y-32">
-            {/* Locality */}
             <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
               <div className="flex-1 order-2 md:order-1">
                  <div className="bg-primary/5 h-80 rounded-[3rem] flex items-center justify-center">
@@ -642,19 +606,14 @@ export default function JobPortalPage() {
               </div>
               <div className="flex-1 order-1 md:order-2">
                 <h2 className="text-4xl font-[1000] mb-4 text-slate-900 uppercase tracking-tighter">{t.hireLocTitle}</h2>
-                <p className="text-slate-500 font-bold text-lg leading-relaxed italic">
-                  {t.hireLocDesc}
-                </p>
+                <p className="text-slate-500 font-bold text-lg leading-relaxed italic">{t.hireLocDesc}</p>
               </div>
             </div>
 
-            {/* Direct Contact */}
             <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
               <div className="flex-1">
                 <h2 className="text-4xl font-[1000] mb-4 text-slate-900 uppercase tracking-tighter">{t.directContactTitle}</h2>
-                <p className="text-slate-500 font-bold text-lg leading-relaxed italic">
-                  {t.directContactDesc}
-                </p>
+                <p className="text-slate-500 font-bold text-lg leading-relaxed italic">{t.directContactDesc}</p>
               </div>
               <div className="flex-1 bg-slate-900 rounded-[3rem] p-16 text-white flex justify-center gap-12 shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl rounded-full" />
@@ -663,7 +622,6 @@ export default function JobPortalPage() {
               </div>
             </div>
 
-            {/* Vernacular */}
             <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
               <div className="flex-1 order-2 md:order-1 flex justify-center">
                 <div className="flex gap-4">
@@ -673,19 +631,14 @@ export default function JobPortalPage() {
               </div>
               <div className="flex-1 order-1 md:order-2">
                 <h2 className="text-4xl font-[1000] mb-4 text-slate-900 uppercase tracking-tighter">{t.vernacularTitle}</h2>
-                <p className="text-slate-500 font-bold text-lg leading-relaxed italic">
-                  {t.vernacularDesc}
-                </p>
+                <p className="text-slate-500 font-bold text-lg leading-relaxed italic">{t.vernacularDesc}</p>
               </div>
             </div>
           </section>
 
-          {/* Benefit Cards */}
           <section className="bg-slate-50 py-24">
             <div className="max-w-7xl mx-auto px-6">
-              <h2 className="text-3xl md:text-5xl font-[1000] text-center mb-16 text-slate-900 uppercase tracking-tighter">
-                {t.benefitHeading}
-              </h2>
+              <h2 className="text-3xl md:text-5xl font-[1000] text-center mb-16 text-slate-900 uppercase tracking-tighter">{t.benefitHeading}</h2>
               <div className="grid md:grid-cols-3 gap-8">
                 {[
                   { title: t.benefit1Title, desc: t.benefit1Desc },
@@ -704,7 +657,6 @@ export default function JobPortalPage() {
             </div>
           </section>
 
-          {/* Roles & Location Cloud */}
           <section className="py-24 bg-slate-900 text-white rounded-[4rem] mx-6 mb-24 overflow-hidden relative">
             <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 blur-[100px] rounded-full" />
             <div className="max-w-7xl mx-auto px-10 relative z-10">
@@ -712,58 +664,44 @@ export default function JobPortalPage() {
                 <h2 className="text-3xl md:text-5xl font-black mb-8 uppercase tracking-tighter">{t.rolesTitle}</h2>
                 <div className="flex flex-wrap gap-3">
                   {roles.map(role => (
-                    <span key={role} className="bg-white/10 px-6 py-3 rounded-full border border-white/20 text-xs font-black uppercase tracking-widest hover:bg-white hover:text-slate-900 transition cursor-default">
-                      {role}
-                    </span>
+                    <span key={role} className="bg-white/10 px-6 py-3 rounded-full border border-white/20 text-xs font-black uppercase tracking-widest hover:bg-white hover:text-slate-900 transition cursor-default">{role}</span>
                   ))}
                 </div>
                 <Button asChild className="mt-12 bg-white text-slate-900 px-10 py-8 rounded-2xl font-black text-lg hover:bg-primary hover:text-white transition shadow-2xl shadow-white/5">
                     <Link href="/admin/login">{t.registerForFree}</Link>
                 </Button>
               </div>
-
               <div>
                 <h2 className="text-3xl md:text-5xl font-black mb-4 uppercase tracking-tighter">{t.localityTitle}</h2>
-                <p className="text-slate-400 mb-10 max-w-2xl font-bold text-lg italic">
-                  {t.localityDesc}
-                </p>
+                <p className="text-slate-400 mb-10 max-w-2xl font-bold text-lg italic">{t.localityDesc}</p>
                 <div className="flex flex-wrap gap-x-10 gap-y-6">
                   {locations.map(loc => (
-                    <span key={loc} className="text-xl font-black border-b-2 border-white/20 hover:border-white transition cursor-pointer uppercase tracking-[0.2em] pb-1">
-                      {loc}
-                    </span>
+                    <span key={loc} className="text-xl font-black border-b-2 border-white/20 hover:border-white transition cursor-pointer uppercase tracking-[0.2em] pb-1">{loc}</span>
                   ))}
                 </div>
               </div>
             </div>
           </section>
 
-          {/* FAQ Section */}
           <section className="py-20 max-w-4xl mx-auto px-6">
             <h2 className="text-4xl font-[1000] text-center mb-16 text-slate-900 uppercase tracking-tighter">{t.faqs}</h2>
             <div className="space-y-4">
               {faqs.map((faq, idx) => (
                 <div key={idx} className="border-b border-slate-100 last:border-0">
-                  <button 
-                    onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                    className="w-full flex items-center justify-between py-8 text-left font-black text-xl uppercase tracking-tight hover:text-primary transition group"
-                  >
+                  <button onClick={() => setOpenFaq(openFaq === idx ? null : idx)} className="w-full flex items-center justify-between py-8 text-left font-black text-xl uppercase tracking-tight hover:text-primary transition group">
                     <span className="flex-1 pr-8">{faq}</span>
                     <div className={`shrink-0 w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all ${openFaq === idx ? 'bg-primary border-primary text-white rotate-180' : 'border-slate-200 text-slate-400 group-hover:border-primary'}`}>
                       <ChevronDown size={20} />
                     </div>
                   </button>
                   {openFaq === idx && (
-                    <div className="pb-8 text-slate-500 font-bold text-lg leading-relaxed italic animate-in slide-in-from-top-2 duration-300">
-                      {t.faqAns}
-                    </div>
+                    <div className="pb-8 text-slate-500 font-bold text-lg leading-relaxed italic animate-in slide-in-from-top-2 duration-300">{t.faqAns}</div>
                   )}
                 </div>
               ))}
             </div>
           </section>
 
-          {/* Final CTA */}
           <section className="py-32 bg-primary/5 text-center border-t border-slate-100">
             <div className="max-w-4xl mx-auto px-6">
               <p className="text-primary font-black uppercase tracking-[0.3em] mb-6 text-sm">Ayush Jobs Network</p>
@@ -777,100 +715,42 @@ export default function JobPortalPage() {
         </div>
       )}
 
-      {/* --- JOB DETAILS DIALOG --- */}
+      {/* JOB DETAILS DIALOG */}
       <Dialog open={!!selectedJob} onOpenChange={(open) => !open && setSelectedJob(null)}>
         <DialogContent className="max-w-4xl h-[90vh] flex flex-col p-0 border-none rounded-[3rem] overflow-hidden shadow-2xl z-[60]">
           {selectedJob && (
             <>
               <div className="relative h-40 md:h-56 shrink-0">
-                {selectedJob.bannerUrl ? (
-                  <Image src={selectedJob.bannerUrl} alt="Banner" fill className="object-cover" />
-                ) : (
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-accent/80" />
-                )}
+                {selectedJob.bannerUrl ? <Image src={selectedJob.bannerUrl} alt="Banner" fill className="object-cover" /> : <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-accent/80" />}
                 <div className="absolute inset-0 bg-black/20" />
-                
                 <div className="absolute -bottom-8 left-8">
                   <div className="relative w-24 h-24 md:w-32 md:h-32 bg-white rounded-3xl p-4 shadow-2xl border-4 border-white flex items-center justify-center overflow-hidden">
-                    {selectedJob.logoUrl ? (
-                      <Image src={selectedJob.logoUrl} alt={selectedJob.company} fill className="object-contain p-4" />
-                    ) : (
-                      <Building2 className="text-slate-200 h-12 w-12" />
-                    )}
+                    {selectedJob.logoUrl ? <Image src={selectedJob.logoUrl} alt={selectedJob.company} fill className="object-contain p-4" /> : <Building2 className="text-slate-300 h-12 w-12" />}
                   </div>
                 </div>
               </div>
-
               <div className="flex-1 min-h-0 pt-12">
                 <ScrollArea className="h-full">
                   <div className="p-8 md:p-12 space-y-8">
-                    <div className="space-y-2">
-                      <DialogHeader className="p-0 text-left">
-                        <DialogTitle className="text-3xl md:text-4xl font-black text-slate-900 uppercase tracking-tight leading-none">
-                          {selectedJob.title}
-                        </DialogTitle>
-                        <DialogDescription className="text-primary font-black text-lg flex items-center gap-2 italic">
-                          <Building2 size={18} /> {selectedJob.company}
-                        </DialogDescription>
-                      </DialogHeader>
-                    </div>
-
+                    <DialogHeader className="p-0 text-left">
+                      <DialogTitle className="text-3xl md:text-4xl font-black text-slate-900 uppercase tracking-tight leading-none">{selectedJob.title}</DialogTitle>
+                      <DialogDescription className="text-primary font-black text-lg flex items-center gap-2 italic"><Building2 size={18} /> {selectedJob.company}</DialogDescription>
+                    </DialogHeader>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                      <div className="flex items-center gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                        <div className="bg-primary/10 p-2 rounded-lg text-primary"><MapPin size={18} /></div>
-                        <div className="flex flex-col">
-                          <span className="text-[10px] font-black uppercase text-slate-400 leading-none mb-1">{t.location}</span>
-                          <span className="text-sm font-black text-slate-700">{selectedJob.location}</span>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                        <div className="bg-accent/10 p-2 rounded-lg text-accent"><Briefcase size={18} /></div>
-                        <div className="flex flex-col">
-                          <span className="text-[10px] font-black uppercase text-slate-400 leading-none mb-1">{t.salary}</span>
-                          <span className="text-sm font-black text-slate-700">{selectedJob.salary || 'Competitive'}</span>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                        <div className="bg-blue-50 p-2 rounded-lg text-blue-500"><Zap size={18} /></div>
-                        <div className="flex flex-col">
-                          <span className="text-[10px] font-black uppercase text-slate-400 leading-none mb-1">{t.jobType}</span>
-                          <span className="text-sm font-black text-slate-700">{selectedJob.type}</span>
-                        </div>
-                      </div>
+                      <div className="flex items-center gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100"><div className="bg-primary/10 p-2 rounded-lg text-primary"><MapPin size={18} /></div><div className="flex flex-col"><span className="text-[10px] font-black uppercase text-slate-400 leading-none mb-1">{t.location}</span><span className="text-sm font-black text-slate-700">{selectedJob.location}</span></div></div>
+                      <div className="flex items-center gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100"><div className="bg-accent/10 p-2 rounded-lg text-accent"><Briefcase size={18} /></div><div className="flex flex-col"><span className="text-[10px] font-black uppercase text-slate-400 leading-none mb-1">{t.salary}</span><span className="text-sm font-black text-slate-700">{selectedJob.salary || 'Competitive'}</span></div></div>
+                      <div className="flex items-center gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100"><div className="bg-blue-50 p-2 rounded-lg text-blue-500"><Zap size={18} /></div><div className="flex flex-col"><span className="text-[10px] font-black uppercase text-slate-400 leading-none mb-1">{t.jobType}</span><span className="text-sm font-black text-slate-700">{selectedJob.type}</span></div></div>
                     </div>
-
                     <div className="space-y-8">
-                      <div className="space-y-4">
-                        <h4 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2">
-                          <div className="w-8 h-px bg-slate-200" /> {t.jobDescription}
-                        </h4>
-                        <div className="p-8 rounded-[2.5rem] bg-white border-2 border-slate-50 text-slate-600 leading-relaxed text-sm font-bold italic whitespace-pre-wrap">
-                          {selectedJob.description}
-                        </div>
-                      </div>
-
-                      {selectedJob.requirements && (
-                        <div className="space-y-4">
-                          <h4 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2">
-                            <div className="w-8 h-px bg-slate-200" /> {t.requirements}
-                          </h4>
-                          <div className="p-8 rounded-[2.5rem] bg-primary/5 border-2 border-primary/10 text-slate-700 leading-relaxed text-sm font-black whitespace-pre-wrap">
-                            {selectedJob.requirements}
-                          </div>
-                        </div>
-                      )}
+                      <div className="space-y-4"><h4 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2"><div className="w-8 h-px bg-slate-200" /> {t.jobDescription}</h4><div className="p-8 rounded-[2.5rem] bg-white border-2 border-slate-50 text-slate-600 leading-relaxed text-sm font-bold italic whitespace-pre-wrap">{selectedJob.description}</div></div>
+                      {selectedJob.requirements && <div className="space-y-4"><h4 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2"><div className="w-8 h-px bg-slate-200" /> {t.requirements}</h4><div className="p-8 rounded-[2.5rem] bg-primary/5 border-2 border-primary/10 text-slate-700 leading-relaxed text-sm font-black whitespace-pre-wrap">{selectedJob.requirements}</div></div>}
                     </div>
                   </div>
                 </ScrollArea>
               </div>
-
               <DialogFooter className="p-6 md:p-8 bg-white border-t border-slate-100 shrink-0 gap-4 flex-row items-center justify-between">
-                <Button variant="ghost" onClick={() => setSelectedJob(null)} className="h-14 px-8 rounded-2xl font-black uppercase text-slate-400 hover:text-slate-600 text-[10px]">
-                  {t.close}
-                </Button>
-                <Button asChild className="flex-1 h-14 bg-primary text-white font-black uppercase tracking-widest rounded-2xl hover:bg-slate-900 transition-all shadow-xl shadow-primary/20">
-                  <Link href={`/jobs/profile`}>{t.confirmApply}</Link>
-                </Button>
+                <Button variant="ghost" onClick={() => setSelectedJob(null)} className="h-14 px-8 rounded-2xl font-black uppercase text-slate-400 hover:text-slate-600 text-[10px]">{t.close}</Button>
+                <Button asChild className="flex-1 h-14 bg-primary text-white font-black uppercase tracking-widest rounded-2xl hover:bg-slate-900 transition-all shadow-xl shadow-primary/20"><Link href={`/jobs/profile`}>{t.confirmApply}</Link></Button>
               </DialogFooter>
             </>
           )}
