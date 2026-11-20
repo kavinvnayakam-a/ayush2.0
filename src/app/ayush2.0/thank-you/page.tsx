@@ -36,7 +36,7 @@ export default function AyushThankYouPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-8 border-y border-slate-100">
           <div className="flex items-center justify-center gap-3 text-slate-700">
             <Calendar className="text-[#c4643c]" size={20} />
-            <span className="font-bold">21-OCT-2026</span>
+            <span className="font-bold">21-NOV-2026</span>
           </div>
           <div className="flex items-center justify-center gap-3 text-slate-700">
             <MapPin className="text-[#c4643c]" size={20} />
